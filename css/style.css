@@ -8,7 +8,9 @@
  * 2.0 - Header
  *  2.1 - Navigation
  * 3.0 - Main
- * 4.0 - Responsive
+ * 4.0 - Index
+ *  4.1 - Presentation
+ * 5.0 - Responsive
  * ----------------------------------------------------------------------------
  */
 
@@ -19,15 +21,24 @@
 
 body{
 	background-color: #fcfcfc;
+	font-family:"open", sans-serif;
 }
 
-.center{
+.pageCenter{
 	width: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
 }
 
-
+.separator:after{
+	content: "";
+	clear: both;
+	width: 50%;
+	height: 0px;
+	padding-top: 30px;
+	border-bottom: 1px solid #bababa;
+	margin: 0 auto
+}
 
 .logo{
 	color:black;
@@ -50,9 +61,10 @@ body{
 	position: fixed;
 	width: 100%;
 	min-height:80px;
-    box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.4);
+  	border-bottom: 1px solid rgba(0,0,0,0.2);
     background-color: #fff;
-	background-color: rgba(255,255,255,0.9);
+	background-color: rgba(255,255,255,0.94);
 }
 
 #header h1 {
@@ -64,13 +76,14 @@ body{
 	height: 50px;
 	line-height: 50px;
 	padding-left: 60px;
+	color:#505050;
 }
 
 #header h1:hover a{
 	color:#3498db;
 }
 #header h1:hover a span{
-	color:black;
+	color:#505050;
 }
 
 /**
@@ -83,7 +96,7 @@ body{
 }
 #navigation a{
 	text-decoration: none;
-	color: black;
+	color:#505050;
 	display: block;
 	line-height: 60px;
 	letter-spacing: 1.5px;
@@ -139,14 +152,57 @@ body{
 
 
  /**
- * 4.0 Responsive
+ * 4.0 Index
+ * ----------------------------------------------------------------------------
+ */
+
+/**
+ * 4.1 Presentation
+ **/
+#presentation{
+	color:#919191;
+}
+
+#presentation h2{
+	font-size: 3.3em;
+	color:#505050;
+}
+
+#presentation h3{
+	font-weight: 300;
+	color:#505050;
+	letter-spacing: 1.036px;
+}
+
+#presentation p{
+	font-weight: 100;
+	letter-spacing: 1.036px;
+
+}
+
+#presentation figure{
+	text-align: center;
+}
+
+ /**
+ * 5.0 Responsive
  * ----------------------------------------------------------------------------
  */
 
 @media (max-width: 768px) {
 	
 	#header{
-		position: block !important
+		position: relative;
+	}
+	
+	#main{
+		padding-top: 0;
 	}
 
+	/**
+	* presentation
+	**/
+	#presentation figure{
+		padding-bottom:60px;
+	}
 }

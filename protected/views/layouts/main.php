@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<header id="header" class="line pa1 " role="banner">
-			<div class="center">
+			<div class="pageCenter">
 				<h1 class="left ml1 txtcenter small-w100" id="logo" ><a href="<?php echo Yii::app()->request->baseUrl; ?>" class="logo inbl">Lib<span>ebook</span></a></h1>
 				
 				<!-- ========== compact navigation =========== !-->
@@ -36,7 +36,7 @@
 
 		</header>
 
-		<div id="main" role="main" class="line center">
+		<div id="main" role="main" class="line pageCenter pa1">
 			<?php echo $content; ?>
 
 		</div>
