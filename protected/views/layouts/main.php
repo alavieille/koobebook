@@ -21,7 +21,7 @@
 				</nav>
 		
 
-				<nav id="navigation" class="right mr3 bigger small-w100 txtcenter " role="navigation">
+				<nav id="navigation" class="right mr3 bigger small-w100 txtcenter" role="navigation">
 					<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						array('label'=>'Catalogues', 'url'=>array('/site/index' )),
@@ -30,6 +30,7 @@
 					'itemCssClass' => "inbl pr2 small-w100",
 
 					)); ?>
+		
 				</nav>
 
 			</div>
