@@ -55,7 +55,7 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=libebook',
 			'emulatePrepare' => true,
-			'username' => 'root',
+			'username' => 'roodt',
 			'password' => 'lertiotiopen15',
 			'charset' => 'utf8',
 		),
