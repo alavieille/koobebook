@@ -10,8 +10,25 @@
 	<body>
 		<header id="header" class="line pa1 " role="banner">
 			<div class="pageCenter">
-				<h1 class="left ml1 txtcenter small-w100" id="logo" ><a href="<?php echo Yii::app()->request->baseUrl; ?>" class="logo inbl">Lib<span>ebook</span></a></h1>
+				<nav id="userNav" class="right mr3">
+					<?php 
+
+					$this->widget('zii.widgets.CMenu',array(
+						'items'=>array(
+							array('label'=>'Connexion', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest,  "itemOptions"=>array("class"=>"inbl")),
+							array('label'=>'Mon compte', 'url'=>array('/site/login'), 'visible'=>!Yii::app()->user->isGuest,  "itemOptions"=>array("class"=>"inbl")),
+
+							array('label'=>'Deconnexion ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest,  "itemOptions"=>array("class"=>"inbl")),
+
+							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, "itemOptions"=>array("class"=>"inbl"))
+						),
+					));
+					?>
+				</nav>
+				<div class="clearfix">&nbsp;</div>
+				<h1 class="left ml1 mt0 txtcenter small-w100" id="logo" ><a href="<?php echo Yii::app()->request->baseUrl; ?>" class="logo inbl">Lib<span>ebook</span></a></h1>
 				
+			
 				<!-- ========== compact navigation =========== !-->
 				<nav id="compactNav" class="grid desktop-hidden small-w100 mt2">
 					<ul class="grid2">
@@ -21,7 +38,9 @@
 				</nav>
 		
 
-				<nav id="navigation" class="right mr3 bigger small-w100 txtcenter" role="navigation">
+				<nav id="siteNav" class="right mr3 bigger small-w100 txtcenter" role="navigation">
+				
+
 					<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						array('label'=>'Catalogues', 'url'=>array('/site/index' )),
@@ -32,7 +51,6 @@
 					)); ?>
 		
 				</nav>
-
 			</div>
 
 		</header>

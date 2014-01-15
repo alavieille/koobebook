@@ -7,7 +7,7 @@
  */
 class LoginForm extends CFormModel
 {
-	public $username;
+	public $email;
 	public $password;
 	public $rememberMe;
 
@@ -21,11 +21,9 @@ class LoginForm extends CFormModel
 	public function rules()
 	{
 		return array(
-			// username and password are required
-			array('username, password', 'required'),
-			// rememberMe needs to be a boolean
+			array('email, password', 'required'),
+			array('email', 'email'),
 			array('rememberMe', 'boolean'),
-			// password needs to be authenticated
 			array('password', 'authenticate'),
 		);
 	}
@@ -36,7 +34,9 @@ class LoginForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'rememberMe'=>'Remember me next time',
+			'rememberMe'=>'Connexion automatique',
+			'email'=>'Email',
+			'password'=>'Mot de passe',
 		);
 	}
 
@@ -48,9 +48,23 @@ class LoginForm extends CFormModel
 	{
 		if(!$this->hasErrors())
 		{
-			$this->_identity=new UserIdentity($this->username,$this->password);
-			if(!$this->_identity->authenticate())
-				$this->addError('password','Incorrect username or password.');
+			$this->_identity=new UserIdentity($this->email,$this->password);
+			$this->_identity->authenticate();
+			switch($this->_identity->errorCode)
+			{
+				case UserIdentity::ERROR_NONE: // aucun erreur 
+					//Yii::app()->user->login($identity);
+					break;
+				case UserIdentity::ERROR_USERNAME_INVALID:
+					$this->addError('email','Email incorrecte');
+					break;
+				case UserIdentity::ERROR_PASSWORD_INVALID:
+					$this->addError('password','Mot de passe incorrecte');
+					break;
+				default:
+					$this->addError('password','Erreur inconnue');
+					break;
+			}
 		}
 	}
 
