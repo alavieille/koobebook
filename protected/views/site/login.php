@@ -6,8 +6,8 @@
 $this->pageTitle=Yii::app()->name . ' - Login';
 ?>
 
-<h1>Login</h1>
-<div class="form">
+<h2 class="txtcenter pt2 pb1 ">Connexion</h2>
+<div class="form w100 center" >
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
@@ -17,26 +17,26 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 )); ?>
 
 	<?php echo  $form->errorSummary($model); ?>
-	<?php //echo $form->error($model,'email'); ?>
+	<?php echo $form->error($model,'email'); ?>
 
-	<div class="row">
+	<div class="rowInput">
 		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email'); ?>
+		<?php echo $form->emailField($model,'email',array("class"=>"icon icon-mail")); ?>
 
 	</div>
 
-	<div class="row">
+	<div class="rowInput">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		
 	</div>
 
-	<div class="row rememberMe">
+	<div class="rowInput rememberMe">
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
 		<?php echo $form->label($model,'rememberMe'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="rowInput buttons">
 		<?php echo CHtml::submitButton('Connexion'); ?>
 	</div>
 

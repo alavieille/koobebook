@@ -9,6 +9,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create User</h1>
+<h2 class="txtcenter pt2 pb1">Inscription</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -36,31 +36,141 @@
 
 div.form
 {
+	max-width: 400px;
 }
 
-div.form input,
+::-webkit-input-placeholder {
+   color: #bbb;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #bbb;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #bbb;
+}
+
+:-ms-input-placeholder {  
+   color: #bbb;
+}
+input:focus{
+    outline: 0;
+    border:2px solid #3498db !important;
+}
+div.form input[type="text"],
+div.form input[type="email"],
+div.form input[type="password"],
 div.form textarea,
 div.form select
 {
 	margin: 0.2em 0 0.5em 0;
+	width:100%;
+	height: 40px;
+	border: none;
+	border: 2px solid #E5E3E2;
+	text-indent: 10px;
 }
 
-div.form fieldset
-{
-	border: 1px solid #DDD;
-	padding: 10px;
-	margin: 0 0 10px 0;
-    -moz-border-radius:7px;
+
+    /* Cachons la case à cocher */  
+div.form [type="checkbox"]:not(:checked),  
+div.form [type="checkbox"]:checked {  
+     position: absolute;  
+     left: -9999px; 
+     z-index: 1;
+    }  
+       
+    /* on prépare le label */  
+div.form [type="checkbox"]:not(:checked) + label,  
+div.form [type="checkbox"]:checked + label {  
+    position: relative; /* permet de positionner les pseudo-éléments */  
+    padding-left: 25px; /* fait un peu d'espace pour notre case à venir */  
+    cursor: pointer;    /* affiche un curseur adapté */  
+    padding-top:2px;
+    display:block;
+	width:90%;
+  	max-width:480px;
+  	  z-index: 1;
+    }  
+    
+div.form [type="checkbox"]:not(:checked) + label:before,  
+div.form [type="checkbox"]:checked + label:before {  
+  content: '';  
+  position: absolute;  
+  left:0; top: 2px;  
+  width: 17px; height: 17px; /* dim. de la case */  
+  border: 1px solid #aaa;  
+  background: #f8f8f8;  
+  border-radius: 10px; /* angles arrondis */  
+
+
+
+}  
+
+
+div.form [type="checkbox"]:not(:checked) + label:after,  
+div.form [type="checkbox"]:checked + label:after {  
+  content: "";  
+  position: absolute;  
+  left:2px; top: 4px;  
+  font-size: 14px;  
+  color: #09ad7e;  
+  width: 15px; height: 15px; /* dim. de la case */  
+  border: 1x solid #aaa;  
+  transition: all .2s; /* on prévoit une animation */  
+  background:#3498db; 
+  border-radius: 10px; /* angles arrondis */  
+
+} 
+
+div.form [type="checkbox"]:not(:checked) + label:after {  
+  opacity: 0; /* coche invisible */  
+  transform: scale(0); /* mise à l'échelle à 0 */  
+}  
+
+/* Aspect si "cochée" */  
+div.form [type="checkbox"]:checked + label:after {  
+  opacity: 1; /* coche opaque */  
+  transform: scale(1); /* mise à l'échelle 1:1 */  
+}  
+
+/** bouton submit **/
+
+div.form input[type="submit"]{
+	border: none;
+	color:white;
+	padding:8px 15px;
+	width:200px;
+	font-size: 1.2em;
+	font-weight: 600;
+	letter-spacing: 0.78px;
+	text-align: center;
+	height: 40px;
+	background-color: #3498db;
+	display: block;
+	margin: 0 auto;
+	margin-top: 30px;
 }
+
+
+div.form input[type="submit"]:hover{
+	background-color: #ccc;
+	color:#555;
+}
+
 
 div.form label
 {
-	font-weight: bold;
-	font-size: 0.9em;
+
+	font-size: 1em;
+	letter-spacing: 0.78px;
+	color:#505050;
 	display: block;
+
 }
 
-div.form .row
+div.form .rowInput
 {
 	margin: 5px 0;
 }
@@ -82,12 +192,7 @@ div.form span.required
 	color: red;
 }
 
-div.form div.error label:first-child,
-div.form label.error,
-div.form span.error
-{
-	color: #C00;
-}
+
 
 div.form div.error input,
 div.form div.error textarea,
@@ -96,8 +201,7 @@ div.form input.error,
 div.form textarea.error,
 div.form select.error
 {
-	background: #FEE;
-	border-color: #C00;
+	border-color: #e74c3c;
 }
 
 div.form div.success input,
@@ -107,7 +211,6 @@ div.form input.success,
 div.form textarea.success,
 div.form select.success
 {
-	background: #E6EFC2;
 	border-color: #C6D880;
 }
 
@@ -118,16 +221,17 @@ div.form div.success label
 
 div.form .errorSummary
 {
-	border: 2px solid #C00;
 	padding: 7px 7px 12px 7px;
 	margin: 0 0 20px 0;
-	background: #FEE;
-	font-size: 0.9em;
+	background: rgba(231, 76, 60, 0.7);
+	color: white;
+	letter-spacing: 0.77px;
+	font-size: 1.1em;
 }
 
 div.form .errorMessage
 {
-	color: red;
+	color: #e74c3c;
 	font-size: 0.9em;
 }
 
@@ -152,7 +256,7 @@ div.wide.form label
 	width: 100px;
 }
 
-div.wide.form .row
+div.wide.form .rowInput
 {
 	clear: left;
 }

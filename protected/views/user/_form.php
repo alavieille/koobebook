@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+<div class="form w100 center">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',
@@ -16,36 +16,34 @@
 //	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="rowInput">
 		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'username',array('maxlength'=>20)); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowInput">
 		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->emailField($model,'email',array('maxlength'=>128, "placeholder"=>"example@mail.com")); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowInput">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->passwordField($model,'password',array('maxlength'=>128)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>	
 
-	<div class="row">
+	<div class="rowInput">
 		<?php echo $form->labelEx($model,'passwordConfirm'); ?>
-		<?php echo $form->passwordField($model,'passwordConfirm',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->passwordField($model,'passwordConfirm',array('maxlength'=>128)); ?>
 		<?php echo $form->error($model,'passwordConfirm'); ?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="rowInput buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Valider' : 'Sauvegarder'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

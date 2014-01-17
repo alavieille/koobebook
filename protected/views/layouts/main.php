@@ -5,7 +5,8 @@
 			<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/knacss.css" media="all">
-			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" media="all"> 
+			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" media="all"> 		
+			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" media="all"> 
 	</head>
 	<body>
 		<header id="header" class="line pa1 " role="banner">
@@ -15,13 +16,14 @@
 
 					$this->widget('zii.widgets.CMenu',array(
 						'items'=>array(
-							array('label'=>'Connexion', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest,  "itemOptions"=>array("class"=>"inbl")),
-							array('label'=>'Mon compte', 'url'=>array('/site/login'), 'visible'=>!Yii::app()->user->isGuest,  "itemOptions"=>array("class"=>"inbl")),
+							array('label'=>'Connexion', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'Mon compte', 'url'=>array('/site/login'), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
 
-							array('label'=>'Deconnexion ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest,  "itemOptions"=>array("class"=>"inbl")),
+							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 
-							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, "itemOptions"=>array("class"=>"inbl"))
+							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible"))
 						),
+						'itemCssClass' => "inbl pr2",
 					));
 					?>
 				</nav>

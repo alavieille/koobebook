@@ -29,6 +29,7 @@ class UserController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('update'),
 				'users'=>array('@'),
+				'expression' => array($this, 'isOwner'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -165,5 +166,16 @@ class UserController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function isOwner($user, $rule)
+	{
+     	if(isset($_GET["id"])){
+	        $model = $this->loadModel($_GET['id']);
+	        return $user->id === $model->id;
+	    }
+	    else{
+	    	throw new CHttpException(400,"votre requête est invalide");
+	    }
 	}
 }
