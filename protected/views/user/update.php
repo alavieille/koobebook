@@ -9,7 +9,7 @@ $this->menu=array(
 	array('label'=>'Manage User', 'url'=>array('admin')),
 );
 ?>
-<h2 class="txtcenter pt2 pb1 ">Modification profil</h2>
+<h2 class="txtcenter pt2 pb1 ">Mon compte</h2>
 
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -17,7 +17,7 @@
 					$this->widget('zii.widgets.CMenu',array(
 						'items'=>array(
 							array('label'=>'Connexion', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Mon compte', 'url'=>array('/site/login'), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
+							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
 
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 
@@ -57,7 +57,7 @@
 
 		</header>
 
-		<div id="main" role="main" class="line pageCenter pa1">
+		<div id="main" role="main" class="line pageCenter  pa1">
 			<?php echo $content; ?>
 
 		</div>

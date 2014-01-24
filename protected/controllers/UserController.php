@@ -29,7 +29,6 @@ class UserController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('update'),
 				'users'=>array('@'),
-				'expression' => array($this, 'isOwner'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -47,6 +46,11 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
+		
+		if(isset($_GET["id"]) && $_GET["id"]==yii::app()->user->id){
+	       $this->layout = "//layouts/private";
+	    }
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -78,11 +82,12 @@ class UserController extends Controller
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
+
+		$this->layout = "//layouts/private";
+		$model=$this->loadModel(yii::app()->user->id);
 
 		// Uncomment the following line if AJAX validation is needed
 		//$this->performAjaxValidation($model);
