@@ -23,7 +23,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create'),
+				'actions'=>array('index','view','create','forget'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -88,7 +88,7 @@ class UserController extends Controller
 
 		$this->layout = "//layouts/private";
 		$model=$this->loadModel(yii::app()->user->id);
-
+		$model->scenario ='updateUser';
 		// Uncomment the following line if AJAX validation is needed
 		//$this->performAjaxValidation($model);
 
@@ -116,6 +116,43 @@ class UserController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
+	/**
+	 * Forget form password.
+	 */
+	public function actionForget()
+	{
+		$model = new ForgetPassForm;
+
+		if(isset($_POST['ForgetPassForm']))
+		{
+			$model->attributes=$_POST['ForgetPassForm'];
+			if($model->validate()){
+				$user = User::model()->findByPk(6);
+				$user->temp_password = crypt(rand(),$model->email);
+				$user->date_tmp_password = new CDbExpression('CURRENT_TIMESTAMP()');
+				if($user->save()){
+					$subject='=?UTF-8?B?Libebook: mot de passe oublié?=';
+					$headers="From: ".Yii::app()->params['adminEmail']."\r\n".
+					"Reply-To: ".Yii::app()->params['adminEmail']."\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-Type: text/plain; charset=UTF-8";
+					$content = "Bonjour, \n  Votre nouveau mot de passe est : ".$user->temp_password."\n \n Attention il n'est valide que pendant 30 minutes";
+					mail($model->email, $subject, $content);
+					Yii::app()->user->setFlash('success','Email envoyé avec succés. Consultez vos emails, veuillez aussi vérifier les spam.');
+					$this->redirect(array('site/login'));
+				}
+				else{
+					Yii::app()->user->setFlash('error', "Une erreur a été recontrée. Veuillez contacter l'administrateur.");
+					$this->refresh();
+				}
+
+		
+			}
+		}
+				
+		$this->render('forgetPass', array('model'=>$model));
 	}
 
 	/**

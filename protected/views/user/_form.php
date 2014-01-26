@@ -19,12 +19,6 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="rowInput">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('maxlength'=>20)); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
-
-	<div class="rowInput">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->emailField($model,'email',array('maxlength'=>128, "placeholder"=>"example@mail.com")); ?>
 		<?php echo $form->error($model,'email'); ?>

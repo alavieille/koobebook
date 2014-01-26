@@ -5,9 +5,10 @@
  *
  * The followings are the available columns in table 'user':
  * @property integer $id
- * @property string $username
  * @property string $email
  * @property string $password
+ * @property string temp_password
+ * @property date date_tmp_password
  */
 class User extends CActiveRecord
 {
@@ -30,15 +31,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, email, password, passwordConfirm', 'required'),
-			array('username', 'length', 'max'=>20),
+			array('email, password, ', 'required'),
+			array('passwordConfirm', 'required', 'on'=>'insert, updateUser'),
 			array('email', 'email'),
-			array('email', 'unique'),
+			array('email', 'unique'), 	
 			array('email, password', 'length', 'max'=>128),
-			array('passwordConfirm','compare', 'compareAttribute' => 'password'),
+			array('passwordConfirm','compare', 'compareAttribute' => 'password', 'on'=>'insert, updateUser'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, email, password', 'safe', 'on'=>'search'),
+			array('id, email, password', 'safe', 'on'=>'search'),
+			array('temp_password, date_tmp_password', 'unsafe'),
 			array('id', 'unsafe', 'on'=>'update')
 		);
 	}
@@ -61,7 +63,6 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'username' => 'Nom',
 			'email' => 'Email',
 			'password' => 'Mot de passe',
 			'passwordConfirm' => 'Confirmation mot de passe'
@@ -70,7 +71,7 @@ class User extends CActiveRecord
 
   	public function beforeSave(){
 
-        $pass = md5($this->password);
+        $pass = crypt($this->password,$this->email);
         $this->password = $pass;
         return true;
      }
@@ -93,7 +94,6 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 

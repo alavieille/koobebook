@@ -185,7 +185,7 @@ sub {
 	left: auto;
 	right: -7000px;
 }
-.desktop-hidden { display: none; } /* hidden on desktop */
+.desktop-hidden { display: none !important; } /* hidden on desktop */
 
 
 /* ----------------------------- */

@@ -53,7 +53,6 @@ body{
 	color:#3498db;
 }
 
-
  /**
  * 2.0 Header
  * ----------------------------------------------------------------------------
@@ -187,12 +186,27 @@ body{
 	min-height: 600px;
 }
 
+#main .flashsuccess{
+	color:#27ae60;
+}
 
+#main .flasherror{
+	color:#e74c3c;
+}
 #main h2, #main h3{
 		color:#505050;
 }
+#main p{
+	color:#505050;
+}
+#main a{
+	color:#505050;
+	text-decoration: none;
+}
 
-
+#main a:hover{
+	color: #3498db;
+}
  /**
  * 4.0 Index
  * ----------------------------------------------------------------------------

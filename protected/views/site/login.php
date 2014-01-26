@@ -5,8 +5,12 @@
 
 $this->pageTitle=Yii::app()->name . ' - Login';
 ?>
-
 <h2 class="txtcenter pt2 pb1 ">Connexion</h2>
+<?php if(Yii::app()->user->hasFlash('success')):?>
+    <div class="txtcenter flashsuccess pb2">
+        <?php echo Yii::app()->user->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 <div class="form w100 center" >
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
@@ -36,9 +40,10 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 		<?php echo $form->label($model,'rememberMe'); ?>
 	</div>
 
-	<div class="rowInput buttons">
+	<div class="rowInput buttons pb3">
 		<?php echo CHtml::submitButton('Connexion'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
+<p class="txtcenter mt3 w100"><?php echo CHtml::link('Mot de passe oublié ?',array('user/Forget'),array('class'=>'pa3')); ?></p>

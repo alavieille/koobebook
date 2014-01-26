@@ -16,12 +16,12 @@
 
 					$this->widget('zii.widgets.CMenu',array(
 						'items'=>array(
-							array('label'=>'Connexion', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
+							array('label'=>'Connexion', 'url'=>array('/site/login'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
 
-							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
+							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest),
 
-							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible"))
+							array('label'=>'Inscription', 'url'=>array('/user/create'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible"))
 						),
 						'itemCssClass' => "inbl pr2",
 					));
@@ -45,6 +45,10 @@
 
 					<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
+							array('label'=>'Connexion', 'url'=>array('/site/login'), 'itemOptions'=>array("class"=>"desktop-hidden"), 'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
+							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden")),
+							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
 						array('label'=>'Catalogues', 'url'=>array('/site/index' )),
 						array('label'=>'Aide', 'url'=>array('/site/index' )),
 						),

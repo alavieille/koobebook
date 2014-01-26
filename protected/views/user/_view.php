@@ -21,4 +21,8 @@
 	<?php echo CHtml::encode($data->password); ?>
 	<br />	
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('temp_password')); ?>:</b>
+	<?php echo CHtml::encode($data->password); ?>
+	<br />	
+
 </div>
