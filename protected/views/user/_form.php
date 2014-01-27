@@ -32,7 +32,7 @@
 
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'passwordConfirm'); ?>
-		<?php echo $form->passwordField($model,'passwordConfirm',array('maxlength'=>128)); ?>
+		<?php echo $form->passwordField($model,'passwordConfirm',array('maxlength'=>128, "value"=>"")); ?>
 		<?php echo $form->error($model,'passwordConfirm'); ?>
 	</div>
 

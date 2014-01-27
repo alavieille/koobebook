@@ -1,3 +1,8 @@
+<?php if(Yii::app()->user->hasFlash('success')):?>
+    <div class="txtcenter flashsuccess pb2">
+        <?php echo Yii::app()->user->getFlash('success'); ?>
+    </div>
+<?php endif; ?>
 <section id="presentation" class="line separator pt2">
 	<h2 class="logo txtcenter">Lib<span>ebook</span></h2>
 	<p class="txtcenter biggest mt0">Votre librairie Numérique</p>

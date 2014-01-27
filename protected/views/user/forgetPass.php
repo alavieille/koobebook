@@ -1,7 +1,6 @@
 <?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm  */
+/* @var $this userController */
+/* @var $model ForgetPassForm */
 
 $this->pageTitle=Yii::app()->name . ' - Mot de passe oublié';
 ?>

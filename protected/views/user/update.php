@@ -2,14 +2,11 @@
 /* @var $this UserController */
 /* @var $model User */
 
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
-);
+
 ?>
 <h2 class="txtcenter pt2 pb1 ">Mon compte</h2>
+
+<?php
 
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

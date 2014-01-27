@@ -10,7 +10,6 @@ class UserController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -20,10 +19,10 @@ class UserController extends Controller
 	 * @return array access control rules
 	 */
 	public function accessRules()
-	{
+	{	
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','forget'),
+				'actions'=>array('index','view','create','forget','admin'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -31,8 +30,10 @@ class UserController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('delete','confirmDelete'),
+				'users'=>array('@'),
+				//'expression'=> '(Yii::app()->user->id == ($_GET[\'id\']))',
+				'expression'=> 'Yii::app()->controller->isOwner()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -71,7 +72,7 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('site/login'));
 		}
 
 		$this->render('create',array(
@@ -85,6 +86,7 @@ class UserController extends Controller
 	 */
 	public function actionUpdate()
 	{
+
 
 		$this->layout = "//layouts/private";
 		$model=$this->loadModel(yii::app()->user->id);
@@ -107,15 +109,28 @@ class UserController extends Controller
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$this->layout = "//layouts/private";
+		$this->render('delete',array('id'=>$id));
+	}	
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	/**
+	* Confirm delete account
+	**/
+	public function actionConfirmDelete($id)
+	{
+		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('user/delete', array(
+            'id'=>$id))){
+			$this->loadModel($id)->delete();
+			Yii::app()->user->logout();
+			$this->redirect(Yii::app()->homeUrl);
+
+		}
+		else{
+			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
+		}
 	}
 
 	/**
@@ -171,17 +186,17 @@ class UserController extends Controller
 	/**
 	 * Manages all models.
 	 */
-	// public function actionAdmin()
-	// {
-	// 	$model=new User('search');
-	// 	$model->unsetAttributes();  // clear any default values
-	// 	if(isset($_GET['User']))
-	// 		$model->attributes=$_GET['User'];
+	public function actionAdmin()
+	{
+		$model=new User('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['User']))
+			$model->attributes=$_GET['User'];
 
-	// 	$this->render('admin',array(
-	// 		'model'=>$model,
-	// 	));
-	// }
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -211,11 +226,11 @@ class UserController extends Controller
 		}
 	}
 
-	public function isOwner($user, $rule)
+	public function isOwner()
 	{
      	if(isset($_GET["id"])){
 	        $model = $this->loadModel($_GET['id']);
-	        return $user->id === $model->id;
+	        return yii::app()->user->id === $model->id;
 	    }
 	    else{
 	    	throw new CHttpException(400,"votre requête est invalide");

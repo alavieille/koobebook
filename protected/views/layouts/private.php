@@ -6,9 +6,8 @@
 	<?php 
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Mon profil', 'url'=>array('/user/view/'.yii::app()->user->id)),
 				array('label'=>'Modifier', 'url'=>array('/user/update')),
-				array('label'=>'Supprimer', 'url'=>array('/user/delete')),
+				array('label'=>'Supprimer', 'url'=>array('/user/delete/'.yii::app()->user->id)),
 			),
 			'itemCssClass' => "txtcenter pb1",
 		));
