@@ -25,6 +25,6 @@ $this->menu=array(
 		'email',
 		'password',
 		'temp_password',
-		'date_temp_password',
+		'date_tmp_password',
 	),
 )); ?>

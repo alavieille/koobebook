@@ -124,22 +124,24 @@ class UserController extends Controller
 	public function actionForget()
 	{
 		$model = new ForgetPassForm;
-
 		if(isset($_POST['ForgetPassForm']))
 		{
 			$model->attributes=$_POST['ForgetPassForm'];
 			if($model->validate()){
-				$user = User::model()->findByPk(6);
+
+				$user = User::model()->findByAttributes(array('email'=>$model->email));	
 				$user->temp_password = crypt(rand(),$model->email);
 				$user->date_tmp_password = new CDbExpression('CURRENT_TIMESTAMP()');
-				if($user->save()){
-					$subject='=?UTF-8?B?Libebook: mot de passe oublié?=';
-					$headers="From: ".Yii::app()->params['adminEmail']."\r\n".
+				$user->update(array("temp_password","date_tmp_password"));
+				
+				$subject='=?UTF-8?B?Libebook: mot de passe oublié?=';
+				$headers="From: ".Yii::app()->params['adminEmail']."\r\n".
 					"Reply-To: ".Yii::app()->params['adminEmail']."\r\n".
 					"MIME-Version: 1.0\r\n".
 					"Content-Type: text/plain; charset=UTF-8";
-					$content = "Bonjour, \n  Votre nouveau mot de passe est : ".$user->temp_password."\n \n Attention il n'est valide que pendant 30 minutes";
-					mail($model->email, $subject, $content);
+				$content = "Bonjour, \n  Votre nouveau mot de passe est : ".$user->temp_password."\n \n Attention il n'est valide que pendant 30 minutes";
+				
+				if(mail($model->email, $subject, $content)){
 					Yii::app()->user->setFlash('success','Email envoyé avec succés. Consultez vos emails, veuillez aussi vérifier les spam.');
 					$this->redirect(array('site/login'));
 				}
@@ -150,8 +152,7 @@ class UserController extends Controller
 
 		
 			}
-		}
-				
+		}	
 		$this->render('forgetPass', array('model'=>$model));
 	}
 
