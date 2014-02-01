@@ -43,7 +43,7 @@ class Book extends CActiveRecord
 			array('price', 'length', 'max'=>10),
 			array('picture', 'file', 'types'=>'jpg, gif, png'),
 			array('epub', 'file', 'types'=>'epub'),
-			
+
 			array('description, publication', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -71,14 +71,15 @@ class Book extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'catalogueId' => 'Catalogue',
-			'title' => 'Title',
-			'price' => 'Price',
-			'author' => 'Author',
-			'picture' => 'Picture',
+			'title' => 'Titre',
+			'price' => 'Prix',
+			'author' => 'Auteur',
+			'picture' => 'Couverture',
 			'description' => 'Description',
-			'editor' => 'Editor',
-			'publication' => 'Publication',
-			'isbn' => 'Isbn',
+			'editor' => 'Editeur',
+			'publication' => 'Date de publication',
+			'isbn' => 'ISBN',
+			'epub' => 'Fichier Epub',
 		);
 	}
 

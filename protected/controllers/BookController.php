@@ -58,10 +58,9 @@ class BookController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Book;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->layout = "//layouts/private";
+		$model=new Book;
 
 		if(isset($_POST['Book']))
 		{
@@ -70,6 +69,12 @@ class BookController extends Controller
 			$model->epub=CUploadedFile::getInstance($model,'epub');
 			if($model->save())
 				echo "ok";
+				$urlUpload = yii::app()->params->path_upload.DIRECTORY_SEPARATOR;
+			//	$model->picture->name = "cover-".$model->id;
+				$model->picture->saveAs($urlUpload."cover-".$model->id.".".$model->picture->extensionName);			
+
+			//	$model->epub->name = "epub-".$model->id;
+				$model->epub->saveAs($urlUpload."epub-".$model->id.".".$model->picture->extensionName);
 				//$this->redirect(array('view','id'=>$model->id));
 		}
 
