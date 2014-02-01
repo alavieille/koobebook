@@ -2,7 +2,7 @@
 <?php $this->beginContent('//layouts/main'); ?>
 
 <nav class="w25 mt3 pr2 pl3 mb1 mr3 left small-w100" id="privateNav">
-	<h3 class="">Profil</h3>
+	<h3 class="">Compte</h3>
 	<?php 
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
@@ -16,11 +16,22 @@
 		<ul>
 			<li><a href="">Voir ma biliothéque</a></li>
 		</ul>
-	<h3 class="">Boutique</h3>
-	<ul>
-			<li><a href="">Voir ma boutique</a></li>
-			<li><a href="">Personaliser ma boutique</a></li>
-		</ul>
+	<h3 class="">Catalogue</h3>
+	<?php 
+		$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		$this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
+				array('label'=>'Modifier', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
+			),
+			'itemCssClass' => "txtcenter pb1",
+		));
+	?>
+<!-- 	<ul>
+			<li><a href="">Créer mon catalogue</a></li>
+			<li><a href="">Voir mon catalogue</a></li>
+			<li><a href="">Personaliser mon catalogue</a></li>
+		</ul> -->
 </nav>
 
 <section id="content" class="w70 mod small-w100">

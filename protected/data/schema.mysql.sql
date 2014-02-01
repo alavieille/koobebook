@@ -1,16 +1,37 @@
+/* Tablea user */
 CREATE TABLE IF NOT EXISTS user (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(20) NOT NULL,
   email varchar(128) NOT NULL,
   password varchar(128) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB
+  temp_password varchar(128) DEFAULT NULL,
+  date_tmp_password datetime DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB ;
 
-INSERT INTO user (username, password, email) VALUES ('test1', 'pass1', 'test1@example.com');
-INSERT INTO user (username, password, email) VALUES ('test2', 'pass2', 'test2@example.com');
-INSERT INTO user (username, password, email) VALUES ('test3', 'pass3', 'test3@example.com');
-INSERT INTO user (username, password, email) VALUES ('test4', 'pass4', 'test4@example.com');
-INSERT INTO user (username, password, email) VALUES ('test5', 'pass5', 'test5@example.com');
-INSERT INTO user (username, password, email) VALUES ('test6', 'pass6', 'test6@example.com');
-INSERT INTO user (username, password, email) VALUES ('test7', 'pass7', 'test7@example.com');
-INSERT INTO user (username, password, email) VALUES ('test8', 'pass8', 'test8@example.com');
+
+/* Table catalogue */
+CREATE TABLE IF NOT EXISTS catalogue (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  userId int(11) NOT NULL
+  COMMENT "CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)",
+  description TEXT,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB ;
+
+
+/* Table book */
+CREATE TABLE IF NOT EXISTS book (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  catalogueId int(11) NOT NULL
+  COMMENT "CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)",
+  title int(11) NOT NULL,
+  price decimal NOT NULL,
+  author int(11) NOT NULL,
+  picture varchar(250),
+  description text,
+  editor varchar(250),
+  publication date,
+  isbn int(13),
+  PRIMARY KEY (id)
+) ENGINE=InnoDB ;

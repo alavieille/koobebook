@@ -233,6 +233,7 @@ div.form .errorMessage
 {
 	color: #e74c3c;
 	font-size: 0.9em;
+	display: inline-block;
 }
 
 div.form .errorSummary p
@@ -266,3 +267,71 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 	clear: left;
 	padding-left: 110px;
 }
+
+
+
+div .form .labelCheckboxList{
+	vertical-align: bottom;
+}
+ /* Cachons la case à cocher */  
+div.form [type="radio"]:not(:checked),  
+div.form [type="radio"]:checked {  
+     position: absolute;  
+     left: -9999px; 
+     z-index: 1;
+    }  
+       
+    /* on prépare le label */  
+div.form [type="radio"]:not(:checked) + label,  
+div.form [type="radio"]:checked + label {  
+    position: relative; /* permet de positionner les pseudo-éléments */  
+    padding-left: 25px; /* fait un peu d'espace pour notre case à venir */  
+    cursor: pointer;    /* affiche un curseur adapté */  
+    padding-top:2px;
+    display:inline-block;
+	width:auto;
+  	max-width:480px;
+  	z-index: 1;
+  	vertical-align: top;
+    }  
+    
+div.form [type="radio"]:not(:checked) + label:before,  
+div.form [type="radio"]:checked + label:before {  
+  content: '';  
+  position: absolute;  
+  left:0; top: 2px;  
+  width: 17px; height: 17px; /* dim. de la case */  
+  border: 1px solid #aaa;  
+  background: #f8f8f8;  
+  border-radius: 10px; /* angles arrondis */  
+
+
+
+}  
+
+
+div.form [type="radio"]:not(:checked) + label:after,  
+div.form [type="radio"]:checked + label:after {  
+  content: "";  
+  position: absolute;  
+  left:2px; top: 4px;  
+  font-size: 14px;  
+  color: #09ad7e;  
+  width: 15px; height: 15px; /* dim. de la case */  
+  border: 1x solid #aaa;  
+  transition: all .2s; /* on prévoit une animation */  
+  background:#3498db; 
+  border-radius: 10px; /* angles arrondis */  
+
+} 
+
+div.form [type="radio"]:not(:checked) + label:after {  
+  opacity: 0; /* coche invisible */  
+  transform: scale(0); /* mise à l'échelle à 0 */  
+}  
+
+/* Aspect si "cochée" */  
+div.form [type="radio"]:checked + label:after {  
+  opacity: 1; /* coche opaque */  
+  transform: scale(1); /* mise à l'échelle 1:1 */  
+}  

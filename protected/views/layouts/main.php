@@ -28,7 +28,7 @@
 					?>
 				</nav>
 				<div class="clearfix">&nbsp;</div>
-				<h1 class="left ml1 mt0 txtcenter small-w100" id="logo" ><a href="<?php echo Yii::app()->request->baseUrl; ?>" class="logo inbl">Lib<span>ebook</span></a></h1>
+				<h1 class="left ml1 mt0 txtcenter small-w100" id="logo" ><a href="<?php echo Yii::app()->request->baseUrl; ?>" class="logo inbl">e<span>Librairie</span></a></h1>
 				
 			
 				<!-- ========== compact navigation =========== !-->

@@ -1,26 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "catalogue".
  *
- * The followings are the available columns in table 'user':
+ * The followings are the available columns in table 'catalogue':
  * @property integer $id
- * @property string $email
- * @property string $password
- * @property string temp_password
- * @property date date_tmp_password
+ * @property integer $userId
+ * @property string $name
+ * @property string $firstName
+ * @property string $description
+ *
+ * The followings are the available model relations:
+ * @property User $user
  */
-class User extends CActiveRecord
+class Catalogue extends CActiveRecord
 {
-	
-
-	public $passwordConfirm;
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return 'catalogue';
 	}
 
 	/**
@@ -31,17 +31,15 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, password, ', 'required'),
-			array('passwordConfirm', 'required', 'on'=>'insert, updateUser'),
-			array('email', 'email'),
-			array('email', 'unique'), 	
-			array('email, password', 'length', 'max'=>128),
-			array('passwordConfirm','compare', 'compareAttribute' => 'password', 'on'=>'insert, updateUser'),
+			array('name', 'required'),
+			array('userId', 'unique',   'message'=>'Vous avez déjà crée un catalogue'),
+			array('userId', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>50),
+			array('firstName', 'length', 'max'=>40),
+			array('description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, password', 'safe', 'on'=>'search'),
-			array('temp_password, date_tmp_password', 'unsafe'),
-			array('id', 'unsafe', 'on'=>'update')
+			array('id, userId, name, firstName, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +51,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'catalogue' => array(self::HAS_ONE, 'Catalogue', 'userId'),
+			'user' => array(self::BELONGS_TO, 'User', 'userId'),
 		);
 	}
 
@@ -64,18 +62,13 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Email',
-			'password' => 'Mot de passe',
-			'passwordConfirm' => 'Confirmation mot de passe'
+			'userId' => 'User',
+			'name' => 'Nom',
+			'firstName' => 'Prénom',
+			'description' => 'Description',
 		);
 	}
 
-  	public function beforeSave(){
-
-        $pass = crypt($this->password,$this->email);
-        $this->password = $pass;
-        return true;
-     }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -95,8 +88,10 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('password',$this->password,true);
+		$criteria->compare('userId',$this->userId);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('firstName',$this->firstName,true);
+		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,7 +102,7 @@ class User extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Catalogue the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -1,26 +1,31 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "book".
  *
- * The followings are the available columns in table 'user':
+ * The followings are the available columns in table 'book':
  * @property integer $id
- * @property string $email
- * @property string $password
- * @property string temp_password
- * @property date date_tmp_password
+ * @property integer $catalogueId
+ * @property string $title
+ * @property string $price
+ * @property string $author
+ * @property string $picture
+ * @property string $description
+ * @property string $editor
+ * @property string $publication
+ * @property integer $isbn
+ *
+ * The followings are the available model relations:
+ * @property Catalogue $catalogue
  */
-class User extends CActiveRecord
+class Book extends CActiveRecord
 {
-	
-
-	public $passwordConfirm;
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return 'book';
 	}
 
 	/**
@@ -31,17 +36,18 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, password, ', 'required'),
-			array('passwordConfirm', 'required', 'on'=>'insert, updateUser'),
-			array('email', 'email'),
-			array('email', 'unique'), 	
-			array('email, password', 'length', 'max'=>128),
-			array('passwordConfirm','compare', 'compareAttribute' => 'password', 'on'=>'insert, updateUser'),
+			array('catalogueId, title, price, author', 'required'),
+			array('catalogueId, isbn', 'numerical', 'integerOnly'=>true),
+			array('title, author, editor, epub', 'length', 'max'=>250),
+
+			array('price', 'length', 'max'=>10),
+			array('picture', 'file', 'types'=>'jpg, gif, png'),
+			array('epub', 'file', 'types'=>'epub'),
+			
+			array('description, publication', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, password', 'safe', 'on'=>'search'),
-			array('temp_password, date_tmp_password', 'unsafe'),
-			array('id', 'unsafe', 'on'=>'update')
+			array('id, catalogueId, title, price, author, picture, description, editor, publication, isbn', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +59,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'catalogue' => array(self::HAS_ONE, 'Catalogue', 'userId'),
+			'catalogue' => array(self::BELONGS_TO, 'Catalogue', 'catalogueId'),
 		);
 	}
 
@@ -64,18 +70,18 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Email',
-			'password' => 'Mot de passe',
-			'passwordConfirm' => 'Confirmation mot de passe'
+			'catalogueId' => 'Catalogue',
+			'title' => 'Title',
+			'price' => 'Price',
+			'author' => 'Author',
+			'picture' => 'Picture',
+			'description' => 'Description',
+			'editor' => 'Editor',
+			'publication' => 'Publication',
+			'isbn' => 'Isbn',
 		);
 	}
 
-  	public function beforeSave(){
-
-        $pass = crypt($this->password,$this->email);
-        $this->password = $pass;
-        return true;
-     }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -95,8 +101,15 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('password',$this->password,true);
+		$criteria->compare('catalogueId',$this->catalogueId);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('price',$this->price,true);
+		$criteria->compare('author',$this->author,true);
+		$criteria->compare('picture',$this->picture,true);
+		$criteria->compare('description',$this->description,true);
+		$criteria->compare('editor',$this->editor,true);
+		$criteria->compare('publication',$this->publication,true);
+		$criteria->compare('isbn',$this->isbn);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,7 +120,7 @@ class User extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Book the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

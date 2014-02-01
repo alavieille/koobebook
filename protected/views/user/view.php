@@ -2,10 +2,7 @@
 /* @var $this UserController */
 /* @var $model User */
 
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->id,
-);
+
 ?>
 
 <h2 class="txtcenter">Profil</h2>

@@ -4,7 +4,7 @@
     </div>
 <?php endif; ?>
 <section id="presentation" class="line separator pt2">
-	<h2 class="logo txtcenter">Lib<span>ebook</span></h2>
+	<h2 class="logo txtcenter">e<span>Librairie</span></h2>
 	<p class="txtcenter biggest mt0">Votre librairie Numérique</p>
 	<div class="grid">
 		<div class="grid3 mt2">
