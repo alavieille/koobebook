@@ -4,9 +4,17 @@
 			<meta charset="UTF-8">
 			<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/knacss.css" media="all">
-			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" media="all"> 		
-			<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" media="all"> 
+			<?php 
+				// style
+				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/knacss.css');
+				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/style.css');
+				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/form.css');
+
+				// javascript
+				Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
+
+			?>
+		
 	</head>
 	<body>
 		<header id="header" class="line pa1 " role="banner">

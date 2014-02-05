@@ -13,8 +13,8 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
-		'enableClientValidation'=>true,
-	'enableAjaxValidation'=>false,
+	'enableClientValidation'=>true,
+	'enableAjaxValidation'=>true,
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -26,15 +26,21 @@
 	</div>
 
 	<div class="mod">
-		<div class="left w40">
-			<div class="rowInput line">
+		<div class="left w40 tiny-w100">
+			<div class="rowInput line pr1 ">
 				<?php echo $form->labelEx($model,'picture'); ?>
-				<?php echo CHtml::activeFileField($model,'picture'); ?>
-				<?php echo $form->error($model,'picture'); ?>
+				<img class="mt1 mb1 center visually-hidden" data-previewDownload="preview" id="previous_cover" src="<?php echo Yii::app()->request->baseUrl; ?>/images/default_cover.png" alt="apercu de la couverture" >
+				<?php echo CHtml::activeFileField($model,'picture',array("data-previewDownload"=>"input")); ?>
+				<?php echo $form->error($model,'picture',array("data-previewDownload"=>"error")); ?>
+				<nav class="inputPicture"> 
+					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="button" >Modifier</a>
+					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="delete" >Supprimer</a>
+				</nav>
+				
+				
 			</div>
 		</div>
-		<div class="left w60">
-			<img src="" alt="">
+		<div class="left w60 tiny-w100">
 			<div class="rowInput ">
 				<?php echo $form->labelEx($model,'catalogueId'); ?>
 				<?php echo $form->textField($model,'catalogueId'); ?>
@@ -53,20 +59,33 @@
 				<?php echo $form->error($model,'editor'); ?>
 			</div>
 
-			<div class="rowInput w200p left pr3">
+			<div class="rowInput w200p left pr1 tiny-w100">
 				<?php echo $form->labelEx($model,'publication'); ?>
-				<?php echo $form->textField($model,'publication'); ?>
+				<?php
+					$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+				    'model' => $model,
+				    'attribute' => 'publication',
+				    'language' => 'fr',
+				    'options' => array(
+
+				    	),
+				    'htmlOptions' => array(
+				       // 'class' => 'visually-hidden'  // textField maxlength
+				    ),
+				));
+
+				?>
 				<?php echo $form->error($model,'publication'); ?>
 			</div>
 
-			<div class="rowInput w200p left pl3">
+			<div class="rowInput w200p left tiny-w100">
 				<?php echo $form->labelEx($model,'isbn'); ?>
 				<?php echo $form->textField($model,'isbn'); ?>
 				<?php echo $form->error($model,'isbn'); ?>
 			</div>
 
-			<div class="rowInput w200p">
-				<?php echo $form->labelEx($model,'price'); ?>
+			<div class="rowInput w200p tiny-w100">
+				<?php echo $form->labelEx($model,'price'); ?> 
 				<?php echo $form->textField($model,'price'); ?>
 				<?php echo $form->error($model,'price'); ?>
 			</div>

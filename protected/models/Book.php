@@ -36,15 +36,16 @@ class Book extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('catalogueId, title, price, author', 'required'),
+			array('catalogueId, title, price, author, epub, publication, description', 'required'),
 			array('catalogueId, isbn', 'numerical', 'integerOnly'=>true),
 			array('title, author, editor, epub', 'length', 'max'=>250),
 
-			array('price', 'length', 'max'=>10),
-			array('picture', 'file', 'types'=>'jpg, gif, png'),
+			array('price', 'length', 'max'=>10, ),
+			array('picture', 'file', 'types'=>'jpg, gif, png',"allowEmpty"=>true),
 			array('epub', 'file', 'types'=>'epub'),
 
-			array('description, publication', 'safe'),
+			array('description', 'safe'),
+			array('publication', 'date', 'format'=>'dd/MM/yyyy','message'=>"Format de date invalide (jj/mm/aaaa)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, catalogueId, title, price, author, picture, description, editor, publication, isbn', 'safe', 'on'=>'search'),
@@ -72,7 +73,7 @@ class Book extends CActiveRecord
 			'id' => 'ID',
 			'catalogueId' => 'Catalogue',
 			'title' => 'Titre',
-			'price' => 'Prix',
+			'price' => 'Prix (en €)',
 			'author' => 'Auteur',
 			'picture' => 'Couverture',
 			'description' => 'Description',

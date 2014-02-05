@@ -68,16 +68,15 @@ class BookController extends Controller
 			$model->picture=CUploadedFile::getInstance($model,'picture');
 			$model->epub=CUploadedFile::getInstance($model,'epub');
 			if($model->save())
-				echo "ok";
+			{
 				$urlUpload = yii::app()->params->path_upload.DIRECTORY_SEPARATOR;
-			//	$model->picture->name = "cover-".$model->id;
+
 				$model->picture->saveAs($urlUpload."cover-".$model->id.".".$model->picture->extensionName);			
 
-			//	$model->epub->name = "epub-".$model->id;
 				$model->epub->saveAs($urlUpload."epub-".$model->id.".".$model->picture->extensionName);
-				//$this->redirect(array('view','id'=>$model->id));
-		}
 
+			}
+		}
 		$this->render('create',array(
 			'model'=>$model,
 		));
