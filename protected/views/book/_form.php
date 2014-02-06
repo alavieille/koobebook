@@ -28,24 +28,22 @@
 	<div class="mod">
 		<div class="left w40 tiny-w100">
 			<div class="rowInput line pr1 ">
-				<?php echo $form->labelEx($model,'picture'); ?>
+				<?php echo $form->labelEx($model,'pictureFile'); ?>
 				<img class="mt1 mb1 center visually-hidden" data-previewDownload="preview" id="previous_cover" src="<?php echo Yii::app()->request->baseUrl; ?>/images/default_cover.png" alt="apercu de la couverture" >
-				<?php echo CHtml::activeFileField($model,'picture',array("data-previewDownload"=>"input")); ?>
-				<?php echo $form->error($model,'picture',array("data-previewDownload"=>"error")); ?>
+				<?php echo CHtml::activeFileField($model,'pictureFile',array("data-previewDownload"=>"input")); ?>
+				<?php echo $form->error($model,'pictureFile',array("data-previewDownload"=>"error")); ?>
 				<nav class="inputPicture"> 
 					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="button" >Modifier</a>
 					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="delete" >Supprimer</a>
-				</nav>
-				
-				
+				</nav>						
 			</div>
 		</div>
 		<div class="left w60 tiny-w100">
-			<div class="rowInput ">
+<!-- 			<div class="rowInput ">
 				<?php echo $form->labelEx($model,'catalogueId'); ?>
 				<?php echo $form->textField($model,'catalogueId'); ?>
 				<?php echo $form->error($model,'catalogueId'); ?>
-			</div>
+			</div> -->
 
 			<div class="rowInput">
 				<?php echo $form->labelEx($model,'author'); ?>
@@ -67,7 +65,7 @@
 				    'attribute' => 'publication',
 				    'language' => 'fr',
 				    'options' => array(
-
+						'dateFormat'=>'yy-mm-dd',
 				    	),
 				    'htmlOptions' => array(
 				       // 'class' => 'visually-hidden'  // textField maxlength
@@ -99,9 +97,9 @@
 		</div>
 
 		<div class="rowInput">
-			<?php echo $form->labelEx($model,'epub'); ?>
-			<?php echo CHtml::activeFileField($model,'epub'); ?>
-			<?php echo $form->error($model,'epub'); ?>
+			<?php echo $form->labelEx($model,'epubFile'); ?>
+			<?php echo CHtml::activeFileField($model,'epubFile'); ?>
+			<?php echo $form->error($model,'epubFile'); ?>
 		</div>
 
 		<div class="rowInput buttons">

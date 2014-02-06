@@ -2,34 +2,49 @@
 /* @var $this BookController */
 /* @var $model Book */
 
-$this->breadcrumbs=array(
-	'Books'=>array('index'),
-	$model->title,
-);
-
-$this->menu=array(
-	array('label'=>'List Book', 'url'=>array('index')),
-	array('label'=>'Create Book', 'url'=>array('create')),
-	array('label'=>'Update Book', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Book', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Book', 'url'=>array('admin')),
-);
 ?>
 
-<h1>View Book #<?php echo $model->id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'catalogueId',
-		'title',
-		'price',
-		'author',
-		'picture',
-		'description',
-		'editor',
-		'publication',
-		'isbn',
-	),
-)); ?>
+<div class="view pageCenter">
+
+
+
+
+	<h2><?php echo CHtml::encode($model->title); ?></h2>
+
+
+	
+	<?php echo CHtml::encode($model->price); ?>
+
+
+	
+	<?php echo CHtml::encode($model->author); ?>
+
+ 	<?php
+ 		// select picture of cover
+ 		$urlUpload = yii::app()->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload;
+ 		$picture = yii::app()->baseUrl.DIRECTORY_SEPARATOR.'images/default_cover.png';
+ 		if(! is_null($model->picture)){
+ 			$urlUpload = yii::app()->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload;
+ 			$picture = $urlUpload.DIRECTORY_SEPARATOR.$model->id."-".$model->picture;
+ 		}
+ 	?>
+
+	<img src="<?php echo $picture; ?>" alt="Couverture du livre">
+	
+	
+	<?php echo CHtml::encode($model->description); ?>
+
+	
+	<?php echo CHtml::encode($model->editor); ?>
+
+
+
+	<?php echo CHtml::encode($model->publication); ?>
+
+
+	
+	<?php echo CHtml::encode($model->isbn); ?>
+
+	
+</div>

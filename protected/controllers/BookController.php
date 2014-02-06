@@ -31,10 +31,6 @@ class BookController extends Controller
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -61,20 +57,36 @@ class BookController extends Controller
 
 		$this->layout = "//layouts/private";
 		$model=new Book;
+		//default value
+		$model->price = 0;
+		$model->catalogueId = 1;
 
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
-			$model->picture=CUploadedFile::getInstance($model,'picture');
-			$model->epub=CUploadedFile::getInstance($model,'epub');
+
+			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
+
+			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
+
+			
+			if(! is_null($model->pictureFile ))
+				$model->picture="cover.".$model->pictureFile->extensionName;
+			
+			if(! is_null($model->epubFile))
+				$model->epub="epub.".$model->epubFile->extensionName;
+
+
 			if($model->save())
 			{
-				$urlUpload = yii::app()->params->path_upload.DIRECTORY_SEPARATOR;
+				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
-				$model->picture->saveAs($urlUpload."cover-".$model->id.".".$model->picture->extensionName);			
+				if(! is_null($model->pictureFile))
+					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
 
-				$model->epub->saveAs($urlUpload."epub-".$model->id.".".$model->picture->extensionName);
+				$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
 
+				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
 		$this->render('create',array(
@@ -131,20 +143,6 @@ class BookController extends Controller
 		));
 	}
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Book('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Book']))
-			$model->attributes=$_GET['Book'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

@@ -18,8 +18,12 @@
  * The followings are the available model relations:
  * @property Catalogue $catalogue
  */
+
 class Book extends CActiveRecord
 {
+
+	public $pictureFile;
+	public $epubFile;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -36,16 +40,16 @@ class Book extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('catalogueId, title, price, author, epub, publication, description', 'required'),
+			array('catalogueId, title, price, author, publication, description', 'required'),
 			array('catalogueId, isbn', 'numerical', 'integerOnly'=>true),
-			array('title, author, editor, epub', 'length', 'max'=>250),
+			array('title, author, editor', 'length', 'max'=>250),
 
-			array('price', 'length', 'max'=>10, ),
-			array('picture', 'file', 'types'=>'jpg, gif, png',"allowEmpty"=>true),
-			array('epub', 'file', 'types'=>'epub'),
+			array('price', 'length', 'max'=>10),
+			array('pictureFile', 'file', 'types'=>'jpg, gif, png',"allowEmpty"=>true),
+			array('epubFile', 'file', 'types'=>'epub'),
 
 			array('description', 'safe'),
-			array('publication', 'date', 'format'=>'dd/MM/yyyy','message'=>"Format de date invalide (jj/mm/aaaa)"),
+			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, catalogueId, title, price, author, picture, description, editor, publication, isbn', 'safe', 'on'=>'search'),
@@ -75,12 +79,12 @@ class Book extends CActiveRecord
 			'title' => 'Titre',
 			'price' => 'Prix (en €)',
 			'author' => 'Auteur',
-			'picture' => 'Couverture',
+			'pictureFile' => 'Couverture',
 			'description' => 'Description',
 			'editor' => 'Editeur',
 			'publication' => 'Date de publication',
 			'isbn' => 'ISBN',
-			'epub' => 'Fichier Epub',
+			'epubFile' => 'Fichier Epub',
 		);
 	}
 
@@ -128,4 +132,5 @@ class Book extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 }

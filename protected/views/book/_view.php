@@ -5,13 +5,7 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('catalogueId')); ?>:</b>
-	<?php echo CHtml::encode($data->catalogueId); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
 	<?php echo CHtml::encode($data->title); ?>
@@ -33,7 +27,6 @@
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('editor')); ?>:</b>
 	<?php echo CHtml::encode($data->editor); ?>
 	<br />
@@ -46,6 +39,5 @@
 	<?php echo CHtml::encode($data->isbn); ?>
 	<br />
 
-	*/ ?>
-
+	
 </div>
