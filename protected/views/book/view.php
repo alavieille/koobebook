@@ -31,9 +31,12 @@
 			<p><?php echo CHtml::encode($model->getAttributeLabel('isbn')); ?> : <?php echo CHtml::encode($model->isbn); ?></p>
 		<?php endif;?>
 
+		
 		<p>Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
-		<a class="linkDown" href=""><?php echo (CHtml::encode($model->price) == 0) ? "Télécharger" : "Acheter";  ?></a>
-		<?php //echo CHtml::encode($model->price); ?>
+		
+		<?php echo CHtml::link(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array('book/download',
+                                         'id'=>$model->id),array("class"=>"linkDown")); ?>
+
 	</div>
 
 

@@ -28,7 +28,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'download'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -101,6 +101,7 @@ class BookController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		$this->layout = "//layouts/private";
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -118,6 +119,21 @@ class BookController extends Controller
 		));
 	}
 
+	/**
+	 * Send file to client
+	 * @param integer $id the ID of the book
+	 */
+	public function actionDownload($id)
+	{
+		
+		$model=$this->loadModel($id);
+
+		$urlFolder = Yii::app()->baseurl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR.$model->id."-".$model->epub;
+		Yii::app()->request->xSendFile($urlFolder,array(
+			       'saveName'=>$model->title."-".$model->epub,
+			   ));
+
+	}
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
