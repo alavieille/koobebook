@@ -10,9 +10,6 @@
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/style.css');
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/form.css');
 
-				// javascript
-				Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
-
 			?>
 		
 	</head>

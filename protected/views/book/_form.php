@@ -2,8 +2,10 @@
 /* @var $this BookController */
 /* @var $model Book */
 /* @var $form CActiveForm */
-?>
 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
+?>
+				
 <div class="form center w100">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -14,7 +16,7 @@
 	// See class documentation of CActiveForm for details on this.
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	'enableClientValidation'=>true,
-	'enableAjaxValidation'=>true,
+
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -31,7 +33,8 @@
 				<?php echo $form->labelEx($model,'pictureFile'); ?>
 				<img class="mt1 mb1 center visually-hidden" data-previewDownload="preview" id="previous_cover" src="<?php echo Yii::app()->request->baseUrl; ?>/images/default_cover.png" alt="apercu de la couverture" >
 				<?php echo CHtml::activeFileField($model,'pictureFile',array("data-previewDownload"=>"input")); ?>
-				<?php echo $form->error($model,'pictureFile',array("data-previewDownload"=>"error")); ?>
+				<?php echo $form->error($model,'pictureFile') ?>
+				<div data-previewdownload="error" class="errorMessage" id="Book_pictureFile_em_"></div>
 				<nav class="inputPicture"> 
 					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="button" >Modifier</a>
 					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="delete" >Supprimer</a>
@@ -112,3 +115,4 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+

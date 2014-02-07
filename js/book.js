@@ -43,6 +43,7 @@ var previewPictureDownload = function(){
 		if( ! isPicture(file)){
 			error.html("Les extensions de fichier autorisées sont : jpg, gif, png.");
 			error.show();
+			inputFile.addClass("error");
 			return;
 		}
 		var reader = new FileReader();

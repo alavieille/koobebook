@@ -5,20 +5,8 @@
 ?>
 
 
-<div class="view pageCenter">
+<div id="viewBook" class="view pageCenter w800p pt3">
 
-
-
-
-	<h2><?php echo CHtml::encode($model->title); ?></h2>
-
-
-	
-	<?php echo CHtml::encode($model->price); ?>
-
-
-	
-	<?php echo CHtml::encode($model->author); ?>
 
  	<?php
  		// select picture of cover
@@ -30,21 +18,27 @@
  		}
  	?>
 
-	<img src="<?php echo $picture; ?>" alt="Couverture du livre">
-	
-	
-	<?php echo CHtml::encode($model->description); ?>
+	<div class="left w200p mod tiny-w100" ><img  src="<?php echo $picture; ?>" alt="Couverture du livre"></div>
 
-	
-	<?php echo CHtml::encode($model->editor); ?>
+	<div class="info mod pl2 tiny-w100">
+		<h2 class="mb0 title"><?php echo CHtml::encode($model->title); ?></h2>
+		<h4 class="mt1 mb0 author">De <?php echo CHtml::encode($model->author); ?></h4>
+		<p class="mt0 editor pt1">Edité par <a href="#"><?php echo CHtml::encode($model->editor); ?> </a>
+	 	(<?php echo Yii::app()->dateFormatter->formatDateTime($model->publication, 'medium', null) ?>)
+		</p>
+
+		<?php if(! is_null($model->isbn)) :?>
+			<p><?php echo CHtml::encode($model->getAttributeLabel('isbn')); ?> : <?php echo CHtml::encode($model->isbn); ?></p>
+		<?php endif;?>
+
+		<p>Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
+		<a class="linkDown" href=""><?php echo (CHtml::encode($model->price) == 0) ? "Télécharger" : "Acheter";  ?></a>
+		<?php //echo CHtml::encode($model->price); ?>
+	</div>
 
 
-
-	<?php echo CHtml::encode($model->publication); ?>
-
-
-	
-	<?php echo CHtml::encode($model->isbn); ?>
-
-	
+	<div class="line mt3 description mb3">
+	<h4><?php echo CHtml::encode($model->getAttributeLabel('description')); ?> : </h4>
+	<p><?php echo CHtml::encode($model->description); ?></p>
+	</div>
 </div>

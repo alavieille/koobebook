@@ -14,6 +14,8 @@
  *  4.1 - Presentation
  * 5.0 - Private
  *	 5.1 - create Book
+ * 6.0 - Book
+ *	 6.1 - view 
  * 6.0 - Responsive
  * ----------------------------------------------------------------------------
  */
@@ -29,7 +31,7 @@ body{
 }
 
 .pageCenter{
-	width: 100%;
+	//width: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
 }
@@ -304,6 +306,75 @@ body{
 	background-color: #ccc;
 	color: #555 !important;
  }
+
+
+  /**
+ * 6.0 Book
+ * ----------------------------------------------------------------------------
+ */
+
+/**
+ * 6.1 view book
+ **/
+#viewBook img{
+	min-height: 290px;
+	max-height: 290px;
+	border: 3px solid #C9C9C9;
+	margin: 0 auto;
+	display: block ;
+}
+
+#viewBook .info{
+	position: relative;
+	min-height: 310px;
+}
+#viewBook .linkDown{
+	position: absolute;
+	bottom: 20px;
+	width:150px;
+	font-size: 1.2em;
+	font-weight: 600;
+	letter-spacing: 0.78px;
+	text-align: center;
+	height: 40px;
+	background-color: #3498db;
+	display: block;
+	margin-top: 30px;
+	color:white;
+	line-height: 40px;
+}
+
+#viewBook .linkDown:hover{
+	background-color: #ccc;
+	color:#555;
+}
+
+#viewBook .author{
+	color:#505050;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+#viewBook .editor a{
+	color:#3498db;
+	font-weight: 600;
+}
+
+#viewBook .editor a:hover{
+	color:#505050;
+}
+
+#viewBook .description h4{
+	color:#505050;
+	font-size: 20px;
+}
+
+#viewBook .description p{
+	text-indent: 40px;
+	line-height: 25px;
+	text-align: justify;	
+}
+
  /**
  * 6.0 Responsive
  * ----------------------------------------------------------------------------
@@ -332,4 +403,20 @@ body{
 		display:table-cell !important ;
 
 	}
+}
+
+@media (max-width: 640px) {
+	#viewBook .info{
+		min-height: 0;
+		margin-top: 20px;
+		padding-left: 0;
+	}
+
+	#viewBook .linkDown{
+		position: relative;
+		bottom: 0;
+		margin: 0 auto;
+		margin-top: 10px;
+	}
+
 }

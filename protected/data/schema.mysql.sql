@@ -21,17 +21,17 @@ CREATE TABLE IF NOT EXISTS catalogue (
 
 
 /* Table book */
-CREATE TABLE IF NOT EXISTS book (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  catalogueId int(11) NOT NULL
-  COMMENT "CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)",
-  title int(11) NOT NULL,
-  price decimal NOT NULL,
-  author int(11) NOT NULL,
-  picture varchar(250),
-  description text,
-  editor varchar(250),
-  publication date,
-  isbn int(13),
-  PRIMARY KEY (id)
-) ENGINE=InnoDB ;
+CREATE TABLE IF NOT EXISTS `book` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catalogueId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)',
+  `title` varchar(250) NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `author` varchar(250) NOT NULL,
+  `picture` varchar(250) DEFAULT NULL,
+  `description` text,
+  `editor` varchar(250) DEFAULT NULL,
+  `publication` date DEFAULT NULL,
+  `isbn` int(13) DEFAULT NULL,
+  `epub` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
