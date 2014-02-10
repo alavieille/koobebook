@@ -6,7 +6,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
 ?>
 				
-<div class="form center w100">
+<div class="form w100 center">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'book-form',
@@ -31,7 +31,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 		<div class="left w40 tiny-w100">
 			<div class="rowInput line pr1 ">
 				<?php echo $form->labelEx($model,'pictureFile'); ?>
-				<img class="mt1 mb1 center visually-hidden" data-previewDownload="preview" id="previous_cover" src="<?php echo Yii::app()->request->baseUrl; ?>/images/default_cover.png" alt="apercu de la couverture" >
+				<?php 
+					if( ! is_null($model->picture)){
+						$fileDir = Yii::app()->request->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
+						$src = $fileDir.$model->id."-".$model->picture;
+					}
+					else
+						$src = Yii::app()->request->baseUrl."/images/default_cover.png";
+				?>
+				<img class="mt1 mb1 center visually-hidden" data-previewDownload="preview" id="previous_cover" src="<?php echo $src; ?>" alt="apercu de la couverture" >
 				<?php echo CHtml::activeFileField($model,'pictureFile',array("data-previewDownload"=>"input")); ?>
 				<?php echo $form->error($model,'pictureFile') ?>
 				<div data-previewdownload="error" class="errorMessage" id="Book_pictureFile_em_"></div>
@@ -101,7 +109,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 
 		<div class="rowInput">
 			<?php echo $form->labelEx($model,'epubFile'); ?>
-			<?php echo CHtml::activeFileField($model,'epubFile'); ?>
+			<p><?php echo (! is_null($model->epub))? "Changer de fichier epub :" : "" ?>  <?php echo CHtml::activeFileField($model,'epubFile'); ?></p>
 			<?php echo $form->error($model,'epubFile'); ?>
 		</div>
 

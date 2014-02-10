@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form w100 center">
+<div class="form w400p center">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',

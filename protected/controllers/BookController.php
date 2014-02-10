@@ -110,8 +110,27 @@ class BookController extends Controller
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
-			if($model->save())
+			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
+
+			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
+
+			
+			if(! is_null($model->pictureFile ))
+				$model->picture="cover.".$model->pictureFile->extensionName;
+			
+			if(! is_null($model->epubFile))
+				$model->epub="epub.".$model->epubFile->extensionName;
+
+			if($model->save()){
+				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
+
+				if(! is_null($model->pictureFile))
+					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
+				if(! is_null($model->epubFile))
+					$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
+
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
@@ -127,11 +146,14 @@ class BookController extends Controller
 	{
 		
 		$model=$this->loadModel($id);
+		$fileDir = Yii::app()->getBasePath().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
+		
+		yii::app()->request->sendFile(
+			$model->title."-".$model->epub,
+			file_get_contents($fileDir.$model->id."-".$model->epub)
+			);
 
-		$urlFolder = Yii::app()->baseurl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR.$model->id."-".$model->epub;
-		Yii::app()->request->xSendFile($urlFolder,array(
-			       'saveName'=>$model->title."-".$model->epub,
-			   ));
+		
 
 	}
 	/**

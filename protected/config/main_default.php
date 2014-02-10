@@ -56,8 +56,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=libebook',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'lertiotiopen15',
+			'username' => '',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 		
@@ -87,5 +87,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'amaury.lavieille@gmail.com',
+		'folder_upload'=>'upload',
 	),
 );

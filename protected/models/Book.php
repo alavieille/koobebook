@@ -46,7 +46,8 @@ class Book extends CActiveRecord
 
 			array('price', 'length', 'max'=>10),
 			array('pictureFile', 'file', 'types'=>'jpg, gif, png',"allowEmpty"=>true),
-			array('epubFile', 'file', 'types'=>'epub'),
+			array('epubFile', 'file', 'types'=>'epub','on'=>'insert'),
+			array('epubFile', 'file', 'types'=>'epub',"allowEmpty"=>true,'on'=>'update') ,
 
 			array('description', 'safe'),
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
