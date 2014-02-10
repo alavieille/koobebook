@@ -1,7 +1,7 @@
 <?php
 /* @var $this CatalogueController */
 /* @var $model Catalogue */
-
+$this->pageTitle=Yii::app()->name . ' - Mise a jour';
 $this->breadcrumbs=array(
 	'Catalogues'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),

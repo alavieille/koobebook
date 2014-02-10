@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+<div class="form ">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'catalogue-form',
@@ -20,11 +20,6 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="rowInput">
-		<?php echo $form->labelEx($model,'userId'); ?>
-		<?php echo $form->textField($model,'userId'); ?>
-		<?php echo $form->error($model,'userId'); ?>
-	</div>
 
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'name'); ?>
@@ -32,11 +27,6 @@
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-	<div class="rowInput">
-		<?php echo $form->labelEx($model,'firstName'); ?>
-		<?php echo $form->textField($model,'firstName',array('size'=>40,'maxlength'=>40)); ?>
-		<?php echo $form->error($model,'firstName'); ?>
-	</div>
 
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'description'); ?>

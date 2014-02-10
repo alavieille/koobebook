@@ -32,14 +32,15 @@ class Catalogue extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
+			array('name', 'unique'),
 			array('userId', 'unique',   'message'=>'Vous avez déjà crée un catalogue'),
 			array('userId', 'numerical', 'integerOnly'=>true),
+
 			array('name', 'length', 'max'=>50),
-			array('firstName', 'length', 'max'=>40),
 			array('description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, userId, name, firstName, description', 'safe', 'on'=>'search'),
+			array('id, userId, name, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,9 +64,9 @@ class Catalogue extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'userId' => 'User',
-			'name' => 'Nom',
-			'firstName' => 'Prénom',
+			'name' => 'Nom du catalogue (Editeur)',
 			'description' => 'Description',
+
 		);
 	}
 

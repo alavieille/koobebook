@@ -1,7 +1,7 @@
 <?php
 /* @var $this BookController */
 /* @var $dataProvider CActiveDataProvider */
-
+$this->pageTitle=Yii::app()->name;
 $this->breadcrumbs=array(
 	'Books',
 );

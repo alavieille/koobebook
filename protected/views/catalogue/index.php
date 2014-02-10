@@ -1,7 +1,7 @@
 <?php
 /* @var $this CatalogueController */
 /* @var $dataProvider CActiveDataProvider */
-
+$this->pageTitle=Yii::app()->name ;
 $this->breadcrumbs=array(
 	'Catalogues',
 );

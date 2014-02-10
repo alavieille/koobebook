@@ -50,12 +50,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 			</div>
 		</div>
 		<div class="left w60 tiny-w100">
-<!-- 			<div class="rowInput ">
-				<?php echo $form->labelEx($model,'catalogueId'); ?>
-				<?php echo $form->textField($model,'catalogueId'); ?>
-				<?php echo $form->error($model,'catalogueId'); ?>
-			</div> -->
-
 			<div class="rowInput">
 				<?php echo $form->labelEx($model,'author'); ?>
 				<?php echo $form->textField($model,'author'); ?>
@@ -64,7 +58,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 
 			<div class="rowInput">
 				<?php echo $form->labelEx($model,'editor'); ?>
-				<?php echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>
+				<?php //echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>
+				<p><?php echo $model->editor ?></p>
 				<?php echo $form->error($model,'editor'); ?>
 			</div>
 

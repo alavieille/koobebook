@@ -10,15 +10,18 @@ CREATE TABLE IF NOT EXISTS user (
 ) ENGINE=InnoDB ;
 
 
-/* Table catalogue */
-CREATE TABLE IF NOT EXISTS catalogue (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  userId int(11) NOT NULL
-  COMMENT "CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)",
-  description TEXT,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB ;
 
+CREATE TABLE IF NOT EXISTS `catalogue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)',
+  `name` varchar(50) NOT NULL,
+  `firstName` varchar(40) DEFAULT NULL,
+  `description` text,
+  `isAuthor` tinyint(1) NOT NULL DEFAULT '0',
+  `isEditor` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userId` (`userId`)
+) ENGINE=InnoDB
 
 /* Table book */
 CREATE TABLE IF NOT EXISTS `book` (

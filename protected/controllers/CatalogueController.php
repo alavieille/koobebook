@@ -67,7 +67,8 @@ class CatalogueController extends Controller
 		if(isset($_POST['Catalogue']))
 		{
 			$model->attributes=$_POST['Catalogue'];
-			$model->userId = yii::app()->user->id;
+			$model->userId = yii::app()->user->id ;
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
