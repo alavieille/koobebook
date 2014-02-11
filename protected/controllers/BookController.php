@@ -24,7 +24,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','admin'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -177,15 +177,29 @@ class BookController extends Controller
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
+ 	public function actionAdmin()
+    {
+        $dataProvider=new CActiveDataProvider('Book');
+        $model = Book::model()->findAll();
+
+        $this->render('admin',array(
+            'dataProvider'=>$dataProvider,
+            'model'=>$model,
+        ));
+    }
+
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Book');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		 $dataProvider=new CActiveDataProvider('Book');
+        $model = Book::model()->findAll();
+
+        $this->render('admin',array(
+            'dataProvider'=>$dataProvider,
+            'model'=>$model,
+        ));
 	}
 
 

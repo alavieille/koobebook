@@ -12,9 +12,22 @@ $this->menu=array(
 );
 ?>
 
-<h1>Books</h1>
+<h1>Livre</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'book-grid',
 	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+	//'filter'=>$model,
+	'columns'=>array(
+		'title',
+		'price',
+		'author',
+		'editor',
+		array(
+			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+		),
+	),
+))
+
+; ?>
