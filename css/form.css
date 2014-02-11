@@ -71,7 +71,9 @@ div.form select
 	border: 2px solid #E5E3E2;
 	text-indent: 10px;
 }
-
+div.form textarea{
+    height: 150px;
+}
 
     /* Cachons la case à cocher */  
 div.form [type="checkbox"]:not(:checked),  

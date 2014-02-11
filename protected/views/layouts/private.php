@@ -22,7 +22,7 @@
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
-				array('label'=>'Modifier', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
+				array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
 				array('label' =>'Ajouter Livre', 'url'=>array('book/create/')),
 			),
 			'itemCssClass' => "txtcenter pb1",

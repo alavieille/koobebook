@@ -11,7 +11,7 @@ class CatalogueController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -32,7 +32,12 @@ class CatalogueController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('delete','confirmDelete'),
+				'users'=>array('@'),
+				'expression'=> 'Yii::app()->controller->isOwner()',
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -83,10 +88,12 @@ class CatalogueController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
-
+		$this->layout = "//layouts/private";
+		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		if(is_null($model))
+			throw new CHttpException(400,"votre requête est invalide");
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -102,12 +109,34 @@ class CatalogueController extends Controller
 		));
 	}
 
+
+	public function actionDelete($id)
+	{
+		$this->layout = "//layouts/private";
+		$this->render('delete',array('id'=>$id));
+	}	
+
+	/**
+	* Confirm delete account
+	**/
+	public function actionConfirmDelete($id)
+	{
+		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('catalogue/delete', array(
+            'id'=>$id))){
+			$this->loadModel($id)->delete();
+			$this->redirect(Yii::app()->homeUrl);
+		}
+		else{
+			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
+		}
+	}
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	/*public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
 
@@ -115,7 +144,7 @@ class CatalogueController extends Controller
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
-
+*/
 	/**
 	 * Lists all models.
 	 */
@@ -140,6 +169,18 @@ class CatalogueController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+
+
+	public function isOwner()
+	{
+     	if(isset($_GET["id"])){
+	        $model = $this->loadModel($_GET['id']);
+	        return yii::app()->user->id === $model->userId;
+	    }
+	    else{
+	    	throw new CHttpException(400,"votre requête est invalide");
+	    }
 	}
 
 	/**
@@ -169,4 +210,7 @@ class CatalogueController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+
+
 }
