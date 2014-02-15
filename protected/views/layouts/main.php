@@ -9,7 +9,10 @@
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/knacss.css');
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/style.css');
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/form.css');
-
+				
+				//js
+				Yii::app()->clientScript->registerCoreScript('jquery');
+				Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/site.js',CClientScript::POS_END);
 			?>
 		
 	</head>

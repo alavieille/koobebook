@@ -1005,7 +1005,7 @@ input[type='submit']::-moz-focus-inner {
 	.large-w66 { width: 66.6666% !important; }
 	.large-w75 { width: 75% !important; }
 	.large-w100 {
-		display: block !important;
+		display: block;
 		float: none !important;
 		clear: none !important;
 		width: auto !important;

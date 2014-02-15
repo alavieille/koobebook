@@ -1,6 +1,6 @@
 /***
 * Javascript 
-* Pour vue Book
+* vue Book
 ****/ 
 
 $(function(){
@@ -28,6 +28,7 @@ var previewPictureDownload = function(){
 		preview.attr("src",saveDefaultCover);
 		inputFile.val("");
 		buttonDelete.addClass("visually-hidden");
+		return false;
 
 
 	});
@@ -36,6 +37,13 @@ var previewPictureDownload = function(){
 	buttonUpdate.click(function(){
 		error.hide();
 		$((inputFile).get()).click();
+		return false;
+	});
+	
+	preview.click(function(){
+		error.hide();
+		$((inputFile).get()).click();
+		return false;
 	});
 	
 	inputFile.change(function(){
@@ -44,7 +52,7 @@ var previewPictureDownload = function(){
 			error.html("Les extensions de fichier autorisées sont : jpg, gif, png.");
 			error.show();
 			inputFile.addClass("error");
-			return;
+			return false;
 		}
 		var reader = new FileReader();
 		reader.onload=function(){

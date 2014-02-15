@@ -1,7 +1,7 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
-
-<nav class="w25 mt3 pr2 pl3 mb1 mr3 left small-w100" id="privateNav">
+<p id="privateMenu" class="small-visible desktop-hidden pa1 inbl h5-like txtcenter icon icon-down">Menu</p>
+<nav class="w25 mt3 pr2 pl3 mb1 mr3 left small-no-float small-inbl " id="privateNav">
 	<h3 class="">Compte</h3>
 	<?php 
 		$this->widget('zii.widgets.CMenu',array(

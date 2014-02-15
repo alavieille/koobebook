@@ -284,6 +284,7 @@ body{
  #book-form #previous_cover{
  	display: block;
 	width: 250px;
+	height: 350px;
  	min-width:200px;
  	max-height:350px;
  	border: 3px solid #C9C9C9;
@@ -317,6 +318,7 @@ body{
  * 6.1 view book
  **/
 #viewBook img{
+	width:200px;
 	min-height: 290px;
 	max-height: 290px;
 	border: 3px solid #C9C9C9;
@@ -402,6 +404,38 @@ body{
 	#ui-datepicker-div td {
 		display:table-cell !important ;
 
+	}
+	
+	/** Private Nav **/
+	#privateMenu{
+		background-color:white;
+		width:100%;
+		margin-top:20px;
+		margin-bottom: 10px;
+		color:#505050;
+	}
+
+	#privateMenu:before{
+		color:#505050;
+	}
+
+	#privateMenu:hover{
+		background-color:#eee;
+		cursor: pointer;
+	}
+
+	#privateNav{
+		background-color:white;
+		margin-top: 0;
+		width: 100%;
+		margin-right: 0;
+	}
+
+	#privateNav h3{
+		text-align: center;
+	}
+	#privateNav ul li a{
+		text-align: center;
 	}
 }
 
