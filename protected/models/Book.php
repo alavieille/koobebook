@@ -60,7 +60,7 @@ class Book extends CActiveRecord
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
+	/*public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
@@ -68,7 +68,7 @@ class Book extends CActiveRecord
 			'catalogue' => array(self::BELONGS_TO, 'Catalogue', 'catalogueId'),
 		);
 	}
-
+*/
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

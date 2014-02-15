@@ -12,17 +12,18 @@
 			'itemCssClass' => "txtcenter pb1",
 		));
 	?>
-	<h3 class="">Bibliothéque</h3>
+	<!-- <h3 class="">Bibliothèque</h3>
 		<ul>
-			<li><a href="">Voir ma biliothéque</a></li>
-		</ul>
+			<li><a href="">Voir ma biliothèque</a></li>
+		</ul> -->
 	<h3 class="">Catalogue</h3>
 	<?php 
-		$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		//$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
-				array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
+				//array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
+				//array('label'=>'Gérer', 'url'=>array('/catalogue/manage/'),'visible'=>isset($catalogueUser)),
+				//array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
 				array('label' =>'Ajouter Livre', 'url'=>array('book/create/')),
 			),
 			'itemCssClass' => "txtcenter pb1",
