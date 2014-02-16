@@ -14,6 +14,7 @@
  *  4.1 - Presentation
  * 5.0 - Private
  *	 5.1 - create Book
+ *   5.2 - Mange Book
  * 6.0 - Book
  *	 6.1 - view 
  * 6.0 - Responsive
@@ -308,7 +309,42 @@ body{
 	color: #555 !important;
  }
 
+/**
+ * 5.2 Manage Book
+ **/
 
+#ltBook{
+		background: white;
+		border: 1px solid rgba(0,0,0,0.2);
+}
+
+#ltBook h4{
+		border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+#ltBook div { /* liste livre */
+	text-align: left;
+}
+
+
+#ltBook div figure{
+	position: relative;
+	height: 100%;
+}
+
+#ltBook div figure:hover{
+	background-color: #eee;
+}
+
+#ltBook div figure img{
+	height: 200px ;
+	min-height: 120px;
+	max-height: 190px;
+
+}
+#ltBook div figure figcaption{
+
+}
   /**
  * 6.0 Book
  * ----------------------------------------------------------------------------

@@ -20,6 +20,7 @@
 	<h3 class="">Catalogue</h3>
 	<?php 
 		$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
