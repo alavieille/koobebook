@@ -60,18 +60,15 @@ class BookController extends Controller
 		//default value
 		$model->price = 0;
 		// recherche catalogue lié
-		//$catalogue = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		$catalogue = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 	
 
-		/*if(is_null($catalogue)){
+		if(is_null($catalogue)){
 			$this->redirect(array('catalogue/create'));
-		}*/
+		}
 
-		/*$model->editor = $catalogue->name;
-		$model->catalogueId = $catalogue->id;*/
-
-		$model->editor = "Nom test catalogue";
-		$model->catalogueId = 5;
+		$model->editor = $catalogue->name;
+		$model->catalogueId = $catalogue->id;
 
 		if(isset($_POST['Book']))
 		{
