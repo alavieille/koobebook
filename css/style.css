@@ -288,7 +288,6 @@ body{
 	height: 350px;
  	min-width:200px;
  	max-height:350px;
- 	border: 3px solid #C9C9C9;
  }
 
  #book-form .inputPicture{
@@ -319,7 +318,8 @@ body{
 }
 
 #ltBook h4{
-		border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	color:#3498db;
 }
 
 #ltBook div { /* liste livre */
@@ -332,7 +332,11 @@ body{
 	height: 100%;
 }
 
-#ltBook div figure:hover{
+#ltBook div a{
+	display: block;
+}
+
+#ltBook div a:hover{
 	background-color: #eee;
 }
 
@@ -345,6 +349,29 @@ body{
 #ltBook div figure figcaption{
 
 }
+
+/**
+* Bouton add ebbok
+**/
+
+#ltBook #addEbook{
+	width: 160px;
+	border: 2px solid #ccc;
+	position: relative;
+}
+
+#ltBook #addEbook #iconAdd{
+	font-weight: bold;
+	font-size: 10em;
+	color:#ddd;
+}
+#ltBook #addEbook p:last-child{
+	position: absolute;
+	top:80%;
+	margin-left: 20%;
+
+}
+
   /**
  * 6.0 Book
  * ----------------------------------------------------------------------------
@@ -472,6 +499,11 @@ body{
 	}
 	#privateNav ul li a{
 		text-align: center;
+	}
+
+	#ltBook #addEbook p:last-child{
+		position: relative;
+		margin-left: 0%;
 	}
 }
 
