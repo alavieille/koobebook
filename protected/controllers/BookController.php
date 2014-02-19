@@ -26,7 +26,7 @@ class BookController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			array('allow', // allow authenticated user 
 				'actions'=>array('create','update', 'download','delete','confirmDelete'),
 				'users'=>array('@'),
 			),
@@ -73,15 +73,15 @@ class BookController extends Controller
 		{
 			$model->attributes=$_POST['Book'];
 
+			//upload couverture & ebook 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
-
 			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
 
 			
-			if(! is_null($model->pictureFile ))
+			if(! is_null($model->pictureFile )) // si couverture
 				$model->picture="cover.".$model->pictureFile->extensionName;
-			
-			if(! is_null($model->epubFile))
+			 
+			if(! is_null($model->epubFile)) // si fichier format epub
 				$model->epub="epub.".$model->epubFile->extensionName;
 
 
@@ -91,10 +91,11 @@ class BookController extends Controller
 
 				if(! is_null($model->pictureFile))
 					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
+ 
+				if(! is_null($model->epubFile))
+					$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
 
-				$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
-
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array("catalogue/manage"));
 			}
 		}
 		$this->render('create',array(
@@ -112,8 +113,6 @@ class BookController extends Controller
 		$this->layout = "//layouts/private";
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Book']))
 		{
@@ -124,19 +123,22 @@ class BookController extends Controller
 			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
 
 			
-			if(! is_null($model->pictureFile ))
-				$picturePrecSave = $model->picture;
+			if(! is_null($model->pictureFile )){
+				$picturePrecSave = $model->picture; // ancienne couverture 
 				$model->picture = "cover.".$model->pictureFile->extensionName;
-			
+			}
+
 			if(! is_null($model->epubFile))
 				$model->epub="epub.".$model->epubFile->extensionName;
 
-			if($model->save()){
+			if($model->save())
+			{
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
 				if(! is_null($model->pictureFile)){
-					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
-					if($picturePrecSave != $model->picture)
+					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);	
+
+					if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
 						unlink($urlUpload.$model->id."-".$picturePrecSave);
 				}
 				if(! is_null($model->epubFile))
@@ -178,59 +180,31 @@ class BookController extends Controller
 	}	
 
 	/**
-	* Confirm delete account
+	* Confirm delete Book
 	**/
 	public function actionConfirmDelete($id)
 	{
 		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('book/delete', array(
             'id'=>$id))){
 			$model = $this->loadModel($id);
-			$model->delete();
-			$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
-			unlink($urlUpload.$model->id."-".$model->epub);
-			if($model->picture);
-				unlink($urlUpload.$model->id."-".$model->picture);
+			$model->catalogueId = null;
+			$model->save();
 			Yii::app()->getController()->redirect(array('catalogue/manage'));
 		}
 		else{
 			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
 		}
 	}
-	/** 
-	* Confirm delete book 
-	**/
-	/*public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}*/
 
- 	public function actionAdmin()
-    {
-        $dataProvider=new CActiveDataProvider('Book');
-        $model = Book::model()->findAll();
-
-        $this->render('admin',array(
-            'dataProvider'=>$dataProvider,
-            'model'=>$model,
-        ));
-    }
-
+ 
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
-		 $dataProvider=new CActiveDataProvider('Book');
-        $model = Book::model()->findAll();
-
-        $this->render('admin',array(
-            'dataProvider'=>$dataProvider,
-            'model'=>$model,
-        ));
+		
+		$this->redirect(Yii::app()->homeUrl);
 	}
 
 

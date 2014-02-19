@@ -24,21 +24,17 @@ class CatalogueController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','manage'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','manage'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow',
 				'actions'=>array('delete','confirmDelete'),
 				'users'=>array('@'),
 				'expression'=> 'Yii::app()->controller->isOwner()',
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -64,6 +60,9 @@ class CatalogueController extends Controller
 	public function actionCreate()
 	{
 		$this->layout = "//layouts/private";
+		if(! is_null(Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id)))){
+			$this->redirect("manage");
+		}
 		$model=new Catalogue;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -75,7 +74,7 @@ class CatalogueController extends Controller
 			$model->userId = yii::app()->user->id ;
 			
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect("manage");
 		}
 
 		$this->render('create',array(
@@ -112,10 +111,12 @@ class CatalogueController extends Controller
 	* manage catalogue
 	*/
 	public function actionManage(){
+		
 		$this->layout = "//layouts/private";
 		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+
 		if(is_null($model))
-			throw new CHttpException(400,"votre requête est invalide");
+			$this->redirect("create");
 		
 		$this->render('manage',array('model'=>$model));
 
@@ -125,6 +126,7 @@ class CatalogueController extends Controller
 	{
 		$this->layout = "//layouts/private";
 		$this->render('delete',array('id'=>$id));
+
 	}	
 
 	/**
@@ -135,54 +137,23 @@ class CatalogueController extends Controller
 		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('catalogue/delete', array(
             'id'=>$id))){
 			$this->loadModel($id)->delete();
-			$this->redirect(Yii::app()->homeUrl);
+			$this->redirect("create");
 		}
 		else{
 			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
 		}
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
-	/*public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
-*/
+	
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Catalogue');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->redirect("manage");
 	}
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Catalogue('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Catalogue']))
-			$model->attributes=$_GET['Catalogue'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
-
+	
 	public function isOwner()
 	{
      	if(isset($_GET["id"])){
