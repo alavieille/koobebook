@@ -11,11 +11,11 @@ $(function(){
 var previewPictureDownload = function(){
 
 
-	var buttonUpdate = $('[data-previewDownload="button"');
-	var buttonDelete = $('[data-previewDownload="delete"');
-	var inputFile = $('[data-previewDownload="input"');
-	var preview = $('[data-previewDownload="preview"');
-	var error = $('[data-previewDownload="error"')
+	var buttonUpdate = $('[data-previewDownload="button"]');
+	var buttonDelete = $('[data-previewDownload="delete"]');
+	var inputFile = $('[data-previewDownload="input"]');
+	var preview = $('[data-previewDownload="preview"]');
+	var error = $('[data-previewDownload="error"]')
  	
  	var saveDefaultCover = preview.attr("src");
 

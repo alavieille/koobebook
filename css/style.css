@@ -14,7 +14,7 @@
  *  4.1 - Presentation
  * 5.0 - Private
  *	 5.1 - create Book
- *   5.2 - Mange Book
+ *   5.2 - Manage Book
  * 6.0 - Book
  *	 6.1 - view 
  * 6.0 - Responsive
@@ -324,31 +324,75 @@ body{
 
 #ltBook div { /* liste livre */
 	text-align: left;
+	position: relative;
 }
 
 
 #ltBook div figure{
-	position: relative;
 	height: 100%;
 }
 
-#ltBook div a{
+#ltBook div>a{
 	display: block;
 }
 
-#ltBook div a:hover{
+#ltBook div>a:hover{
 	background-color: #eee;
 }
 
 #ltBook div figure img{
-	height: 200px ;
-	min-height: 120px;
+	max-width:120px;
+	height: 190px ;
+	min-height: 190px;
 	max-height: 190px;
 
 }
 #ltBook div figure figcaption{
 
 }
+/** param livre **/
+#ltBook div .btParam{
+	background:url("img/paramsprite.png") -35px -5px no-repeat;
+	height: 20px;
+	width: 20px;
+	text-indent: -9999px;
+	margin-bottom: 2px;
+}
+
+#ltBook div .btParam:hover,#ltBook div .btParamActive{
+	background-position: -5px -5px;
+	cursor:pointer;
+}
+
+#ltBook .param{
+	position: absolute;
+	background: white;
+	width: 100%;
+	top:22px;
+	//border: 1px solid #eee;
+}
+
+#ltBook ul{
+	list-style: none;
+	padding-left: 0;
+	text-align: center;
+}
+
+#ltBook ul li{
+	margin-top:15px;
+	//background-color: #3498db;
+}
+
+#ltBook ul li a{
+	color: #3498db;
+	display: block;
+	padding:8px 15px;
+}
+
+#ltBook ul li a:hover{
+	color:#505050;
+}
+
 
 /**
 * Bouton add ebbok
@@ -500,7 +544,8 @@ body{
 	#privateNav ul li a{
 		text-align: center;
 	}
-
+	
+	/** gestion catalogue / liste livre **/
 	#ltBook #addEbook p:last-child{
 		position: relative;
 		margin-left: 0%;

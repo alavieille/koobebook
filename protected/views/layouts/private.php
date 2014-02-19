@@ -26,7 +26,6 @@
 				array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
 				array('label'=>'Gérer', 'url'=>array('/catalogue/manage/'),'visible'=>isset($catalogueUser)),
 				array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
-				array('label' =>'Ajouter Livre', 'url'=>array('book/create/')),
 			),
 			'itemCssClass' => "txtcenter pb1",
 		));
