@@ -11,7 +11,6 @@ class BookController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -28,7 +27,7 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'download'),
+				'actions'=>array('create','update', 'download','delete','confirmDelete'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -119,13 +118,15 @@ class BookController extends Controller
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
-			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
 
+
+			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
 			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
 
 			
 			if(! is_null($model->pictureFile ))
-				$model->picture="cover.".$model->pictureFile->extensionName;
+				$picturePrecSave = $model->picture;
+				$model->picture = "cover.".$model->pictureFile->extensionName;
 			
 			if(! is_null($model->epubFile))
 				$model->epub="epub.".$model->epubFile->extensionName;
@@ -133,8 +134,11 @@ class BookController extends Controller
 			if($model->save()){
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
-				if(! is_null($model->pictureFile))
+				if(! is_null($model->pictureFile)){
 					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
+					if($picturePrecSave != $model->picture)
+						unlink($urlUpload.$model->id."-".$picturePrecSave);
+				}
 				if(! is_null($model->epubFile))
 					$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
 
@@ -165,19 +169,44 @@ class BookController extends Controller
 		
 
 	}
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
+
 	public function actionDelete($id)
+	{
+		$model = $this->loadModel($id);
+		$this->layout = "//layouts/private";
+		$this->render('delete',array('model'=>$model));
+	}	
+
+	/**
+	* Confirm delete account
+	**/
+	public function actionConfirmDelete($id)
+	{
+		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('book/delete', array(
+            'id'=>$id))){
+			$model = $this->loadModel($id);
+			$model->delete();
+			$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
+			unlink($urlUpload.$model->id."-".$model->epub);
+			if($model->picture);
+				unlink($urlUpload.$model->id."-".$model->picture);
+			Yii::app()->getController()->redirect(array('catalogue/manage'));
+		}
+		else{
+			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
+		}
+	}
+	/** 
+	* Confirm delete book 
+	**/
+	/*public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+	}*/
 
  	public function actionAdmin()
     {

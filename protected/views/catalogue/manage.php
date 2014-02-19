@@ -25,7 +25,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 			<nav>
 				<ul>
 					<li><a href="<?php echo Yii::app()->createUrl('book/update/',array( 'id'=>$book->id)); ?>">Modifier</a></li>
-					<li><a href="<?php echo Yii::app()->createUrl('book/view/',array( 'id'=>$book->id)); ?>">Supprimer</a></li>
+					<li><a href="<?php echo Yii::app()->createUrl('book/delete/',array( 'id'=>$book->id)); ?>">Supprimer</a></li>
 					<li><a href="">Mettre à la une</a></li>
 				</ul>
 			</nav>
