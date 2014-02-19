@@ -59,7 +59,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 			<div class="rowInput">
 				<?php echo $form->labelEx($model,'editor'); ?>
 				<?php //echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>
-				<p><?php echo $model->editor ?></p>
+				<p><?php echo $model->catalogue->name ?></p>
 				<?php echo $form->error($model,'editor'); ?>
 			</div>
 

@@ -66,7 +66,6 @@ class BookController extends Controller
 			$this->redirect(array('catalogue/create'));
 		}
 
-		$model->editor = $catalogue->name;
 		$model->catalogueId = $catalogue->id;
 
 		if(isset($_POST['Book']))

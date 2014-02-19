@@ -42,7 +42,7 @@ class Book extends CActiveRecord
 		return array(
 			array('title, price, author, publication, description', 'required'),
 			array('isbn', 'numerical', 'integerOnly'=>true),
-			array('title, author, editor', 'length', 'max'=>250),
+			array('title, author', 'length', 'max'=>250),
 
 			array('price', 'length', 'max'=>10),
 			array('pictureFile', 'file', 'types'=>'jpg, gif, png',"allowEmpty"=>true),
@@ -53,7 +53,7 @@ class Book extends CActiveRecord
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, catalogueId, title, price, author, picture, description, editor, publication, isbn', 'safe', 'on'=>'search'),
+			array('id, catalogueId, title, price, author, picture, description, publication, isbn', 'safe', 'on'=>'search'),
 		);
 	}
 
