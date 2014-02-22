@@ -1,14 +1,16 @@
 /***
 * Javascript 
-* vue principale site
+* view principale site
 ****/ 
 $(function(){
 	
-	// menu principale 
+	// main navigation 
 	$("#showMenu").click(showMenu);
 	if($(window).width() < 768)
 		$("#siteNav ul").hide();
 
+
+	// private navigation
 	if($(window).width() < 768)
 		$("#privateNav").hide();
 	$("#privateMenu").click(showPrivateMenu);

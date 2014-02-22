@@ -1,6 +1,6 @@
 /***
 * Javascript 
-* vue Book
+* view Book
 ****/ 
 
 $(function(){
@@ -23,7 +23,7 @@ var previewPictureDownload = function(){
  	buttonUpdate.removeClass("visually-hidden");
  	preview.removeClass("visually-hidden");
 
- 	// relie le bouton delete au input file
+ 	// button delete
 	buttonDelete.click(function(){
 		preview.attr("src",saveDefaultCover);
 		inputFile.val("");
@@ -33,7 +33,7 @@ var previewPictureDownload = function(){
 
 	});
 
- 	// relie le bouton update au input file
+ 	// button update 
 	buttonUpdate.click(function(){
 		error.hide();
 		$((inputFile).get()).click();
@@ -62,7 +62,7 @@ var previewPictureDownload = function(){
 		reader.readAsDataURL(file);
 	})
 
-	var isPicture = function(file){ // test si le fichier est une image 
+	var isPicture = function(file){ // check if file is picture
 		var type = new Array('image/pjpeg','image/jpeg','image/bmp','image/png','image/gif','image/x-png');
 	return ($.inArray(file.type,type)!=-1);
 	}

@@ -108,7 +108,8 @@ class CatalogueController extends Controller
 	}
 	
 	/**
-	* manage catalogue
+	* Manage book in catalogue 
+	* if user hasn't catalogue, he is redirect to action create
 	*/
 	public function actionManage(){
 		
@@ -122,6 +123,10 @@ class CatalogueController extends Controller
 
 	}
 
+	/**
+	* Delete a catalogue
+	* @param integer $id the ID of the catalogue
+	*/
 	public function actionDelete($id)
 	{
 		$this->layout = "//layouts/private";
@@ -130,7 +135,8 @@ class CatalogueController extends Controller
 	}	
 
 	/**
-	* Confirm delete account
+	* Confirm delete catalogue
+	* @param integer $id the ID of the catalogue
 	**/
 	public function actionConfirmDelete($id)
 	{
@@ -146,14 +152,18 @@ class CatalogueController extends Controller
 
 	
 	/**
-	 * Lists all models.
+	 * Redirect user to action manage
 	 */
 	public function actionIndex()
 	{
 		$this->redirect("manage");
 	}
 
-	
+	/**
+	* Check is user is owner of catalogue, use in acces rules
+	* @return boolean
+	* @throws CHttpException
+	*/
 	public function isOwner()
 	{
      	if(isset($_GET["id"])){

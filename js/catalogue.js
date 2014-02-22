@@ -1,6 +1,6 @@
 /***
 * Javascript 
-* vue Catalogue
+* view Catalogue
 ****/ 
 $(function(){
 

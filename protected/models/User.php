@@ -13,8 +13,8 @@
 class User extends CActiveRecord
 {
 	
-
 	public $passwordConfirm;
+
 	/**
 	 * @return string the associated database table name
 	 */

@@ -171,6 +171,11 @@ class BookController extends Controller
 
 	}
 
+
+	/**
+	* Delete a book
+	* @param integer $id the ID of the book
+	*/
 	public function actionDelete($id)
 	{
 		$model = $this->loadModel($id);
@@ -180,7 +185,9 @@ class BookController extends Controller
 
 	/**
 	* Confirm delete Book
-	**/
+	* @param integer $id the ID of the book
+	* @throws CHttpException
+	*/
 	public function actionConfirmDelete($id)
 	{
 		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('book/delete', array(
@@ -198,7 +205,8 @@ class BookController extends Controller
 
  
 	/**
-	 * Lists all models.
+	 * default action
+	 * Redirect user to home
 	 */
 	public function actionIndex()
 	{
