@@ -187,7 +187,7 @@ body{
  */
 
 #main{
-	padding-top: 110px;
+	padding-top: 100px;
 	min-height: 600px;
 }
 
@@ -221,28 +221,38 @@ body{
  * 4.1 Presentation
  **/
 #presentation{
-	color:#919191;
+	color:white;
+	background: #3498db;
 }
 
 #presentation h2{
 	font-size: 3.3em;
+	color:#ecf0f1;
+}
+
+#presentation .logo span{
 	color:#505050;
 }
 
 #presentation h3{
 	font-weight: 300;
-	color:#505050;
+	color:#ecf0f1;
 	letter-spacing: 1.036px;
 }
 
 #presentation p{
 	font-weight: 100;
 	letter-spacing: 1.036px;
+	color:#ecf0f1;
 
 }
 
 #presentation figure{
 	text-align: center;
+}
+
+#presentation figure  figcaption p {
+	text-align: justify;
 }
  /**
  * 5.0 Private 

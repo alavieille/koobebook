@@ -69,7 +69,7 @@
 
 		</header>
 
-		<div id="main" role="main" class="line pageCenter  pa1">
+		<div id="main" role="main" class="line">
 			<?php echo $content; ?>
 
 		</div>
