@@ -13,19 +13,17 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 	<h4 class="pb1 mb1 w100">Ebooks à la une</h4>
 
 	<?php if(count($pushBooks) == 0 ) : ?>
-		<div>
+		<div id="dropInfo">
 			<p class="big txtcenter ">Ebooks qui sont mis en avant</p>
 			<p class="txtcenter italic"> Ajouter un livre à la une, depuis le menu contextuel</p>
 			<p class="txtcenter">Ou faites un glissé-déposé du livre que vous souhaité mettre en avant</p>
 		</div>
-	<?php else : ?>
-		<div class="autogrid4">
+		<?php endif; ?>
+		<div class="autogrid4 dropper">
 			<?php foreach ($pushBooks as $book) :?>
 				<?php $this->renderPartial('_viewManage', array('book'=>$book)); ?>
 			<?php endforeach; ?>
 		</div>
-	<?php endif; ?>
-	
 </section>
 <section id="ltBook" class="w100 pa1">
 	<h4 class="pb1 mb1 w100">Vos ebooks</h4>
@@ -42,5 +40,5 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 			<?php $this->renderPartial('_viewManage', array('book'=>$book)); ?>
 		
 		<?php endforeach; ?>
-		</div>
+	</div>
 </section>

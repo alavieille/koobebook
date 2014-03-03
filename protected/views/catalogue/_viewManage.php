@@ -1,4 +1,4 @@
-<div class="mb2 mr1">
+<div class="mb2 mr1 book" draggable="true" data-id="<?php echo $book->id ?>">
 	<p class="pa0 ma0 right mr1 pt1 btParam">paramètres</p>
 	<div class="param pa1">
 		<nav>
@@ -10,7 +10,6 @@
 					<?php echo (! $book->push) ? "Mettre en avant" : "Supprimer de la mise en avant" ?>
 					</a>
 				</li>
-				
 			</ul>
 		</nav>
 	</div>

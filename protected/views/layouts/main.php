@@ -13,6 +13,17 @@
 				//js
 				Yii::app()->clientScript->registerCoreScript('jquery');
 				Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/site.js',CClientScript::POS_END);
+				
+				Yii::app()->clientScript->registerScript('helpers', '                                                           
+		          yii = {                                                                                                     
+		              urls: {                                                                                                 
+		                  saveEdits: '.CJSON::encode(Yii::app()->createUrl('edit/save')).',                                   
+		                  base: '.CJSON::encode(Yii::app()->baseUrl).'                                                        
+		              }                                                                                                       
+		          };                                                                                                          
+		      ',CClientScript::POS_HEAD); 
+				
+
 			?>
 		
 	</head>
