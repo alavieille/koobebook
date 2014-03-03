@@ -23,18 +23,17 @@ CREATE TABLE IF NOT EXISTS `catalogue` (
   UNIQUE KEY `userId` (`userId`)
 ) ENGINE=InnoDB
 
-/* Table book */
 CREATE TABLE IF NOT EXISTS `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `catalogueId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)',
+  `catalogueId` int(11) DEFAULT NULL COMMENT 'CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)',
   `title` varchar(250) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `author` varchar(250) NOT NULL,
   `picture` varchar(250) DEFAULT NULL,
   `description` text,
-  `editor` varchar(250) DEFAULT NULL,
   `publication` date DEFAULT NULL,
   `isbn` int(13) DEFAULT NULL,
+  `push` tinyint(1) NOT NULL DEFAULT '0',
   `epub` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB

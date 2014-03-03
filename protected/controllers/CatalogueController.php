@@ -116,12 +116,18 @@ class CatalogueController extends Controller
 		$this->layout = "//layouts/private";
 		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 
+		$pushBooks = $model->books(array('condition'=>'push=1'));
+		$books = $model->books(array('condition'=>'push=0'));
+
 		if(is_null($model))
 			$this->redirect("create");
 		
-		$this->render('manage',array('model'=>$model));
-
+		$this->render('manage',array(
+			'books' => $books,
+			'pushBooks' => $pushBooks
+			));
 	}
+
 
 	/**
 	* Delete a catalogue

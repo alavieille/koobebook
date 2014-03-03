@@ -222,7 +222,7 @@ body{
  **/
 #presentation{
 	color:white;
-	background: #3498db;
+	background: #53a1b8;
 }
 
 #presentation h2{
@@ -322,46 +322,46 @@ body{
  * 5.2 Manage Book
  **/
 
-#ltBook{
+#ltBook,#pushBook{
 		background: white;
 		border: 1px solid rgba(0,0,0,0.2);
 }
 
-#ltBook h4{
+#ltBook h4,#pushBook h4{
 	border-bottom: 1px solid rgba(0,0,0,0.2);
 	color:#3498db;
 }
 
-#ltBook div { /* liste livre */
+#ltBook div, #pushBook div { /* liste livre */
 	text-align: left;
 	position: relative;
 }
 
 
-#ltBook div figure{
+#ltBook div figure,#pushBook div figure{
 	height: 100%;
 }
 
-#ltBook div>a{
+#ltBook div>a,#pushBook div>a{
 	display: block;
 }
 
-#ltBook div>a:hover{
+#ltBook div>a:hover,#pushBook div>a:hover{
 	background-color: #eee;
 }
 
-#ltBook div figure img{
+#ltBook div figure img,#pushBook div figure img{
 	max-width:120px;
 	height: 190px ;
 	min-height: 190px;
 	max-height: 190px;
 
 }
-#ltBook div figure figcaption{
+#ltBook div figure figcaption,#pushBook div figure figcaption{
 
 }
 /** param livre **/
-#ltBook div .btParam{
+#ltBook div .btParam,#pushBook div .btParam{
 	background:url("img/paramsprite.png") -35px -5px no-repeat;
 	height: 20px;
 	width: 20px;
@@ -369,12 +369,12 @@ body{
 	margin-bottom: 2px;
 }
 
-#ltBook div .btParam:hover,#ltBook div .btParamActive{
+#ltBook div .btParam:hover,#ltBook div .btParamActive,#pushBook div .btParam:hover,#pushBook div .btParamActive{
 	background-position: -5px -5px;
 	cursor:pointer;
 }
 
-#ltBook .param{
+#ltBook .param,#pushBook .param{
 	position: absolute;
 	background: white;
 	width: 100%;
@@ -382,24 +382,24 @@ body{
 	//border: 1px solid #eee;
 }
 
-#ltBook ul{
+#ltBook ul,#pushBook ul{
 	list-style: none;
 	padding-left: 0;
 	text-align: center;
 }
 
-#ltBook ul li{
+#ltBook ul li,#pushBook ul li{
 	margin-top:15px;
 	//background-color: #3498db;
 }
 
-#ltBook ul li a{
+#ltBook ul li a,#pushBook ul li a{
 	color: #3498db;
 	display: block;
 	padding:8px 15px;
 }
 
-#ltBook ul li a:hover{
+#ltBook ul li a:hover,#pushBook ul li a:hover{
 	color:#505050;
 }
 

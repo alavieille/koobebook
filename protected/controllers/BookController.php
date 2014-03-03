@@ -27,8 +27,13 @@ class BookController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
-				'actions'=>array('create','update', 'download','delete','confirmDelete'),
+				'actions'=>array('create', 'download'),
 				'users'=>array('@'),
+			),
+			array('allow',
+				'actions'=>array('update','delete','confirmDelete','togglePush'),
+				'users'=>array('@'),
+				'expression'=> 'Yii::app()->controller->isOwner()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -171,6 +176,26 @@ class BookController extends Controller
 
 	}
 
+	/**
+	* Toggle param push of a book
+	* @param $id the ID of the book
+	*/
+	public function actionTogglePush($id)
+	{
+		$model=$this->loadModel($id);
+		if($model->push)
+			$model->push = false;
+		else 
+			$model->push = true;
+		$model->save();
+		if(Yii::app()->request->isAjaxRequest) {
+			echo "tes";
+		}
+		else {
+			Yii::app()->getController()->redirect(array('catalogue/manage'));
+		}
+
+	}
 
 	/**
 	* Delete a book
@@ -214,6 +239,20 @@ class BookController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
+	/**
+	* Check is user is owner of book, use in acces rules
+	* @return boolean
+	* @throws CHttpException
+	*/
+	public function isOwner()
+	{
+     	if(isset($_GET["id"])) {
+	        $model = $this->loadModel($_GET['id']);
+	        if(isset($model->catalogue))
+	        	return yii::app()->user->id === $model->catalogue->userId;
+	    }
+	    throw new CHttpException(400,"votre requête est invalide");
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
