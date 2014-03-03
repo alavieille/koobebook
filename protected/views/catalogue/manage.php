@@ -9,6 +9,11 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 ?>
 
 <h2 class="pt2 pb1 txtcenter">Gérer</h2>
+
+    <div class="txtcenter flasherror pb2">
+        <?php echo Yii::app()->user->getFlash('error'); ?>
+    </div>
+
 <section id="pushBook" class="w100 pa1 mb3">
 	<h4 class="pb1 mb1 w100">Ebooks à la une</h4>
 

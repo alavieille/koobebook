@@ -12,25 +12,17 @@ $('html').click(function() {
 	$(".btParam").removeClass("btParamActive");
 });
 
-$("#ltBook .book, #pushBook .book ").each(function(index,element){
+/** Drag and Drop ebook for push **/
+$("#ltBook .book, #pushBook .book ").each(function(index,element){ 
 	dndHandler.applyDragEvents($(element));
-	console.log(element);
-
 });
 
-dndHandler.applyDropEvents($("#pushBook")); 
+dndHandler.applyDropEvents($("#pushBook"));  
 dndHandler.applyDropOutEvents($("#ltBook")); 
 
 
 
 });
-
-var dropBook = function(e){
-	e.preventDefault();
-	e.stopPropagation();
-	console.log(e);
-	console.log($(this));
-}
 
 var showParam = function(event){
 	$(".param").not($(this).next(".param")).hide();
@@ -40,6 +32,9 @@ var showParam = function(event){
 	event.stopPropagation();
 }
 
+/**
+* Manage drag and drop 
+**/
 var dndHandler = {
      
     draggedElement: null,
@@ -62,7 +57,7 @@ var dndHandler = {
         });
             
     },
-	 applyDropOutEvents: function(dropper) {
+	 applyDropOutEvents: function(dropper) { // remove push 
 	        dropper.bind('dragover', function(e) {
 	        	if (dndHandler.parentDraggedElement.hasClass("dropper")){
 	            	e.preventDefault();
@@ -78,6 +73,7 @@ var dndHandler = {
 		    dropper.bind('drop', function(e) {	
 		        
 		  		if (dndHandler.parentDraggedElement.hasClass("dropper")){
+
 			        draggedElement = dndHandler.draggedElement; 
 			   
 
@@ -100,12 +96,14 @@ var dndHandler = {
 			        	$("#pushBook #dropInfo").show();
 	        		}
 
+	        		$(".flasherror").html("");
 			        $("#ltBook").removeClass("onDrop");
 			    }     
+			    return false;
 		    });            
 	},
  
-    applyDropEvents: function(dropper) {
+    applyDropEvents: function(dropper) { // add push
         dropper.bind('dragover', function(e) {
             e.preventDefault();
             $(this).addClass("onDrop");
@@ -116,28 +114,33 @@ var dndHandler = {
 	    var dndHandler = this; 
 	    dropper.bind('drop', function(e) {	
 	        
-	        draggedElement = dndHandler.draggedElement; 
-	      	var target = e.target;
-	  
-	        while(target.id.indexOf('pushBook') == -1) { 
-	                target = target.parentNode;
-	        }
-	        
-  			$.get( yii.urls.base+"/index.php/book/togglePush/"+draggedElement.attr("data-id"));
-	        draggedElement.detach().appendTo($("#pushBook .dropper"));
-	    	draggedElement.find(".param li a").eq(2).html("Supprimer de la mise en avant");
+	        if( $("#pushBook .dropper .book").length < 5 ) {
+	        	$(".flasherror").html("");
+		        draggedElement = dndHandler.draggedElement; 
+		      	var target = e.target;
+		  
+		        while(target.id.indexOf('pushBook') == -1) { 
+		                target = target.parentNode;
+		        }
+		        
+	  			$.get( yii.urls.base+"/index.php/book/togglePush/"+draggedElement.attr("data-id"));
+		        draggedElement.detach().appendTo($("#pushBook .dropper"));
+		    	draggedElement.find(".param li a").eq(2).html("Supprimer de la mise en avant");
 
-	    	console.log($("#pushBook .dropper .book").length);
-	        if($("#pushBook .dropper .book").length > 0) {
-	       		$("#pushBook #dropInfo").hide();
-	        }
-	        else {
-	        	$("#pushBook #dropInfo").show();
-	        }
 
-	        $(target).removeClass("onDrop");
-		
+		        if($("#pushBook .dropper .book").length > 0) {
+		       		$("#pushBook #dropInfo").hide();
+		        }
+		        else {
+		        	$("#pushBook #dropInfo").show();
+		        }
 
+		        $(target).removeClass("onDrop");
+			}
+			else {
+				$(".flasherror").html("Vous pouvez mettre au maximun 5 ebooks en avant");
+			}
+	        return false;
 	    });          	  
 	}
 

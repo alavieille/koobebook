@@ -182,16 +182,23 @@ class BookController extends Controller
 	*/
 	public function actionTogglePush($id)
 	{
+
 		$model=$this->loadModel($id);
-		if($model->push)
+		
+		if($model->push) {
 			$model->push = false;
-		else 
-			$model->push = true;
-		$model->save();
-		if(Yii::app()->request->isAjaxRequest) {
-			echo "tes";
 		}
 		else {
+			$nbrBookPush = count($model->catalogue->books(array('condition'=>'push=1')));
+			if($nbrBookPush >= 5) {
+				yii::app()->user->setFlash("error","Vous pouvez mettre au maximun 5 ebooks en avant");
+				Yii::app()->getController()->redirect(array('catalogue/manage'));
+			}
+			$model->push = true;
+		}
+		$model->save();
+
+		if(! Yii::app()->request->isAjaxRequest) {
 			Yii::app()->getController()->redirect(array('catalogue/manage'));
 		}
 
