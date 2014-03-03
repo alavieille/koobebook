@@ -70,7 +70,7 @@ class BookController extends Controller
 		/*$model->editor = $catalogue->name;
 		$model->catalogueId = $catalogue->id;*/
 
-		$model->editor = "Nom test catalogue";
+		
 		$model->catalogueId = 5;
 
 		if(isset($_POST['Book']))

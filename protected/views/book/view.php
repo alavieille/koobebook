@@ -23,8 +23,8 @@
 	<div class="info mod pl2 tiny-w100">
 		<h2 class="mb0 title"><?php echo CHtml::encode($model->title); ?></h2>
 		<h4 class="mt1 mb0 author">De <?php echo CHtml::encode($model->author); ?></h4>
-		<p class="mt0 editor pt1">Edité par <a href="#"><?php echo CHtml::encode($model->editor); ?> </a>
-	 	(<?php echo Yii::app()->dateFormatter->formatDateTime($model->publication, 'medium', null) ?>)
+		<p class="mt0 editor pt1">Edité le
+	 	<?php echo Yii::app()->dateFormatter->formatDateTime($model->publication, 'medium', null) ?>
 		</p>
 
 		<?php if(! is_null($model->isbn)) :?>

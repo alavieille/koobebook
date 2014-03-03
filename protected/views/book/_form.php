@@ -56,13 +56,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'author'); ?>
 			</div>
 
-			<div class="rowInput">
-				<?php echo $form->labelEx($model,'editor'); ?>
-				<?php //echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>
-				<p><?php echo $model->editor ?></p>
-				<?php echo $form->error($model,'editor'); ?>
-			</div>
-
+	
 			<div class="rowInput w200p left pr1 tiny-w100">
 				<?php echo $form->labelEx($model,'publication'); ?>
 				<?php

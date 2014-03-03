@@ -14,6 +14,7 @@
  *  4.1 - Presentation
  * 5.0 - Private
  *	 5.1 - create Book
+ *   5.2 - Manage Book
  * 6.0 - Book
  *	 6.1 - view 
  * 6.0 - Responsive
@@ -186,7 +187,7 @@ body{
  */
 
 #main{
-	padding-top: 110px;
+	padding-top: 100px;
 	min-height: 600px;
 }
 
@@ -220,28 +221,38 @@ body{
  * 4.1 Presentation
  **/
 #presentation{
-	color:#919191;
+	color:white;
+	background: #3498db;
 }
 
 #presentation h2{
 	font-size: 3.3em;
+	color:#ecf0f1;
+}
+
+#presentation .logo span{
 	color:#505050;
 }
 
 #presentation h3{
 	font-weight: 300;
-	color:#505050;
+	color:#ecf0f1;
 	letter-spacing: 1.036px;
 }
 
 #presentation p{
 	font-weight: 100;
 	letter-spacing: 1.036px;
+	color:#ecf0f1;
 
 }
 
 #presentation figure{
 	text-align: center;
+}
+
+#presentation figure  figcaption p {
+	text-align: justify;
 }
  /**
  * 5.0 Private 
@@ -287,7 +298,6 @@ body{
 	height: 350px;
  	min-width:200px;
  	max-height:350px;
- 	border: 3px solid #C9C9C9;
  }
 
  #book-form .inputPicture{
@@ -308,6 +318,113 @@ body{
 	color: #555 !important;
  }
 
+/**
+ * 5.2 Manage Book
+ **/
+
+#ltBook{
+		background: white;
+		border: 1px solid rgba(0,0,0,0.2);
+}
+
+#ltBook h4{
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	color:#3498db;
+}
+
+#ltBook div { /* liste livre */
+	text-align: left;
+	position: relative;
+}
+
+
+#ltBook div figure{
+	height: 100%;
+}
+
+#ltBook div>a{
+	display: block;
+}
+
+#ltBook div>a:hover{
+	background-color: #eee;
+}
+
+#ltBook div figure img{
+	max-width:120px;
+	height: 190px ;
+	min-height: 190px;
+	max-height: 190px;
+
+}
+#ltBook div figure figcaption{
+
+}
+/** param livre **/
+#ltBook div .btParam{
+	background:url("img/paramsprite.png") -35px -5px no-repeat;
+	height: 20px;
+	width: 20px;
+	text-indent: -9999px;
+	margin-bottom: 2px;
+}
+
+#ltBook div .btParam:hover,#ltBook div .btParamActive{
+	background-position: -5px -5px;
+	cursor:pointer;
+}
+
+#ltBook .param{
+	position: absolute;
+	background: white;
+	width: 100%;
+	top:22px;
+	//border: 1px solid #eee;
+}
+
+#ltBook ul{
+	list-style: none;
+	padding-left: 0;
+	text-align: center;
+}
+
+#ltBook ul li{
+	margin-top:15px;
+	//background-color: #3498db;
+}
+
+#ltBook ul li a{
+	color: #3498db;
+	display: block;
+	padding:8px 15px;
+}
+
+#ltBook ul li a:hover{
+	color:#505050;
+}
+
+
+/**
+* Bouton add ebbok
+**/
+
+#ltBook #addEbook{
+	width: 160px;
+	border: 2px solid #ccc;
+	position: relative;
+}
+
+#ltBook #addEbook #iconAdd{
+	font-weight: bold;
+	font-size: 10em;
+	color:#ddd;
+}
+#ltBook #addEbook p:last-child{
+	position: absolute;
+	top:80%;
+	margin-left: 20%;
+
+}
 
   /**
  * 6.0 Book
@@ -321,7 +438,6 @@ body{
 	width:200px;
 	min-height: 290px;
 	max-height: 290px;
-	border: 3px solid #C9C9C9;
 	margin: 0 auto;
 	display: block ;
 }
@@ -436,6 +552,12 @@ body{
 	}
 	#privateNav ul li a{
 		text-align: center;
+	}
+	
+	/** gestion catalogue / liste livre **/
+	#ltBook #addEbook p:last-child{
+		position: relative;
+		margin-left: 0%;
 	}
 }
 
