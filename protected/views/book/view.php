@@ -5,7 +5,7 @@
 ?>
 
 
-<div id="viewBook" class="view pageCenter w800p pt3">
+<div id="viewBook" class="view center w960p pt3 pb3 mt2">
 
 
  	<?php
@@ -24,7 +24,7 @@
 		<h2 class="mb0 title"><?php echo CHtml::encode($model->title); ?></h2>
 		<h4 class="mt1 mb0 author">De <?php echo CHtml::encode($model->author); ?></h4>
 		<?php if(! is_null($model->catalogue)) :?>
-			<p class="mt0 editor pt1">Edité par <a href="#"><?php //echo CHtml::encode($model->editor); ?> </a>
+			<p class="mt0 editor pt1">Edité par <a href="<?php echo Yii::app()->createUrl('catalogue/view/',array( 'id'=>$model->catalogueId));  ?>"><?php echo CHtml::encode($model->catalogue->name); ?> </a>
 	 		(<?php echo Yii::app()->dateFormatter->formatDateTime($model->publication, 'medium', null) ?>)
 			</p>
 		<?php else : ?>
@@ -44,7 +44,7 @@
 	</div>
 
 
-	<div class="line mt3 description mb3">
+	<div class="line mt3 description mb3 pa2">
 	<h4><?php echo CHtml::encode($model->getAttributeLabel('description')); ?> : </h4>
 	<p><?php echo CHtml::encode($model->description); ?></p>
 	</div>

@@ -56,7 +56,7 @@ div.form
 }
 input:focus{
     outline: 0;
-    border:2px solid #3498db !important;
+    border:2px solid #53a1b8 !important;
 }
 div.form input[type="text"],
 div.form input[type="email"],
@@ -121,7 +121,7 @@ div.form [type="checkbox"]:checked + label:after {
   width: 15px; height: 15px; /* dim. de la case */  
   border: 1x solid #aaa;  
   transition: all .2s; /* on prévoit une animation */  
-  background:#3498db; 
+  background:#53a1b8; 
   border-radius: 10px; /* angles arrondis */  
 
 } 
@@ -149,7 +149,7 @@ div.form input[type="submit"]{
 	letter-spacing: 0.78px;
 	text-align: center;
 	height: 40px;
-	background-color: #3498db;
+	background-color: #53a1b8;
 	display: block;
 	margin: 0 auto;
 	margin-top: 30px;
@@ -323,7 +323,7 @@ div.form [type="radio"]:checked + label:after {
   width: 15px; height: 15px; /* dim. de la case */  
   border: 1x solid #aaa;  
   transition: all .2s; /* on prévoit une animation */  
-  background:#3498db; 
+  background:#53a1b8; 
   border-radius: 10px; /* angles arrondis */  
 
 } 

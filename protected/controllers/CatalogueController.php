@@ -48,8 +48,13 @@ class CatalogueController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model= $this->loadModel($id);
+		$pushBooks = $model->books(array('condition'=>'push=1'));
+		$books = $model->books(array('condition'=>'push=0'));
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'pushBooks'=>$pushBooks,
+			'books'=>$books,
 		));
 	}
 

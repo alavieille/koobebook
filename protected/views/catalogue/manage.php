@@ -19,21 +19,21 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 
 	<?php if(count($pushBooks) == 0 ) : ?>
 		<div id="dropInfo">
-			<p class="big txtcenter ">Ebooks qui sont mis en avant</p>
+			<p class="big txtcenter ">Ebooks mis en avant</p>
 			<p class="txtcenter italic"> Ajouter un livre à la une, depuis le menu contextuel</p>
 			<p class="txtcenter">Ou faites un glissé-déposé du livre que vous souhaité mettre en avant</p>
 		</div>
 		<?php endif; ?>
-		<div class="autogrid4 dropper">
+		<div class="autogrid5 dropper">
 			<?php foreach ($pushBooks as $book) :?>
-				<?php $this->renderPartial('_viewManage', array('book'=>$book)); ?>
+				<?php $this->renderPartial('_viewBookManage', array('book'=>$book)); ?>
 			<?php endforeach; ?>
 		</div>
 </section>
 <section id="ltBook" class="w100 pa1">
 	<h4 class="pb1 mb1 w100">Vos ebooks</h4>
-	<div class="autogrid4">
-		<div class="center ml1 mb2 mr1 mt2 w150p small-w100" id="addEbook">
+	<div class="autogrid5">
+		<div class="ml1 mb2 mr1 mt2 tiny-w100	" id="addEbook">
 			<a class="center" href="<?php echo Yii::app()->createUrl('book/create/'); ?>">
 
 				<p id="iconAdd" class="txtcenter">+</p>
@@ -42,7 +42,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 		</div>
 		<?php foreach ($books as $book) :?>
 
-			<?php $this->renderPartial('_viewManage', array('book'=>$book)); ?>
+			<?php $this->renderPartial('_viewBookManage', array('book'=>$book)); ?>
 		
 		<?php endforeach; ?>
 	</div>
