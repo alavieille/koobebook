@@ -34,7 +34,7 @@ class CatalogueController extends Controller
 			array('allow',
 				'actions'=>array('delete','confirmDelete'),
 				'users'=>array('@'),
-				'expression'=> 'Yii::app()->controller->isOwner()',
+				'expression'=> 'Yii::app()->controller->isOwnerRules()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -55,6 +55,7 @@ class CatalogueController extends Controller
 			'model'=>$model,
 			'pushBooks'=>$pushBooks,
 			'books'=>$books,
+			'isOwner'=>$this->isOwner($id)
 		));
 	}
 
@@ -186,11 +187,22 @@ class CatalogueController extends Controller
 	}
 
 	/**
+	* Check is user is owner of catalogue
+	* @return boolean
+	* @throws CHttpException
+	*/
+	public function isOwner($id)
+	{
+	    $model = $this->loadModel($id);
+	    return yii::app()->user->id === $model->userId;
+	}
+
+	/**
 	* Check is user is owner of catalogue, use in acces rules
 	* @return boolean
 	* @throws CHttpException
 	*/
-	public function isOwner()
+	public function isOwnerRules()
 	{
      	if(isset($_GET["id"])){
 	        $model = $this->loadModel($_GET['id']);

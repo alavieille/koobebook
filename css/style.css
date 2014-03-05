@@ -221,6 +221,24 @@ body{
 	padding: 20px;
 	margin: 0px auto;
 }
+
+#main .linkButton{
+	width:80px;
+	font-size: 0.9em;
+	font-weight: 600;
+	letter-spacing: 0.78px;
+	text-align: center;
+	height: 40px;
+	background-color: #53a1b8;
+	display: block;	
+	color:white;
+	line-height: 40px;
+}
+
+#main .linkButton:hover{
+	background-color: #ccc !important;
+	color:#555 !important;
+}
  /**
  * 4.0 Index
  * ----------------------------------------------------------------------------
@@ -481,7 +499,7 @@ body{
 
 #viewBook .linkDown{
 	position: absolute;
-	bottom: 20px;
+	bottom: 55px;
 	width:150px;
 	font-size: 1.2em;
 	font-weight: 600;

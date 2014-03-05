@@ -33,7 +33,7 @@ class BookController extends Controller
 			array('allow',
 				'actions'=>array('update','delete','confirmDelete','togglePush'),
 				'users'=>array('@'),
-				'expression'=> 'Yii::app()->controller->isOwner()',
+				'expression'=> 'Yii::app()->controller->isOwnerRules()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -47,8 +47,11 @@ class BookController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'isOwner'=>$this->isOwner($id)
 		));
 	}
 
@@ -248,11 +251,24 @@ class BookController extends Controller
 	}
 
 	/**
+	* Check is user is owner of book
+	* @return boolean
+	*/
+	private function isOwner($id){
+
+		 $model = $this->loadModel($id);
+		 if(isset($model->catalogue))
+		 	return yii::app()->user->id === $model->catalogue->userId;
+		 return false;
+	}
+
+
+	/**
 	* Check is user is owner of book, use in acces rules
 	* @return boolean
 	* @throws CHttpException
 	*/
-	public function isOwner()
+	public function isOwnerRules()
 	{
      	if(isset($_GET["id"])) {
 	        $model = $this->loadModel($_GET['id']);

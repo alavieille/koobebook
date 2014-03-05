@@ -6,6 +6,24 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 <section class="center mt2 mod mw960p" id="viewCatalogue">
 	
 <h2 class="pa2 txtcenter">Catalogue de <?php echo $model->name; ?></h2>
+
+<?php if($isOwner) : ?>
+	<nav>
+		<?php 
+			$this->widget('zii.widgets.CMenu',array(
+				'items'=>array(
+					array('label'=>'Modifier', 'url'=>array('/catalogue/update/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
+					array('label'=>'Supprimer', 'url'=>array('/catalogue/delete/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
+					
+				),
+				'itemCssClass' => "pb1 inbl",
+				'htmlOptions' => array("class" => 'pl1')
+			));
+
+		?>
+	</nav>
+<?php endif; ?>
+
 <?php if (count($pushBooks) > 0) : ?>
 	<section id="viewPushBook" class="pa2 pt1">
 		<h3 class="mb2">À à la une</h3>
