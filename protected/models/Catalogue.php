@@ -87,7 +87,7 @@ class Catalogue extends CActiveRecord
 
 		$res = $this->with(array('books'=>array('joinType'=>'INNER JOIN',)))->find(array(
 			'select' => "*",
-			'condition' => 't.description IS NOT NULL',
+			'condition' => 't.description IS NOT NULL AND t.description != "" ',
 			'order' => 'rand()',
 			'limit' => '1'
 		));

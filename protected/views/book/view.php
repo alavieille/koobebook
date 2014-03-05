@@ -43,7 +43,7 @@
 
 	</div>
 	<?php if($isOwner) : ?>
-		<nav>
+		<nav class="mt1">
 			<?php 
 				$this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
