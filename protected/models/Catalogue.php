@@ -37,7 +37,8 @@ class Catalogue extends CActiveRecord
 			array('userId', 'numerical', 'integerOnly'=>true),
 
 			array('name', 'length', 'max'=>50),
-			array('description  date_create', 'safe'),
+			array('description','length','min'=>200,'allowEmpty'=>true),
+			array('date_create', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, userId, name, description', 'safe', 'on'=>'search'),

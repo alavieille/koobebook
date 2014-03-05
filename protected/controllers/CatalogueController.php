@@ -152,10 +152,15 @@ class CatalogueController extends Controller
 	**/
 	public function actionConfirmDelete($id)
 	{
+	
 		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('catalogue/delete', array(
             'id'=>$id))){
+			foreach ($this->loadModel($id)->books as $book) {
+				$book->catalogueId = null;
+				$book->save();
+			}
 			$this->loadModel($id)->delete();
-			$this->redirect("create");
+			Yii::app()->getController()->redirect(array('catalogue/create'));
 		}
 		else{
 			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
