@@ -219,7 +219,7 @@ body{
 #main .panel{
 	background:white;
 	padding: 20px;
-	margin: 20px auto;
+	margin: 0px auto;
 }
  /**
  * 4.0 Index
@@ -553,43 +553,42 @@ body{
 	letter-spacing: 1.37px;
 }
 
-#indexCatalogue h3{
+#indexCatalogue h3, #newCatalogue h3 , #indexCataDiscover h3{
 	color: #53a1b8;
 	border-bottom: 1px solid #53a1b8;
 }
 /** new catalogue **/
 
-#newCatalogue div { /* liste livre */
+.viewNew div { /* liste livre */
 	text-align: left;
 	position: relative;
 }
 
-#newCatalogue .book:hover{
+.viewNew .book:hover{
 	transform: scale(1.1);
 	opacity: 0.7;
 }
 
-#newCatalogue .book figure img{
+.viewNew .book figure img{
 	width:123px;
 	min-height: 195px;
 	max-height: 195px;
-
-}
-#newCatalogue>a{
-	display: block;
-	background-color: green;
 }
 
-#newCatalogue a, #newCatalogue a:after{
-	color:#53a1b8;
+#main .viewNew>a p ,#main .viewNew a p:after{
+	color:#53a1b8 ;
 }
-#newCatalogue a:hover, #newCatalogue a:hover:after{
+#main .viewNew>a p:hover, #main .viewNew>a p:hover:after{
 	color:#555;
 }
+.viewNew>a{
+	display: block;
+}
+
 
 /** catalogue random **/
 
-#discoverCatalogue{
+#discoverCatalogue,#indexCataDiscover{
 	background-color: #53a1b8;
 	background-color: #666;
 }
@@ -645,11 +644,7 @@ body{
 	color:#777;
 }
 
-#viewCatalogue h3{
-	color: #53a1b8;
-	border-bottom: 1px solid #53a1b8;
-	
-}
+
 
 #viewPushBook div, #viewLtBook div { /* liste livre */
 	text-align: left;

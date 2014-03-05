@@ -23,9 +23,16 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$randCata = Catalogue::model()->findRandom();
+	
+		$newCata = array();
+		$newCata = Catalogue::model()->findRandomNew($randCata->id);
+
+
+		$this->render('index',array(
+			'randCata'=> $randCata,
+			'newCata'=>$newCata,
+		));
 	}
 
 	/**

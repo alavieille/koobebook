@@ -164,32 +164,19 @@ class CatalogueController extends Controller
 
 	
 	/**
-	 * Redirect user to action manage
+	 * Show different catalogue
 	 */
 	public function actionIndex()
 	{
 		$randCata = Catalogue::model()->findRandom();
-		$randCata = $this->loadModel('12');
-		
+	
 		$newCata = array();
-		$arrayNewCata = Catalogue::model()->findRandomNew($randCata->id);
-
-		foreach ($arrayNewCata as $catalogue) {
-			$arrayCata = array();
-			$arrayCata["catalogue"] = $catalogue;
-			if(count($catalogue->books(array('condition'=>'push=1'))) > 0) {
-				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=1'));
-			}
-			else {
-				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=0','limit'=>5));
-			}
-			$newCata[] = $arrayCata;
-		}
+		$newCata = Catalogue::model()->findRandomNew($randCata->id);
 
 		$this->render('index',array(
 			'randCata'=> $randCata,
 			'newCata'=>$newCata,
-		));
+		));	
 
 	}
 

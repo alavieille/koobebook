@@ -125,7 +125,20 @@ class Catalogue extends CActiveRecord
 			'limit' => '2',
 		));
 
-		return $res;
+		$newCata  = array();
+		foreach ($res as $catalogue) {
+			$arrayCata = array();
+			$arrayCata["catalogue"] = $catalogue;
+			if(count($catalogue->books(array('condition'=>'push=1'))) > 0) {
+				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=1'));
+			}
+			else {
+				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=0','limit'=>5));
+			}
+			$newCata[] = $arrayCata;
+		}
+
+		return $newCata;
 
 	}
 
