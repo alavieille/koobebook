@@ -37,7 +37,7 @@ class Catalogue extends CActiveRecord
 			array('userId', 'numerical', 'integerOnly'=>true),
 
 			array('name', 'length', 'max'=>50),
-			array('description', 'safe'),
+			array('description  date_create', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, userId, name, description', 'safe', 'on'=>'search'),
@@ -69,6 +69,81 @@ class Catalogue extends CActiveRecord
 			'description' => 'Description',
 
 		);
+	}
+
+	/**
+	* Select a random Catalogue where have pusblih book
+	* @return Return an Array of Catalogue
+	*/
+	public function findRandom()
+	{
+		/*$res = $this->with(array('books'=>array('joinType'=>'INNER JOIN',)))->find(array(
+			'select' => "*",
+			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
+			'condition' => 't.description IS NOT NULL and t.id >=r2.id',
+			'order' => 't.id ASC',
+		));	*/
+
+		$res = $this->with(array('books'=>array('joinType'=>'INNER JOIN',)))->find(array(
+			'select' => "*",
+			'condition' => 't.description IS NOT NULL',
+			'order' => 'rand()',
+			'limit' => '1'
+		));
+		return $res;
+	
+	}
+
+	/**
+	* Select two random Catalogue which was published there was less than one month
+	* @param $ignoreId 
+	* @return an Array of Catalogue
+	*/
+	public function findRandomNew($ignoreId = null){
+			
+		/*$res = Catalogue::model()->findAll(array(
+			'select' => "*",
+			'alias' => 'r1',
+			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
+			'condition' => ' DATEDIFF(NOW(),r1.date_create) < 30 and r1.id >=r2.id',
+			'order' => 'rand()',
+			'limit' => '2'
+		));*/
+
+		$conditionIgnoreId = "";
+		if($ignoreId != null) {
+			//$conditionIgnoreId = " AND t.id != ".$ignoreId;
+		}
+
+		$res = Catalogue::model()->with(array('books'=>array('joinType'=>'INNER JOIN')))->findAll(array(
+			'select' => "*",
+			//'alias' => 'r1',
+			//'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
+			'condition' => ' DATEDIFF(NOW(),t.date_create) < 30'.$conditionIgnoreId,
+			'order' => 'rand()',
+			'together' => true,
+			'limit' => '2',
+		));
+
+		return $res;
+
+	}
+
+	/**
+	* Return an Excerpt of catalogue Description
+	* @param Integer $len length of excerpt
+	* @return String
+	*/
+	public function getExcerptDescription($len)
+	{
+  		$text = $this->description;
+        if (strlen($text) > $len) { 
+          $text = substr($text, 0, $len); 
+          $text = substr($text,0,strrpos($text," ")); 
+          $etc = " ...";  
+          $text = $text.$etc; 
+          }
+        return $text; 
 	}
 
 	/**

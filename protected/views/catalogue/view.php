@@ -3,12 +3,12 @@
 /* @var $model Catalogue */
 $this->pageTitle=Yii::app()->name . ' - Catalogue';
 ?>
-<section class="center mt2 mod w960p" id="viewCatalogue">
+<section class="center mt2 mod mw960p" id="viewCatalogue">
 	
 <h2 class="pa2 txtcenter">Catalogue de <?php echo $model->name; ?></h2>
 <?php if (count($pushBooks) > 0) : ?>
 	<section id="viewPushBook" class="pa2 pt1">
-		<h3 class="mb2">Ebooks à la une</h3>
+		<h3 class="mb2">À à la une</h3>
 
 		<div class="autogrid5">
 			<?php foreach ($pushBooks as $book) :?>

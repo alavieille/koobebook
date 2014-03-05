@@ -49,7 +49,7 @@ class Book extends CActiveRecord
 			array('epubFile', 'file', 'types'=>'epub','on'=>'insert'),
 			array('epubFile', 'file', 'types'=>'epub',"allowEmpty"=>true,'on'=>'update') ,
 
-			array('description', 'safe'),
+			array('description date_create', 'safe'),
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

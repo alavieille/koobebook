@@ -18,7 +18,8 @@
  * 6.0 - Book
  *	 6.1 - view 
  * 7.0 - Catalogue
- *	 7.1 - view
+ *   7.1 - index 
+ *	 7.2 - view
  * 8.0 - Responsive
  * ----------------------------------------------------------------------------
  */
@@ -460,9 +461,11 @@ body{
 /**
  * 6.1 view book
  **/
+
 #viewBook{
 	background-color: white;
 }
+
 #viewBook img{
 	width:165px;
 	min-height: 260px;
@@ -475,6 +478,7 @@ body{
 	position: relative;
 	min-height: 310px;
 }
+
 #viewBook .linkDown{
 	position: absolute;
 	bottom: 20px;
@@ -512,7 +516,8 @@ body{
 }
 
 #viewBook .description{
-	background-color: #555
+	background-color: #666
+
 }
 
 #viewBook .description h4{
@@ -535,7 +540,101 @@ body{
  */
 
 /**
- * 7.1 view Catalogue
+ * 7.1 index Catalogue
+ **/
+#indexCatalogue{
+	background-color: white;
+}
+
+#indexCatalogue .name{
+	color: #555;
+	font-size: 1.15em;
+	line-height: 20px;
+	letter-spacing: 1.37px;
+}
+
+#indexCatalogue h3{
+	color: #53a1b8;
+	border-bottom: 1px solid #53a1b8;
+}
+/** new catalogue **/
+
+#newCatalogue div { /* liste livre */
+	text-align: left;
+	position: relative;
+}
+
+#newCatalogue .book:hover{
+	transform: scale(1.1);
+	opacity: 0.7;
+}
+
+#newCatalogue .book figure img{
+	width:123px;
+	min-height: 195px;
+	max-height: 195px;
+
+}
+#newCatalogue>a{
+	display: block;
+	background-color: green;
+}
+
+#newCatalogue a, #newCatalogue a:after{
+	color:#53a1b8;
+}
+#newCatalogue a:hover, #newCatalogue a:hover:after{
+	color:#555;
+}
+
+/** catalogue random **/
+
+#discoverCatalogue{
+	background-color: #53a1b8;
+	background-color: #666;
+}
+
+#discoverCatalogue .books{
+	text-align: left;
+	position: relative;
+}
+
+#discoverCatalogue a, #discoverCatalogue a:after{
+	color:#349fff;
+}
+
+#discoverCatalogue .book:hover{
+	transform: scale(1.1);
+	opacity: 0.7;
+}
+
+
+#discoverCatalogue .book figure img{
+	width:61px;
+	min-height: 97px;
+	max-height: 97px;
+
+}
+#discoverCatalogue .book a p{
+	color:#ccc;
+	font-size:0.9em;
+}
+
+#discoverCatalogue .name{
+	color: white;
+}
+
+#discoverCatalogue .description{
+	text-indent: 55px;
+	text-align: justify;
+	color:white;
+	font-size:1.1em;
+	line-height: 20px;
+	font-family: "georgia","times" serif;
+}
+
+/**
+ * 7.2 view Catalogue
  **/
 
 #viewCatalogue{
@@ -590,13 +689,12 @@ body{
 }
 
 #viewCatalogue #viewLtBook {
-	background-color: #555;
+	background-color: #666;
 
 }
 
-#viewCatalogue #viewLtBook p {
+#viewCatalogue #viewLtBook p{
 	color:white;
-	min-height: 200px;
 }
 
 

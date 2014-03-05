@@ -69,7 +69,7 @@ class CatalogueController extends Controller
 			$this->redirect("manage");
 		}
 		$model=new Catalogue;
-
+		$model->date_create = new CDbExpression('NOW()');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -121,12 +121,13 @@ class CatalogueController extends Controller
 		$this->layout = "//layouts/private";
 		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 
-		$pushBooks = $model->books(array('condition'=>'push=1'));
-		$books = $model->books(array('condition'=>'push=0'));
 
 		if(is_null($model))
 			$this->redirect("create");
 		
+		$pushBooks = $model->books(array('condition'=>'push=1'));
+		$books = $model->books(array('condition'=>'push=0'));
+
 		$this->render('manage',array(
 			'books' => $books,
 			'pushBooks' => $pushBooks
@@ -167,7 +168,29 @@ class CatalogueController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$this->redirect("manage");
+		$randCata = Catalogue::model()->findRandom();
+		$randCata = $this->loadModel('12');
+		
+		$newCata = array();
+		$arrayNewCata = Catalogue::model()->findRandomNew($randCata->id);
+
+		foreach ($arrayNewCata as $catalogue) {
+			$arrayCata = array();
+			$arrayCata["catalogue"] = $catalogue;
+			if(count($catalogue->books(array('condition'=>'push=1'))) > 0) {
+				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=1'));
+			}
+			else {
+				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=0','limit'=>5));
+			}
+			$newCata[] = $arrayCata;
+		}
+
+		$this->render('index',array(
+			'randCata'=> $randCata,
+			'newCata'=>$newCata,
+		));
+
 	}
 
 	/**

@@ -68,7 +68,7 @@
 							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden")),
 							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
-						array('label'=>'Catalogues', 'url'=>array('/book/index' )),
+						array('label'=>'Catalogues', 'url'=>array('/catalogue/index' )),
 						array('label'=>'Aide', 'url'=>array('/site/index' )),
 						),
 					'itemCssClass' => "inbl pr2 small-w100",

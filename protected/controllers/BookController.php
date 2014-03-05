@@ -63,6 +63,7 @@ class BookController extends Controller
 		$model=new Book;
 		//default value
 		$model->price = 0;
+		$model->date_create = new CDbExpression('NOW()');
 		// recherche catalogue lié
 		$catalogue = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 	

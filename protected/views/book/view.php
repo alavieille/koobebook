@@ -5,7 +5,7 @@
 ?>
 
 
-<div id="viewBook" class="view center w960p pt3 pb3 mt2">
+<div id="viewBook" class="view center mw960p pt3 pb3 mt2">
 
 
  	<?php
