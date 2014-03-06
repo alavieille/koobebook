@@ -100,8 +100,8 @@ class Catalogue extends CActiveRecord
 	* @param $ignoreId 
 	* @return an Array of Catalogue
 	*/
-	public function findRandomNew($ignoreId = null){
-			
+	public function findRandomNew($ignoreId = null)
+	{		
 		/*$res = Catalogue::model()->findAll(array(
 			'select' => "*",
 			'alias' => 'r1',

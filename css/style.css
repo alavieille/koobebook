@@ -35,7 +35,6 @@ body{
 }
 
 .pageCenter{
-	//width: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
 }
@@ -70,7 +69,6 @@ body{
 	position: fixed;
 	width: 100%;
 	min-height:80px;
-  //  box-shadow: 0px 1px 1px rgba(0,0,0,0.4);
   	border-bottom: 1px solid rgba(0,0,0,0.2);
     background-color: #fff;
 	background-color: rgba(255,255,255,0.94);
@@ -160,6 +158,7 @@ body{
  	content:"|";
  	padding: 0 10px;
  }
+
  #userNav a{
 	text-decoration: none;
 	color:#505050;
@@ -201,6 +200,7 @@ body{
 #main .flasherror{
 	color:#e74c3c;
 }
+
 #main h2, #main h3{
 	color:#777;
 }
@@ -236,9 +236,10 @@ body{
 }
 
 #main .linkButton:hover{
-	background-color: #ccc !important;
-	color:#555 !important;
+	background-color: #ccc;
+	color:#555;
 }
+
  /**
  * 4.0 Index
  * ----------------------------------------------------------------------------
@@ -304,13 +305,13 @@ body{
 	color:#505050;
 	display: block;
 	text-align: left;
-	//padding-left: 50px;
 	padding-bottom: 10px;
 	letter-spacing: 0.37px;
 	
 	transition: color 200ms linear;
 	-webkit-transition: color 200ms linear;
 }
+
 #privateNav li a:hover,#privateNav li.active a{
 	color:#53a1b8; 
 }
@@ -364,7 +365,7 @@ body{
 	color:#53a1b8;
 }
 
-#ltBook div, #pushBook div { /* liste livre */
+#ltBook div, #pushBook div { /* liste book */
 	text-align: left;
 	position: relative;
 }
@@ -394,6 +395,7 @@ body{
 #ltBook div figure figcaption,#pushBook div figure figcaption{
 
 }
+
 /** param livre **/
 #ltBook div .btParam,#pushBook div .btParam{
 	background:url("img/paramsprite.png") -35px -5px no-repeat;
@@ -413,7 +415,6 @@ body{
 	background: white;
 	width: 100%;
 	top:22px;
-	//border: 1px solid #eee;
 }
 
 #ltBook ul,#pushBook ul{
@@ -424,7 +425,6 @@ body{
 
 #ltBook ul li,#pushBook ul li{
 	margin-top:15px;
-	//background-color: #53a1b8;
 }
 
 #ltBook ul li a,#pushBook ul li a{
@@ -444,7 +444,6 @@ body{
 
 #ltBook #addEbook{
 	width: 120px;
-	//height: 180px;
 	border: 2px solid #53a1b8;
 	position: relative;
 }
@@ -471,7 +470,8 @@ body{
 	border-color: #53a1b8;
 	background: white;
 }
-  /**
+ 
+ /**
  * 6.0 Book
  * ----------------------------------------------------------------------------
  */
@@ -502,20 +502,7 @@ body{
 	bottom: 55px;
 	width:150px;
 	font-size: 1.2em;
-	font-weight: 600;
-	letter-spacing: 0.78px;
-	text-align: center;
-	height: 40px;
-	background-color: #53a1b8;
-	display: block;
 	margin-top: 30px;
-	color:white;
-	line-height: 40px;
-}
-
-#viewBook .linkDown:hover{
-	background-color: #ccc;
-	color:#555;
 }
 
 #viewBook .author{
@@ -539,7 +526,6 @@ body{
 }
 
 #viewBook .description h4{
-	//color:#505050;
 	color:white;
 	font-size: 20px;
 }
@@ -564,65 +550,53 @@ body{
 	background-color: white;
 }
 
-#indexCatalogue .name{
-	color: #555;
+#indexCatalogue h3, #newCatalogue h3 , #discoverCatalogue h3{
+	color: #53a1b8;
+	border-bottom: 1px solid #53a1b8;
+}
+
+/** design catalogue **/
+.catalogue .name{
+	color: #555 ;
 	font-size: 1.15em;
 	line-height: 20px;
 	letter-spacing: 1.37px;
 }
 
-#indexCatalogue h3, #newCatalogue h3 , #indexCataDiscover h3{
-	color: #53a1b8;
-	border-bottom: 1px solid #53a1b8;
-}
-/** new catalogue **/
-
-.viewNew div { /* liste livre */
+.catalogue div.autogrid5 { /* list book */
 	text-align: left;
 	position: relative;
 }
 
-.viewNew .book:hover{
+#main .catalogue .link p ,#main .catalogue .link p:after{
+	color:#53a1b8 ;
+}
+
+.catalogue .link{
+	display: block;
+}
+
+
+/** design book in previous catalogue **/
+.catalogue .book:hover{
 	transform: scale(1.1);
 	opacity: 0.7;
 }
-
-.viewNew .book figure img{
+.catalogue .book figure img{
 	width:123px;
 	min-height: 195px;
 	max-height: 195px;
 }
 
-#main .viewNew>a p ,#main .viewNew a p:after{
-	color:#53a1b8 ;
-}
-#main .viewNew>a p:hover, #main .viewNew>a p:hover:after{
-	color:#555;
-}
-.viewNew>a{
-	display: block;
-}
-
 
 /** catalogue random **/
 
-#discoverCatalogue,#indexCataDiscover{
-	background-color: #53a1b8;
+#discoverCatalogue{
 	background-color: #666;
-}
-
-#discoverCatalogue .books{
-	text-align: left;
-	position: relative;
 }
 
 #discoverCatalogue a, #discoverCatalogue a:after{
 	color:#349fff;
-}
-
-#discoverCatalogue .book:hover{
-	transform: scale(1.1);
-	opacity: 0.7;
 }
 
 
@@ -630,8 +604,8 @@ body{
 	width:61px;
 	min-height: 97px;
 	max-height: 97px;
-
 }
+
 #discoverCatalogue .book a p{
 	color:#ccc;
 	font-size:0.9em;
@@ -645,9 +619,6 @@ body{
 	text-indent: 55px;
 	text-align: justify;
 	color:white;
-	font-size:1.1em;
-	line-height: 20px;
-	font-family: "georgia","times" serif;
 }
 
 /**
@@ -660,25 +631,6 @@ body{
 
 #viewCatalogue h2{
 	color:#777;
-}
-
-
-
-#viewPushBook div, #viewLtBook div { /* liste livre */
-	text-align: left;
-	position: relative;
-}
-
-#viewCatalogue .book:hover{
-	transform: scale(1.1);
-	opacity: 0.7;
-}
-
-#viewCatalogue .book figure img{
-	width:123px;
-	min-height: 195px;
-	max-height: 195px;
-
 }
 
 #viewCatalogue #viewPushBook{
@@ -697,19 +649,16 @@ body{
 
 #viewCatalogue #viewDescription p{
 	text-indent: 50px;
-	font-size: 1.1em;
 	text-align: justify;
 }
 
 #viewCatalogue #viewLtBook {
 	background-color: #666;
-
 }
 
 #viewCatalogue #viewLtBook p{
 	color:white;
 }
-
 
  /**
  * 8.0 Responsive

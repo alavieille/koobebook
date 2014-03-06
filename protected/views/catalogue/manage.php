@@ -26,7 +26,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 		<?php endif; ?>
 		<div class="autogrid5 dropper">
 			<?php foreach ($pushBooks as $book) :?>
-				<?php $this->renderPartial('_viewBookManage', array('book'=>$book)); ?>
+				<?php $this->renderPartial('//book/_viewBookManage', array('book'=>$book)); ?>
 			<?php endforeach; ?>
 		</div>
 </section>
@@ -42,7 +42,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 		</div>
 		<?php foreach ($books as $book) :?>
 
-			<?php $this->renderPartial('_viewBookManage', array('book'=>$book)); ?>
+			<?php $this->renderPartial('//book/_viewBookManage', array('book'=>$book)); ?>
 		
 		<?php endforeach; ?>
 	</div>

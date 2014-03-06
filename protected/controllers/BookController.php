@@ -175,9 +175,6 @@ class BookController extends Controller
 			$model->title."-".$model->epub,
 			file_get_contents($fileDir.$model->id."-".$model->epub)
 			);
-
-		
-
 	}
 
 	/**

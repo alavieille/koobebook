@@ -71,8 +71,6 @@ class CatalogueController extends Controller
 		}
 		$model=new Catalogue;
 		$model->date_create = new CDbExpression('NOW()');
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Catalogue']))
 		{
@@ -98,8 +96,6 @@ class CatalogueController extends Controller
 		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 		if(is_null($model))
 			throw new CHttpException(400,"votre requête est invalide");
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Catalogue']))
 		{
@@ -121,8 +117,7 @@ class CatalogueController extends Controller
 		
 		$this->layout = "//layouts/private";
 		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
-
-
+		
 		if(is_null($model))
 			$this->redirect("create");
 		

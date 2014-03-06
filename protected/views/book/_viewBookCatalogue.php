@@ -1,3 +1,8 @@
+<?php 
+/**
+* Design of one book Catalogue
+**/
+?>
 <div class="book mb2">
 	<a class="" href="<?php echo Yii::app()->createUrl('book/view/',array( 'id'=>$book->id)); ?> " >
 	<?php 
@@ -13,6 +18,5 @@
 				<p class="pt1 w100 txtcenter"><?php echo $book->title;?></p>		
 			</figcaption>
 		</figure>
-	</a>
-	
+	</a>	
 </div>

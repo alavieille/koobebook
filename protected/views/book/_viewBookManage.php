@@ -1,3 +1,8 @@
+<?php 
+/**
+* Design of one book for manage this
+**/
+?>
 <div class="mb2 book" draggable="true" data-id="<?php echo $book->id ?>">
 	<p class="pa0 ma0 right mr1 pt1 btParam">paramètres</p>
 	<div class="param pa1">

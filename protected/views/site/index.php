@@ -52,8 +52,8 @@
 
 </section>
 
-<section id="indexCataDiscover">
-	<div class=" mw960p center pt1">
+<section id="discoverCatalogue">
+	<div class=" mw960p center pt1 catalogue">
 		<?php if(isset($randCata)) : ?>
 		<h3 class="mb2 ml3 mr3">À découvrir</h3>
 		<?php  $this->renderPartial('//catalogue/_viewDiscover', array('cata'=>$randCata)); ?>
