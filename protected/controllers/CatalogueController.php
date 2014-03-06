@@ -125,6 +125,7 @@ class CatalogueController extends Controller
 		$books = $model->books(array('condition'=>'push=0'));
 
 		$this->render('manage',array(
+			'catalogue' => $model,
 			'books' => $books,
 			'pushBooks' => $pushBooks
 			));

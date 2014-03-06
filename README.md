@@ -1,7 +1,6 @@
 ==TODO==
 
-* Ajouter plus d'info dans un livre (fiche technique)
-* Ajouter une photo Catalogue
+* Ajoute personalisation du texte catalogue
 * Top Téléchargement
 * Ajout de compte et catalogue fictif
 

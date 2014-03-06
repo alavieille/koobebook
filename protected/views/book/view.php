@@ -70,7 +70,7 @@
 		<section class="mw960p center">
 			<h4>Informations</h4>
 			<p>ISBN : <?php echo empty($model->isbn) ? "Inconnue" :  CHtml::encode($model->isbn); ?></p>
-			<p>Langue : <?php echo empty($model->language) ? "Inconnue" :  CHtml::encode($model->language); ?></p>
+			<p>Langue : <?php echo empty($model->language) ? "Inconnue" :  CHtml::encode(ucfirst($model->language)); ?></p>
 		</section>
 		
 	</div>

@@ -13,6 +13,17 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
     <div class="txtcenter flasherror pb2">
         <?php echo Yii::app()->user->getFlash('error'); ?>
     </div>
+	<nav class="center mw960p mb2">
+		<?php 
+			$this->widget('zii.widgets.CMenu',array(
+				'items'=>array(
+					array('label'=>'Voir mon catalogue', 'url'=>array('/catalogue/view/'.$catalogue->id),'linkOptions'=>array("class"=>"linkButton")),
+				),
+				'itemCssClass' => "pb1 inbl",
+				'htmlOptions' => array("class" => 'pl1')
+			));
+		?>
+	</nav>
 
 <section id="pushBook" class="w100 pa1 mb3">
 	<h4 class="pb1 mb1 w100">Ebooks à la une</h4>
