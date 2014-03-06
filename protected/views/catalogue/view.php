@@ -2,13 +2,15 @@
 /* @var $this CatalogueController */
 /* @var $model Catalogue */
 $this->pageTitle=Yii::app()->name . ' - Catalogue';
+
+
 ?>
 <section class="mod catalogue" id="viewCatalogue">
 	
 <h2 class="pa2 txtcenter">Catalogue de <?php echo $model->name; ?></h2>
 <div class="center mw960p">		
 	<?php if($isOwner) : ?>
-		<nav>
+		<nav class="mb2">
 			<?php 
 				$this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
@@ -57,7 +59,7 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 		<?php if (count($books) > 0) : ?>
 			<div class="autogrid5">
 			<?php foreach ($books as $book) :?>
-					<?php $this->renderPartial('//book/_viewBook', array('book'=>$book)); ?>
+					<?php $this->renderPartial('//book/_viewBookCatalogue', array('book'=>$book)); ?>
 			<?php endforeach; ?>
 			</div>
 		<?php else : ?>

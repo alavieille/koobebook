@@ -24,7 +24,7 @@ class CatalogueController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage'),
+				'actions'=>array('index','view','manage','new'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -170,13 +170,26 @@ class CatalogueController extends Controller
 	public function actionIndex()
 	{
 		$randCata = Catalogue::model()->findRandom();
-	
-		$newCata = array();
+		
+	//	var_dump($randCata->books);
 		$newCata = Catalogue::model()->findRandomNew($randCata->id);
 
 		$this->render('index',array(
 			'randCata'=> $randCata,
 			'newCata'=>$newCata,
+		));	
+
+	}
+
+	/**
+	* Show all new catalogue
+	**/
+	public function actionNew()
+	{
+		
+    	$allNewCata = Catalogue::model()->findAllNew();
+    	$this->render('new',array(
+			'newCata'=>$allNewCata,
 		));	
 
 	}

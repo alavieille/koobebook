@@ -5,7 +5,7 @@
 <?php endif; ?>
 <section id="presentation" class="line pt1">
 	<div class="pageCenter pa1">
-		<h2 class="logo txtcenter">e<span>Librairie</span></h2>
+		<h2 class="logo txtcenter">koob<span>ebook</span></h2>
 		<p class="txtcenter biggest mt0">Votre librairie Numérique</p>
 		<div class="grid">
 			<div class="grid3 mt2">
@@ -42,7 +42,7 @@
 	<div class=" mw960p center">
 		<?php if(count($newCata) > 0) : ?>
 			<section id="newCatalogue">
-				<h3 class="mb2 ml3 mr3">Nouveautés</h3>
+				<h3 class="mb2 ml1 mr3">Nouveautés</h3>
 				<?php foreach ($newCata as $cata) : ?>
 					<?php  $this->renderPartial('//catalogue/_viewNew', array('cata'=>$cata)); ?>
 				<?php endforeach; ?>
@@ -55,7 +55,7 @@
 <section id="discoverCatalogue">
 	<div class=" mw960p center pt1 catalogue">
 		<?php if(isset($randCata)) : ?>
-		<h3 class="mb2 ml3 mr3">À découvrir</h3>
+		<h3 class="mb2 ml1 mr3">À découvrir</h3>
 		<?php  $this->renderPartial('//catalogue/_viewDiscover', array('cata'=>$randCata)); ?>
 		<?php endif; ?>
 	</div>

@@ -84,13 +84,13 @@ class Catalogue extends CActiveRecord
 			'condition' => 't.description IS NOT NULL and t.id >=r2.id',
 			'order' => 't.id ASC',
 		));	*/
+		$criteria = new CDbCriteria();
+		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
+		$criteria->addCondition('t.description IS NOT NULL AND t.description != ""');
+		$criteria->order = 'rand()';
+		$criteria->together = true;
+		$res = Catalogue::model()->find($criteria);
 
-		$res = $this->with(array('books'=>array('joinType'=>'INNER JOIN',)))->find(array(
-			'select' => "*",
-			'condition' => 't.description IS NOT NULL AND t.description != "" ',
-			'order' => 'rand()',
-			'limit' => '1'
-		));
 		return $res;
 	
 	}
@@ -113,18 +113,16 @@ class Catalogue extends CActiveRecord
 
 		$conditionIgnoreId = "";
 		if($ignoreId != null) {
-			//$conditionIgnoreId = " AND t.id != ".$ignoreId;
+			$conditionIgnoreId = " AND t.id != ".$ignoreId;
 		}
 
-		$res = Catalogue::model()->with(array('books'=>array('joinType'=>'INNER JOIN')))->findAll(array(
-			'select' => "*",
-			//'alias' => 'r1',
-			//'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => ' DATEDIFF(NOW(),t.date_create) < 30'.$conditionIgnoreId,
-			'order' => 'rand()',
-			'together' => true,
-			'limit' => '2',
-		));
+		$criteria = new CDbCriteria();
+		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
+		$criteria->addCondition("DATEDIFF(NOW(),t.date_create) < 30".$conditionIgnoreId);
+		$criteria->order = 'rand()';
+		$criteria->limit = '2';
+		$criteria->together = true;
+		$res = Catalogue::model()->findAll($criteria);
 
 		$newCata  = array();
 		foreach ($res as $catalogue) {
@@ -142,6 +140,47 @@ class Catalogue extends CActiveRecord
 		return $newCata;
 
 	}
+
+	/**
+	* Select all Catalogue which was published there was less than one month
+	* @param $ignoreId 
+	* @return an Array of Catalogue
+	*/
+	public function findAllNew()
+	{		
+		/*$res = Catalogue::model()->findAll(array(
+			'select' => "*",
+			'alias' => 'r1',
+			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
+			'condition' => ' DATEDIFF(NOW(),r1.date_create) < 30 and r1.id >=r2.id',
+			'order' => 'rand()',
+			'limit' => '2'
+		));*/
+
+		
+		$criteria = new CDbCriteria();
+		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
+		$criteria->addCondition("DATEDIFF(NOW(),t.date_create) < 30");
+		$criteria->together = true;
+		$res = Catalogue::model()->findAll($criteria);
+
+		$newCata  = array();
+		foreach ($res as $catalogue) {
+			$arrayCata = array();
+			$arrayCata["catalogue"] = $catalogue;
+			if(count($catalogue->books(array('condition'=>'push=1'))) > 0) {
+				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=1'));
+			}
+			else {
+				$arrayCata["books"] = $catalogue->books(array('condition'=>'push=0','limit'=>5));
+			}
+			$newCata[] = $arrayCata;
+		}
+
+		return $newCata;
+
+	}
+
 
 	/**
 	* Return an Excerpt of catalogue Description

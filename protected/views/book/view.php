@@ -7,6 +7,22 @@
 
 <div id="viewBook" class="pt3 pb3">
 
+		<?php if($isOwner) : ?>
+			<nav class="center mw960p mb2">
+				<?php 
+					$this->widget('zii.widgets.CMenu',array(
+						'items'=>array(
+							array('label'=>'Modifier', 'url'=>array('/book/update/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
+							array('label'=>'Supprimer', 'url'=>array('/book/delete/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
+						
+						),
+						'itemCssClass' => "pb1 inbl",
+						'htmlOptions' => array("class" => 'pl1')
+					));
+
+				?>
+			</nav>
+		<?php endif; ?>
 
  	<?php
  		// select picture of cover
@@ -23,7 +39,7 @@
 		</div>
 
 		<div class="info mod tiny-w100">
-			<h2 class="pl1 mb0 title"><?php echo CHtml::encode($model->title); ?></h2>
+			<h2 class="pl1 mb0 title "><?php echo CHtml::encode($model->title); ?></h2>
 			<h4 class="pl1 mt1 mb0 author">De <?php echo CHtml::encode($model->author); ?></h4>
 			<?php if(! is_null($model->catalogue)) :?>
 				<p class="pl1 mt0 editor pt1">Edité par <a href="<?php echo Yii::app()->createUrl('catalogue/view/',array( 'id'=>$model->catalogueId));  ?>"><?php echo CHtml::encode($model->catalogue->name); ?> </a>
@@ -44,22 +60,6 @@
 	                                         'id'=>$model->id),array("class"=>"linkButton linkDown ")); ?>
 
 		</div>
-
-		<?php if($isOwner) : ?>
-			<nav class="mt1">
-				<?php 
-					$this->widget('zii.widgets.CMenu',array(
-						'items'=>array(
-							array('label'=>'Modifier', 'url'=>array('/book/update/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
-							array('label'=>'Supprimer', 'url'=>array('/book/delete/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
-						
-						),
-						'itemCssClass' => "pb1 inbl",
-					));
-
-				?>
-			</nav>
-		<?php endif; ?>
 	</div>
 
 	<div class="line mt3 description mb3 pa2">
@@ -68,5 +68,6 @@
 			<p><?php echo CHtml::encode($model->description); ?></p>
 		</section>
 	</div>
+
 
 </div>
