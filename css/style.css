@@ -516,7 +516,11 @@ body{
 	position: relative;
 	min-height: 310px;
 }
-
+#viewBook .subtitle{
+	font-size: 18px;
+	font-weight: normal;
+	++
+}
 #viewBook .linkDown{
 	position: absolute;
 	bottom: 55px;
@@ -548,6 +552,7 @@ body{
 #viewBook .description h4{
 	color:white;
 	font-size: 20px;
+	font-weight: normal;
 }
 
 #viewBook .description p{
@@ -557,7 +562,17 @@ body{
 	color:white;	
 
 }
- 
+
+#viewBook .more{
+	font-size: medium;
+}
+
+#viewBook .more h4{
+	color: #53a1b8;
+	border-bottom: 1px solid #53a1b8;
+	font-size: 25px;
+	font-weight: normal;
+}
 
  /**
  * 7.0 Catalogue
@@ -574,7 +589,7 @@ body{
 #indexCatalogue h3 , #newCatalogue h3, #discoverCatalogue h3{
 	color: #53a1b8;
 	border-bottom: 1px solid #53a1b8;
-		font-size: 25px;
+	font-size: 25px;
 	font-weight: normal;
 }
 

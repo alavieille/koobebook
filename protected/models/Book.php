@@ -42,14 +42,14 @@ class Book extends CActiveRecord
 		return array(
 			array('title, price, author, publication, description', 'required'),
 			array('isbn', 'numerical', 'integerOnly'=>true),
-			array('title, author', 'length', 'max'=>250),
+			array('title, author, subtitle', 'length', 'max'=>250),
 
 			array('price', 'length', 'max'=>10),
 			array('pictureFile', 'file', 'types'=>'jpg, gif, png',"allowEmpty"=>true),
 			array('epubFile', 'file', 'types'=>'epub','on'=>'insert'),
 			array('epubFile', 'file', 'types'=>'epub',"allowEmpty"=>true,'on'=>'update') ,
 
-			array('description date_create', 'safe'),
+			array('description date_create, language', 'safe'),
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -77,12 +77,14 @@ class Book extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'catalogueId' => 'Catalogue',
+			'subtitle' => 'Sous-titre',
 			'title' => 'Titre',
 			'price' => 'Prix (en €)',
 			'author' => 'Auteur',
 			'pictureFile' => 'Couverture',
 			'description' => 'Description',
 			'editor' => 'Editeur',
+			'language' => 'Langue',
 			'publication' => 'Date de publication',
 			'isbn' => 'ISBN',
 			'epubFile' => 'Fichier Epub',

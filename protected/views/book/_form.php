@@ -27,6 +27,12 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'subtitle'); ?>
+		<?php echo $form->textField($model,'subtitle'); ?>
+		<?php echo $form->error($model,'subtitle'); ?>
+	</div>
+
 	<div class="mod">
 		<div class="left w40 tiny-w100">
 			<div class="rowInput line pr1 ">
@@ -82,17 +88,25 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'publication'); ?>
 			</div>
 
+			<div class="rowInput w200p left  tiny-w100">
+				<?php echo $form->labelEx($model,'language'); ?> 
+				<?php echo $form->textField($model,'language'); ?>
+				<?php echo $form->error($model,'language'); ?>
+			</div>
+
+			<div class="rowInput w200p pr1 left tiny-w100">
+				<?php echo $form->labelEx($model,'price'); ?> 
+				<?php echo $form->textField($model,'price'); ?>
+				<?php echo $form->error($model,'price'); ?>
+			</div>
+
 			<div class="rowInput w200p left tiny-w100">
 				<?php echo $form->labelEx($model,'isbn'); ?>
 				<?php echo $form->textField($model,'isbn'); ?>
 				<?php echo $form->error($model,'isbn'); ?>
 			</div>
 
-			<div class="rowInput w200p tiny-w100">
-				<?php echo $form->labelEx($model,'price'); ?> 
-				<?php echo $form->textField($model,'price'); ?>
-				<?php echo $form->error($model,'price'); ?>
-			</div>
+
 		</div>
 	</div>
 	<div>

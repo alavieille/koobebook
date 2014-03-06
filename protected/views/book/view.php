@@ -40,6 +40,8 @@
 
 		<div class="info mod tiny-w100">
 			<h2 class="pl1 mb0 title "><?php echo CHtml::encode($model->title); ?></h2>
+			<h3 class="pl1 mt0 subtitle "><?php echo CHtml::encode($model->subtitle); ?></h2>
+			
 			<h4 class="pl1 mt1 mb0 author">De <?php echo CHtml::encode($model->author); ?></h4>
 			<?php if(! is_null($model->catalogue)) :?>
 				<p class="pl1 mt0 editor pt1">Edité par <a href="<?php echo Yii::app()->createUrl('catalogue/view/',array( 'id'=>$model->catalogueId));  ?>"><?php echo CHtml::encode($model->catalogue->name); ?> </a>
@@ -49,11 +51,7 @@
 				<p class="pl1 small">(L'editeur a supprimer ce ebook de son catalogue)</p>
 			<?php endif; ?>
 
-			<?php if(! is_null($model->isbn)) :?>
-				<p class="pl1"><?php echo CHtml::encode($model->getAttributeLabel('isbn')); ?> : <?php echo CHtml::encode($model->isbn); ?></p>
-			<?php endif;?>
-
-			
+		
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
 			<?php echo CHtml::link(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array('book/download',
@@ -62,11 +60,19 @@
 		</div>
 	</div>
 
-	<div class="line mt3 description mb3 pa2">
+	<div class="line mt3 description pa2">
 		<section class="mw960p center">
 			<h4><?php echo CHtml::encode($model->getAttributeLabel('description')); ?> : </h4>
 			<p><?php echo CHtml::encode($model->description); ?></p>
 		</section>
+	</div>
+	<div class="line mt1 mb3 pa2 more">
+		<section class="mw960p center">
+			<h4>Informations</h4>
+			<p>ISBN : <?php echo empty($model->isbn) ? "Inconnue" :  CHtml::encode($model->isbn); ?></p>
+			<p>Langue : <?php echo empty($model->language) ? "Inconnue" :  CHtml::encode($model->language); ?></p>
+		</section>
+		
 	</div>
 
 
