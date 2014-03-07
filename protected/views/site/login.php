@@ -11,7 +11,7 @@ $this->pageTitle=Yii::app()->name . ' - Login';
         <?php echo Yii::app()->user->getFlash('success'); ?>
     </div>
 <?php endif; ?>
-<div class="form w400p center" >
+<div class="form w400p center pa1" >
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,

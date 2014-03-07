@@ -33,7 +33,7 @@
  			$picture = $urlUpload.DIRECTORY_SEPARATOR.$model->id."-".$model->picture;
  		}
  	?>
- 	<div class="center mw960p ">
+ 	<div class="center mw960p mod">
 		<div class="left w200p mod tiny-w100" >
 			<img  src="<?php echo $picture; ?>" alt="Couverture du livre">
 		</div>

@@ -42,7 +42,9 @@
 	<div class=" mw960p center">
 		<?php if(count($newCata) > 0) : ?>
 			<section id="newCatalogue">
-				<h3 class="mb2 ml1 mr3">Nouveautés</h3>
+				<h3 class="mb2 mr3">
+					<a class=" w100 icon icon-bracket2 after" href="<?php echo Yii::app()->createUrl('catalogue/new/');  ?>">Nouveautés</a>
+				</h3>
 				<?php foreach ($newCata as $cata) : ?>
 					<?php  $this->renderPartial('//catalogue/_viewNew', array('cata'=>$cata)); ?>
 				<?php endforeach; ?>

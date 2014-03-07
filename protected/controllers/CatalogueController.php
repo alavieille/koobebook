@@ -115,6 +115,11 @@ class CatalogueController extends Controller
 	*/
 	public function actionManage(){
 		
+		// active upload for ckeditor with kcfinder
+		$_SESSION['KCFINDER']['disabled'] = false; // enables the file browser in the admin
+		$_SESSION['KCFINDER']['uploadURL'] = Yii::app()->baseUrl."/upload/"; // URL for the uploads folder
+		$_SESSION['KCFINDER']['uploadDir'] = Yii::app()->basePath."/../upload";
+
 		$this->layout = "//layouts/private";
 		$model= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 		

@@ -24,7 +24,25 @@
 
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('rows'=>20, 'cols'=>50)); ?>
+		<?php //echo $form->textArea($model,'description',array('rows'=>20, 'cols'=>50)); ?>
+		<?php $this->widget('ext.editMe.widgets.ExtEditMe', array(
+	    'model'=>$model,
+	    'attribute'=>'description',
+	    'filebrowserUploadUrl' => Yii::app()->baseUrl.'/lib/kcfinder/upload.php?type=files',
+	    'filebrowserImageUploadUrl' =>  Yii::app()->baseUrl.'/lib/kcfinder/upload.php?type=images',
+	    'toolbar' =>array(
+			array('Source','-','Maximize',),
+			array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat',),
+			array('Link', 'Unlink',	),
+			array('Image', 'HorizontalRule', 'SpecialChar'),'/',
+			array('Styles', 'Format', 'FontSize'),
+			array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-'),
+			),
+		'advancedTabs' => false,
+		'uiColor' => '#E5E3E2',
+		));
+ 		?>
+		
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 	
