@@ -5,8 +5,84 @@
 
 $(function(){
 	previewPictureDownload();
+	manageUpload();
+
 });
 
+var manageUpload = function(){
+
+
+	var arrayTypeFile = [];
+	$("#uploadInput ul li").click(function(){
+		var nameClass = $(this).attr('class').split(" ")[0];
+		$("#uploadInput input#"+nameClass).click();
+		return false;
+	});
+
+	$("#uploadInput input[type='file']").change(function(ev){
+
+		file = this.files[0];
+		$('#uploadInput .personalError').html("");
+
+		if( ! checkTypeFile(file.type)) {
+			$('#uploadInput .personalError').html("Seul les fichiers epub, mobi et pdf sont autorisés");
+			return;
+		}
+
+		/*if(!checkNumberFile(file.type,this.id)){
+
+			$('#uploadInput .personalError').html("Vous ne pouvez envoyer seulement un seul fichier par format");
+			return;
+		}*/
+
+
+		name = file.name.substr(0,7)+"..."+file.name.substr(-7,7);
+		$("#uploadInput ul li."+this.id).children("p").html(name);
+		$("#uploadInput ul li."+this.id).removeClass("epub mobi pdf");
+		switch(file.type)
+		{
+		case "application/epub+zip":
+		  	$("#uploadInput ul li."+this.id).addClass("epub");
+		  break;
+		case "application/x-mobipocket-ebook":
+		 	$("#uploadInput ul li."+this.id).addClass("mobi");
+		  break;
+		case "application/pdf":
+		 	$("#uploadInput ul li."+this.id).addClass("pdf");
+		  break;
+		}
+		arrayTypeFile[this.id] = file.type;
+		//$("#uploadInput ul li."+this.id).css("background-image","url('"+yii.urls.base+"/css/img/"+pictureBackground+"')");
+	});
+
+	var checkNumberFile = function (typeFile,id){
+		
+		for (var input in arrayTypeFile){
+			if(input != id && arrayTypeFile[input] == typeFile)
+				return false;
+		}
+		return true;
+		//console.log(arrayTypeFile[typeFile] != null);
+		//console.log(arrayTypeFile[typeFile]);
+	//	console.log( ( (arrayTypeFile[typeFile] != null) && (arrayTypeFile[typeFile]!=id)));
+		//return (arrayTypeFile[typeFile] != null);
+		//console.log(typeFile);
+		//console.log($.inArray("application/x-mobipocket-ebook",arrayTypeFile));
+		//console.log(arrayTypeFile[typeFile]!=id);
+
+		/*if(arrayTypeFile[typeFile] != null && arrayTypeFile[typeFile]!=id){
+			return false;
+		}
+		else{
+			return true;
+		}*/
+	}
+
+	var checkTypeFile = function(type){
+		arrayType = ["application/epub+zip","application/x-mobipocket-ebook","application/pdf"];
+		return ($.inArray(type,arrayType) >= 0 );
+	}
+}
 
 var previewPictureDownload = function(){
 

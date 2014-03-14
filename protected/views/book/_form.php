@@ -116,11 +116,28 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'description'); ?>
 		</div>
 
-		<div class="rowInput">
-			<?php echo $form->labelEx($model,'epubFile'); ?>
-			<p><?php echo (! is_null($model->epub))? "Changer de fichier epub :" : "" ?>  <?php echo CHtml::activeFileField($model,'epubFile'); ?></p>
-			<?php echo $form->error($model,'epubFile'); ?>
-		</div>
+		<div class="rowInput" id="uploadInput">
+			<?php echo $form->labelEx($model,'bookFile1'); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile1',array("class"=>"visually-hidden")); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile2',array("class"=>"visually-hidden")); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile3',array("class"=>"visually-hidden")); ?>
+			<ul class='mb1'>
+				<li class="Book_bookFile1" >
+					<p></p>
+				</li>
+				<li class="Book_bookFile2">
+					<p></p>
+				</li>
+				<li class="Book_bookFile3">
+					<p></p>
+				</li>
+			</ul>
+			
+			
+			<?php echo $form->error($model,'bookFile1'); ?>
+			<div class="personalError errorMessage"></div>
+		</div>		
+
 
 		<div class="rowInput buttons">
 			<?php echo CHtml::submitButton($model->isNewRecord ? 'Ajouter' : 'Modifier'); ?>

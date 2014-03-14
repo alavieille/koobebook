@@ -54,6 +54,18 @@ class BookController extends Controller
 			'isOwner'=>$this->isOwner($id)
 		));
 	}
+	
+	private function uploadFileBook($model)
+	{
+		
+		for ($i=1; $i <=3 ; $i++) { 
+			$param = 'bookFile'.$i;		
+			if(! is_null($model->$param)) {
+				$extension = $model->$param->extensionName;
+				$model->$extension=$extension.'.'.$extension;
+			}
+		}
+	}
 
 	/**
 	 * Creates a new model.
@@ -83,14 +95,14 @@ class BookController extends Controller
 
 			//upload couverture & ebook 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
-			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
+			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');
+			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');
+			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');
 
-			
+			$this->uploadFileBook($model);
+		
 			if(! is_null($model->pictureFile )) // si couverture
 				$model->picture="cover.".$model->pictureFile->extensionName;
-			 
-			if(! is_null($model->epubFile)) // si fichier format epub
-				$model->epub="epub.".$model->epubFile->extensionName;
 
 
 			if($model->save())
@@ -99,10 +111,15 @@ class BookController extends Controller
 
 				if(! is_null($model->pictureFile))
 					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
- 
-				if(! is_null($model->epubFile))
-					$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
+ 				
 
+				for ($i=1; $i <=3 ; $i++) { 
+					$param = 'bookFile'.$i;		
+					if(! is_null($model->$param)) {
+						$extension = $model->$param->extensionName;
+						$model->$param->saveAs($urlUpload.$model->id."-".$extension.'.'.$extension);
+					}
+				}
 				$this->redirect(array("catalogue/manage"));
 			}
 		}
@@ -110,6 +127,7 @@ class BookController extends Controller
 			'model'=>$model,
 		));
 	}
+
 
 	/**
 	 * Updates a particular model.
