@@ -2,6 +2,7 @@
 /* @var $this BookController */
 /* @var $model Book */
 $this->pageTitle=Yii::app()->name . ' - Mise à jour';
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
 ?>
 
 <h2 class="txtcenter pt2 pb1" >Mise à jour</h2>
@@ -40,7 +41,7 @@ $this->pageTitle=Yii::app()->name . ' - Mise à jour';
 				<?php 
 					if( ! is_null($model->picture)){
 						$fileDir = Yii::app()->request->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
-						$src = $fileDir.$model->id."-".$model->picture;
+						$src = $fileDir."book".DIRECTORY_SEPARATOR.$model->id.DIRECTORY_SEPARATOR.$model->id."-".$model->picture;
 					}
 					else
 						$src = Yii::app()->request->baseUrl."/images/default_cover.png";
@@ -117,7 +118,6 @@ $this->pageTitle=Yii::app()->name . ' - Mise à jour';
 		</div>
 		
 
-		<?php var_dump(isset($model->epub)) ?>
 		<div class="rowInput" id="uploadInput">
 			<?php echo $form->labelEx($model,'bookFile1'); ?>
 			<?php echo CHtml::activeFileField($model,'bookFile1',array("class"=>"visually-hidden")); ?>

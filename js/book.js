@@ -4,7 +4,10 @@
 ****/ 
 
 $(function(){
+	/** mange of preview */
 	previewPictureDownload();
+
+	/** mange upload of file */
 	manageUpload();
 
 });
@@ -13,11 +16,23 @@ var manageUpload = function(){
 
 
 	var arrayTypeFile = [];
-	$("#uploadInput ul li").click(function(){
+
+
+	$("#uploadInput ul li .close").click(function(){
+
+		$(this).next().val(1);
+		nameClass = $(this).parent().attr('class').split(" ")[0];
+		$(this).parent().removeClass().addClass(nameClass);
+		$(this).detach();
+		return false;
+	});
+
+	$("#uploadInput ul li:not(.noclick)").live('click',function(){
 		var nameClass = $(this).attr('class').split(" ")[0];
 		$("#uploadInput input#"+nameClass).click();
 		return false;
 	});
+
 
 	$("#uploadInput input[type='file']").change(function(ev){
 
@@ -29,11 +44,11 @@ var manageUpload = function(){
 			return;
 		}
 
-		/*if(!checkNumberFile(file.type,this.id)){
+		if(!checkNumberFile(file.type,this.id)){
 
 			$('#uploadInput .personalError').html("Vous ne pouvez envoyer seulement un seul fichier par format");
 			return;
-		}*/
+		}
 
 
 		name = file.name.substr(0,7)+"..."+file.name.substr(-7,7);
@@ -52,7 +67,6 @@ var manageUpload = function(){
 		  break;
 		}
 		arrayTypeFile[this.id] = file.type;
-		//$("#uploadInput ul li."+this.id).css("background-image","url('"+yii.urls.base+"/css/img/"+pictureBackground+"')");
 	});
 
 	var checkNumberFile = function (typeFile,id){
@@ -62,20 +76,6 @@ var manageUpload = function(){
 				return false;
 		}
 		return true;
-		//console.log(arrayTypeFile[typeFile] != null);
-		//console.log(arrayTypeFile[typeFile]);
-	//	console.log( ( (arrayTypeFile[typeFile] != null) && (arrayTypeFile[typeFile]!=id)));
-		//return (arrayTypeFile[typeFile] != null);
-		//console.log(typeFile);
-		//console.log($.inArray("application/x-mobipocket-ebook",arrayTypeFile));
-		//console.log(arrayTypeFile[typeFile]!=id);
-
-		/*if(arrayTypeFile[typeFile] != null && arrayTypeFile[typeFile]!=id){
-			return false;
-		}
-		else{
-			return true;
-		}*/
 	}
 
 	var checkTypeFile = function(type){

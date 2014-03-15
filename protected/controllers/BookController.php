@@ -55,6 +55,11 @@ class BookController extends Controller
 		));
 	}
 	
+
+	/**
+	* Manage upload of all format of ebook
+	* @param Object $model 
+	*/
 	private function uploadFileBook($model)
 	{
 		
@@ -109,15 +114,18 @@ class BookController extends Controller
 			{
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
+				if(! file_exists($urlUpload."/book/".$model->id)) {
+					mkdir($urlUpload."/book/".$model->id,0777,true);
+				}
 				if(! is_null($model->pictureFile))
-					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
+					$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);			
  				
 
 				for ($i=1; $i <=3 ; $i++) { 
 					$param = 'bookFile'.$i;		
 					if(! is_null($model->$param)) {
 						$extension = $model->$param->extensionName;
-						$model->$param->saveAs($urlUpload.$model->id."-".$extension.'.'.$extension);
+						$model->$param->saveAs($urlUpload."/book/".$model->id."/".$model->id."-".$extension.'.'.$extension);
 					}
 				}
 				$this->redirect(array("catalogue/manage"));
@@ -144,14 +152,13 @@ class BookController extends Controller
 		{
 			
 			$model->attributes=$_POST['Book'];
-			//var_dump($model);
 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
 
 			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');
 			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');
 			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');
-			//$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
+			
 
 			
 			if(! is_null($model->pictureFile )){
@@ -163,20 +170,20 @@ class BookController extends Controller
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 				
 				if(isset($_POST['Book']['deleteEpub']) and $_POST['Book']['deleteEpub']== 1) {
-					if(file_exists($urlUpload.$model->id."-".$model->epub))
-							unlink($urlUpload.$model->id."-".$model->epub);
+					if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$model->epub))
+							unlink($urlUpload."/book/".$model->id."/".$model->id."-".$model->epub);
 					$model->epub = null;
 				}
 
 				if(isset($_POST['Book']['deleteMobi']) and $_POST['Book']['deleteMobi']== 1) {
-					if(file_exists($urlUpload.$model->id."-".$model->mobi))
-							unlink($urlUpload.$model->id."-".$model->mobi);
+					if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$model->mobi))
+							unlink($urlUpload."/book/".$model->id."/".$model->id."-".$model->mobi);
 					$model->mobi = null;
 				}
 
 				if(isset($_POST['Book']['deletePdf']) and $_POST['Book']['deletePdf']== 1) {
-					if(file_exists($urlUpload.$model->id."-".$model->pdf))
-							unlink($urlUpload.$model->id."-".$model->pdf);
+					if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$model->pdf))
+							unlink($urlUpload."/book/".$model->id."/".$model->id."-".$model->pdf);
 					$model->pdf = null;
 				}
 
@@ -189,8 +196,8 @@ class BookController extends Controller
 					if(! is_null($model->pictureFile)){
 						$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);	
 						if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
-							if(file_exists($urlUpload.$model->id."-".$picturePrecSave))
-								unlink($urlUpload.$model->id."-".$picturePrecSave);
+							if(file_exists($urlUpload."/book/".$model->id."-".$picturePrecSave))
+								unlink($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave);
 					}
 
 					
@@ -198,7 +205,7 @@ class BookController extends Controller
 						$param = 'bookFile'.$i;		
 						if(! is_null($model->$param)) {
 							$extension = $model->$param->extensionName;
-							$model->$param->saveAs($urlUpload.$model->id."-".$extension.'.'.$extension);
+							$model->$param->saveAs($urlUpload."/book/".$model->id."/".$model->id."-".$extension.'.'.$extension);
 						}
 					}
 
@@ -224,7 +231,7 @@ class BookController extends Controller
 		
 		yii::app()->request->sendFile(
 			$model->title."-".$model->epub,
-			file_get_contents($fileDir.$model->id."-".$model->epub)
+			file_get_contents($fileDir."/book/".$model->id."-".$model->epub)
 			);
 	}
 

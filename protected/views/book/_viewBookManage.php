@@ -23,7 +23,7 @@
 		 $picture = yii::app()->baseUrl.DIRECTORY_SEPARATOR.'images/default_cover.png';
 		 if(! is_null($book->picture)){
 		 	$urlUpload = yii::app()->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload;
-		 	$picture = $urlUpload.DIRECTORY_SEPARATOR.$book->id."-".$book->picture;
+		 	$picture = $urlUpload.DIRECTORY_SEPARATOR."book/".$book->id."/".$book->id."-".$book->picture;
 		}
 	?>
 		<figure class="txtcenter  mt0 line">

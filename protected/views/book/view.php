@@ -30,7 +30,7 @@
  		$picture = yii::app()->baseUrl.DIRECTORY_SEPARATOR.'images/default_cover.png';
  		if(! is_null($model->picture)){
  			$urlUpload = yii::app()->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload;
- 			$picture = $urlUpload.DIRECTORY_SEPARATOR.$model->id."-".$model->picture;
+ 			$picture = $urlUpload.DIRECTORY_SEPARATOR."book/".$model->id."/".$model->id."-".$model->picture;
  		}
  	?>
  	<div class="center mw960p mod">

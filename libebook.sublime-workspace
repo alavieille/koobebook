@@ -4,6 +4,74 @@
 		"selected_items":
 		[
 			[
+				"add",
+				"addClass  (function)"
+			],
+			[
+				"fnt",
+				"font-size"
+			],
+			[
+				"delete",
+				"deleteEpub"
+			],
+			[
+				"remove",
+				"removeClass  (function)"
+			],
+			[
+				"back",
+				"background-image"
+			],
+			[
+				"type",
+				"typeFile"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"typ",
+				"typeFile"
+			],
+			[
+				"arra",
+				"arrayTypeFile"
+			],
+			[
+				"pic",
+				"pictureBackground"
+			],
+			[
+				"url",
+				"urls"
+			],
+			[
+				"chec",
+				"checkTypeFile"
+			],
+			[
+				"cl",
+				"click  (function)"
+			],
+			[
+				"book",
+				"bookFile1"
+			],
+			[
+				"change",
+				"changeUpload"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
 				"save",
 				"saveAs"
 			],
@@ -32,10 +100,6 @@
 				"epubFile  (variable)"
 			],
 			[
-				"bac",
-				"background"
-			],
-			[
 				"fr",
 				"form"
 			],
@@ -58,14 +122,6 @@
 			[
 				"ba",
 				"background"
-			],
-			[
-				"in",
-				"inline-block"
-			],
-			[
-				"arra",
-				"array"
 			],
 			[
 				"data",
@@ -128,10 +184,6 @@
 				"font-weight"
 			],
 			[
-				"back",
-				"background-color"
-			],
-			[
 				"b",
 				"border"
 			],
@@ -158,10 +210,6 @@
 			[
 				"min",
 				"min-width"
-			],
-			[
-				"book",
-				"books"
 			],
 			[
 				"da",
@@ -212,14 +260,6 @@
 	"buffers":
 	[
 		{
-			"file": "protected/models/Book.php",
-			"settings":
-			{
-				"buffer_size": 4466,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "js/catalogue.js",
 			"settings":
 			{
@@ -231,42 +271,41 @@
 			"file": "js/book.js",
 			"settings":
 			{
-				"buffer_size": 1737,
+				"buffer_size": 4107,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<?php\n/* @var $this BookController */\n/* @var $model Book */\n/* @var $form CActiveForm */\n\nYii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);\n?>\n				\n<div class=\"form w100 center\">\n\n<?php $form=$this->beginWidget('CActiveForm', array(\n	'id'=>'book-form',\n	// Please note: When you enable ajax validation, make sure the corresponding\n	// controller action is handling ajax validation correctly.\n	// There is a call to performAjaxValidation() commented in generated controller code.\n	// See class documentation of CActiveForm for details on this.\n	'htmlOptions' => array('enctype' => 'multipart/form-data'),\n	'enableClientValidation'=>true,\n\n)); ?>\n\n	<?php echo $form->errorSummary($model); ?>\n\n	<div class=\"rowInput\">\n		<?php echo $form->labelEx($model,'title'); ?>\n		<?php echo $form->textField($model,'title'); ?>\n		<?php echo $form->error($model,'title'); ?>\n	</div>\n\n	<div class=\"row\">\n		<?php echo $form->label($model,'subtitle'); ?>\n		<?php echo $form->textField($model,'subtitle'); ?>\n		<?php echo $form->error($model,'subtitle'); ?>\n	</div>\n\n	<div class=\"mod\">\n		<div class=\"left w40 tiny-w100\">\n			<div class=\"rowInput line pr1 \">\n				<?php echo $form->labelEx($model,'pictureFile'); ?>\n				<?php \n					if( ! is_null($model->picture)){\n						$fileDir = Yii::app()->request->baseUrl.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;\n						$src = $fileDir.$model->id.\"-\".$model->picture;\n					}\n					else\n						$src = Yii::app()->request->baseUrl.\"/images/default_cover.png\";\n				?>\n				<img class=\"mt1 mb1 center visually-hidden\" data-previewDownload=\"preview\" id=\"previous_cover\" src=\"<?php echo $src; ?>\" alt=\"apercu de la couverture\" >\n				<?php echo CHtml::activeFileField($model,'pictureFile',array(\"data-previewDownload\"=>\"input\")); ?>\n				<?php echo $form->error($model,'pictureFile') ?>\n				<div data-previewdownload=\"error\" class=\"errorMessage\" id=\"Book_pictureFile_em_\"></div>\n				<nav class=\"inputPicture\"> \n					<a href=\"#\" class=\"inbl mt1 visually-hidden\" data-previewDownload=\"button\" >Modifier</a>\n					<a href=\"#\" class=\"inbl mt1 visually-hidden\" data-previewDownload=\"delete\" >Supprimer</a>\n				</nav>						\n			</div>\n		</div>\n		<div class=\"left w60 tiny-w100\">\n			<div class=\"rowInput\">\n				<?php echo $form->labelEx($model,'author'); ?>\n				<?php echo $form->textField($model,'author'); ?>\n				<?php echo $form->error($model,'author'); ?>\n			</div>\n\n			<div class=\"rowInput\">\n				<?php echo $form->labelEx($model,'editor'); ?>\n				<?php //echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>\n				<p><?php echo $model->catalogue->name ?></p>\n				<?php echo $form->error($model,'editor'); ?>\n			</div>\n\n			<div class=\"rowInput w200p left pr1 tiny-w100\">\n				<?php echo $form->labelEx($model,'publication'); ?>\n				<?php\n					$this->widget('zii.widgets.jui.CJuiDatePicker', array(\n				    'model' => $model,\n				    'attribute' => 'publication',\n				    'language' => 'fr',\n				    'options' => array(\n						'dateFormat'=>'yy-mm-dd',\n				    	),\n				    'htmlOptions' => array(\n				       // 'class' => 'visually-hidden'  // textField maxlength\n				    ),\n				));\n\n				?>\n				<?php echo $form->error($model,'publication'); ?>\n			</div>\n\n			<div class=\"rowInput w200p left  tiny-w100\">\n				<?php echo $form->labelEx($model,'language'); ?> \n				<?php echo $form->textField($model,'language'); ?>\n				<?php echo $form->error($model,'language'); ?>\n			</div>\n\n			<div class=\"rowInput w200p pr1 left tiny-w100\">\n				<?php echo $form->labelEx($model,'price'); ?> \n				<?php echo $form->textField($model,'price'); ?>\n				<?php echo $form->error($model,'price'); ?>\n			</div>\n\n			<div class=\"rowInput w200p left tiny-w100\">\n				<?php echo $form->labelEx($model,'isbn'); ?>\n				<?php echo $form->textField($model,'isbn'); ?>\n				<?php echo $form->error($model,'isbn'); ?>\n			</div>\n\n\n		</div>\n	</div>\n	<div>\n		<div class=\"rowInput\">\n				<?php echo $form->labelEx($model,'description'); ?>\n				<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>\n				<?php echo $form->error($model,'description'); ?>\n		</div>\n\n		<div class=\"rowInput\" id=\"uploadInput\">\n			<?php echo $form->labelEx($model,'bookFile1'); ?>\n			ul>li*3\n			<?php echo CHtml::activeFileField($model,'bookFile1'); ?>\n			<?php echo CHtml::activeFileField($model,'bookFile2'); ?>\n			<?php echo CHtml::activeFileField($model,'bookFile3'); ?>\n			<?php echo $form->error($model,'bookFile1'); ?>\n		</div>		\n\n\n		<div class=\"rowInput buttons\">\n			<?php echo CHtml::submitButton($model->isNewRecord ? 'Ajouter' : 'Modifier'); ?>\n		</div>\n	</div>\n\n\n\n<?php $this->endWidget(); ?>\n\n</div><!-- form -->\n\n",
 			"file": "protected/views/book/_form.php",
-			"file_size": 4686,
-			"file_write_time": 130390348348622750,
 			"settings":
 			{
-				"buffer_size": 4697,
+				"buffer_size": 5006,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/amaury/21004281/www-dev/M1/Dev2/config/config.php",
+			"file": "protected/views/book/update.php",
 			"settings":
 			{
-				"buffer_size": 613,
+				"buffer_size": 5705,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/var/www/www-dev/dev2/developpement/dump.sql",
+			"contents": "[SideBarGit@SublimeText] \nTo git@github.com:amaurylavieille/libebook.git\n ! [rejected]        1.0-catalogue -> 1.0-catalogue (fetch first)\nerror: failed to push some refs to 'git@github.com:amaurylavieille/libebook.git'\nhint: Updates were rejected because the remote contains work that you do\nhint: not have locally. This is usually caused by another repository pushing\nhint: to the same ref. You may want to first merge the remote changes (e.g.,\nhint: 'git pull') before pushing again.\nhint: See the 'Note about fast-forwards' in 'git push --help' for details.",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
+				"buffer_size": 561,
+				"line_ending": "Unix",
+				"name": "[SideBarGit@SublimeText]",
+				"scratch": true
 			}
 		},
 		{
-			"file": "protected/data/schema.mysql.sql",
+			"file": "protected/models/Book.php",
 			"settings":
 			{
-				"buffer_size": 1444,
+				"buffer_size": 5225,
 				"line_ending": "Unix"
 			}
 		},
@@ -274,7 +313,7 @@
 			"file": "protected/controllers/BookController.php",
 			"settings":
 			{
-				"buffer_size": 8138,
+				"buffer_size": 9266,
 				"line_ending": "Unix"
 			}
 		},
@@ -282,7 +321,7 @@
 			"file": "css/style.css",
 			"settings":
 			{
-				"buffer_size": 12105,
+				"buffer_size": 13092,
 				"line_ending": "Unix"
 			}
 		}
@@ -359,6 +398,13 @@
 	},
 	"file_history":
 	[
+		"/var/www/www-dev/libebook/upload/68-pdf.pdf",
+		"/var/www/www-dev/libebook/css/knacss.css",
+		"/var/www/www-dev/libebook/css/style.css",
+		"/var/www/www-dev/libebook/protected/data/schema.mysql.sql",
+		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
+		"/home/amaury/21004281/www-dev/M1/Dev2/config/config.php",
+		"/var/www/www-dev/dev2/developpement/dump.sql",
 		"/var/www/www-dev/libebook/README.md",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_form.php",
 		"/var/www/www-dev/libebook/protected/views/site/login.php",
@@ -371,13 +417,11 @@
 		"/var/www/www-dev/libebook/protected/views/book/view.php",
 		"/var/www/www-dev/libebook/protected/views/book/_search.php",
 		"/var/www/www-dev/libebook/protected/views/book/_form.php",
-		"/var/www/www-dev/libebook/css/style.css",
 		"/var/www/www-dev/libebook/protected/views/site/index.php",
 		"/var/www/www-dev/libebook/protected/views/layouts/main.php",
 		"/var/www/www-dev/libebook/protected/extensions/editMe/vendors/CKEditor/contents.css",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_viewDiscover.php",
 		"/var/www/www-dev/libebook/css/contents.css",
-		"/var/www/www-dev/libebook/protected/data/schema.mysql.sql",
 		"/var/www/www-dev/libebook/protected/models/Catalogue.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/new.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/view.php",
@@ -385,7 +429,6 @@
 		"/var/www/www-dev/libebook/protected/config/main.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_viewNew.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_view.php",
-		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
 		"/var/www/www-dev/libebook/css/knacss_save.css",
 		"/var/www/www-dev/libebook/protected/views/book/admin.php",
 		"/var/www/www-dev/libebook/protected/views/book/_view.php",
@@ -397,7 +440,6 @@
 		"/var/www/www-dev/test/index.php",
 		"/var/www/www-dev/libebook/protected/views/book/_viewBook.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_viewBook.php",
-		"/var/www/www-dev/libebook/css/knacss.css",
 		"/var/www/www-dev/libebook/css/form.css",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_viewBookManage.php",
 		"/var/www/www-dev/libebook/protected/controllers/SiteController.php",
@@ -429,6 +471,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			");\n",
+			"						\n",
+			"' ",
+			");\n",
+			"5px",
+			"		\n",
+			"());\n",
 			"div",
 			"subtitle",
 			"linkButton",
@@ -456,144 +505,11 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "protected/models/Book.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4466,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1273,
-								1273
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"sublime_auto_complete": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 46.0,
-						"translation.y": 674.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "js/catalogue.js",
 					"semi_transient": false,
 					"settings":
@@ -605,8 +521,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								335,
+								335
 							]
 						],
 						"settings":
@@ -615,27 +531,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 34.0,
+						"translation.y": 782.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "js/book.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1737,
+						"buffer_size": 4107,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								208,
-								208
+								1047,
+								1047
 							]
 						],
 						"settings":
@@ -747,28 +663,28 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 357.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "protected/views/book/_form.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4697,
+						"buffer_size": 5006,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4507,
-								4507
+								4928,
+								4928
 							]
 						],
 						"settings":
@@ -880,28 +796,28 @@
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 1674.0,
+						"translation.x": 45.0,
+						"translation.y": 2099.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "/home/amaury/21004281/www-dev/M1/Dev2/config/config.php",
+					"buffer": 3,
+					"file": "protected/views/book/update.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 613,
+						"buffer_size": 5705,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								587,
-								587
+								5629,
+								5629
 							]
 						],
 						"settings":
@@ -1010,35 +926,34 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 45.0,
+						"translation.y": 2150.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/var/www/www-dev/dev2/developpement/dump.sql",
+					"buffer": 4,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 561,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								102,
+								487
 							]
 						],
 						"settings":
 						{
+							"auto_name": "[SideBarGit@SublimeText]",
 							"codeintel": true,
 							"codeintel_config":
 							{
@@ -1143,7 +1058,8 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/SQL/SQL.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1153,154 +1069,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "protected/data/schema.mysql.sql",
+					"buffer": 5,
+					"file": "protected/models/Book.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1444,
+						"buffer_size": 5225,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1444,
-								1444
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"sublime_auto_complete": true,
-							"syntax": "Packages/SQL/SQL.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 59.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "protected/controllers/BookController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8138,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2756,
-								2756
+								4218,
+								4218
 							]
 						],
 						"settings":
@@ -1413,27 +1195,166 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1507.0,
+						"translation.y": 2217.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 4,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
-					"buffer": 8,
-					"file": "css/style.css",
+					"buffer": 6,
+					"file": "protected/controllers/BookController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12105,
+						"buffer_size": 9266,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5732,
-								5732
+								5424,
+								5424
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 174.0,
+						"translation.y": 1622.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "css/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5828,
+								5828
 							]
 						],
 						"settings":
@@ -1546,17 +1467,12 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6199.0,
+						"translation.y": 6150.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -1588,7 +1504,7 @@
 		"cols":
 		[
 			0.0,
-			0.849448992918,
+			0.549154586637,
 			1.0
 		],
 		"rows":
