@@ -142,6 +142,12 @@ class Book extends CActiveRecord
 	protected function afterValidate()
 	{
 		
+
+		if($this->epub == null && $this->mobi == null && $this->pdf == null ) {
+				$this->addError("bookFile1","Vous devez ajouter au moins un format de ebook");
+			return false;
+		}
+
 		for ($i=1; $i <=3 ; $i++) { 
 			$param = 'bookFile'.$i;
 			$file = $this->$param;

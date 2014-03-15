@@ -140,7 +140,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 
 
 		<div class="rowInput buttons">
-			<?php echo CHtml::submitButton($model->isNewRecord ? 'Ajouter' : 'Modifier'); ?>
+			<?php echo CHtml::submitButton('Ajouter'); ?>
 		</div>
 	</div>
 

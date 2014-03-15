@@ -142,35 +142,68 @@ class BookController extends Controller
 
 		if(isset($_POST['Book']))
 		{
+			
 			$model->attributes=$_POST['Book'];
-
+			//var_dump($model);
 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
-			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
+
+			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');
+			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');
+			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');
+			//$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
 
 			
 			if(! is_null($model->pictureFile )){
 				$picturePrecSave = $model->picture; // ancienne couverture 
 				$model->picture = "cover.".$model->pictureFile->extensionName;
 			}
+			if($model->validate()) {
 
-			if(! is_null($model->epubFile))
-				$model->epub="epub.".$model->epubFile->extensionName;
-
-			if($model->save())
-			{
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
-
-				if(! is_null($model->pictureFile)){
-					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);	
-
-					if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
-						unlink($urlUpload.$model->id."-".$picturePrecSave);
+				
+				if(isset($_POST['Book']['deleteEpub']) and $_POST['Book']['deleteEpub']== 1) {
+					if(file_exists($urlUpload.$model->id."-".$model->epub))
+							unlink($urlUpload.$model->id."-".$model->epub);
+					$model->epub = null;
 				}
-				if(! is_null($model->epubFile))
-					$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
 
-				$this->redirect(array('view','id'=>$model->id));
+				if(isset($_POST['Book']['deleteMobi']) and $_POST['Book']['deleteMobi']== 1) {
+					if(file_exists($urlUpload.$model->id."-".$model->mobi))
+							unlink($urlUpload.$model->id."-".$model->mobi);
+					$model->mobi = null;
+				}
+
+				if(isset($_POST['Book']['deletePdf']) and $_POST['Book']['deletePdf']== 1) {
+					if(file_exists($urlUpload.$model->id."-".$model->pdf))
+							unlink($urlUpload.$model->id."-".$model->pdf);
+					$model->pdf = null;
+				}
+
+				$this->uploadFileBook($model);
+		
+				if($model->save())
+				{
+					
+
+					if(! is_null($model->pictureFile)){
+						$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);	
+						if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
+							if(file_exists($urlUpload.$model->id."-".$picturePrecSave))
+								unlink($urlUpload.$model->id."-".$picturePrecSave);
+					}
+
+					
+					for ($i=1; $i <=3 ; $i++) { 
+						$param = 'bookFile'.$i;		
+						if(! is_null($model->$param)) {
+							$extension = $model->$param->extensionName;
+							$model->$param->saveAs($urlUpload.$model->id."-".$extension.'.'.$extension);
+						}
+					}
+
+					$this->redirect(array('view','id'=>$model->id));
+				}
 			}
 		}
 
