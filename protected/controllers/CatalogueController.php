@@ -177,8 +177,8 @@ class CatalogueController extends Controller
 	{
 		$randCata = Catalogue::model()->findRandom();
 		
-	//	var_dump($randCata->books);
-		$newCata = Catalogue::model()->findRandomNew($randCata->id);
+
+		$newCata = Catalogue::model()->findRandomNew($randCata);
 
 		$this->render('index',array(
 			'randCata'=> $randCata,

@@ -97,10 +97,10 @@ class Catalogue extends CActiveRecord
 
 	/**
 	* Select two random Catalogue which was published there was less than one month
-	* @param $ignoreId 
+	* @param Catalogue $ignoreCatalogue
 	* @return an Array of Catalogue
 	*/
-	public function findRandomNew($ignoreId = null)
+	public function findRandomNew($ignoreCAtalogue = null)
 	{		
 		/*$res = Catalogue::model()->findAll(array(
 			'select' => "*",
@@ -110,10 +110,10 @@ class Catalogue extends CActiveRecord
 			'order' => 'rand()',
 			'limit' => '2'
 		));*/
-
+	
 		$conditionIgnoreId = "";
-		if($ignoreId != null) {
-			$conditionIgnoreId = " AND t.id != ".$ignoreId;
+		if($ignoreCAtalogue != null) {
+			$conditionIgnoreId = " AND t.id != ".$ignoreCAtalogue->id;
 		}
 
 		$criteria = new CDbCriteria();

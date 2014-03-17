@@ -573,14 +573,11 @@ body{
 #viewBook .subtitle{
 	font-size: 18px;
 	font-weight: normal;
-	++
 }
+
 #viewBook .linkDown{
-	position: absolute;
-	bottom: 55px;
-	width:150px;
-	font-size: 1.2em;
-	margin-top: 30px;
+	display: inline-block;
+	margin-top: 0;
 }
 
 #viewBook .author{
@@ -864,11 +861,5 @@ body{
 		padding-left: 0;
 	}
 
-	#viewBook .linkDown{
-		position: relative;
-		bottom: 0;
-		margin: 0 auto;
-		margin-top: 10px;
-	}
 
 }

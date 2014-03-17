@@ -2,11 +2,16 @@
 /* @var $this BookController */
 /* @var $model Book */
 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
 ?>
 
 
 <div id="viewBook" class="pt3 pb3">
-
+		<?php if(Yii::app()->user->hasFlash('success')):?>
+		    <div class="txtcenter flashsuccess pb2">
+		        <?php echo Yii::app()->user->getFlash('success'); ?>
+		    </div>
+		<?php endif; ?>
 		<?php if($isOwner) : ?>
 			<nav class="center mw960p mb2">
 				<?php 
@@ -33,12 +38,12 @@
  			$picture = $urlUpload.DIRECTORY_SEPARATOR."book/".$model->id."/".$model->id."-".$model->picture;
  		}
  	?>
- 	<div class="center mw960p mod">
+ 	<div class="center mw960p">
 		<div class="left w200p mod tiny-w100" >
 			<img  src="<?php echo $picture; ?>" alt="Couverture du livre">
 		</div>
 
-		<div class="info mod tiny-w100">
+		<div class="info tiny-w100">
 			<h2 class="pl1 mb0 title "><?php echo CHtml::encode($model->title); ?></h2>
 			<h3 class="pl1 mt0 subtitle "><?php echo CHtml::encode($model->subtitle); ?></h2>
 			
@@ -54,10 +59,16 @@
 		
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
-			<?php echo CHtml::link(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array('book/download',
-	                                         'id'=>$model->id),array("class"=>"linkButton linkDown ")); ?>
-
+			<div class="form mt2 pl1">
+				<?php echo CHtml::beginForm(array("download",'id'=>$model->id)); ?>
+				 <?php echo CHtml::submitButton(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array("class"=>"inbl linkButton linkDown ")); ?> 
+				<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
+				<?php echo CHtml::endForm(); ?>
+			</div>
+			<?php // echo CHtml::link(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array('book/download',
+	                                        // 'id'=>$model->id),array("class"=>"linkButton linkDown ")); ?>
 		</div>
+
 	</div>
 
 	<div class="line mt3 description pa2">

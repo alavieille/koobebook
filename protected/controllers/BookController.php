@@ -48,9 +48,19 @@ class BookController extends Controller
 	public function actionView($id)
 	{
 		$model = $this->loadModel($id);
-
+		$format = array();
+		if(isset($model->epub)) {
+			$format["epub"] = "Epub";
+		}
+		if(isset($model->mobi)) {
+			$format["mobi"] = "Mobi";
+		}
+		if(isset($model->pdf)) {
+			$format["pdf"] = "PDF";
+		}
 		$this->render('view',array(
 			'model'=>$model,
+			'format'=>$format,
 			'isOwner'=>$this->isOwner($id)
 		));
 	}
@@ -194,9 +204,9 @@ class BookController extends Controller
 					
 
 					if(! is_null($model->pictureFile)){
-						$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);	
+						$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);	
 						if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
-							if(file_exists($urlUpload."/book/".$model->id."-".$picturePrecSave))
+							if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave))
 								unlink($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave);
 					}
 
@@ -226,13 +236,24 @@ class BookController extends Controller
 	public function actionDownload($id)
 	{
 		
+		if( ! isset($_POST["format"])) {
+			throw new CHttpException(400,"votre requête est invalide");
+		}
 		$model=$this->loadModel($id);
 		$fileDir = Yii::app()->getBasePath().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
-		
-		yii::app()->request->sendFile(
-			$model->title."-".$model->epub,
-			file_get_contents($fileDir."/book/".$model->id."-".$model->epub)
-			);
+
+		$format = $_POST['format'];
+		$file = $fileDir."/book/".$model->id.'/'.$model->id."-".$model->$format;
+		if(file_exists($file)) {
+			yii::app()->request->sendFile(
+				$model->title."-".$model->$format ,
+				file_get_contents($file)
+				);
+		}
+		else {
+			yii::app()->user->setFlash("error","Le fichier demandé n'existe pas");
+			Yii::app()->getController()->redirect(array('book/view/'.$model->id));
+		}
 	}
 
 	/**

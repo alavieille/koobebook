@@ -26,7 +26,7 @@ class SiteController extends Controller
 		$randCata = Catalogue::model()->findRandom();
 	
 		$newCata = array();
-		$newCata = Catalogue::model()->findRandomNew($randCata->id);
+		$newCata = Catalogue::model()->findRandomNew($randCata);
 
 
 		$this->render('index',array(
