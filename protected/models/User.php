@@ -13,8 +13,8 @@
 class User extends CActiveRecord
 {
 	
-
 	public $passwordConfirm;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -48,14 +48,14 @@ class User extends CActiveRecord
 	/**
 	 * @return array relational rules.
 	 */
-	/*public function relations()
+	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
 			'catalogue' => array(self::HAS_ONE, 'Catalogue', 'userId'),
 		);
-	}*/
+	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)

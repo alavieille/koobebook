@@ -27,6 +27,12 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'subtitle'); ?>
+		<?php echo $form->textField($model,'subtitle'); ?>
+		<?php echo $form->error($model,'subtitle'); ?>
+	</div>
+
 	<div class="mod">
 		<div class="left w40 tiny-w100">
 			<div class="rowInput line pr1 ">
@@ -56,7 +62,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'author'); ?>
 			</div>
 
-	
+			<div class="rowInput">
+				<?php echo $form->labelEx($model,'editor'); ?>
+				<?php //echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>
+				<p><?php echo $model->catalogue->name ?></p>
+				<?php echo $form->error($model,'editor'); ?>
+			</div>
+
 			<div class="rowInput w200p left pr1 tiny-w100">
 				<?php echo $form->labelEx($model,'publication'); ?>
 				<?php
@@ -76,17 +88,25 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'publication'); ?>
 			</div>
 
+			<div class="rowInput w200p left  tiny-w100">
+				<?php echo $form->labelEx($model,'language'); ?> 
+				<?php echo $form->textField($model,'language'); ?>
+				<?php echo $form->error($model,'language'); ?>
+			</div>
+
+			<div class="rowInput w200p pr1 left tiny-w100">
+				<?php echo $form->labelEx($model,'price'); ?> 
+				<?php echo $form->textField($model,'price'); ?>
+				<?php echo $form->error($model,'price'); ?>
+			</div>
+
 			<div class="rowInput w200p left tiny-w100">
 				<?php echo $form->labelEx($model,'isbn'); ?>
 				<?php echo $form->textField($model,'isbn'); ?>
 				<?php echo $form->error($model,'isbn'); ?>
 			</div>
 
-			<div class="rowInput w200p tiny-w100">
-				<?php echo $form->labelEx($model,'price'); ?> 
-				<?php echo $form->textField($model,'price'); ?>
-				<?php echo $form->error($model,'price'); ?>
-			</div>
+
 		</div>
 	</div>
 	<div>
@@ -96,14 +116,31 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'description'); ?>
 		</div>
 
-		<div class="rowInput">
-			<?php echo $form->labelEx($model,'epubFile'); ?>
-			<p><?php echo (! is_null($model->epub))? "Changer de fichier epub :" : "" ?>  <?php echo CHtml::activeFileField($model,'epubFile'); ?></p>
-			<?php echo $form->error($model,'epubFile'); ?>
-		</div>
+		<div class="rowInput" id="uploadInput">
+			<?php echo $form->labelEx($model,'bookFile1'); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile1',array("class"=>"visually-hidden")); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile2',array("class"=>"visually-hidden")); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile3',array("class"=>"visually-hidden")); ?>
+			<ul class='mb1'>
+				<li class="Book_bookFile1" >
+					<p></p>
+				</li>
+				<li class="Book_bookFile2">
+					<p></p>
+				</li>
+				<li class="Book_bookFile3">
+					<p></p>
+				</li>
+			</ul>
+			
+			
+			<?php echo $form->error($model,'bookFile1'); ?>
+			<div class="personalError errorMessage"></div>
+		</div>		
+
 
 		<div class="rowInput buttons">
-			<?php echo CHtml::submitButton($model->isNewRecord ? 'Ajouter' : 'Modifier'); ?>
+			<?php echo CHtml::submitButton('Ajouter'); ?>
 		</div>
 	</div>
 

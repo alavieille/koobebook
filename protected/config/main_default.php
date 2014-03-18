@@ -87,6 +87,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'amaury.lavieille@gmail.com',
+		// name of folder for upload ebook and cover
 		'folder_upload'=>'upload',
 	),
 );

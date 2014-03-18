@@ -11,7 +11,6 @@ class BookController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -27,9 +26,14 @@ class BookController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'download'),
+			array('allow', // allow authenticated user 
+				'actions'=>array('create', 'download'),
 				'users'=>array('@'),
+			),
+			array('allow',
+				'actions'=>array('update','delete','confirmDelete','togglePush'),
+				'users'=>array('@'),
+				'expression'=> 'Yii::app()->controller->isOwnerRules()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -43,9 +47,39 @@ class BookController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+		$format = array();
+		if(isset($model->epub)) {
+			$format["epub"] = "Epub";
+		}
+		if(isset($model->mobi)) {
+			$format["mobi"] = "Mobi";
+		}
+		if(isset($model->pdf)) {
+			$format["pdf"] = "PDF";
+		}
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'format'=>$format,
+			'isOwner'=>$this->isOwner($id)
 		));
+	}
+	
+
+	/**
+	* Manage upload of all format of ebook
+	* @param Object $model 
+	*/
+	private function uploadFileBook($model)
+	{
+		
+		for ($i=1; $i <=3 ; $i++) { 
+			$param = 'bookFile'.$i;		
+			if(! is_null($model->$param)) {
+				$extension = $model->$param->extensionName;
+				$model->$extension=$extension.'.'.$extension;
+			}
+		}
 	}
 
 	/**
@@ -59,52 +93,60 @@ class BookController extends Controller
 		$model=new Book;
 		//default value
 		$model->price = 0;
+		$model->date_create = new CDbExpression('NOW()');
 		// recherche catalogue lié
-		//$catalogue = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		$catalogue = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 	
 
-		/*if(is_null($catalogue)){
+		if(is_null($catalogue)){
 			$this->redirect(array('catalogue/create'));
-		}*/
+		}
 
-		/*$model->editor = $catalogue->name;
-		$model->catalogueId = $catalogue->id;*/
 
-		
-		$model->catalogueId = 5;
+		$model->catalogueId = $catalogue->id;
 
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
 
+			//upload couverture & ebook 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
+			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');
+			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');
+			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');
 
-			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
-
-			
-			if(! is_null($model->pictureFile ))
+			$this->uploadFileBook($model);
+		
+			if(! is_null($model->pictureFile )) // si couverture
 				$model->picture="cover.".$model->pictureFile->extensionName;
-			
-			if(! is_null($model->epubFile))
-				$model->epub="epub.".$model->epubFile->extensionName;
 
 
 			if($model->save())
 			{
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
+				if(! file_exists($urlUpload."/book/".$model->id)) {
+					mkdir($urlUpload."/book/".$model->id,0777,true);
+				}
 				if(! is_null($model->pictureFile))
-					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
+					$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);			
+ 				
 
-				$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
-
-				$this->redirect(array('view','id'=>$model->id));
+				for ($i=1; $i <=3 ; $i++) { 
+					$param = 'bookFile'.$i;		
+					if(! is_null($model->$param)) {
+						$extension = $model->$param->extensionName;
+						$model->$param->saveAs($urlUpload."/book/".$model->id."/".$model->id."-".$extension.'.'.$extension);
+					}
+				}
+				$this->redirect(array("catalogue/manage"));
 			}
 		}
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
+
 
 	/**
 	 * Updates a particular model.
@@ -116,32 +158,70 @@ class BookController extends Controller
 		$this->layout = "//layouts/private";
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Book']))
 		{
+			
 			$model->attributes=$_POST['Book'];
+
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
 
-			$model->epubFile = CUploadedFile::getInstance($model,'epubFile');
+			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');
+			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');
+			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');
+			
 
 			
-			if(! is_null($model->pictureFile ))
-				$model->picture="cover.".$model->pictureFile->extensionName;
-			
-			if(! is_null($model->epubFile))
-				$model->epub="epub.".$model->epubFile->extensionName;
+			if(! is_null($model->pictureFile )){
+				$picturePrecSave = $model->picture; // ancienne couverture 
+				$model->picture = "cover.".$model->pictureFile->extensionName;
+			}
+			if($model->validate()) {
 
-			if($model->save()){
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
+				
+				if(isset($_POST['Book']['deleteEpub']) and $_POST['Book']['deleteEpub']== 1) {
+					if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$model->epub))
+							unlink($urlUpload."/book/".$model->id."/".$model->id."-".$model->epub);
+					$model->epub = null;
+				}
 
-				if(! is_null($model->pictureFile))
-					$model->pictureFile->saveAs($urlUpload.$model->id."-cover.".$model->pictureFile->extensionName);			
-				if(! is_null($model->epubFile))
-					$model->epubFile->saveAs($urlUpload.$model->id."-epub.".$model->epubFile->extensionName);
+				if(isset($_POST['Book']['deleteMobi']) and $_POST['Book']['deleteMobi']== 1) {
+					if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$model->mobi))
+							unlink($urlUpload."/book/".$model->id."/".$model->id."-".$model->mobi);
+					$model->mobi = null;
+				}
 
-				$this->redirect(array('view','id'=>$model->id));
+				if(isset($_POST['Book']['deletePdf']) and $_POST['Book']['deletePdf']== 1) {
+					if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$model->pdf))
+							unlink($urlUpload."/book/".$model->id."/".$model->id."-".$model->pdf);
+					$model->pdf = null;
+				}
+
+				$this->uploadFileBook($model);
+		
+				if($model->save())
+				{
+					
+
+					if(! is_null($model->pictureFile)){
+						$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);	
+						if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
+							if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave))
+								unlink($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave);
+					}
+
+					
+					for ($i=1; $i <=3 ; $i++) { 
+						$param = 'bookFile'.$i;		
+						if(! is_null($model->$param)) {
+							$extension = $model->$param->extensionName;
+							$model->$param->saveAs($urlUpload."/book/".$model->id."/".$model->id."-".$extension.'.'.$extension);
+						}
+					}
+
+					$this->redirect(array('view','id'=>$model->id));
+				}
 			}
 		}
 
@@ -157,56 +237,123 @@ class BookController extends Controller
 	public function actionDownload($id)
 	{
 		
+		if( ! isset($_POST["format"])) {
+			throw new CHttpException(400,"votre requête est invalide");
+		}
 		$model=$this->loadModel($id);
 		$fileDir = Yii::app()->getBasePath().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
-		
-		yii::app()->request->sendFile(
-			$model->title."-".$model->epub,
-			file_get_contents($fileDir.$model->id."-".$model->epub)
-			);
 
+		$format = $_POST['format'];
+		$file = $fileDir."/book/".$model->id.'/'.$model->id."-".$model->$format;
+		if(file_exists($file)) {
+			yii::app()->request->sendFile(
+				$model->title."-".$model->$format ,
+				file_get_contents($file)
+				);
+		}
+		else {
+			yii::app()->user->setFlash("error","Le fichier demandé n'existe pas");
+			Yii::app()->getController()->redirect(array('book/view/'.$model->id));
+		}
+	}
+
+	/**
+	* Toggle param push of a book
+	* @param $id the ID of the book
+	*/
+	public function actionTogglePush($id)
+	{
+
+		$model=$this->loadModel($id);
 		
+		if($model->push) {
+			$model->push = false;
+		}
+		else {
+			$nbrBookPush = count($model->catalogue->books(array('condition'=>'push=1')));
+			if($nbrBookPush >= 5) {
+				yii::app()->user->setFlash("error","Vous pouvez mettre au maximun 5 ebooks en avant");
+				Yii::app()->getController()->redirect(array('catalogue/manage'));
+			}
+			$model->push = true;
+		}
+		$model->save();
+
+		if(! Yii::app()->request->isAjaxRequest) {
+			Yii::app()->getController()->redirect(array('catalogue/manage'));
+		}
 
 	}
+
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
+	* Delete a book
+	* @param integer $id the ID of the book
+	*/
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
-
- 	public function actionAdmin()
-    {
-        $dataProvider=new CActiveDataProvider('Book');
-        $model = Book::model()->findAll();
-
-        $this->render('admin',array(
-            'dataProvider'=>$dataProvider,
-            'model'=>$model,
-        ));
-    }
+		$model = $this->loadModel($id);
+		$this->layout = "//layouts/private";
+		$this->render('delete',array('model'=>$model));
+	}	
 
 	/**
-	 * Lists all models.
+	* Confirm delete Book
+	* @param integer $id the ID of the book
+	* @throws CHttpException
+	*/
+	public function actionConfirmDelete($id)
+	{
+		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('book/delete', array(
+            'id'=>$id))){
+			$model = $this->loadModel($id);
+			$model->catalogueId = null;
+			$model->save();
+			Yii::app()->getController()->redirect(array('catalogue/manage'));
+		}
+		else{
+			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
+		}
+	}
+
+
+ 
+	/**
+	 * default action
+	 * Redirect user to home
 	 */
 	public function actionIndex()
 	{
-		 $dataProvider=new CActiveDataProvider('Book');
-        $model = Book::model()->findAll();
-
-        $this->render('admin',array(
-            'dataProvider'=>$dataProvider,
-            'model'=>$model,
-        ));
+		
+		$this->redirect(Yii::app()->homeUrl);
 	}
 
+	/**
+	* Check is user is owner of book
+	* @return boolean
+	*/
+	private function isOwner($id){
+
+		 $model = $this->loadModel($id);
+		 if(isset($model->catalogue))
+		 	return yii::app()->user->id === $model->catalogue->userId;
+		 return false;
+	}
+
+
+	/**
+	* Check is user is owner of book, use in acces rules
+	* @return boolean
+	* @throws CHttpException
+	*/
+	public function isOwnerRules()
+	{
+     	if(isset($_GET["id"])) {
+	        $model = $this->loadModel($_GET['id']);
+	        if(isset($model->catalogue))
+	        	return yii::app()->user->id === $model->catalogue->userId;
+	    }
+	    throw new CHttpException(400,"votre requête est invalide");
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

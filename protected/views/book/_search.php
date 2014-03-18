@@ -26,6 +26,8 @@
 		<?php echo $form->textField($model,'title'); ?>
 	</div>
 
+
+
 	<div class="row">
 		<?php echo $form->label($model,'price'); ?>
 		<?php echo $form->textField($model,'price',array('size'=>10,'maxlength'=>10)); ?>

@@ -20,7 +20,7 @@ vous sera envoyé,
 attention il ne sera valable que pendant 30 minutes.</p>
 
 
-<div class="form w400p center" >
+<div class="form w400p center pa1" >
 <?php $form=$this->beginWidget('CActiveForm', array(
     'id'=>'forget-form',
     'enableClientValidation'=>true,

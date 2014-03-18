@@ -1,0 +1,611 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"selec",
+				"selectValue"
+			],
+			[
+				"sel",
+				"selectPersonal"
+			],
+			[
+				"inp",
+				"inputSelect  (argument)"
+			],
+			[
+				"input",
+				"inputSelect"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"text",
+				"text-indent"
+			],
+			[
+				"pad",
+				"padding-top"
+			],
+			[
+				"lsit",
+				"list-style"
+			],
+			[
+				"add",
+				"addClass  (function)"
+			],
+			[
+				"fnt",
+				"font-size"
+			],
+			[
+				"delete",
+				"deleteEpub"
+			],
+			[
+				"remove",
+				"removeClass  (function)"
+			],
+			[
+				"back",
+				"background-image"
+			],
+			[
+				"type",
+				"typeFile"
+			],
+			[
+				"typ",
+				"typeFile"
+			],
+			[
+				"arra",
+				"arrayTypeFile"
+			],
+			[
+				"pic",
+				"pictureBackground"
+			],
+			[
+				"url",
+				"urls"
+			],
+			[
+				"chec",
+				"checkTypeFile"
+			],
+			[
+				"cl",
+				"click  (function)"
+			],
+			[
+				"book",
+				"bookFile1"
+			],
+			[
+				"change",
+				"changeUpload"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"save",
+				"saveAs"
+			],
+			[
+				"ex",
+				"extension  (variable)"
+			],
+			[
+				"upla",
+				"uploadFileBook"
+			],
+			[
+				"for",
+				"for	for …"
+			],
+			[
+				"bo",
+				"bookFile1"
+			],
+			[
+				"exte",
+				"extensionName"
+			],
+			[
+				"epub",
+				"epubFile  (variable)"
+			],
+			[
+				"fr",
+				"form"
+			],
+			[
+				"im",
+				"important"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"data",
+				"dataProvider"
+			],
+			[
+				"fin",
+				"findAllNew  (function)"
+			],
+			[
+				"new",
+				"newCata"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"le",
+				"letter-spacing"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"tex",
+				"text-indent"
+			],
+			[
+				"rand",
+				"randCata"
+			],
+			[
+				"con",
+				"conditionIgnoreId"
+			],
+			[
+				"en",
+				"endif"
+			],
+			[
+				"op",
+				"opacity"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"b",
+				"border"
+			],
+			[
+				"fo",
+				"font-weight"
+			],
+			[
+				"li",
+				"line-height"
+			],
+			[
+				"bor",
+				"border-color"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"da",
+				"draggedElement"
+			],
+			[
+				"remo",
+				"removeClass  (function)"
+			],
+			[
+				"paren",
+				"parentDraggedElement"
+			],
+			[
+				"dro",
+				"dropper"
+			],
+			[
+				"inde",
+				"indexOf"
+			],
+			[
+				"dra",
+				"draggedElement"
+			],
+			[
+				"ta",
+				"target"
+			],
+			[
+				"drop",
+				"dropBook"
+			],
+			[
+				"push",
+				"pushBooks"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"se",
+				"section	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/var/www/www-dev/test/journal/config/config.php",
+			"settings":
+			{
+				"buffer_size": 294,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 370.0,
+		"selected_items":
+		[
+			[
+				"di",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"dis",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"LiveReload: Enable/disable plugins",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pro",
+				"Project: Save As"
+			],
+			[
+				"projet",
+				"Project: Save As"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remova",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 597.0
+	},
+	"console":
+	{
+		"height": 143.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/var/www/www-dev/libebook/css/style.css",
+		"/var/www/www-dev/libebook/css/form.css",
+		"/var/www/www-dev/libebook/js/book.js",
+		"/var/www/www-dev/libebook/js/personalSelect.js",
+		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
+		"/var/www/www-dev/libebook/protected/views/book/view.php",
+		"/var/www/www-dev/libebook/protected/controllers/CatalogueController.php",
+		"/var/www/www-dev/libebook/protected/controllers/SiteController.php",
+		"/var/www/www-dev/libebook/protected/models/Catalogue.php",
+		"/var/www/www-dev/libebook/js/catalogue.js",
+		"/var/www/www-dev/libebook/protected/views/book/_viewBookCatalogue.php",
+		"/var/www/www-dev/libebook/upload/book/73-mobi.mobi",
+		"/var/www/www-dev/libebook/protected/models/Book.php",
+		"/var/www/www-dev/libebook/protected/views/book/_form.php",
+		"/var/www/www-dev/libebook/protected/views/book/_viewBookManage.php",
+		"/var/www/www-dev/libebook/protected/views/book/update.php",
+		"/var/www/www-dev/libebook/upload/68-pdf.pdf",
+		"/var/www/www-dev/libebook/css/knacss.css",
+		"/var/www/www-dev/libebook/protected/data/schema.mysql.sql",
+		"/home/amaury/21004281/www-dev/M1/Dev2/config/config.php",
+		"/var/www/www-dev/dev2/developpement/dump.sql",
+		"/var/www/www-dev/libebook/README.md",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_form.php",
+		"/var/www/www-dev/libebook/protected/views/site/login.php",
+		"/var/www/www-dev/libebook/protected/views/user/forgetPass.php",
+		"/var/www/www-dev/libebook/kcfinder/config.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/manage.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/update.php",
+		"/var/www/www-dev/libebook/protected/views/book/_search.php",
+		"/var/www/www-dev/libebook/protected/views/site/index.php",
+		"/var/www/www-dev/libebook/protected/views/layouts/main.php",
+		"/var/www/www-dev/libebook/protected/extensions/editMe/vendors/CKEditor/contents.css",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_viewDiscover.php",
+		"/var/www/www-dev/libebook/css/contents.css",
+		"/var/www/www-dev/libebook/protected/views/catalogue/new.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/view.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/index.php",
+		"/var/www/www-dev/libebook/protected/config/main.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_viewNew.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_view.php",
+		"/var/www/www-dev/libebook/css/knacss_save.css",
+		"/var/www/www-dev/libebook/protected/views/book/admin.php",
+		"/var/www/www-dev/libebook/protected/views/book/_view.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/admin.php",
+		"/var/www/www-dev/libebook/protected/views/book/index.php",
+		"/var/www/www-dev/test/article.bd.classe.php",
+		"/var/www/www-dev/test/index.php",
+		"/var/www/www-dev/libebook/protected/views/book/_viewBook.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_viewBook.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_viewBookManage.php",
+		"/home/amaury/.config/sublime-text-3/Packages/LiveReload/LiveReload.sublime-settings",
+		"/var/www/www-dev/libebook/protected/views/user/update.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_viewManage.php",
+		"/var/www/www-dev/libebook/protected/views/site/error.php",
+		"/var/www/www-dev/libebook/protected/views/layouts/private.php",
+		"/var/www/www-dev/libebook/libebook.sublime-project",
+		"/var/www/www-dev/MVCApp/mvcapp.sublime-project",
+		"/var/www/www-dev/MVCApp/components/ModeleDb.php",
+		"/var/www/www-dev/MVCApp/components/App.php",
+		"/home/amaury/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 94.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"inb",
+			"document",
+			"body",
+			";\n",
+			"icon",
+			"var_dump",
+			");\n",
+			"						\n",
+			"' ",
+			");\n",
+			"5px",
+			"		\n",
+			"());\n",
+			"div",
+			"subtitle",
+			"linkButton",
+			"line",
+			"mod",
+			"inbl",
+			"hidden",
+			"linkd",
+			"#ltBook div .btParam",
+			"var"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/var/www/www-dev/test/journal/config/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.77580708027,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "libebook.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/var/www/www-dev/Dev2/dev2.sublime-project"
+			],
+			[
+				"mv",
+				"/var/www/www-dev/MVCApp/mvcapp.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 255.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

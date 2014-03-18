@@ -1,7 +1,13 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
+<<<<<<< HEAD
 <div class="pageCenter  pa1">
 	<p id="privateMenu" class="small-visible desktop-hidden pa1 inbl h5-like txtcenter icon icon-down">Menu</p>
+=======
+<div class="pageCenter pa1">
+	<p id="privateMenu" class="small-visible desktop-hidden pa1 h5-like txtcenter icon-down">Menu</p>
+
+>>>>>>> 1.0-catalogue
 	<nav class="w25 mt3 pr2 pl3 mb1 mr3 left small-no-float small-inbl " id="privateNav">
 		<h3 class="">Compte</h3>
 		<?php 
@@ -19,13 +25,13 @@
 			</ul> -->
 		<h3 class="">Catalogue</h3>
 		<?php 
-			//$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+			$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+			
 			$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
-					//array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
-					//array('label'=>'Gérer', 'url'=>array('/catalogue/manage/'),'visible'=>isset($catalogueUser)),
-					//array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
-					array('label' =>'Ajouter Livre', 'url'=>array('book/create/')),
+					array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
+					array('label'=>'Gérer', 'url'=>array('/catalogue/manage/'),'visible'=>isset($catalogueUser)),
+					array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
 				),
 				'itemCssClass' => "txtcenter pb1",
 			));

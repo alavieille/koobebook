@@ -108,7 +108,7 @@ class UserController extends Controller
 
 	/**
 	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be loaded
 	 */
 	public function actionDelete($id)
 	{
@@ -118,6 +118,8 @@ class UserController extends Controller
 
 	/**
 	* Confirm delete account
+ 	* @param integer $id the ID of the model to be loaded
+    * @throws CHttpException
 	**/
 	public function actionConfirmDelete($id)
 	{
@@ -212,6 +214,11 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	* Check is user is owner of user, use in acces rules
+	* @return boolean
+	* @throws CHttpException
+	*/
 	public function isOwner()
 	{
      	if(isset($_GET["id"])){
