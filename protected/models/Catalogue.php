@@ -161,6 +161,7 @@ class Catalogue extends CActiveRecord
 		$criteria = new CDbCriteria();
 		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
 		$criteria->addCondition("DATEDIFF(NOW(),t.date_create) < 30");
+		$criteria->order = 't.date_create desc';
 		$criteria->together = true;
 		$res = Catalogue::model()->findAll($criteria);
 

@@ -82,6 +82,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 			<h4>Informations</h4>
 			<p>ISBN : <?php echo empty($model->isbn) ? "Inconnue" :  CHtml::encode($model->isbn); ?></p>
 			<p>Langue : <?php echo empty($model->language) ? "Inconnue" :  CHtml::encode(ucfirst($model->language)); ?></p>
+			<p>Format : <?php echo isset($model->epub) ? "Epub" : "" ?> <?php echo isset($model->mobi) ? "mobi" : "" ?> <?php echo isset($model->pdf) ? "PDF" : "" ?></p>
 		</section>
 		
 	</div>
