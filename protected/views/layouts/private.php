@@ -1,13 +1,7 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/main'); ?>
-<<<<<<< HEAD
-<div class="pageCenter  pa1">
-	<p id="privateMenu" class="small-visible desktop-hidden pa1 inbl h5-like txtcenter icon icon-down">Menu</p>
-=======
 <div class="pageCenter pa1">
 	<p id="privateMenu" class="small-visible desktop-hidden pa1 h5-like txtcenter icon-down">Menu</p>
-
->>>>>>> 1.0-catalogue
 	<nav class="w25 mt3 pr2 pl3 mb1 mr3 left small-no-float small-inbl " id="privateNav">
 		<h3 class="">Compte</h3>
 		<?php 
