@@ -13,10 +13,15 @@
 				'itemCssClass' => "txtcenter pb1",
 			));
 		?>
-		<!-- <h3 class="">Bibliothèque</h3>
-			<ul>
-				<li><a href="">Voir ma biliothèque</a></li>
-			</ul> -->
+		<h3 class="">Bibliothèque</h3>
+			<?php 
+				$this->widget('zii.widgets.CMenu',array(
+					'items'=>array(
+						array('label'=>'Ma Bibliothèque', 'url'=>array('/library/view')),
+					),
+					'itemCssClass' => "txtcenter pb1",
+				));
+			?>
 		<h3 class="">Catalogue</h3>
 		<?php 
 			$catalogueUser = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));

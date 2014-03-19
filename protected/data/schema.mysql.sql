@@ -21,7 +21,9 @@ CREATE TABLE IF NOT EXISTS `catalogue` (
   `isEditor` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `userId` (`userId`)
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
+
+
 CREATE TABLE IF NOT EXISTS `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catalogueId` int(11) DEFAULT NULL COMMENT 'CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)',
@@ -40,4 +42,10 @@ CREATE TABLE IF NOT EXISTS `book` (
   `mobi` varchar(250) DEFAULT NULL,
   `pdf` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `library` (
+  `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)'
+  `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
 ) ENGINE=InnoDB

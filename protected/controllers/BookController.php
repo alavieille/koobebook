@@ -23,11 +23,11 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','download'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
-				'actions'=>array('create', 'download'),
+				'actions'=>array('create'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -246,11 +246,21 @@ class BookController extends Controller
 		$format = $_POST['format'];
 		$file = $fileDir."/book/".$model->id.'/'.$model->id."-".$model->$format;
 		if(file_exists($file)) {
+			if(isset(yii::app()->user->id)) {
+				$library= Library::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));
+				if(! isset($library)) {
+					$library = new Library();
+					$library->userId = yii::app()->user->id;
+					$library->bookId = $id;
+					$library->save();
+				}
+			}
 			yii::app()->request->sendFile(
 				$model->title."-".$model->$format ,
 				file_get_contents($file)
-				);
+			);
 		}
+
 		else {
 			yii::app()->user->setFlash("error","Le fichier demandé n'existe pas");
 			Yii::app()->getController()->redirect(array('book/view/'.$model->id));
