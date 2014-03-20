@@ -24,7 +24,7 @@ class CatalogueController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','new'),
+				'actions'=>array('index','view','manage','new','topDownload'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -211,9 +211,12 @@ class CatalogueController extends Controller
 
 		$newCata = Catalogue::model()->findRandomNew($randCata);
 
+		$topCata = Catalogue::findTopDownload(2);
+
 		$this->render('index',array(
 			'randCata'=> $randCata,
 			'newCata'=>$newCata,
+			'topCata'=>$topCata,
 		));	
 
 	}
@@ -227,6 +230,19 @@ class CatalogueController extends Controller
     	$allNewCata = Catalogue::model()->findAllNew();
     	$this->render('new',array(
 			'newCata'=>$allNewCata,
+		));	
+
+	}
+
+	/**
+	* Show all top download catalogue
+	**/
+	public function actionTopDownload()
+	{
+		
+    	$allTopCata = Catalogue::findTopDownload();
+    	$this->render('topDownload',array(
+			'allTopCata'=>$allTopCata,
 		));	
 
 	}

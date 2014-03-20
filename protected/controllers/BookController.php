@@ -252,6 +252,7 @@ class BookController extends Controller
 					$library = new Library();
 					$library->userId = yii::app()->user->id;
 					$library->bookId = $id;
+					$library->date_download =  new CDbExpression('NOW()');
 					$library->save();
 				}
 			}

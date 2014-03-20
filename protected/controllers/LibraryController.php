@@ -42,8 +42,10 @@ class LibraryController extends Controller
 	    $this->render('view',array(
 			'model'=>$model,
 		));	
-	}
 
+
+
+	}
 	/**
 	* Delete book in library
 	* @param Integer $id

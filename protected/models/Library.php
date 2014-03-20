@@ -31,6 +31,7 @@ class Library extends CActiveRecord
 		return array(
 			array('userId, bookId', 'required'),
 			array('userId, bookId', 'numerical', 'integerOnly'=>true),
+			array('date_download', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('userId, bookId', 'safe', 'on'=>'search'),
@@ -93,6 +94,8 @@ class Library extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	
 
 	/**
 	 * Returns the static model of the specified AR class.
