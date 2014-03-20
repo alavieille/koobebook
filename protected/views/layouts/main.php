@@ -38,7 +38,7 @@
 					$this->widget('zii.widgets.CMenu',array(
 						'items'=>array(
 							array('label'=>'Connexion', 'url'=>array('/site/login'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
+							array('label'=>'Mon compte', 'url'=>array('/library/'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
 
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest),
 

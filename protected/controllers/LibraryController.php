@@ -72,4 +72,4 @@ class LibraryController extends Controller
 			throw new CHttpException(403,"Vous n'êtes pas autorisé à effectuer cette action.");
 		}
 	}
-}
+};

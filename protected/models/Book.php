@@ -76,6 +76,8 @@ class Book extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'catalogue' => array(self::BELONGS_TO, 'Catalogue', 'catalogueId'),
+			'library' => array(self::HAS_MANY, 'Library', 'bookId'),
+			'libraryCount' => array(self::STAT, 'Library', 'bookId'),
 		);
 	}
 	

@@ -30,6 +30,7 @@
 				'items'=>array(
 					array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
 					array('label'=>'Gérer', 'url'=>array('/catalogue/manage/'),'visible'=>isset($catalogueUser)),
+					array('label'=>'Suivi', 'url'=>array('/catalogue/monitoring/'),'visible'=>isset($catalogueUser)),
 					array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
 				),
 				'itemCssClass' => "txtcenter pb1",

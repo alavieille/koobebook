@@ -28,7 +28,7 @@ class CatalogueController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','manage'),
+				'actions'=>array('create','update','manage','monitoring'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -134,6 +134,37 @@ class CatalogueController extends Controller
 			'books' => $books,
 			'pushBooks' => $pushBooks
 			));
+	}
+
+	/**
+	* Monitoring of ebook download
+	*/
+	public function actionMonitoring()
+	{
+	
+
+		$this->layout = "//layouts/private";
+		$criteria = new CDbCriteria();
+		$criteria->with = array(
+			'library'=>array('joinType'=>'INNER JOIN'),
+			'libraryCount',
+			);
+		$criteria->addCondition('t.catalogueId = 20');
+		$monitoring = Book::model()->findAll($criteria);
+
+		$totalDownload = 0;
+		$totalPrice= 0;
+
+		foreach ($monitoring as $book) {
+			$totalDownload += $book->libraryCount;
+			$totalPrice += $book->price;
+		}
+		$this->render('monitoring',array(
+			'monitoring' => $monitoring,
+			'totalPrice' => $totalPrice,
+			'totalDownload' => $totalDownload
+			));
+
 	}
 
 
