@@ -172,6 +172,22 @@ class Book extends CActiveRecord
 	}
 
 	/**
+	* Return an Excerpt of book Description
+	* @param Integer $len length of excerpt
+	* @return String
+	*/
+	public function getExcerptDescription($len)
+	{
+  		$text = $this->description;
+        if (strlen($text) > $len) { 
+          $text = substr($text, 0, $len); 
+          $text = substr($text,0,strrpos($text," ")); 
+          $etc = " ...";  
+          $text = $text.$etc; 
+          }
+        return $text; 
+	}
+	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.

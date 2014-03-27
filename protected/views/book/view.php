@@ -59,7 +59,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
 			<div class="form mt2 pl1">
-				<?php echo CHtml::beginForm(array("download",'id'=>$model->id)); ?>
+				<?php echo CHtml::beginForm(array("download",'id'=>$model->id),"get"); ?>
 				 <?php echo CHtml::submitButton(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array("class"=>"inbl linkButton linkDown ")); ?> 
 				<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
 				<?php echo CHtml::endForm(); ?>

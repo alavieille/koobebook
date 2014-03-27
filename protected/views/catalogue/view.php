@@ -9,8 +9,10 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 	
 <h2 class="pa2 txtcenter">Catalogue de <?php echo $model->name; ?></h2>
 <div class="center mw960p">		
-	<?php if($isOwner) : ?>
+
 		<nav class="mb2">
+		<a class="linkButton inbl w200p left mr2" href="odps://<?php echo $this->createUrl('catalogue/viewodps',array('id'=>$model->id));?>">Exporter au format opds</a>
+			<?php if($isOwner) : ?>
 			<?php 
 				$this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
@@ -23,8 +25,8 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 				));
 
 			?>
+		<?php endif; ?>
 		</nav>
-	<?php endif; ?>
 
 </div>
 

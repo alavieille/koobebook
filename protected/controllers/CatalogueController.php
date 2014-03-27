@@ -24,7 +24,7 @@ class CatalogueController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','new','topDownload'),
+				'actions'=>array('index','viewodps','view','manage','new','topDownload'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -56,6 +56,25 @@ class CatalogueController extends Controller
 			'pushBooks'=>$pushBooks,
 			'books'=>$books,
 			'isOwner'=>$this->isOwner($id)
+		));
+	}
+
+	/**
+	 * Displays a particular model in opds format.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewodps($id,$all=0)
+	{
+		$model= $this->loadModel($id);
+		if( $all != 0) {
+		$books = $model->books();
+		}
+		else {
+		$books = $model->books(array('condition'=>'push=1'));
+		}
+		$this->renderPartial('viewOdps',array(
+			'model'=>$model,
+			'books'=>$books,
 		));
 	}
 

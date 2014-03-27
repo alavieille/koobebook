@@ -23,7 +23,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','download'),
+				'actions'=>array('index','view','viewodps','download'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
@@ -65,6 +65,17 @@ class BookController extends Controller
 		));
 	}
 	
+	/**
+	 * Displays a particular model in opds format.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewodps($id)
+	{
+		$model= $this->loadModel($id);
+		$this->renderPartial('viewOdps',array(
+			'model'=>$model,
+		));
+	}
 
 	/**
 	* Manage upload of all format of ebook
@@ -237,13 +248,13 @@ class BookController extends Controller
 	public function actionDownload($id)
 	{
 		
-		if( ! isset($_POST["format"])) {
+		if( ! isset($_GET["format"])) {
 			throw new CHttpException(400,"votre requête est invalide");
 		}
 		$model=$this->loadModel($id);
 		$fileDir = Yii::app()->getBasePath().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
-		$format = $_POST['format'];
+		$format = $_GET['format'];
 		$file = $fileDir."/book/".$model->id.'/'.$model->id."-".$model->$format;
 		if(file_exists($file)) {
 			if(isset(yii::app()->user->id)) {
