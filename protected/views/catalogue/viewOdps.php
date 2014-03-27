@@ -14,10 +14,10 @@
 <link type="application/atom+xml;profile=opds-catalog;kind=navigation" 
 href="<?php echo yii::app()->createAbsoluteUrl("catalogue/viewodps",array("id"=>$model->id)); ?>" rel="start" title="Accueil"/>
 
-<link type="application/atom+xml; profile=opds-catalog; kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl("catalogue/viewodps",array("id"=>$model->id)); ?>" rel="self" title="A la une"/>
+<link type="application/atom+xml; profile=opds-catalog; kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl("catalogue/viewodps",array("id"=>$model->id)); ?>" rel="self" title="Tous ces ebook"/>
 
 
-<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl("catalogue/viewodps",array("id"=>$model->id,"all"=>1)); ?>" rel="subsection" title="Tous ces ebooks"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl("catalogue/viewodps",array("id"=>$model->id,"all"=>0)); ?>" rel="http://opds-spec.org/sort/popular" title="A la une"/>
 
 <?php foreach ($books as $book) : ?>
 		<?php $this->renderPartial('//book/_viewBookCatalogueOdps', array('book'=>$book)); ?>

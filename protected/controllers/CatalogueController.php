@@ -63,7 +63,7 @@ class CatalogueController extends Controller
 	 * Displays a particular model in opds format.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionViewodps($id,$all=0)
+	public function actionViewodps($id,$all=1)
 	{
 		$model= $this->loadModel($id);
 		if( $all != 0) {

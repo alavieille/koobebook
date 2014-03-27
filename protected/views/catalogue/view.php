@@ -10,8 +10,10 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 <h2 class="pa2 txtcenter">Catalogue de <?php echo $model->name; ?></h2>
 <div class="center mw960p">		
 
-		<nav class="mb2">
-		<a class="linkButton inbl w200p left mr2" href="odps://<?php echo $this->createUrl('catalogue/viewodps',array('id'=>$model->id));?>">Exporter au format opds</a>
+		<nav class="mb2 mod">
+		<a class="linkButton inbl w200p left mr2" href="<?php echo  str_replace("http", "opds", $this->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->id)));?>">
+		Exporter au format opds
+		</a>
 			<?php if($isOwner) : ?>
 			<?php 
 				$this->widget('zii.widgets.CMenu',array(
@@ -20,8 +22,8 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 						array('label'=>'Supprimer', 'url'=>array('/catalogue/delete/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
 						
 					),
-					'itemCssClass' => "pb1 inbl",
-					'htmlOptions' => array("class" => 'pl1')
+					'itemCssClass' => "inbl",
+					'htmlOptions' => array("class" => 'mt0 pl1')
 				));
 
 			?>

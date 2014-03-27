@@ -1,27 +1,29 @@
 <?php header("Content-type: text/xml"); ?>
 <?xml version="1.0" encoding="UTF-8"?>
-<entry xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:opds="http://opds-spec.org/2010/catalog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dcterms="http://purl.org/dc/terms/">
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0"    xmlns:dc="http://purl.org/dc/terms/" xmlns:opds="http://opds-spec.org/2010/catalog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dcterms="http://purl.org/dc/terms/">
 <title><?php echo $model->title ?></title>
 <id><?php echo $model->id; ?></id>
 <author>
   <name><?php echo $model->author; ?></name>
 </author>
+
+
 <published><?php echo str_replace('+00:00', 'Z', gmdate('c',strtotime($model->publication))) ?></published>
 <updated><?php echo str_replace('+00:00', 'Z', gmdate('c')) ?></updated>
-
 
 <?php if(! empty($model->language)) :?>
 <dcterms:language><?php echo $model->language; ?></dcterms:language>
 <?php endif; ?>
 
 <?php if(! empty($model->isbn)) :?>
-<dc:identifier><?php echo $model->isbn; ?></dc:identifier>
+<dc:identifier xsi:type="dcterms:URI">urn:ISBN:<?php echo $model->isbn; ?></dc:identifier>
 <?php endif; ?>
 
 
 
-<?php if(! isset($model->catalogueId)) : ?>
+<?php if(isset($model->catalogueId)) : ?>
 <dcterms:publisher><?php echo $model->catalogue->name ?></dcterms:publisher>
+<dcterms:issued><?php echo $model->publication ?></dcterms:issued>
 <?php endif; ?>
 
 <summary>
@@ -42,18 +44,18 @@
 
 
 <?php if(isset($model->epub)) : ?>
-<link type="application/epub+zip" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'epub')); ?>" rel="http://opds-spec.org/acquisition/sample"/>
+<link type="application/epub+zip" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'epub')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
 <?php endif; ?>
 
 <?php if(isset($model->mobi)) : ?>
-<link type="application/x-mobipocket-ebook" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'mobi')); ?>" rel="http://opds-spec.org/acquisition/sample"/>
+<link type="application/x-mobipocket-ebook" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'mobi')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
 <?php endif; ?>
 
 <?php if(isset($model->pdf)) : ?>
-<link type="application/pdf" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'pdf')); ?>" rel="http://opds-spec.org/acquisition/sample"/>
+<link type="application/pdf" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'pdf')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
 <?php endif; ?>
 
-<?php if(! isset($model->catalogueId)) : ?>
+<?php if(isset($model->catalogueId)) : ?>
 <link type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->catalogueId));  ?>" rel="related" title="Du m&#234;me &#233;diteur"/>
 <?php endif;?>
 
