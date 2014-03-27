@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 
 )); ?>
 
-	<?php echo $form->errorSummary(array($model,$author)); ?>
+	<?php echo $form->errorSummary($model); ?>
 
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'title'); ?>
@@ -59,8 +59,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 		<div class="left w60 tiny-w100">
 			<div class="rowInput">
 				<?php echo $form->labelEx($model,'author'); ?>
-				<?php echo $form->textField($author,'nom'); ?>
-				<?php echo $form->error($author,'nom'); ?>
+				<?php echo $form->textField($model,'author'); ?>
+				<?php echo $form->error($model,'author'); ?>
 			</div>
 
 			<div class="rowInput">

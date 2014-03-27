@@ -102,7 +102,6 @@ class BookController extends Controller
 
 		$this->layout = "//layouts/private";
 		$model=new Book;
-		$author = new Author;
 		//default value
 		$model->price = 0;
 		$model->date_create = new CDbExpression('NOW()');
@@ -117,11 +116,10 @@ class BookController extends Controller
 
 		$model->catalogueId = $catalogue->id;
 
-		if(isset($_POST['Book']) && $_POST['Author'] )
+		if(isset($_POST['Book']))
 		{
-
 			$model->attributes=$_POST['Book'];
-			$author->attributes =$_POST['Author'];
+
 			//upload couverture & ebook 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
 			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');
@@ -133,10 +131,7 @@ class BookController extends Controller
 			if(! is_null($model->pictureFile )) // si couverture
 				$model->picture="cover.".$model->pictureFile->extensionName;
 
-			if( $author->validate()) {
-				$author->save();
-				$model->author = $author->getPrimaryKey();
-			}
+
 			if($model->save())
 			{
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
@@ -160,7 +155,6 @@ class BookController extends Controller
 		}
 		$this->render('create',array(
 			'model'=>$model,
-			'author'=>$author,
 		));
 	}
 
@@ -174,14 +168,12 @@ class BookController extends Controller
 	{
 		$this->layout = "//layouts/private";
 		$model=$this->loadModel($id);
-		$author = $model->author;
 
 
-		if(isset($_POST['Book']) && $_POST['Author'])
+		if(isset($_POST['Book']))
 		{
 			
 			$model->attributes=$_POST['Book'];
-			$author->attributes = $_POST['Author'];
 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
 
@@ -195,8 +187,7 @@ class BookController extends Controller
 				$picturePrecSave = $model->picture; // ancienne couverture 
 				$model->picture = "cover.".$model->pictureFile->extensionName;
 			}
-
-			if($model->validate() && $author->validate()) {
+			if($model->validate()) {
 
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 				
@@ -220,7 +211,7 @@ class BookController extends Controller
 
 				$this->uploadFileBook($model);
 		
-				if($model->save() && $author->save())
+				if($model->save())
 				{
 					
 
@@ -247,7 +238,6 @@ class BookController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-			'author'=>$author,
 		));
 	}
 

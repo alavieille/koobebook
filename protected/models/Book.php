@@ -46,9 +46,9 @@ class Book extends CActiveRecord
 		// will receive user inputs.
 		return array(
 
-			array('title, price, authorId, publication, description', 'required'),
+			array('title, price, author, publication, description', 'required'),
 			array('isbn', 'numerical', 'integerOnly'=>true),
-			array('title, subtitle', 'length', 'max'=>250),
+			array('title, author, subtitle', 'length', 'max'=>250),
 
 
 			array('price', 'length', 'max'=>10),
@@ -63,7 +63,7 @@ class Book extends CActiveRecord
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, catalogueId, title, price, picture, description, publication, isbn', 'safe', 'on'=>'search'),
+			array('id, catalogueId, title, price, author, picture, description, publication, isbn', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,7 +76,6 @@ class Book extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'catalogue' => array(self::BELONGS_TO, 'Catalogue', 'catalogueId'),
-			'author' => array(self::BELONGS_TO, 'Author', 'authorId'),
 			'library' => array(self::HAS_MANY, 'Library', 'bookId'),
 			'libraryCount' => array(self::STAT, 'Library', 'bookId'),
 		);
@@ -93,7 +92,7 @@ class Book extends CActiveRecord
 			'subtitle' => 'Sous-titre',
 			'title' => 'Titre',
 			'price' => 'Prix (en €)',
-			'authorId' => 'Auteur',
+			'author' => 'Auteur',
 			'pictureFile' => 'Couverture',
 			'description' => 'Description',
 			'editor' => 'Editeur',
