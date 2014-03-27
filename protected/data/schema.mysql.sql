@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `book` (
   `title` varchar(250) NOT NULL,
   `subtitle` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
-  `author` varchar(250) NOT NULL,
+  `authorId` int(11) DEFAULT NULL COMMENT 'CONSTRAINT FOREIGN KEY (authorId) REFERENCES author(id)',
   `language` varchar(200) NOT NULL,
   `picture` varchar(250) DEFAULT NULL,
   `description` text,
