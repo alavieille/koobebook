@@ -120,7 +120,7 @@ class CatalogueController extends Controller
 		{
 			$model->attributes=$_POST['Catalogue'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('manage'));
 		}
 
 		$this->render('update',array(

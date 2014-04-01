@@ -40,7 +40,6 @@ class BookController extends Controller
 			),
 		);
 	}
-
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -369,6 +368,7 @@ class BookController extends Controller
 	*/
 	public function isOwnerRules()
 	{
+     	var_dump($_GET);
      	if(isset($_GET["id"])) {
 	        $model = $this->loadModel($_GET['id']);
 	        if(isset($model->catalogue))

@@ -71,8 +71,10 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			if($model->save())
+			if($model->save()) {
+				yii::app()->user->setFlash("success","Compte créé avec succés");
 				$this->redirect(array('site/login'));
+			}
 		}
 
 		$this->render('create',array(

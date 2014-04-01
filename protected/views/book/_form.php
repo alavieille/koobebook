@@ -43,7 +43,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'pictureFile') ?>
 				<div data-previewdownload="error" class="errorMessage" id="Book_pictureFile_em_"></div>
 				<nav class="inputPicture"> 
-					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="button" >Modifier</a>
+					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="button" >Changer l'image</a>
 					<a href="#" class="inbl mt1 visually-hidden" data-previewDownload="delete" >Supprimer</a>
 				</nav>						
 			</div>

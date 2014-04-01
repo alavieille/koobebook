@@ -59,7 +59,7 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 
 <div id="viewLtBook">
 	<section class="pa2 pt1 center mw960p">
-		<h3  class="mb2" >Ces Ebooks</h3>
+		<h3  class="mb2" >Ses Ebooks</h3>
 		<?php if (count($books) > 0) : ?>
 			<div class="autogrid5">
 			<?php foreach ($books as $book) :?>

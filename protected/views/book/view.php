@@ -10,6 +10,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 		<?php if(Yii::app()->user->hasFlash('success')):?>
 		    <div class="txtcenter flashsuccess pb2">
 		        <?php echo Yii::app()->user->getFlash('success'); ?>
+		    </div>		    
+		<?php elseif(Yii::app()->user->hasFlash('error')):?>
+		    <div class="txtcenter flasherror pb2">
+		        <?php echo Yii::app()->user->getFlash('error'); ?>
 		    </div>
 		<?php endif; ?>
 		<?php if($isOwner) : ?>

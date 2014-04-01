@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 $this->pageTitle=Yii::app()->name."- Catalogues" ;	
 $this->breadcrumbs=array(
-	    'Catalogue'=>array('Catalogue'),	
+	    'Catalogues'=>array('Catalogue/index'),	
 );
 
 ?>
