@@ -5,8 +5,8 @@ $this->pageTitle=Yii::app()->name . ' - Suvis';
 
 ?>
 
-<section class="panel">
-	<h2 class="pb2 txtcenter">Suivi</h2>
+<section>
+	<h2 class="pt2 mb3">Suivi</h2>
 
 	<table class="striped  data table" summary="">
 		<thead>

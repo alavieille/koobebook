@@ -1,0 +1,386 @@
+/*  
+    Style private section
+*/ 
+/*
+* 1.0 - Private
+ *	 1.1 - create Book
+ *   1.2 - Manage Book
+ *	 1.3 - Library
+ * 8.0 - Responsive
+ */
+
+
+ /**
+ * 1.0 Private 
+ * ----------------------------------------------------------------------------
+ */
+
+
+#privateNav{
+	 position: fixed;
+	 border-right: 1px solid #e7e7e7;
+	 //background-color: #f5f5f5;
+	 background-color: #f8f8f8;
+	 height: 100%;
+	 width: 250px;
+}
+
+#private #content{
+	margin-left:250px;
+}
+
+#private #content h2{
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+	color:#53a1b8;
+	font-weight: 600;
+}
+#private #privateNav h3{
+	text-align: left;
+	font-weight: 600;
+	color:#53a1b8;
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+#privateNav ul{
+	list-style: none;
+	padding-left: 0;
+}
+#privateNav li:first-child a{
+	border-top: 1px solid #e7e7e7;
+}
+#privateNav li{
+	text-decoration: none;
+	border-bottom: 1px solid #e7e7e7;
+
+	display: block;
+	text-align: left;
+
+	letter-spacing: 0.37px;
+	text-indent: 30px;
+	transition: color 200ms linear;
+	-webkit-transition: color 200ms linear;
+}
+
+#privateNav li a{
+	display: block;
+	color:#505050;
+		padding-bottom: 5px;
+	padding-top: 5px;
+}
+#privateNav li a:hover,#privateNav li.active a{
+	color:#53a1b8; 
+	background-color:#eee;
+}
+
+/**
+ * 1.1 create Book
+ **/
+
+ #book-form #previous_cover{
+ 	display: block;
+	width: 165px;
+	height: 260px;
+ 	min-width:165px;
+ 	max-height:260px;
+ 	min-height: 260px;
+ }
+
+ #book-form .inputPicture{
+	margin: auto;
+	text-align: center;
+ }
+ #book-form .inputPicture a{
+ 	padding:5px 15px;
+ 	background-color: #53a1b8;
+ 	color:white !important;
+ 	width:150px;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ }
+
+ #book-form .inputPicture a:hover{
+	background-color: #ccc;
+	color: #555 !important;
+ }
+
+ #book-form #uploadInput ul li{
+ 	//background: red;
+ 	position: relative;
+ 	vertical-align: top;
+ 	text-align: center;
+ 	padding-top:3lopx;
+ 	width:120px;
+ 	display: inline-block;
+ 	min-height: 150px;
+ 	border: 3px dotted #ccc;
+ 	 word-wrap: break-word;
+ 	background: url("img/upload.png") no-repeat 50%;
+ }
+ 
+ #book-form #uploadInput ul li .close{
+ 	position: absolute;
+ 	display: none;
+ 	right:5px;
+ 	top:-10px;
+ 	font-size: 35px;
+	color:#e74c3c;
+ }
+
+  #book-form #uploadInput ul li .close:hover{
+  	color:#2c3e50;
+  }
+
+ #book-form #uploadInput ul li:hover .close{
+ 	display: block;
+ }
+
+ #book-form #uploadInput ul li.epub{
+ 	background-image: url("img/epub.png");
+ } 
+
+ #book-form #uploadInput ul li.mobi{
+ 	background-image: url("img/mobi.png");
+ }
+
+ #book-form #uploadInput ul li.pdf{
+ 	background-image: url("img/pdf.png");
+ }
+
+  #book-form #uploadInput ul li:hover{
+  	background-color: #ddd;
+  	cursor: pointer;
+  }
+  #book-form #uploadInput ul li+li{
+  	margin-left:30px;
+  }
+
+/**
+ * 5.2 Manage Book
+ **/
+#displayManage li a{
+	//background: red;
+	display: inline-block;
+	height: 35px;
+	width : 35px;
+	background-repeat: no-repeat;
+	background-image: url("img/displaySprite.png");
+	
+	text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#displayManage .list{
+	background-position: -95px -5px;
+}
+
+#displayManage .grid{
+	background-position: -5px -5px;
+}
+
+#displayManage .list:hover, #displayManage .active .list{
+	background-position: -149px -5px;
+}
+
+#displayManage .grid:hover, #displayManage .active .grid{
+	background-position: -50px -5px;
+}
+
+#ltBook,#pushBook{
+		border: 1px solid rgba(0,0,0,0.2);
+}
+#ltBook.list,#pushBook.list{
+	border: none;
+}
+
+.list .options a{
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-position: 50%;
+	display: inline-block;
+	width:34px;
+	height: 32px;
+	text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 2px;
+    margin-left: 2px;
+    background-image: url("img/optionSprite.png");
+}
+
+.list .options a:hover{
+	background-color: #53a1b8;
+}
+
+.list .options .delete{
+    background-position: -5px -5px;
+	//background-image: url("img/delete.png");
+}
+
+.list .options .edit{
+    background-position: -75px 0px;
+	//background-image: url("img/update.png");
+}
+.list .options .push{
+   background-position: -42px 00px;
+	//background-image: url("img/push.png");
+}
+
+#ltBook.onDrop,#pushBook.onDrop{
+	border:2px solid #53a1b8;
+}
+
+#ltBook h4,#pushBook h4{
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	color:#53a1b8;
+}
+
+#ltBook div, #pushBook div { /* liste book */
+	text-align: left;
+	position: relative;
+}
+#ltBook div.autogrid5 > *, #pushBook div.autogrid5 > *{
+	width: 25%;
+}
+
+#ltBook div figure,#pushBook div figure{
+	height: 100%;
+}
+
+#ltBook div>a,#pushBook div>a{
+	display: block;
+}
+
+#ltBook div>a:hover,#pushBook div>a:hover{
+	background-color: #eee;
+}
+
+#ltBook div figure img,#pushBook div figure img{
+	max-width:83px;
+	width:83px;
+	min-width:83px;
+	height: 130px ;
+	min-height: 130px;
+	max-height: 130px;
+
+}
+#ltBook div figure figcaption,#pushBook div figure figcaption{
+
+}
+
+/** param livre **/
+#ltBook div .btParam,#pushBook div .btParam{
+	background:url("img/paramsprite.png") -35px -5px no-repeat;
+	height: 20px;
+	width: 20px;
+	text-indent: -9999px;
+	margin-bottom: 2px;
+}
+
+#ltBook div .btParam:hover,#ltBook div .btParamActive,#pushBook div .btParam:hover,#pushBook div .btParamActive{
+	background-position: -5px -5px;
+	cursor:pointer;
+}
+
+#ltBook .param,#pushBook .param{
+	position: absolute;
+	background: white;
+	width: 100%;
+	top:22px;
+}
+
+#ltBook ul,#pushBook ul{
+	list-style: none;
+	padding-left: 0;
+	text-align: center;
+}
+
+#ltBook ul li,#pushBook ul li{
+	margin-top:15px;
+}
+
+#ltBook ul li a,#pushBook ul li a{
+	color: #53a1b8;
+	display: block;
+	padding:8px 15px;
+}
+
+#ltBook ul li a:hover,#pushBook ul li a:hover{
+	color:#505050;
+}
+
+
+/**
+* Bouton add ebbok
+**/
+
+#ltBook #addEbook{
+	width: 120px;
+	border: 2px solid #53a1b8;
+	position: relative;
+}
+
+#ltBook #addEbook #iconAdd{
+	top:-20%;
+	left:15%;
+	font-weight: bold;
+	font-size: 10em;
+	padding-top: 15px;
+	line-height: 150px;
+	color:#ddd;
+}
+#ltBook #addEbook p:last-child{
+	position: absolute;
+	top:10%;
+	margin-left: 10%;
+	color: #53a1b8;
+
+}
+
+#ltBook #addEbook:hover #iconAdd,#ltBook #addEbook:hover p:last-child,#ltBook #addEbook:hover{
+	color:#53a1b8;
+	border-color: #53a1b8;
+	background: white;
+}
+
+/**
+ * 1.3 Library
+ **/
+#library .book{
+	position: relative;
+}
+#library .book .close{
+	display: none;
+	position: absolute;
+	right:15px;
+	font-size: 30px;
+	padding: 10px;
+	padding-top: 0px;
+	color:red;
+}
+
+#library .book .close:hover{
+	color:orange;
+}
+ 
+ #library .book:hover .close{
+	display: block;
+ }
+
+ /**
+ * 1.0 Private 
+ * ----------------------------------------------------------------------------
+ */
+
+
+@media (max-width: 768px) {
+	#privateNav{
+		position: relative;
+	}
+
+
+}

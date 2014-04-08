@@ -125,6 +125,7 @@ class CatalogueController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+
 		));
 	}
 	
@@ -132,7 +133,7 @@ class CatalogueController extends Controller
 	* Manage book in catalogue 
 	* if user hasn't catalogue, he is redirect to action create
 	*/
-	public function actionManage(){
+	public function actionManage($display="list"){
 		
 		// active upload for ckeditor with kcfinder
 		$_SESSION['KCFINDER']['disabled'] = false; // enables the file browser in the admin
@@ -148,10 +149,12 @@ class CatalogueController extends Controller
 		$pushBooks = $model->books(array('condition'=>'push=1'));
 		$books = $model->books(array('condition'=>'push=0'));
 
-		$this->render('manage',array(
+
+		$this->render('manage'.ucfirst($display),array(
 			'catalogue' => $model,
 			'books' => $books,
-			'pushBooks' => $pushBooks
+			'pushBooks' => $pushBooks,
+			'display'=>$display,
 			));
 	}
 

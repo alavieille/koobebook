@@ -13,14 +13,25 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
     <div class="txtcenter flasherror pb2">
         <?php echo Yii::app()->user->getFlash('error'); ?>
     </div>
-	<nav class="center mw960p mb2">
+	<nav class="center mw960p mb2 mod">
 		<?php 
 			$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 					array('label'=>'Voir mon catalogue', 'url'=>array('/catalogue/view/'.$catalogue->id),'linkOptions'=>array("class"=>"linkButton")),
 				),
 				'itemCssClass' => "pb1 inbl",
-				'htmlOptions' => array("class" => 'pl1')
+				'htmlOptions' => array("class" => 'pl0 left')
+			));
+		?>
+		<?php 
+			$this->widget('zii.widgets.CMenu',array(
+				'items'=>array(
+					array('label'=>'Affichage en liste', 'url'=>array('/catalogue/manage',"display"=>"list"),'linkOptions'=>array("class"=>"list mr2","title"=>"Affichage en liste"),
+						'active'=>$display=='list'),
+					array('label'=>'Affichage en grille', 'url'=>array('/catalogue/manage',"display"=>"grid"),'linkOptions'=>array("class"=>"grid","title"=>"Affichage en grille")),
+				),
+				'itemCssClass' => "pb1 inbl",
+				'htmlOptions' => array("class" => 'pl1 right display-'.$display, "id"=>"displayManage")
 			));
 		?>
 	</nav>
@@ -34,12 +45,13 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 			<p class="txtcenter italic"> Ajouter un livre à la une, depuis le menu contextuel</p>
 			<p class="txtcenter">Ou faites un glissé-déposé du livre que vous souhaité mettre en avant</p>
 		</div>
-		<?php endif; ?>
+	<?php else : ?>
 		<div class="autogrid5 dropper">
 			<?php foreach ($pushBooks as $book) :?>
 				<?php $this->renderPartial('//book/_viewBookManage', array('book'=>$book)); ?>
 			<?php endforeach; ?>
 		</div>
+	<?php endif; ?>
 </section>
 <section id="ltBook" class="w100 pa1">
 	<h4 class="pb1 mb1 w100">Vos ebooks</h4>

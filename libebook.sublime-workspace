@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"b",
+				"background"
+			],
+			[
 				"findB",
 				"findByPk"
 			],
@@ -248,10 +252,6 @@
 				"font-weight"
 			],
 			[
-				"b",
-				"border"
-			],
-			[
 				"fo",
 				"font-weight"
 			],
@@ -328,14 +328,6 @@
 			}
 		},
 		{
-			"file": "protected/controllers/BookController.php",
-			"settings":
-			{
-				"buffer_size": 10910,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "protected/views/catalogue/viewOdps.php",
 			"settings":
 			{
@@ -344,10 +336,10 @@
 			}
 		},
 		{
-			"file": "protected/components/Controller.php",
+			"file": "protected/components/UserIdentity.php",
 			"settings":
 			{
-				"buffer_size": 808,
+				"buffer_size": 1662,
 				"line_ending": "Unix"
 			}
 		}
@@ -424,25 +416,31 @@
 	},
 	"file_history":
 	[
+		"/home/amaury/Téléchargements/seigneur des anneaux 3/Tolkien,J.R.R.-[Seigneur des Anneaux-3]Le Retour du Roi(1955).French.ebook.AlexandriZ/Tolkien,J.R.R.-[Seigneur des Anneaux-3]Le Retour du Roi(1955).French.ebook.AlexandriZ.mobi",
+		"/var/www/www-dev/libebook/protected/views/catalogue/index.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/new.php",
+		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
+		"/var/www/www-dev/libebook/protected/controllers/CatalogueController.php",
+		"/var/www/www-dev/libebook/protected/controllers/UserController.php",
+		"/var/www/www-dev/libebook/protected/views/book/_form.php",
+		"/var/www/www-dev/libebook/css/knacss.css",
+		"/var/www/www-dev/libebook/css/style.css",
+		"/var/www/www-dev/libebook/README.md",
+		"/var/www/www-dev/libebook/protected/views/book/view.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/monitoring.php",
+		"/var/www/www-dev/libebook/protected/views/site/login.php",
 		"/var/www/www-dev/libebook/protected/models/Author.php",
 		"/var/www/www-dev/libebook/protected/data/schema.mysql.sql",
-		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
-		"/var/www/www-dev/libebook/protected/views/book/view.php",
 		"/var/www/www-dev/libebook/protected/models/Book.php",
 		"/var/www/www-dev/libebook/protected/views/book/update.php",
-		"/var/www/www-dev/libebook/protected/views/book/_form.php",
 		"/var/www/www-dev/libebook/protected/views/book/create.php",
 		"/var/www/www-dev/libebook/protected/views/book/_viewBookCatalogueOdps.php",
 		"/var/www/www-dev/complete.xml",
 		"/var/www/www-dev/test.xml",
-		"/var/www/www-dev/libebook/css/style.css",
 		"/var/www/www-dev/opds.html",
-		"/var/www/www-dev/libebook/protected/controllers/CatalogueController.php",
 		"/var/www/www-dev/libebook/protected/views/book/viewOdps.php",
 		"/var/www/www-dev/libebook/protected/controllers/LibraryController.php",
-		"/var/www/www-dev/libebook/css/knacss.css",
 		"/var/www/www-dev/libebook/protected/models/Catalogue.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/index.php",
 		"/var/www/www-dev/libebook/protected/views/library/delete.php",
 		"/var/www/www-dev/libebook/protected/controllers/SiteController.php",
 		"/var/www/www-dev/libebook/protected/views/book/_viewBookLibrary.php",
@@ -452,10 +450,8 @@
 		"/var/www/www-dev/libebook/protected/models/Library.php",
 		"/home/amaury/21004281/www-prod/opds/test.xml",
 		"/home/amaury/21004281/www-prod/opds/complete.xml",
-		"/var/www/www-dev/libebook/protected/views/catalogue/monitoring.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/topDownload.php",
 		"/var/www/www-dev/libebook/protected/views/library/index.php",
-		"/var/www/www-dev/libebook/README.md",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_viewDiscover.php",
 		"/var/www/www-dev/libebook/protected/views/site/error.php",
 		"/var/www/www-dev/libebook/protected/views/site/index.php",
@@ -471,7 +467,6 @@
 		"/home/amaury/21004281/www-dev/M1/Dev2/config/config.php",
 		"/var/www/www-dev/dev2/developpement/dump.sql",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_form.php",
-		"/var/www/www-dev/libebook/protected/views/site/login.php",
 		"/var/www/www-dev/libebook/protected/views/user/forgetPass.php",
 		"/var/www/www-dev/libebook/kcfinder/config.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/manage.php",
@@ -479,7 +474,6 @@
 		"/var/www/www-dev/libebook/protected/views/book/_search.php",
 		"/var/www/www-dev/libebook/protected/extensions/editMe/vendors/CKEditor/contents.css",
 		"/var/www/www-dev/libebook/css/contents.css",
-		"/var/www/www-dev/libebook/protected/views/catalogue/new.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/view.php",
 		"/var/www/www-dev/libebook/protected/config/main.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/_viewNew.php",
@@ -505,7 +499,7 @@
 	],
 	"find":
 	{
-		"height": 46.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -519,6 +513,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"picture",
+			".inputPicture",
+			"inputPicture",
+			"flash",
 			"new",
 			"top",
 			"findByp ",
@@ -564,7 +562,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -580,8 +578,8 @@
 						"selection":
 						[
 							[
-								300,
-								300
+								1771,
+								1771
 							]
 						],
 						"settings":
@@ -694,143 +692,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "protected/controllers/BookController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10910,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9904,
-								9887
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"sublime_auto_complete": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 6392.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -840,7 +705,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "protected/views/catalogue/viewOdps.php",
 					"semi_transient": false,
 					"settings":
@@ -965,19 +830,19 @@
 							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 108.0,
+						"translation.y": 144.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "protected/components/Controller.php",
+					"buffer": 2,
+					"file": "protected/components/UserIdentity.php",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 808,
+						"buffer_size": 1662,
 						"regions":
 						{
 						},
@@ -997,7 +862,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1031,7 +896,7 @@
 		"cols":
 		[
 			0.0,
-			0.784395795837,
+			0.105505805748,
 			1.0
 		],
 		"rows":
