@@ -60,7 +60,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 		<tbody>
 			<?php foreach ($pushBooks as $book) :?>
 			<tr>
-				<td><a href="<?php echo Yii::app()->createUrl('book/create/'); ?>" ><?php echo $book->title;?></a></td>
+				<td><a href="<?php echo Yii::app()->createUrl('book/view/',array( 'id'=>$book->id)); ?> "  ><?php echo $book->title;?></a></td>
 				<td class="txtcenter" ><a href="<?php  ?>" ><?php echo $book->author ?></a></td>
 				<td class="txtcenter" ><?php echo $book->price ?> &euro;</td>
 				<td class="options">

@@ -356,7 +356,8 @@
 #library .book .close{
 	display: none;
 	position: absolute;
-	right:15px;
+	right:30px;
+	top:0px;
 	font-size: 30px;
 	padding: 10px;
 	padding-top: 0px;

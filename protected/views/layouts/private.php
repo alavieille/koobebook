@@ -31,17 +31,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/private.css'
 				'items'=>array(
 					array('label'=>'Créer', 'url'=>array('/catalogue/create'),'visible'=>!isset($catalogueUser)),
 					array('label'=>'Gérer', 'url'=>array('/catalogue/manage/'),'visible'=>isset($catalogueUser)),
-					array('label'=>'Suivi', 'url'=>array('/catalogue/monitoring/'),'visible'=>isset($catalogueUser)),
+					array('label'=>'Tableau de bord', 'url'=>array('/catalogue/monitoring/'),'visible'=>isset($catalogueUser)),
 					array('label'=>'Paramètres', 'url'=>array('/catalogue/update/'),'visible'=>isset($catalogueUser)),
 				),
 
 			));
 		?>
-	<!-- 	<ul>
-				<li><a href="">Créer mon catalogue</a></li>
-				<li><a href="">Voir mon catalogue</a></li>
-				<li><a href="">Personaliser mon catalogue</a></li>
-			</ul> -->
 	</nav>
 
 	<section id="content" class="pa3  pt0 mod small-w100 ">
