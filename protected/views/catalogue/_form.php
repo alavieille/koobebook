@@ -27,6 +27,7 @@
 		<?php //echo $form->textArea($model,'description',array('rows'=>20, 'cols'=>50)); ?>
 		<?php $this->widget('ext.editMe.widgets.ExtEditMe', array(
 	    'model'=>$model,
+	    'autoLanguage'=> false,
 	    'attribute'=>'description',
 	    'filebrowserUploadUrl' => Yii::app()->baseUrl.'/lib/kcfinder/upload.php?type=files',
 	    'filebrowserImageUploadUrl' =>  Yii::app()->baseUrl.'/lib/kcfinder/upload.php?type=images',

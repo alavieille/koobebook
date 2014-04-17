@@ -3,7 +3,7 @@
 * Design of one book Catalogue
 **/
 ?>
-<div class="book mb2">
+<div class="book mb0">
 	<a class="" href="<?php echo Yii::app()->createUrl('book/view/',array( 'id'=>$book->id)); ?> " >
 	<?php 
 		 $picture = yii::app()->baseUrl.DIRECTORY_SEPARATOR.'images/default_cover.png';

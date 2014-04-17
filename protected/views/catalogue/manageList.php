@@ -64,10 +64,10 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 				<td class="txtcenter" ><a href="<?php  ?>" ><?php echo $book->author ?></a></td>
 				<td class="txtcenter" ><?php echo $book->price ?> &euro;</td>
 				<td class="options">
-					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id));; ?>" class="push right" title="Mise à la une">Mise à la une</a>
-					<a href="<?php echo Yii::app()->createUrl('book/update/',array( 'id'=>$book->id)); ?>" class="right edit" title="Modifier">Modifier</a>
+					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id));; ?>" class="push tiny-no-float right" title="Mise à la une">Mise à la une</a>
+					<a href="<?php echo Yii::app()->createUrl('book/update/',array( 'id'=>$book->id)); ?>" class="right tiny-no-float edit" title="Modifier">Modifier</a>
 
-					<a href="<?php echo Yii::app()->createUrl('book/delete/',array( 'id'=>$book->id)); ?>" class="right delete" title="Supprimer">Supprimer</a>
+					<a href="<?php echo Yii::app()->createUrl('book/delete/',array( 'id'=>$book->id)); ?>" class="right tiny-no-float delete" title="Supprimer">Supprimer</a>
 
 				</td>
 
@@ -109,10 +109,10 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 				<td class="txtcenter" ><a href="<?php  ?>" ><?php echo $book->author ?></a></td>
 				<td class="txtcenter" ><?php echo $book->price ?> &euro;</td>
 				<td class="options">
-					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id));; ?>" class="push right" title="Mise à la une">Mise à la une</a>
-					<a href="<?php echo Yii::app()->createUrl('book/update/',array( 'id'=>$book->id)); ?>" class="edit right" title="Modifier">Modifier</a>
+					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id));; ?>" class="push tiny-no-float  right" title="Mise à la une">Mise à la une</a>
+					<a href="<?php echo Yii::app()->createUrl('book/update/',array( 'id'=>$book->id)); ?>" class="edit tiny-no-float  right" title="Modifier">Modifier</a>
 
-					<a href="<?php echo Yii::app()->createUrl('book/delete/',array( 'id'=>$book->id)); ?>" class="delete right" title="Supprimer">Supprimer</a>
+					<a href="<?php echo Yii::app()->createUrl('book/delete/',array( 'id'=>$book->id)); ?>" class="delete tiny-no-float  right" title="Supprimer">Supprimer</a>
 
 				</td>
 

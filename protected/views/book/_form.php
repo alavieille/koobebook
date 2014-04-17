@@ -20,7 +20,35 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
+	<section>
+		<h4 class="pt1 icon icon-up after">Fichiers</h4>
+		<span class="etape">Etape 1</span>
+		<div class="rowInput" id="uploadInput">
+			<?php echo $form->labelEx($model,'bookFile1'); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile1',array("class"=>"visually-hidden")); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile2',array("class"=>"visually-hidden")); ?>
+			<?php echo CHtml::activeFileField($model,'bookFile3',array("class"=>"visually-hidden")); ?>
+			<ul class='mb1'>
+				<li class="Book_bookFile1" >
+					<p></p>
+				</li>
+				<li class="Book_bookFile2">
+					<p></p>
+				</li>
+				<li class="Book_bookFile3">
+					<p></p>
+				</li>
+			</ul>
+				
+				
+			<?php echo $form->error($model,'bookFile1'); ?>
+			<div class="personalError errorMessage"></div>
+		</div>	
+	</section>
 
+	<section>
+	<h4 class="icon icon-down after">Informations</h4>
+	<span class="etape ">Etape 2</span>
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'title'); ?>
 		<?php echo $form->textField($model,'title'); ?>
@@ -102,39 +130,24 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 
 		</div>
 	</div>
-	<div>
-		<div class="rowInput">
-				<?php echo $form->labelEx($model,'description'); ?>
-				<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
-				<?php echo $form->error($model,'description'); ?>
-		</div>
+	
+	<div class="rowInput">
+		<?php echo $form->labelEx($model,'description'); ?>
+		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'description'); ?>
+	</div>
 
-		<div class="rowInput" id="uploadInput">
-			<?php echo $form->labelEx($model,'bookFile1'); ?>
-			<?php echo CHtml::activeFileField($model,'bookFile1',array("class"=>"visually-hidden")); ?>
-			<?php echo CHtml::activeFileField($model,'bookFile2',array("class"=>"visually-hidden")); ?>
-			<?php echo CHtml::activeFileField($model,'bookFile3',array("class"=>"visually-hidden")); ?>
-			<ul class='mb1'>
-				<li class="Book_bookFile1" >
-					<p></p>
-				</li>
-				<li class="Book_bookFile2">
-					<p></p>
-				</li>
-				<li class="Book_bookFile3">
-					<p></p>
-				</li>
-			</ul>
-			
-			
-			<?php echo $form->error($model,'bookFile1'); ?>
-			<div class="personalError errorMessage"></div>
-		</div>		
+	
 
-
+	</section>
+	<section>
+		<h4 class="icon icon-down after">Valider</h4>
+		<span class="etape">Etape 3</span>
 		<div class="rowInput buttons">
 			<?php echo CHtml::submitButton('Ajouter'); ?>
 		</div>
+	</section>
+
 	</div>
 
 

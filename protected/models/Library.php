@@ -69,6 +69,23 @@ class Library extends CActiveRecord
 		);
 	}
 
+	public function findTopDownload($limit=10)
+	{
+		$connection=Yii::app()->db;
+		$sql = "SELECT count(bookId), bookId FROM library ";
+		$sql .= "GROUP by bookId ORDER BY count(bookId) DESC LIMIT ".$limit;
+		$command=$connection->createCommand($sql);
+		$dataReader=$command->query();
+		$rows=$dataReader->readAll();
+
+		return $rows;
+
+	}
+	/**
+	*SELECT count(bookId), bookId FROM `library` GROUP by bookId ORDER BY count(bookId) DESC LIMIT 20 
+	**/
+
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

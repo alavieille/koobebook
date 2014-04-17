@@ -233,12 +233,17 @@ class CatalogueController extends Controller
 
 		$newCata = Catalogue::model()->findRandomNew($randCata);
 
-		$topCata = Catalogue::findTopDownload(2);
+		$topBookid = Library::findTopDownload();
+		$topBook = array();
+		foreach ($topBookid as $id) {
+			$topBook[] = Book::model()->findByPk($id);
+		}
+
 
 		$this->render('index',array(
 			'randCata'=> $randCata,
 			'newCata'=>$newCata,
-			'topCata'=>$topCata,
+			'topBook'=>$topBook,
 		));	
 
 	}

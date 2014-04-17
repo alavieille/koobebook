@@ -207,7 +207,7 @@ table{
 
 #main #breadcrumb li{ 
 	display: inline;
-	padding:0 10px;
+	padding:0 5px;
 }
 
 #main .flashsuccess{
@@ -220,6 +220,7 @@ table{
 
 #main h2, #main h3{
 	color:#777;
+	font-weight: normal;
 }
 #main p{
 	color:#505050;
@@ -406,6 +407,9 @@ table{
 	font-weight: normal;
 }
 
+#indexCatalogue h3 a, #newCatalogue h3 a, #discoverCatalogue h3 a{
+	display: block;
+}
 
 /** design catalogue **/
 
@@ -444,15 +448,15 @@ table{
 	border-top: 1px solid #aaa;
 }
 
-#newCatalogue h3 a, #newCatalogue h3:after{
+#newCatalogue h3 a, #newCatalogue h3:after, #topDownload h3 a, #topDownload h3 a:after  {
 	color: #53a1b8;
 }
 
-#newCatalogue h3 a:hover, #newCatalogue h3 a:hover:after{
+#newCatalogue h3 a:hover, #newCatalogue h3 a:hover:after, #topDownload h3 a:hover, #topDownload h3 a:hover:after{
 	color:#555;
 }
 
-#newCatalogue h3 a:after{
+#newCatalogue h3 a:after, #topDownload h3 a:after{
 	font-size: 26px;
 	line-height: 22px;
 	color: #53a1b8;
@@ -473,7 +477,12 @@ table{
 /** catalogue random **/
 
 #discoverCatalogue{
-	background-color: #666;
+	background-color: #555;
+}
+
+#discoverCatalogue h3{
+	color:#349fff;
+	border-color: #349fff;
 }
 
 #discoverCatalogue a, #discoverCatalogue a:after{
@@ -534,6 +543,10 @@ table{
 	font-size: 1.1em;
 }
 
+#viewCatalogue #viewDescription h3{
+	border-bottom: 1px solid #505050;
+}
+
 #viewCatalogue #viewDescription p{
 	text-indent: 50px;	
 	font-size: 14px;
@@ -576,44 +589,11 @@ table{
 		display:table-cell !important ;
 
 	}
-	
-	/** Private Nav **/
-	#privateMenu{
-		background-color:white;
-		width:100%;
-		margin-top:20px;
-		margin-bottom: 10px;
-		color:#505050;
-	}
 
-	#privateMenu:before{
-		color:#505050;
-	}
-
-	#privateMenu:hover{
-		background-color:#eee;
-		cursor: pointer;
-	}
-
-	#privateNav{
-		background-color:white;
-		margin-top: 0;
-		width: 100%;
-		margin-right: 0;
-	}
-
-	#privateNav h3{
-		text-align: center;
-	}
-	#privateNav ul li a{
-		text-align: center;
+	#discoverCatalogue div.autogrid5 > *{
+	width: 30%;
 	}
 	
-	/** gestion catalogue / liste livre **/
-	#ltBook #addEbook p:last-child{
-		position: relative;
-		margin-left: 0%;
-	}
 }
 
 @media (max-width: 640px) {

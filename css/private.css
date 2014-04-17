@@ -33,11 +33,12 @@
 	text-align: left;
 	border-bottom: 1px solid #ddd;
 	color:#53a1b8;
-	font-weight: 600;
+	font-weight: normal;
 }
 #private #privateNav h3{
 	text-align: left;
-	font-weight: 600;
+	font-weight: normal;
+
 	color:#53a1b8;
 	margin-top: 10px;
 	font-size: 18px;
@@ -66,7 +67,7 @@
 #privateNav li a{
 	display: block;
 	color:#505050;
-		padding-bottom: 5px;
+	padding-bottom: 5px;
 	padding-top: 5px;
 }
 #privateNav li a:hover,#privateNav li.active a{
@@ -77,7 +78,72 @@
 /**
  * 1.1 create Book
  **/
+#book-form{
+	padding-top: 50px;
+	margin-left: 50px;
+}
 
+
+#book-form>section {
+	border-left: 2px dashed #ccc;
+
+	padding-bottom: 50px;
+	position: relative;
+	min-height: 150px;
+
+}
+#book-form>section>div{
+	//display: none;
+	padding-left: 80px;
+}
+
+#book-form section:first-of-type div{
+	display: block;
+}
+
+
+#book-form>section .etape{
+	background:#eee;
+	padding: 35px 20px;
+	display: inline-block;
+	border-radius:80px;
+	position: absolute;
+	left: -50px;
+	top:-35px;
+	color: #53a1b8;
+
+}
+
+#book-form section:first-of-type .etape {
+	color:white;
+	background:#53a1b8;
+}
+
+#book-form>section h4{
+	font-weight: normal;
+	color:#53a1b8;
+}
+#book-form>section h4::before{
+	content:" ";
+	width: 80px;
+	height: 20px;
+	display: inline-block;
+	color:#53a1b8;
+	border-bottom: 1px dashed #53a1b8;
+	text-align: top;
+	vertical-align: top;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: -10px;
+}
+#book-form>section h4::after{
+	color: #53a1b8;
+	font-size: 15px;
+}
+#book-form>section h4:hover,#book-form>section h4:hover::after,#book-form>section h4:hover::before{
+	color:#ccc;
+	cursor: pointer;
+}
  #book-form #previous_cover{
  	display: block;
 	width: 165px;
@@ -112,6 +178,7 @@
  	text-align: center;
  	padding-top:3lopx;
  	width:120px;
+ 	margin-top: 15px;
  	display: inline-block;
  	min-height: 150px;
  	border: 3px dotted #ccc;
@@ -379,9 +446,69 @@
 
 
 @media (max-width: 768px) {
+	
+	/** Private Nav **/
+	#privateMenu{
+		background-color:white;
+		width:100%;
+		margin-top:20px;
+		margin-bottom: 10px;
+		color:#505050;
+	}
+
+	#privateMenu:before{
+		color:#505050;
+	}
+
+	#privateMenu:hover{
+		background-color:#eee;
+		cursor: pointer;
+	}
+
 	#privateNav{
+		background-color:white;
+		margin-top: 0;
+		width: 100%;
 		position: relative;
+		margin-right: 0;
+	}
+
+	#privateNav h3{
+		text-align: center;
+	}
+	#privateNav ul li a{
+		text-align: center;
+	}
+	
+	/** gestion catalogue / liste livre **/
+	#ltBook #addEbook p:last-child{
+		position: relative;
+		margin-left: 0%;
+	}
+
+}
+
+@media(max-width: 480px){
+
+	#ltBook div.autogrid5 > *, #pushBook div.autogrid5 > *{
+		width:100%;
+	}
+
+	#book-form{
+		margin-left: 10px;
 	}
 
 
+	#book-form>section {
+		border-left:none;
+	}
+		#book-form>section div{
+			padding-left: 5px;
+		}
+	#book-form>section .etape{
+		display: none;
+	}	
+	  #book-form #uploadInput ul li+li{
+	  	margin-left: 0px;
+	  }
 }

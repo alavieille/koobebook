@@ -1,3 +1,4 @@
+
 <?php if(Yii::app()->user->hasFlash('success')):?>
     <div class="txtcenter flashsuccess pb2">
         <?php echo Yii::app()->user->getFlash('success'); ?>
@@ -38,30 +39,4 @@
 		</div>
 	</div>
 </section>
-
-<section class="panel">
-	<div class=" mw960p center">
-		<?php if(count($newCata) > 0) : ?>
-			<section id="newCatalogue">
-				<h3 class="mb2 mr3">
-					<a class=" w100 icon icon-bracket2 after" href="<?php echo Yii::app()->createUrl('catalogue/new/');  ?>">Nouveautés</a>
-				</h3>
-				<?php foreach ($newCata as $cata) : ?>
-					<?php  $this->renderPartial('//catalogue/_viewNew', array('cata'=>$cata)); ?>
-				<?php endforeach; ?>
-			<section>
-		<?php endif; ?>
-	</div>
-
-</section>
-
-<section id="discoverCatalogue">
-	<div class=" mw960p center pt1 catalogue">
-		<?php if(isset($randCata)) : ?>
-		<h3 class="mb2 ml1 mr3">À découvrir</h3>
-		<?php  $this->renderPartial('//catalogue/_viewDiscover', array('cata'=>$randCata)); ?>
-		<?php endif; ?>
-	</div>
-
-
-</section>
+	<?php  $this->renderPartial('//catalogue/_viewIndex', array('newCata'=>$newCata,'randCata'=>$randCata,'topBook'=>$topBook)); ?>

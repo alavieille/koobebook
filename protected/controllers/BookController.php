@@ -23,7 +23,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewodps','download'),
+				'actions'=>array('index','view','viewodps','download','topDownload'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
@@ -337,7 +337,20 @@ class BookController extends Controller
 	}
 
 
- 
+ 	public function actionTopDownload()
+ 	{
+		$topBookid = Library::findTopDownload(30);
+		$topBook = array();
+		foreach ($topBookid as $id) {
+			$topBook[] = Book::model()->findByPk($id);
+		}
+		$this->render('topDownload',array(
+			'topBook'=>$topBook,
+		));	
+
+ 	}
+
+
 	/**
 	 * default action
 	 * Redirect user to home

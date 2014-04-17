@@ -1,12 +1,12 @@
 <?php
 /* @var $this CatalogueController */
 
-$this->pageTitle=Yii::app()->name . ' - Suvis';
+$this->pageTitle=Yii::app()->name . ' - Tableau de bord';
 
 ?>
 
 <section>
-	<h2 class="pt2 mb3">Suivi</h2>
+	<h2 class="pt2 mb3">Tableau de bord</h2>
 
 	<table class="striped  data table" summary="">
 		<thead>
