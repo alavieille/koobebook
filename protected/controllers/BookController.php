@@ -23,7 +23,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewodps','download','topDownload'),
+				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
@@ -230,7 +230,7 @@ class BookController extends Controller
 						}
 					}
 
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array("catalogue/manage"));
 				}
 			}
 		}
@@ -305,6 +305,54 @@ class BookController extends Controller
 		}
 
 	}
+
+
+	public function actionExtractInfo()
+	{
+		if(Yii::app()->request->isAjaxRequest ) {
+			try {
+				$files = array("application/x-mobipocket-ebook"=>"mobi.mobi","application/epub+zip"=>"epub.epub");
+				$metaFile = array();
+				foreach ($_FILES as $file) {
+					if( $file["error"] == 0 )
+						$metaFile[] = FactoryMeta::initialize($file["tmp_name"], $file["type"]);
+				}
+				echo json_encode($this->getMetaFile($metaFile));
+			} catch (Exception $e) {
+				echo "error";
+			}
+		
+		}
+	}
+
+	private function getMetaFile($metaFiles)
+	{
+		$meta = array(
+			"title" => null,
+			"author" => null,
+			"language" => null,
+			"description" => null,
+			"date" => null,
+			"isbn" => null,
+			);
+		foreach ($metaFiles as $metaFile) {
+			if( $meta["title"] == null )
+				$meta["title"] = $metaFile->getTitle();
+			if( $meta["author"] == null )
+				$meta["author"] = $metaFile->getAuthor();
+			if( $meta["language"] == null )
+				$meta["language"] = $metaFile->getLanguage();
+			if( $meta["description"] == null )
+				$meta["description"] = $metaFile->getDescription();
+			if( $meta["date"] == null )
+				$meta["date"] = date("Y-m-d", strtotime($metaFile->getDate()));
+			if( $meta["isbn"] == null )
+				$meta["isbn"] = $metaFile->getIsbn();
+		}
+
+		return $meta;
+	}
+
 
 	/**
 	* Delete a book
@@ -381,7 +429,6 @@ class BookController extends Controller
 	*/
 	public function isOwnerRules()
 	{
-     	var_dump($_GET);
      	if(isset($_GET["id"])) {
 	        $model = $this->loadModel($_GET['id']);
 	        if(isset($model->catalogue))

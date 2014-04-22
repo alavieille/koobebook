@@ -20,10 +20,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
-	<section>
-		<h4 class="pt1 icon icon-up after">Fichiers</h4>
+	<section class="etape1">
+		<h4 class="pt3 ">Fichiers</h4>
 		<span class="etape">Etape 1</span>
-		<div class="rowInput" id="uploadInput">
+		<div class="rowInput txtcenter" id="uploadInput">
 			<?php echo $form->labelEx($model,'bookFile1'); ?>
 			<?php echo CHtml::activeFileField($model,'bookFile1',array("class"=>"visually-hidden")); ?>
 			<?php echo CHtml::activeFileField($model,'bookFile2',array("class"=>"visually-hidden")); ?>
@@ -42,12 +42,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				
 				
 			<?php echo $form->error($model,'bookFile1'); ?>
-			<div class="personalError errorMessage"></div>
+			<div class="personalError errorMessage mt3 txtcenter"></div>
 		</div>	
+		<div class="rowInput pt2">
+				<?php echo CHtml::button('Étape suivante',array("id"=>"extractInfo")); ?>
+		</div>
 	</section>
 
-	<section>
-	<h4 class="icon icon-down after">Informations</h4>
+	<section class="etape2">
+	<h4 class="pt3">Informations</h4>
 	<span class="etape ">Etape 2</span>
 	<div class="rowInput">
 		<?php echo $form->labelEx($model,'title'); ?>
@@ -115,7 +118,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'language'); ?>
 			</div>
 
-			<div class="rowInput w200p pr1 left tiny-w100">
+			<div class="rowInput w200p pr1 left tiny-w100 line">
 				<?php echo $form->labelEx($model,'price'); ?> 
 				<?php echo $form->textField($model,'price'); ?>
 				<?php echo $form->error($model,'price'); ?>
@@ -138,11 +141,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 	</div>
 
 	
-
-	</section>
-	<section>
-		<h4 class="icon icon-down after">Valider</h4>
-		<span class="etape">Etape 3</span>
 		<div class="rowInput buttons">
 			<?php echo CHtml::submitButton('Ajouter'); ?>
 		</div>

@@ -7,6 +7,13 @@ $(function(){
 	/** mange of preview */
 	previewPictureDownload();
 
+	if($(".errorSummary:visible").length <= 0 ) {
+		$(".etape2").hide();
+	}
+	else {
+		$("#extractInfo").hide();	
+	}
+
 	/** mange upload of file */
 	manageUpload();
 
@@ -15,9 +22,10 @@ $(function(){
 var manageUpload = function(){
 
 
-	var arrayTypeFile = [];
+	var arrayTypeFile = new Array();
+	var arrayFile = new Array();
 
-
+	/** delete in update action **/
 	$("#uploadInput ul li .close").click(function(){
 
 		$(this).next().val(1);
@@ -27,11 +35,27 @@ var manageUpload = function(){
 		return false;
 	});
 
+	/** remove click on upload in update action */
 	$("#uploadInput ul li:not(.noclick)").live('click',function(){
 		var nameClass = $(this).attr('class').split(" ")[0];
 		$("#uploadInput input#"+nameClass).click();
 		return false;
 	});
+
+	/** delete in create action **/
+	$("#uploadInput ul li .deleteCreate").live('click',function(){
+		console.log('ok');
+		var nameClass = $(this).parent().attr('class').split(" ")[0];
+		$("#uploadInput input#"+nameClass).val();
+		
+		delete arrayFile[nameClass];
+		delete arrayTypeFile[nameClass];
+		$(this).parent().removeClass().addClass(nameClass);
+		$(this).parent().children("p").text("");
+		$(this).detach();
+
+		return false;
+	})
 
 
 	$("#uploadInput input[type='file']").change(function(ev){
@@ -66,8 +90,59 @@ var manageUpload = function(){
 		 	$("#uploadInput ul li."+this.id).addClass("pdf");
 		  break;
 		}
+		$("#uploadInput ul li."+this.id).append("<a href='' class='deleteCreate'>Supprimer</a>");
 		arrayTypeFile[this.id] = file.type;
+		arrayFile[this.id] = this.files[0];
+		console.log(arrayTypeFile);
+		console.log(arrayFile);
 	});
+	
+
+	$("#extractInfo").click(function(){
+		$('#uploadInput .personalError').html("");
+			console.log(Object.keys(arrayFile).length);
+	
+		if(Object.keys(arrayFile).length <=0 ){
+			$('#uploadInput .personalError').html("Vous devez au moins ajouter un fichier");
+			return;
+		}	
+	
+		formdata = new FormData();
+		for(key in arrayFile) {
+		  formdata.append(key, arrayFile[key]);
+		}
+
+		 $.ajax({  
+		    url: "extractInfo",  
+		    type: "POST",  
+		    data: formdata,  
+		    processData: false,  
+		    contentType: false, 
+		    dataType: "json", 
+		    success:  addExtractMetaInfo,
+		}); 
+		$(".etape2").show();
+		$('html,body').animate({scrollTop: $(".etape2").offset().top},'slow');
+		$(this).detach();
+
+		//console.log(arrayFile);
+	});
+
+
+
+	var addExtractMetaInfo = function(res)
+	{
+		if(res.title && $("#book-form #Book_title").val() == "" )
+			$("#book-form #Book_title").val(res.title);
+		if(res.language && $("#book-form #Book_language").val() == "" )
+			$("#book-form #Book_language").val(res.language);
+		if(res.description && $("#book-form #Book_description").val() == ""  )
+			$("#book-form #Book_description").val(res.description);
+		if(res.date && $("#book-form #Book_publication").val() == ""  )
+			$("#book-form #Book_publication").val(res.date);
+		if(res.isbn && $("#book-form #Book_isbn").val() == "" )
+			$("#book-form #Book_isbn").val(res.isbn);
+	}
 
 	var checkNumberFile = function (typeFile,id){
 		

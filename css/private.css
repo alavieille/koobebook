@@ -109,12 +109,7 @@
 	border-radius:80px;
 	position: absolute;
 	left: -50px;
-	top:-35px;
-	color: #53a1b8;
-
-}
-
-#book-form section:first-of-type .etape {
+	top:-5px;
 	color:white;
 	background:#53a1b8;
 }
@@ -140,10 +135,7 @@
 	color: #53a1b8;
 	font-size: 15px;
 }
-#book-form>section h4:hover,#book-form>section h4:hover::after,#book-form>section h4:hover::before{
-	color:#ccc;
-	cursor: pointer;
-}
+
  #book-form #previous_cover{
  	display: block;
 	width: 165px;
@@ -185,7 +177,19 @@
  	 word-wrap: break-word;
  	background: url("img/upload.png") no-repeat 50%;
  }
- 
+  
+  #book-form #uploadInput ul li .deleteCreate{
+	position: absolute;
+ 	bottom:-25px;
+ 	left:30px;
+ 	font-size: 15px;
+	color:#e74c3c;
+  }
+
+  #book-form #uploadInput ul li .deleteCreate:hover{
+	color:red;
+  }
+
  #book-form #uploadInput ul li .close{
  	position: absolute;
  	display: none;
@@ -485,6 +489,28 @@
 		position: relative;
 		margin-left: 0%;
 	}
+	#book-form #uploadInput ul li{
+		margin-top: 30px;
+	}
+
+	#book-form #uploadInput ul li+li{
+	  	margin-left: 0px;
+	 }
+	
+	#book-form{
+		margin-left: 10px;
+	}
+
+	 #book-form>section {
+		border-left:none;
+		}
+	#book-form>section div{
+			padding-left: 5px;
+		}
+	#book-form>section .etape{
+		display: none;
+	}	
+	
 
 }
 
@@ -494,21 +520,11 @@
 		width:100%;
 	}
 
-	#book-form{
-		margin-left: 10px;
-	}
 
 
-	#book-form>section {
-		border-left:none;
+
+	#book-form #uploadInput ul li{
+		display:block;
 	}
-		#book-form>section div{
-			padding-left: 5px;
-		}
-	#book-form>section .etape{
-		display: none;
-	}	
-	  #book-form #uploadInput ul li+li{
-	  	margin-left: 0px;
-	  }
+
 }

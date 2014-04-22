@@ -139,7 +139,7 @@ div.form [type="checkbox"]:checked + label:after {
 
 /** bouton submit **/
 
-div.form input[type="submit"]{
+div.form input[type="submit"],div.form input[type="button"]{
 	border: none;
 	color:white;
 	padding:8px 15px;
@@ -156,7 +156,7 @@ div.form input[type="submit"]{
 }
 
 
-div.form input[type="submit"]:hover{
+div.form input[type="submit"]:hover,div.form input[type="button"]:hover{
 	background-color: #ccc;
 	color:#555;
 }
