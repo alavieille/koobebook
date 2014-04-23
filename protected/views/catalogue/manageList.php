@@ -61,7 +61,13 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 			<?php foreach ($pushBooks as $book) :?>
 			<tr>
 				<td><a href="<?php echo Yii::app()->createUrl('book/view/',array( 'id'=>$book->id)); ?> "  ><?php echo $book->title;?></a></td>
-				<td class="txtcenter" ><a href="<?php  ?>" ><?php echo $book->author ?></a></td>
+				<td class="txtcenter" >
+					<?php foreach ($book->contributors as $contributor) : ?>
+						<?php if($contributor->type == 'author') : ?>
+						<a href="<?php  ?>" ><?php echo $contributor->name; ?></a>
+						<?php endif; ?>
+					<?php endforeach ?>
+				</td>
 				<td class="txtcenter" ><?php echo $book->price ?> &euro;</td>
 				<td class="options">
 					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id));; ?>" class="push tiny-no-float right" title="Mise à la une">Mise à la une</a>
@@ -106,7 +112,13 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 			<?php foreach ($books as $book) :?>
 			<tr>
 					<td><a href="<?php echo Yii::app()->createUrl('book/view/',array( 'id'=>$book->id)); ?> "  ><?php echo $book->title;?></a></td>
-				<td class="txtcenter" ><a href="<?php  ?>" ><?php echo $book->author ?></a></td>
+				<td class="txtcenter" >
+					<?php foreach ($book->contributors as $contributor) : ?>
+						<?php if($contributor->type == 'author') : ?>
+						<a href="<?php  ?>" ><?php echo $contributor->name; ?></a></br>
+						<?php endif; ?>
+					<?php endforeach ?>
+				</td>
 				<td class="txtcenter" ><?php echo $book->price ?> &euro;</td>
 				<td class="options">
 					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id));; ?>" class="push tiny-no-float  right" title="Mise à la une">Mise à la une</a>

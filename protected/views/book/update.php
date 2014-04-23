@@ -2,6 +2,8 @@
 /* @var $this BookController */
 /* @var $model Book */
 $this->pageTitle=Yii::app()->name . ' - Mise à jour';
+
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
 ?>
 
@@ -57,11 +59,22 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 			</div>
 		</div>
 		<div class="left w60 tiny-w100">
-			<div class="rowInput">
-				<?php echo $form->labelEx($model,'author'); ?>
-				<?php echo $form->textField($model,'author'); ?>
-				<?php echo $form->error($model,'author'); ?>
+			<p class="pt2">Contributeurs : </p>
+			<?php foreach ($contributors as $key => $contributor) : ?> 
+				<div class="contributor ml1 mb1">
+				<p class=" w200p tiny-w100"><input type="text" value="<?php echo $contributor->name ?>" name="contributor[<?php echo $key ?>][name]"  style="display:none;"></p>
+				<select class="w200p" name="contributor[<?php echo $key ?>][type]" style="display:none;">
+				<option  value="<?php echo $contributor->type ?>" selected="selected"></option>
+				</select>			
+				<p class=""><?php echo $contributor->name ?> (<?php echo $contributor->translateType() ?>)<span class="pl2 deleteContrib">x</span></p>
+				</div>
+
+			<?php endforeach; ?>
+			<div class="ml1 contributor line">
+				<p class="w200p left pr2 tiny-w100"><?php echo CHtml::textField('contributor['.count($contributors).'][name]'); ?></p>
+				<?php echo CHtml::dropDownList('contributor['.count($contributors).'][type]','author',array('author'=>'Auteur','illustrator'=>'Illustrateur','traductor'=>'Traducteur'),array("class"=>"persoDropDown w200p left")); ?>
 			</div>
+			<a href="" id="addContributor">Ajouter un contributeur</a>
 
 			<div class="rowInput">
 				<?php echo $form->labelEx($model,'editor'); ?>

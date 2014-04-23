@@ -24,6 +24,7 @@ var manageUpload = function(){
 
 	var arrayTypeFile = new Array();
 	var arrayFile = new Array();
+	var numberContributor = $(".contributor").length;
 
 	/** delete in update action **/
 	$("#uploadInput ul li .close").click(function(){
@@ -93,10 +94,43 @@ var manageUpload = function(){
 		$("#uploadInput ul li."+this.id).append("<a href='' class='deleteCreate'>Supprimer</a>");
 		arrayTypeFile[this.id] = file.type;
 		arrayFile[this.id] = this.files[0];
-		console.log(arrayTypeFile);
-		console.log(arrayFile);
+
 	});
 	
+	$("#addContributor").click(function()
+	{
+		numberContributor ++;
+
+		var lastContributor = $(".contributor:last");
+
+		if(lastContributor.find('input[type="text"]').val() != "" ) {
+			var newContributor = lastContributor.clone();
+			
+			newContributor.find('input[type="text"]').attr("name","contributor["+numberContributor+"][name]");
+			newContributor.find('input[type="text"]').val("");
+			newContributor.find('select').attr("name","contributor["+numberContributor+"][type]");
+			$(this).before(newContributor);
+			
+			lastContributor.find('input[type="text"]').hide();
+		
+			var contributorText = "<p class='mt0'>"+lastContributor.find('input[type="text"]').val();
+			contributorText += " ("+lastContributor.find('.selectPersonal .selectValue').html()+")";
+			contributorText += "<span class='pl2 deleteContrib'>x</span>";
+			contributorText += "</p>";
+		
+			lastContributor.find('.selectPersonal').detach();
+
+			lastContributor.append(contributorText);
+			
+		}
+			
+		return false;
+	});
+	
+	$(".deleteContrib").live('click',function(){
+		console.log($(this).parent());
+		$(this).parent().parent().detach();
+	});
 
 	$("#extractInfo").click(function(){
 		$('#uploadInput .personalError').html("");
@@ -142,6 +176,12 @@ var manageUpload = function(){
 			$("#book-form #Book_publication").val(res.date);
 		if(res.isbn && $("#book-form #Book_isbn").val() == "" )
 			$("#book-form #Book_isbn").val(res.isbn);
+		if(res.author && res.author.length > 0) {
+			$.each(res.author,function(index,value){$
+				$("#book-form .contributor input").val(value);
+				$("#addContributor").click();
+			});
+		}
 	}
 
 	var checkNumberFile = function (typeFile,id){

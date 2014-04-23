@@ -251,6 +251,7 @@ table{
 	display: block;	
 	color:white;
 	line-height: 40px;
+	font-weight: normal;
 }
 
 #main .linkButton:hover{

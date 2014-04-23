@@ -101,7 +101,6 @@
 	display: block;
 }
 
-
 #book-form>section .etape{
 	background:#eee;
 	padding: 35px 20px;
@@ -134,6 +133,35 @@
 #book-form>section h4::after{
 	color: #53a1b8;
 	font-size: 15px;
+}
+
+#book-form .deleteContrib{
+	color:red;
+	font-size: 20px;
+}
+
+#book-form .deleteContrib:hover{
+	cursor: pointer;
+}
+#book-form #addContributor{
+	line-height: 32px;
+	color: #53a1b8;
+	height: 32px;
+	display: inline-block;
+}
+#book-form #addContributor:hover{
+	color: #999;
+}
+
+#book-form #addContributor:before{
+	content:'';
+	height: 32px;
+	width: 32px;
+	line-height: 32px;
+	padding-right: 5px;
+	display: inline-block;
+	vertical-align: top;
+	background: url('img/plus.png') no-repeat;
 }
 
  #book-form #previous_cover{
@@ -273,7 +301,7 @@
 	display: inline-block;
 	width:34px;
 	height: 32px;
-	text-indent: 100%;
+	text-indent: 110%;
     white-space: nowrap;
     overflow: hidden;
     padding-left: 2px;

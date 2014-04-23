@@ -3,6 +3,7 @@
 /* @var $model Book */
 /* @var $form CActiveForm */
 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',CClientScript::POS_END);
 ?>
 				
@@ -80,13 +81,23 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 			</div>
 		</div>
 		<div class="left w60 tiny-w100">
-			<div class="rowInput">
-				<?php echo $form->labelEx($model,'author'); ?>
-				<?php echo $form->textField($model,'author'); ?>
-				<?php echo $form->error($model,'author'); ?>
-			</div>
+			<p class="pt2">Contributeurs : </p>
+			<?php foreach ($contributors as $key => $contributor) : ?> 
+				<div class="rowInput line contributor">
+				<p class="w200p tiny-w100"><input type="text" value="<?php echo $contributor->name ?>" name="contributor[<?php echo $key ?>][name]"  style="display:none;"></p>
+				<select class="w200p" value="<?php echo $contributor->type ?>" name="contributor[<?php echo $key ?>][type]" style="display:none;">
+				<option value="<?php echo $contributor->type ?>" selected="selected"></option>
+				</select>			
+				<p class="mt0"><?php echo $contributor->name ?> (<?php echo $contributor->translateType() ?>)<span class="pl2 deleteContrib">x</span></p></div>
 
-			<div class="rowInput">
+			<?php endforeach; ?>
+			<div class="rowInput line contributor">
+				<p class="w200p inbl tiny-w100"><?php echo CHtml::textField('contributor['.count($contributors).'][name]'); ?></p>
+				<?php echo CHtml::dropDownList('contributor['.count($contributors).'][type]','author',array('author'=>'Auteur','illustrator'=>'Illustrateur','traductor'=>'Traducteur'),array("class"=>"persoDropDown w200p inbl")); ?>
+			</div>
+			<a href="" id="addContributor">Ajouter un contributeur</a>
+			<div class="rowInput line">
+
 				<?php echo $form->labelEx($model,'editor'); ?>
 				<?php //echo $form->textField($model,'editor',array('size'=>60,'maxlength'=>250)); ?>
 				<p><?php echo $model->catalogue->name ?></p>

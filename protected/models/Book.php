@@ -46,9 +46,9 @@ class Book extends CActiveRecord
 		// will receive user inputs.
 		return array(
 
-			array('title, price, author, publication, description', 'required'),
+			array('title, price, publication, description', 'required'),
 			array('isbn', 'numerical', 'integerOnly'=>true),
-			array('title, author, subtitle', 'length', 'max'=>250),
+			array('title, subtitle', 'length', 'max'=>250),
 
 
 			array('price', 'length', 'max'=>10),
@@ -59,7 +59,7 @@ class Book extends CActiveRecord
 			array('bookFile2', 'file', 'types'=>'epub, mobi, pdf',"allowEmpty"=>true) ,
 			array('bookFile3', 'file', 'types'=>'epub,mobi,pdf',"allowEmpty"=>true) ,
 
-			array('description date_create, language', 'safe'),
+			array('description date_create, language, author', 'safe'),
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -76,6 +76,7 @@ class Book extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'catalogue' => array(self::BELONGS_TO, 'Catalogue', 'catalogueId'),
+			'contributors' => array(self::HAS_MANY, 'Contributor', 'bookId'),
 			'library' => array(self::HAS_MANY, 'Library', 'bookId'),
 			'libraryCount' => array(self::STAT, 'Library', 'bookId'),
 		);

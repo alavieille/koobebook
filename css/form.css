@@ -64,8 +64,8 @@ div.form input[type="password"],
 div.form textarea,
 div.form select
 {
-	margin: 0.2em 0 0.5em 0;
-	width:100%;
+	margin: 0em 0 0.5em 0;
+	width:100% ;
 	height: 40px;
 	border: none;
 	border: 2px solid #E5E3E2;
@@ -153,6 +153,7 @@ div.form input[type="submit"],div.form input[type="button"]{
 	display: block;
 	margin: 0 auto;
 	margin-top: 30px;
+  font-weight: normal;
 }
 
 
