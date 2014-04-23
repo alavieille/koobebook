@@ -74,7 +74,6 @@ class BookController extends Controller
 		$this->render('view',array(
 			'model'=>$model,
 			'format'=>$format,
-			'contributors'=>$contributors,
 			'traductor'=>$traductor,
 			'illustrator'=>$illustrator,
 			'author'=>$author,
@@ -89,8 +88,23 @@ class BookController extends Controller
 	public function actionViewodps($id)
 	{
 		$model= $this->loadModel($id);
+		$contributors = $model->contributors;
+		$author = array();
+		$traductor = array();
+		$illustrator = array();
+		foreach ($contributors as $contributor) {
+			if( $contributor["type"] == "author")
+				$author[] = $contributor;
+			elseif ($contributor["type"] == "traductor") 
+				$traductor[] = $contributor;
+			elseif ($contributor["type"] == "illustrator")
+				$illustrator[] = $contributor;
+		}
 		$this->renderPartial('viewOdps',array(
 			'model'=>$model,
+			'traductor'=>$traductor,
+			'illustrator'=>$illustrator,
+			'author'=>$author,
 		));
 	}
 

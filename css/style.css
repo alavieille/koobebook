@@ -203,6 +203,7 @@ table{
 
 #main #breadcrumb{
 	background: white ;
+	padding-left: 5px;
 }
 
 #main #breadcrumb li{ 

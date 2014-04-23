@@ -3,10 +3,24 @@
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0"    xmlns:dc="http://purl.org/dc/terms/" xmlns:opds="http://opds-spec.org/2010/catalog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dcterms="http://purl.org/dc/terms/">
 <title><?php echo $model->title ?></title>
 <id><?php echo $model->id; ?></id>
-<author>
-  <name><?php echo $model->author; ?></name>
-</author>
 
+<?php foreach ($author as $value) : ?>
+	<author>
+  		<name><?php echo $value["name"]; ?></name>
+	</author>
+<?php endforeach; ?>
+
+<?php foreach ($traductor as $value) : ?>
+		<contributor>
+	  		<name><?php echo $value["name"]; ?></name>
+		</contributor>
+<?php endforeach; ?>
+
+<?php foreach ($illustrator as $value) : ?>
+		<contributor>
+	  		<name><?php echo $value["name"]; ?></name>
+		</contributor>
+<?php endforeach; ?>
 
 <published><?php echo str_replace('+00:00', 'Z', gmdate('c',strtotime($model->publication))) ?></published>
 <updated><?php echo str_replace('+00:00', 'Z', gmdate('c')) ?></updated>
@@ -23,11 +37,11 @@
 
 <?php if(isset($model->catalogueId)) : ?>
 <dcterms:publisher><?php echo $model->catalogue->name ?></dcterms:publisher>
-<dcterms:issued><?php echo $model->publication ?></dcterms:issued>
+<dcterms:issued><?php  echo $model->publication ?></dcterms:issued>
 <?php endif; ?>
 
 <summary>
-	<?php echo $model->getExcerptDescription(100); ?>
+	<?php  echo CHtml::encode($model->getExcerptDescription(100)); ?>
 </summary>
 
 <link type="text/html" href="http://192.168.43.137/www-dev/libebook/index.php/book/95" rel="alternate" title="Voir sur Feedbooks"/>
@@ -59,6 +73,6 @@
 <link type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->catalogueId));  ?>" rel="related" title="Du m&#234;me &#233;diteur"/>
 <?php endif;?>
 
-<content type="html"><?php echo $model->description ?></content>
+<content type="html"><?php echo CHtml::encode($model->description); ?></content>
 
 </entry>

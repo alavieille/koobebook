@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 	<div class="center mw960p">	
 		<?php if(count($topBook) > 0) : ?>
 		<section id="topDownload">
-			<h3 class="mb2 mr3">Top téléchargement</h3>
+			<h3 class="mb2 mr3 pl1">Top téléchargement</h3>
 			<div class="autogrid5 catalogue">
 			<?php foreach ($topBook as $book) : ?>
 				<?php  $this->renderPartial('_viewBookCatalogue', array('book'=>$book)); ?>

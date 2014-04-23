@@ -1,15 +1,28 @@
 <entry>
 <title><?php echo $book->title; ?></title>
-<subtitle><?php echo $book->subtitle ?></subtitle>
 <id><?php echo $book->id ?></id>
-<author>
-  <name><?php echo $book->author; ?></name>
-</author>
+
+<?php foreach ($book->contributors as $contributor) : ?>
+	<?php if($contributor["type"] == "author") : ?>
+	<author>
+  		<name><?php echo $contributor["name"]; ?></name>
+	</author>
+	<?php else : ?>
+		<contributor>
+	  		<name><?php echo $contributor["name"]; ?></name>
+		</contributor>
+	<?php endif; ?>
+
+<?php endforeach; ?>
+
+
+
+
 <published><?php echo str_replace('+00:00', 'Z', gmdate('c',strtotime($book->publication))) ?></published>
 <updated><?php echo str_replace('+00:00', 'Z', gmdate('c')) ?></updated>
 <dcterms:publisher><?php echo $book->catalogue->name ?></dcterms:publisher>
 <summary>
-<?php echo $book->getExcerptDescription(100); ?>
+<?php echo CHtml::encode($book->getExcerptDescription(100)); ?>
 </summary>
 
 <?php if(! is_null($book->picture)) : ?>

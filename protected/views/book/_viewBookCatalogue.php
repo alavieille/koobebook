@@ -12,10 +12,10 @@
 		 	$picture = $urlUpload.DIRECTORY_SEPARATOR."book/".$book->id."/".$book->id."-".$book->picture;
 		}
 	?>
-		<figure class="txtcenter  mt0 ">
+		<figure class="txtcenter  mt0  mb1">
 			<img class="" src="<?php echo $picture; ?>" alt="couverture" />
 			<figcaption>
-				<p class="pt1 w100 txtcenter"><?php echo $book->title;?></p>		
+				<p class="w100 txtcenter pb1"><?php echo $book->title;?></p>		
 			</figcaption>
 		</figure>
 	</a>	
