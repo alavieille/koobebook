@@ -78,12 +78,7 @@ class Catalogue extends CActiveRecord
 	*/
 	public function findRandom()
 	{
-		/*$res = $this->with(array('books'=>array('joinType'=>'INNER JOIN',)))->find(array(
-			'select' => "*",
-			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => 't.description IS NOT NULL and t.id >=r2.id',
-			'order' => 't.id ASC',
-		));	*/
+
 		$criteria = new CDbCriteria();
 		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
 		$criteria->addCondition('t.description IS NOT NULL AND t.description != ""');
@@ -102,15 +97,7 @@ class Catalogue extends CActiveRecord
 	*/
 	public function findRandomNew($ignoreCAtalogue = null)
 	{		
-		/*$res = Catalogue::model()->findAll(array(
-			'select' => "*",
-			'alias' => 'r1',
-			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => ' DATEDIFF(NOW(),r1.date_create) < 30 and r1.id >=r2.id',
-			'order' => 'rand()',
-			'limit' => '2'
-		));*/
-	
+
 		$conditionIgnoreId = "";
 		if($ignoreCAtalogue != null) {
 			$conditionIgnoreId = " AND t.id != ".$ignoreCAtalogue->id;
@@ -141,38 +128,6 @@ class Catalogue extends CActiveRecord
 
 	}
 
-	/**
-	* Select top download of catalogue
-	* @param integer $limit limit of catalogue
-	* @return an Array of Catalogue
-	*/
-	public function findTopDownload($limit=null)
-	{
-
-		$connection=Yii::app()->db;   // vous devez avoir une connection "db"
-		$sql = "SELECT sum(nbr) as 'nbr' , catalogueId FROM (";
-		$sql .= " SELECT count(book.id) as 'nbr', book.catalogueId, library.date_download FROM book INNER JOIN library on book.id = library.bookID GROUP BY book.id) as nb ";
-		$sql .= " WHERE YEAR(nb.date_download) = YEAR(NOW()) AND (MONTH(NOW())-MONTH(nb.date_download)) <= 1";
-		$sql .= " GROUP BY (nb.catalogueId)";
-		$sql .= " ORDER BY sum(nbr)";
-		if(isset($limit)) {
-			$sql .= " LIMIT ".$limit;
-		}
-		$command=$connection->createCommand($sql);
-		$dataReader=$command->query();
-		$rows=$dataReader->readAll();
-
-		$resArray = array();
-		foreach ($rows as $res) {
-			$arrayCata = array();
-			$cata =  Catalogue::model()->findByPk($res["catalogueId"]);
-			$arrayCata["catalogue"] = $cata;
-			$arrayCata["books"] = $cata->books();
-			$resArray[] = $arrayCata;
-		}
-		return $resArray;
-	}
-
 
 	/**
 	* Select all Catalogue which was published there was less than one month
@@ -180,17 +135,7 @@ class Catalogue extends CActiveRecord
 	* @return an Array of Catalogue
 	*/
 	public function findAllNew()
-	{		
-		/*$res = Catalogue::model()->findAll(array(
-			'select' => "*",
-			'alias' => 'r1',
-			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => ' DATEDIFF(NOW(),r1.date_create) < 30 and r1.id >=r2.id',
-			'order' => 'rand()',
-			'limit' => '2'
-		));*/
-
-		
+	{				
 		$criteria = new CDbCriteria();
 		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
 		$criteria->addCondition("DATEDIFF(NOW(),t.date_create) < 30");

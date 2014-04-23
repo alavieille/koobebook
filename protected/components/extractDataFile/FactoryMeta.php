@@ -1,5 +1,7 @@
 <?php 
-
+/** 
+* Pattern factory for choose class according file type
+**/
 
 class FactoryMeta {
 

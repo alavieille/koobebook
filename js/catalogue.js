@@ -24,6 +24,7 @@ dndHandler.applyDropOutEvents($("#ltBook"));
 
 });
 
+/** show menu param **/
 var showParam = function(event){
 	$(".param").not($(this).next(".param")).hide();
 	console.log($(this).next(".param"));

@@ -58,7 +58,7 @@ var manageUpload = function(){
 		return false;
 	})
 
-
+	/*** add book **/
 	$("#uploadInput input[type='file']").change(function(ev){
 
 		file = this.files[0];
@@ -97,6 +97,7 @@ var manageUpload = function(){
 
 	});
 	
+	/** add contributor **/
 	$("#addContributor").click(function()
 	{
 		numberContributor ++;
@@ -127,11 +128,14 @@ var manageUpload = function(){
 		return false;
 	});
 	
+
+	/** delete contributor **/
 	$(".deleteContrib").live('click',function(){
 		console.log($(this).parent());
 		$(this).parent().parent().detach();
 	});
 
+	/** extract metadata of ebook **/
 	$("#extractInfo").click(function(){
 		$('#uploadInput .personalError').html("");
 			console.log(Object.keys(arrayFile).length);
@@ -159,11 +163,11 @@ var manageUpload = function(){
 		$('html,body').animate({scrollTop: $(".etape2").offset().top},'slow');
 		$(this).detach();
 
-		//console.log(arrayFile);
+
 	});
 
 
-
+	/** add information to form **/
 	var addExtractMetaInfo = function(res)
 	{
 		if(res.title && $("#book-form #Book_title").val() == "" )
@@ -184,6 +188,7 @@ var manageUpload = function(){
 		}
 	}
 
+	/** check number of upload file **/
 	var checkNumberFile = function (typeFile,id){
 		
 		for (var input in arrayTypeFile){
@@ -193,12 +198,15 @@ var manageUpload = function(){
 		return true;
 	}
 
+	/** check type of file **/
 	var checkTypeFile = function(type){
 		arrayType = ["application/epub+zip","application/x-mobipocket-ebook","application/pdf"];
 		return ($.inArray(type,arrayType) >= 0 );
 	}
 }
 
+
+/** preview cover of ebook **/
 var previewPictureDownload = function(){
 
 
@@ -253,6 +261,7 @@ var previewPictureDownload = function(){
 		reader.readAsDataURL(file);
 	})
 
+	
 	var isPicture = function(file){ // check if file is picture
 		var type = new Array('image/pjpeg','image/jpeg','image/bmp','image/png','image/gif','image/x-png');
 	return ($.inArray(file.type,type)!=-1);

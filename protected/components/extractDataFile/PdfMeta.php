@@ -1,4 +1,7 @@
 <?php
+/**
+* Class who extract metadata of a pdf
+**/
 
 // Author: de77.com
 // Licence: MIT

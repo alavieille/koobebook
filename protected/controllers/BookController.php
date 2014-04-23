@@ -40,6 +40,7 @@ class BookController extends Controller
 			),
 		);
 	}
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -385,6 +386,10 @@ class BookController extends Controller
 	}
 
 
+	/**
+	* Extract information to file
+	* Is ajax request
+	*/
 	public function actionExtractInfo()
 	{
 		if(Yii::app()->request->isAjaxRequest ) {
@@ -403,6 +408,11 @@ class BookController extends Controller
 		}
 	}
 
+	/**
+	* Create an array who contains metadata information
+	* @param $metaFiles Array contains metadata of all file
+	* @return $meta an Array
+	**/
 	private function getMetaFile($metaFiles)
 	{
 		$meta = array(

@@ -1,5 +1,7 @@
 <?php 
-
+/**
+* Abstract class who represente an objetc who contains metadata
+**/
 
 abstract class AbstractMeta{
 

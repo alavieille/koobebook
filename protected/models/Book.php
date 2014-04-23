@@ -8,7 +8,6 @@
  * @property integer $catalogueId
  * @property string $title
  * @property string $price
- * @property string $author
  * @property string $picture
  * @property string $description
  * @property string $publication
@@ -59,11 +58,11 @@ class Book extends CActiveRecord
 			array('bookFile2', 'file', 'types'=>'epub, mobi, pdf',"allowEmpty"=>true) ,
 			array('bookFile3', 'file', 'types'=>'epub,mobi,pdf',"allowEmpty"=>true) ,
 
-			array('description date_create, language, author', 'safe'),
+			array('description date_create, language', 'safe'),
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, catalogueId, title, price, author, picture, description, publication, isbn', 'safe', 'on'=>'search'),
+			array('id, catalogueId, title, price, picture, description, publication, isbn', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -93,7 +92,6 @@ class Book extends CActiveRecord
 			'subtitle' => 'Sous-titre',
 			'title' => 'Titre',
 			'price' => 'Prix (en €)',
-			'author' => 'Auteur',
 			'pictureFile' => 'Couverture',
 			'description' => 'Description',
 			'editor' => 'Editeur',

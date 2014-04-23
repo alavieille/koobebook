@@ -1,11 +1,9 @@
 <?php
-
+/* @var $this BookController */
 $this->pageTitle=Yii::app()->name."- Top téléchargement" ;
 
 $this->breadcrumbs=array(
-	    'Éditeurs'=>array('Catalogue/index'),
 	    'Top téléchargement'=>array('Book/topDownload'),
-	
 );
 ?>
 

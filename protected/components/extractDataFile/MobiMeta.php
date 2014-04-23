@@ -1,4 +1,7 @@
 <?php 
+/**
+* Class who extract metadata of a mobi
+**/
 class palmDOCHeader
 {
     public $Compression = 0;

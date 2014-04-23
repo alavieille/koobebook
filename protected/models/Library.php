@@ -54,8 +54,6 @@ class Library extends CActiveRecord
 	public function primaryKey()
 	{
 	   return array('userId', 'bookId');
-	    // Pour les clés primaires composites, retourne un tableau, par exemple:
-	    // return array('pk1', 'pk2');
 	}
 
 	/**
@@ -81,10 +79,6 @@ class Library extends CActiveRecord
 		return $rows;
 
 	}
-	/**
-	*SELECT count(bookId), bookId FROM `library` GROUP by bookId ORDER BY count(bookId) DESC LIMIT 20 
-	**/
-
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

@@ -1,5 +1,5 @@
 <?php
-/* @var $this UserController */
+/* @var $this BookController */
 
 
 $this->pageTitle=Yii::app()->name . ' - Supprimer';

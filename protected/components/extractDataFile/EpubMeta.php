@@ -1,5 +1,7 @@
 <?php 
-
+/**
+* Class who extract metadata of an epub
+**/
 class EpubMeta extends AbstractMeta
 {
 
