@@ -28,7 +28,7 @@ class SiteController extends Controller
 	
 		$newCata = Catalogue::model()->findRandomNew($randCata);
 
-		$topBookid = Library::findTopDownload();
+		$topBookid = Library::model()->findTopDownload();
 		$topBook = array();
 		foreach ($topBookid as $id) {
 			$topBook[] = Book::model()->findByPk($id);
