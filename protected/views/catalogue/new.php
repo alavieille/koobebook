@@ -1,10 +1,10 @@
 <?php
 
-$this->pageTitle=Yii::app()->name."- Nouveautés" ;
+$this->pageTitle=Yii::app()->name."- Nouveaux éditeurs" ;
 
 $this->breadcrumbs=array(
-	    'Catalogue'=>array('Catalogue'),
-	    'Nouveautés'=>array('Catalogue/new'),
+	    'Éditeurs'=>array('Catalogue/index'),
+	    'Nouveaux éditeurs'=>array('Catalogue/new'),
 	
 );
 ?>
@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 	<div class="center mw960p">	
 		<?php if(count($newCata) > 0) : ?>
 		<section id="newCatalogue">
-			<h3 class="mb2 mr3">Nouveautés</h3>
+			<h3 class="mb2 mr3 pl1">Nouveaux éditeurs</h3>
 			<?php foreach ($newCata as $cata) : ?>
 				<?php  $this->renderPartial('_viewNew', array('cata'=>$cata)); ?>
 			<?php endforeach; ?>

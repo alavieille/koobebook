@@ -64,15 +64,18 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
-			if($model->save())
+			$model->attributes=$_POST['User'];	
+			$identity=new UserIdentity($model->email,$model->password);
+			if($model->save()) {
+				yii::app()->user->setFlash("success","Compte créé avec succés");
+    			$identity->authenticate();
+    			if(Yii::app()->user->login($identity))
+					$this->redirect(array('/library/'));
+
 				$this->redirect(array('site/login'));
+			}
 		}
 
 		$this->render('create',array(

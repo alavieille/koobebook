@@ -24,11 +24,11 @@ class CatalogueController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','new'),
+				'actions'=>array('index','viewodps','view','manage','new','topDownload'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','manage'),
+				'actions'=>array('create','update','manage','monitoring'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -56,6 +56,25 @@ class CatalogueController extends Controller
 			'pushBooks'=>$pushBooks,
 			'books'=>$books,
 			'isOwner'=>$this->isOwner($id)
+		));
+	}
+
+	/**
+	 * Displays a particular model in opds format.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewodps($id,$all=1)
+	{
+		$model= $this->loadModel($id);
+		if( $all != 0) {
+		$books = $model->books();
+		}
+		else {
+		$books = $model->books(array('condition'=>'push=1'));
+		}
+		$this->renderPartial('viewOdps',array(
+			'model'=>$model,
+			'books'=>$books,
 		));
 	}
 
@@ -101,11 +120,12 @@ class CatalogueController extends Controller
 		{
 			$model->attributes=$_POST['Catalogue'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('manage'));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+
 		));
 	}
 	
@@ -113,7 +133,7 @@ class CatalogueController extends Controller
 	* Manage book in catalogue 
 	* if user hasn't catalogue, he is redirect to action create
 	*/
-	public function actionManage(){
+	public function actionManage($display="list"){
 		
 		// active upload for ckeditor with kcfinder
 		$_SESSION['KCFINDER']['disabled'] = false; // enables the file browser in the admin
@@ -129,11 +149,44 @@ class CatalogueController extends Controller
 		$pushBooks = $model->books(array('condition'=>'push=1'));
 		$books = $model->books(array('condition'=>'push=0'));
 
-		$this->render('manage',array(
+
+		$this->render('manage'.ucfirst($display),array(
 			'catalogue' => $model,
 			'books' => $books,
-			'pushBooks' => $pushBooks
+			'pushBooks' => $pushBooks,
+			'display'=>$display,
 			));
+	}
+
+	/**
+	* Monitoring of ebook download
+	*/
+	public function actionMonitoring()
+	{
+	
+
+		$this->layout = "//layouts/private";
+		$criteria = new CDbCriteria();
+		$criteria->with = array(
+			'library'=>array('joinType'=>'INNER JOIN'),
+			'libraryCount',
+			);
+		$criteria->addCondition('t.catalogueId = 20');
+		$monitoring = Book::model()->findAll($criteria);
+
+		$totalDownload = 0;
+		$totalPrice= 0;
+
+		foreach ($monitoring as $book) {
+			$totalDownload += $book->libraryCount;
+			$totalPrice += $book->price;
+		}
+		$this->render('monitoring',array(
+			'monitoring' => $monitoring,
+			'totalPrice' => $totalPrice,
+			'totalDownload' => $totalDownload
+			));
+
 	}
 
 
@@ -180,9 +233,17 @@ class CatalogueController extends Controller
 
 		$newCata = Catalogue::model()->findRandomNew($randCata);
 
+		$topBookid = Library::findTopDownload();
+		$topBook = array();
+		foreach ($topBookid as $id) {
+			$topBook[] = Book::model()->findByPk($id);
+		}
+
+
 		$this->render('index',array(
 			'randCata'=> $randCata,
 			'newCata'=>$newCata,
+			'topBook'=>$topBook,
 		));	
 
 	}
@@ -196,6 +257,19 @@ class CatalogueController extends Controller
     	$allNewCata = Catalogue::model()->findAllNew();
     	$this->render('new',array(
 			'newCata'=>$allNewCata,
+		));	
+
+	}
+
+	/**
+	* Show all top download catalogue
+	**/
+	public function actionTopDownload()
+	{
+		
+    	$allTopCata = Catalogue::findTopDownload();
+    	$this->render('topDownload',array(
+			'allTopCata'=>$allTopCata,
 		));	
 
 	}

@@ -12,7 +12,7 @@
 				<li><a href="<?php echo Yii::app()->createUrl('book/delete/',array( 'id'=>$book->id)); ?>">Supprimer</a></li>
 				<li>
 					<a href="<?php echo Yii::app()->createUrl('book/togglePush/',array( 'id'=>$book->id)); ?>">
-					<?php echo (! $book->push) ? "Mettre en avant" : "Supprimer de la mise en avant" ?>
+					<?php echo (! $book->push) ? "Mettre à la une" : "Supprimer de la une" ?>
 					</a>
 				</li>
 			</ul>

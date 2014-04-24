@@ -21,14 +21,15 @@ CREATE TABLE IF NOT EXISTS `catalogue` (
   `isEditor` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `userId` (`userId`)
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
+
+
 CREATE TABLE IF NOT EXISTS `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catalogueId` int(11) DEFAULT NULL COMMENT 'CONSTRAINT FOREIGN KEY (catalogueId) REFERENCES catalogue(id)',
   `title` varchar(250) NOT NULL,
   `subtitle` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
-  `author` varchar(250) NOT NULL,
   `language` varchar(200) NOT NULL,
   `picture` varchar(250) DEFAULT NULL,
   `description` text,
@@ -39,5 +40,22 @@ CREATE TABLE IF NOT EXISTS `book` (
   `epub` varchar(250) DEFAULT NULL,
   `mobi` varchar(250) DEFAULT NULL,
   `pdf` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `library` (
+  `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)'
+  `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
+  `date_download` date NOT NULL
+) ENGINE=InnoDB
+
+
+
+CREATE TABLE IF NOT EXISTS `contributor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
+  `type` varchar(50) NOT NULL,
+  `name` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB

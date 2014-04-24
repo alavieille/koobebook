@@ -23,11 +23,11 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
-				'actions'=>array('create', 'download'),
+				'actions'=>array('create'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -48,6 +48,19 @@ class BookController extends Controller
 	public function actionView($id)
 	{
 		$model = $this->loadModel($id);
+		$contributors = $model->contributors;
+		$author = array();
+		$traductor = array();
+		$illustrator = array();
+		foreach ($contributors as $contributor) {
+			if( $contributor["type"] == "author")
+				$author[] = $contributor;
+			elseif ($contributor["type"] == "traductor") 
+				$traductor[] = $contributor;
+			elseif ($contributor["type"] == "illustrator")
+				$illustrator[] = $contributor;
+		}
+
 		$format = array();
 		if(isset($model->epub)) {
 			$format["epub"] = "Epub";
@@ -61,10 +74,39 @@ class BookController extends Controller
 		$this->render('view',array(
 			'model'=>$model,
 			'format'=>$format,
+			'traductor'=>$traductor,
+			'illustrator'=>$illustrator,
+			'author'=>$author,
 			'isOwner'=>$this->isOwner($id)
 		));
 	}
 	
+	/**
+	 * Displays a particular model in opds format.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewodps($id)
+	{
+		$model= $this->loadModel($id);
+		$contributors = $model->contributors;
+		$author = array();
+		$traductor = array();
+		$illustrator = array();
+		foreach ($contributors as $contributor) {
+			if( $contributor["type"] == "author")
+				$author[] = $contributor;
+			elseif ($contributor["type"] == "traductor") 
+				$traductor[] = $contributor;
+			elseif ($contributor["type"] == "illustrator")
+				$illustrator[] = $contributor;
+		}
+		$this->renderPartial('viewOdps',array(
+			'model'=>$model,
+			'traductor'=>$traductor,
+			'illustrator'=>$illustrator,
+			'author'=>$author,
+		));
+	}
 
 	/**
 	* Manage upload of all format of ebook
@@ -88,9 +130,11 @@ class BookController extends Controller
 	 */
 	public function actionCreate()
 	{
-
+		
 		$this->layout = "//layouts/private";
 		$model=new Book;
+		$hasAuthor = false;
+		$contributors = array();
 		//default value
 		$model->price = 0;
 		$model->date_create = new CDbExpression('NOW()');
@@ -105,8 +149,22 @@ class BookController extends Controller
 
 		$model->catalogueId = $catalogue->id;
 
-		if(isset($_POST['Book']))
+		if(isset($_POST['Book']) && isset($_POST['contributor']))
 		{
+			var_dump($_POST['contributor']);
+			foreach ($_POST['contributor'] as $contributor) {
+				if( trim($contributor['name']) != "" && in_array($contributor['type'],array('author','illustrator','traductor')))
+			  	{
+			  		$newContributor = new Contributor;
+				  	$newContributor->name = $contributor['name'];
+				  	$newContributor->type = $contributor['type'];
+				  	if($contributor['type'] == 'author') {
+				  		$hasAuthor = true;
+				  	}
+				  	$contributors[] = $newContributor;
+				}
+			}
+
 			$model->attributes=$_POST['Book'];
 
 			//upload couverture & ebook 
@@ -123,6 +181,17 @@ class BookController extends Controller
 
 			if($model->save())
 			{
+				if(! $hasAuthor) {
+					$model->addError('', 'Vous devez ajouter au moins un auteur');
+					goto end;
+				}
+
+				foreach ($contributors as $contributor) {
+					$contributor->bookId = $model->id;
+
+					$contributor->save();
+				}
+
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
 				if(! file_exists($urlUpload."/book/".$model->id)) {
@@ -142,8 +211,10 @@ class BookController extends Controller
 				$this->redirect(array("catalogue/manage"));
 			}
 		}
+		end:
 		$this->render('create',array(
 			'model'=>$model,
+			'contributors'=>$contributors,
 		));
 	}
 
@@ -158,10 +229,13 @@ class BookController extends Controller
 		$this->layout = "//layouts/private";
 		$model=$this->loadModel($id);
 
+		$hasAuthor = false;
+		$contributors = $model->contributors;
+		$oldContributors = $contributors;
 
-		if(isset($_POST['Book']))
+		if(isset($_POST['Book']) && $_POST['contributor'])
 		{
-			
+			var_dump($_POST["contributor"]);
 			$model->attributes=$_POST['Book'];
 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
@@ -171,6 +245,19 @@ class BookController extends Controller
 			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');
 			
 
+			foreach ($_POST['contributor'] as $contributor) {
+				if( trim($contributor['name']) != "" && in_array($contributor['type'],array('author','illustrator','traductor')))
+			  	{
+			  		$newContributor = new Contributor;
+				  	$newContributor->name = $contributor['name'];
+				  	$newContributor->type = $contributor['type'];
+				  	if($contributor['type'] == 'author') {
+				  		$hasAuthor = true;
+				  	}
+				  	$contributors[] = $newContributor;
+				}
+			}
+
 			
 			if(! is_null($model->pictureFile )){
 				$picturePrecSave = $model->picture; // ancienne couverture 
@@ -178,6 +265,12 @@ class BookController extends Controller
 			}
 			if($model->validate()) {
 
+				if(! $hasAuthor) {
+					$model->addError('', 'Vous devez ajouter au moins un auteur');
+					goto end;
+				}
+
+	
 				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 				
 				if(isset($_POST['Book']['deleteEpub']) and $_POST['Book']['deleteEpub']== 1) {
@@ -203,6 +296,15 @@ class BookController extends Controller
 				if($model->save())
 				{
 					
+					foreach ($contributors as $contributor) {
+						$contributor->bookId = $model->id;
+
+						$contributor->save();
+					}
+
+					foreach ($oldContributors as $oldContributor) {
+						$oldContributor->delete();
+					}
 
 					if(! is_null($model->pictureFile)){
 						$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);	
@@ -220,13 +322,14 @@ class BookController extends Controller
 						}
 					}
 
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array("catalogue/manage"));
 				}
 			}
 		}
-
+		end:
 		$this->render('update',array(
 			'model'=>$model,
+			'contributors'=>$contributors,
 		));
 	}
 
@@ -237,20 +340,31 @@ class BookController extends Controller
 	public function actionDownload($id)
 	{
 		
-		if( ! isset($_POST["format"])) {
+		if( ! isset($_GET["format"])) {
 			throw new CHttpException(400,"votre requête est invalide");
 		}
 		$model=$this->loadModel($id);
 		$fileDir = Yii::app()->getBasePath().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;
 
-		$format = $_POST['format'];
+		$format = $_GET['format'];
 		$file = $fileDir."/book/".$model->id.'/'.$model->id."-".$model->$format;
 		if(file_exists($file)) {
+			if(isset(yii::app()->user->id)) {
+				$library= Library::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));
+				if(! isset($library)) {
+					$library = new Library();
+					$library->userId = yii::app()->user->id;
+					$library->bookId = $id;
+					$library->date_download =  new CDbExpression('NOW()');
+					$library->save();
+				}
+			}
 			yii::app()->request->sendFile(
 				$model->title."-".$model->$format ,
 				file_get_contents($file)
-				);
+			);
 		}
+
 		else {
 			yii::app()->user->setFlash("error","Le fichier demandé n'existe pas");
 			Yii::app()->getController()->redirect(array('book/view/'.$model->id));
@@ -285,6 +399,63 @@ class BookController extends Controller
 
 	}
 
+
+	/**
+	* Extract information to file
+	* Is ajax request
+	*/
+	public function actionExtractInfo()
+	{
+		if(Yii::app()->request->isAjaxRequest ) {
+			try {
+				$files = array("application/x-mobipocket-ebook"=>"mobi.mobi","application/epub+zip"=>"epub.epub");
+				$metaFile = array();
+				foreach ($_FILES as $file) {
+					if( $file["error"] == 0 )
+						$metaFile[] = FactoryMeta::initialize($file["tmp_name"], $file["type"]);
+				}
+				echo json_encode($this->getMetaFile($metaFile));
+			} catch (Exception $e) {
+				echo "error";
+			}
+		
+		}
+	}
+
+	/**
+	* Create an array who contains metadata information
+	* @param $metaFiles Array contains metadata of all file
+	* @return $meta an Array
+	**/
+	private function getMetaFile($metaFiles)
+	{
+		$meta = array(
+			"title" => null,
+			"author" => null,
+			"language" => null,
+			"description" => null,
+			"date" => null,
+			"isbn" => null,
+			);
+		foreach ($metaFiles as $metaFile) {
+			if( $meta["title"] == null )
+				$meta["title"] = $metaFile->getTitle();
+			if( $meta["author"] == null )
+				$meta["author"] = $metaFile->getAuthor();
+			if( $meta["language"] == null )
+				$meta["language"] = $metaFile->getLanguage();
+			if( $meta["description"] == null )
+				$meta["description"] = $metaFile->getDescription();
+			if( $meta["date"] == null )
+				$meta["date"] = date("Y-m-d", strtotime($metaFile->getDate()));
+			if( $meta["isbn"] == null )
+				$meta["isbn"] = $metaFile->getIsbn();
+		}
+
+		return $meta;
+	}
+
+
 	/**
 	* Delete a book
 	* @param integer $id the ID of the book
@@ -316,7 +487,20 @@ class BookController extends Controller
 	}
 
 
- 
+ 	public function actionTopDownload()
+ 	{
+		$topBookid = Library::findTopDownload(30);
+		$topBook = array();
+		foreach ($topBookid as $id) {
+			$topBook[] = Book::model()->findByPk($id);
+		}
+		$this->render('topDownload',array(
+			'topBook'=>$topBook,
+		));	
+
+ 	}
+
+
 	/**
 	 * default action
 	 * Redirect user to home

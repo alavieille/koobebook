@@ -1,30 +1,38 @@
 <?php
 /* @var $this CatalogueController */
 /* @var $model Catalogue */
-$this->pageTitle=Yii::app()->name . ' - Catalogue';
-
+$this->pageTitle=Yii::app()->name . ' - Éditeurs';
+$this->breadcrumbs=array(
+	    'Éditeurs'=>array('Catalogue/index'),
+	    'Éditions '.$model->name =>array('catalogue/view/'.$model->id),
+	
+);
 
 ?>
 <section class="mod catalogue" id="viewCatalogue">
 	
-<h2 class="pa2 txtcenter">Catalogue de <?php echo $model->name; ?></h2>
+<h2 class="pa2 txtcenter">Éditions <?php echo $model->name; ?></h2>
 <div class="center mw960p">		
-	<?php if($isOwner) : ?>
-		<nav class="mb2">
+
+		<nav class="mb2 mod ">
+		<a class="linkButton inbl w200p left mr2" href="<?php echo  str_replace("http", "opds", $this->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->id)));?>">
+		Exporter au format opds
+		</a>
+			<?php if($isOwner) : ?>
 			<?php 
 				$this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
-						array('label'=>'Modifier', 'url'=>array('/catalogue/update/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
+						array('label'=>'Modifier', 'url'=>array('/catalogue/update/'.$model->id),'linkOptions'=>array("class"=>" mr1 linkButton")),
 						array('label'=>'Supprimer', 'url'=>array('/catalogue/delete/'.$model->id),'linkOptions'=>array("class"=>"linkButton")),
 						
 					),
-					'itemCssClass' => "pb1 inbl",
-					'htmlOptions' => array("class" => 'pl1')
+					'itemCssClass' => "inbl",
+					'htmlOptions' => array("class" => 'mt0 pr0 mr0')
 				));
 
 			?>
+		<?php endif; ?>
 		</nav>
-	<?php endif; ?>
 
 </div>
 
@@ -45,7 +53,7 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 <div id="viewDescription">
 	<?php if ($model->description != "") : ?>
 		<section class="pa2 pt1 mb1 center mw960p">
-			<h3  class="mb2" ><?php echo CHtml::encode($model->getAttributeLabel('description')); ?> </h3>
+			<h3  class="mb2" >Présentation</h3>
 			<p>
 				<?php echo $model->description ?>
 			</p>
@@ -55,7 +63,7 @@ $this->pageTitle=Yii::app()->name . ' - Catalogue';
 
 <div id="viewLtBook">
 	<section class="pa2 pt1 center mw960p">
-		<h3  class="mb2" >Ces Ebooks</h3>
+		<h3  class="mb2" >Ses livres disponibles</h3>
 		<?php if (count($books) > 0) : ?>
 			<div class="autogrid5">
 			<?php foreach ($books as $book) :?>

@@ -8,7 +8,6 @@
  * @property integer $catalogueId
  * @property string $title
  * @property string $price
- * @property string $author
  * @property string $picture
  * @property string $description
  * @property string $publication
@@ -46,9 +45,9 @@ class Book extends CActiveRecord
 		// will receive user inputs.
 		return array(
 
-			array('title, price, author, publication, description', 'required'),
+			array('title, price, publication, description', 'required'),
 			array('isbn', 'numerical', 'integerOnly'=>true),
-			array('title, author, subtitle', 'length', 'max'=>250),
+			array('title, subtitle', 'length', 'max'=>250),
 
 
 			array('price', 'length', 'max'=>10),
@@ -63,7 +62,7 @@ class Book extends CActiveRecord
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, catalogueId, title, price, author, picture, description, publication, isbn', 'safe', 'on'=>'search'),
+			array('id, catalogueId, title, price, picture, description, publication, isbn', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,6 +75,9 @@ class Book extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'catalogue' => array(self::BELONGS_TO, 'Catalogue', 'catalogueId'),
+			'contributors' => array(self::HAS_MANY, 'Contributor', 'bookId'),
+			'library' => array(self::HAS_MANY, 'Library', 'bookId'),
+			'libraryCount' => array(self::STAT, 'Library', 'bookId'),
 		);
 	}
 	
@@ -90,7 +92,6 @@ class Book extends CActiveRecord
 			'subtitle' => 'Sous-titre',
 			'title' => 'Titre',
 			'price' => 'Prix (en €)',
-			'author' => 'Auteur',
 			'pictureFile' => 'Couverture',
 			'description' => 'Description',
 			'editor' => 'Editeur',
@@ -169,6 +170,22 @@ class Book extends CActiveRecord
 		return true;
 	}
 
+	/**
+	* Return an Excerpt of book Description
+	* @param Integer $len length of excerpt
+	* @return String
+	*/
+	public function getExcerptDescription($len)
+	{
+  		$text = $this->description;
+        if (strlen($text) > $len) { 
+          $text = substr($text, 0, $len); 
+          $text = substr($text,0,strrpos($text," ")); 
+          $etc = " ...";  
+          $text = $text.$etc; 
+          }
+        return $text; 
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

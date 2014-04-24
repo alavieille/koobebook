@@ -4,7 +4,7 @@
 $this->pageTitle=Yii::app()->name . ' - Mise a jour';
 
 ?>
-<h2 class="pt2 pb1">Mise à jour</h2>
+<h2 class="pt2 mb3">Mise à jour</h2>
 <nav class="center mw960p mb2">
 		<?php 
 			$this->widget('zii.widgets.CMenu',array(

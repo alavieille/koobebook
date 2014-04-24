@@ -78,12 +78,7 @@ class Catalogue extends CActiveRecord
 	*/
 	public function findRandom()
 	{
-		/*$res = $this->with(array('books'=>array('joinType'=>'INNER JOIN',)))->find(array(
-			'select' => "*",
-			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => 't.description IS NOT NULL and t.id >=r2.id',
-			'order' => 't.id ASC',
-		));	*/
+
 		$criteria = new CDbCriteria();
 		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
 		$criteria->addCondition('t.description IS NOT NULL AND t.description != ""');
@@ -102,15 +97,7 @@ class Catalogue extends CActiveRecord
 	*/
 	public function findRandomNew($ignoreCAtalogue = null)
 	{		
-		/*$res = Catalogue::model()->findAll(array(
-			'select' => "*",
-			'alias' => 'r1',
-			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => ' DATEDIFF(NOW(),r1.date_create) < 30 and r1.id >=r2.id',
-			'order' => 'rand()',
-			'limit' => '2'
-		));*/
-	
+
 		$conditionIgnoreId = "";
 		if($ignoreCAtalogue != null) {
 			$conditionIgnoreId = " AND t.id != ".$ignoreCAtalogue->id;
@@ -141,23 +128,14 @@ class Catalogue extends CActiveRecord
 
 	}
 
+
 	/**
 	* Select all Catalogue which was published there was less than one month
 	* @param $ignoreId 
 	* @return an Array of Catalogue
 	*/
 	public function findAllNew()
-	{		
-		/*$res = Catalogue::model()->findAll(array(
-			'select' => "*",
-			'alias' => 'r1',
-			'join' => 'JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM catalogue)) AS id ) AS r2',
-			'condition' => ' DATEDIFF(NOW(),r1.date_create) < 30 and r1.id >=r2.id',
-			'order' => 'rand()',
-			'limit' => '2'
-		));*/
-
-		
+	{				
 		$criteria = new CDbCriteria();
 		$criteria->with = array('books'=>array('joinType'=>'INNER JOIN'));
 		$criteria->addCondition("DATEDIFF(NOW(),t.date_create) < 30");
