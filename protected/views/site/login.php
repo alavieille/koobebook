@@ -7,9 +7,13 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 ?>
 <h2 class="txtcenter pt2 pb1 ">Connexion</h2>
 <?php if(Yii::app()->user->hasFlash('success')):?>
-    <div class="txtcenter flashsuccess pb2">
-        <?php echo Yii::app()->user->getFlash('success'); ?>
-    </div>
+	<div class="txtcenter flashsuccess pb2">
+		<?php echo Yii::app()->user->getFlash('success'); ?>
+	</div>		    
+<?php elseif(Yii::app()->user->hasFlash('error')):?>
+	<div class="txtcenter flasherror pb2">
+		<?php echo Yii::app()->user->getFlash('error'); ?>
+	</div>
 <?php endif; ?>
 <div class="form w400p center pa1" >
 <?php $form=$this->beginWidget('CActiveForm', array(

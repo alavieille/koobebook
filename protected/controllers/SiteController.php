@@ -23,16 +23,25 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		
 		$randCata = Catalogue::model()->findRandom();
 	
-		$newCata = array();
 		$newCata = Catalogue::model()->findRandomNew($randCata);
+
+		$topBookid = Library::findTopDownload();
+		$topBook = array();
+		foreach ($topBookid as $id) {
+			$topBook[] = Book::model()->findByPk($id);
+		}
 
 
 		$this->render('index',array(
 			'randCata'=> $randCata,
 			'newCata'=>$newCata,
-		));
+			'topBook'=>$topBook,
+		));	
+
+
 	}
 
 	/**
@@ -63,7 +72,7 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect(array('/library/'));
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));

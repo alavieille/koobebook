@@ -4,8 +4,8 @@
 
 $this->pageTitle=Yii::app()->name . ' - Supprimer';
 ?>
+<h2 class="txtcenter pt2 mb2">Supprimer</h2>
 <section class="center w500p">
-<h2 class="txtcenter pt2 pb1">Supprimer</h2>
 <p class="txtcenter">Si vous supprimer votre compte, toutes les données concernant celui-ci seront supprimé définitivement.</p>
 
 <p class="txtcenter">

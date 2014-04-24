@@ -12,9 +12,6 @@
  * 3.0 - Main
  * 4.0 - Index
  *  4.1 - Presentation
- * 5.0 - Private
- *	 5.1 - create Book
- *   5.2 - Manage Book
  * 6.0 - Book
  *	 6.1 - view 
  * 7.0 - Catalogue
@@ -31,6 +28,7 @@
 
 body{
 	background-color: #f5f5f5;
+	background-color: white;
    	height:100%;
     font-family:Helvetica,Arial,sans-serif;
     font-size:small;
@@ -62,6 +60,10 @@ body{
 .logo>span{
 	font-weight: normal;
 	color:#53a1b8;
+}
+
+table{
+	table-layout: auto;
 }
 
  /**
@@ -201,11 +203,12 @@ body{
 
 #main #breadcrumb{
 	background: white ;
+	padding-left: 5px;
 }
 
 #main #breadcrumb li{ 
 	display: inline;
-	padding:0 10px;
+	padding:0 5px;
 }
 
 #main .flashsuccess{
@@ -218,6 +221,7 @@ body{
 
 #main h2, #main h3{
 	color:#777;
+	font-weight: normal;
 }
 #main p{
 	color:#505050;
@@ -248,6 +252,7 @@ body{
 	display: block;	
 	color:white;
 	line-height: 40px;
+	font-weight: normal;
 }
 
 #main .linkButton:hover{
@@ -303,248 +308,8 @@ body{
 #presentation figure  figcaption p {
 	text-align: justify;
 }
- /**
- * 5.0 Private 
- * ----------------------------------------------------------------------------
- */
-
-#privateNav{
-	 border-right: 2px solid #53a1b8;
-}
-
-#privateNav h3{
-	text-align: left;
-}
-
-#privateNav ul{
-	list-style: none;
-	padding-left: 0;
-}
-
-#privateNav li a{
-	text-decoration: none;
-	color:#505050;
-	display: block;
-	text-align: left;
-	padding-bottom: 10px;
-	letter-spacing: 0.37px;
-	
-	transition: color 200ms linear;
-	-webkit-transition: color 200ms linear;
-}
-
-#privateNav li a:hover,#privateNav li.active a{
-	color:#53a1b8; 
-}
-
-/**
- * 5.1 create Book
- **/
-
- #book-form #previous_cover{
- 	display: block;
-	width: 165px;
-	height: 260px;
- 	min-width:165px;
- 	max-height:260px;
- 	min-height: 260px;
- }
-
- #book-form .inputPicture{
-	margin: auto;
-	text-align: center;
- }
- #book-form .inputPicture a{
- 	padding:5px 20px;
- 	background-color: #53a1b8;
- 	color:white !important;
- 	width:110px;
- 	margin-left: auto;
- 	margin-right: auto;
- }
-
- #book-form .inputPicture a:hover{
-	background-color: #ccc;
-	color: #555 !important;
- }
-
- #book-form #uploadInput ul li{
- 	//background: red;
- 	position: relative;
- 	vertical-align: top;
- 	text-align: center;
- 	padding-top:3lopx;
- 	width:120px;
- 	display: inline-block;
- 	min-height: 150px;
- 	border: 3px dotted #ccc;
- 	 word-wrap: break-word;
- 	background: url("img/upload.png") no-repeat 50%;
- }
  
- #book-form #uploadInput ul li .close{
- 	position: absolute;
- 	display: none;
- 	right:5px;
- 	top:-10px;
- 	font-size: 35px;
-	color:#e74c3c;
- }
 
-  #book-form #uploadInput ul li .close:hover{
-  	color:#2c3e50;
-  }
-
- #book-form #uploadInput ul li:hover .close{
- 	display: block;
- }
-
- #book-form #uploadInput ul li.epub{
- 	background-image: url("img/epub.png");
- } 
-
- #book-form #uploadInput ul li.mobi{
- 	background-image: url("img/mobi.png");
- }
-
- #book-form #uploadInput ul li.pdf{
- 	background-image: url("img/pdf.png");
- }
-
-  #book-form #uploadInput ul li:hover{
-  	background-color: #ddd;
-  	cursor: pointer;
-  }
-  #book-form #uploadInput ul li+li{
-  	margin-left:30px;
-  }
-
-/**
- * 5.2 Manage Book
- **/
-
-#ltBook,#pushBook{
-		background: white;
-		border: 1px solid rgba(0,0,0,0.2);
-}
-
-#ltBook.onDrop,#pushBook.onDrop{
-	border:2px solid #53a1b8;
-}
-
-#ltBook h4,#pushBook h4{
-	border-bottom: 1px solid rgba(0,0,0,0.2);
-	color:#53a1b8;
-}
-
-#ltBook div, #pushBook div { /* liste book */
-	text-align: left;
-	position: relative;
-}
-#ltBook div.autogrid5 > *, #pushBook div.autogrid5 > *{
-	width: 25%;
-}
-
-#ltBook div figure,#pushBook div figure{
-	height: 100%;
-}
-
-#ltBook div>a,#pushBook div>a{
-	display: block;
-}
-
-#ltBook div>a:hover,#pushBook div>a:hover{
-	background-color: #eee;
-}
-
-#ltBook div figure img,#pushBook div figure img{
-	max-width:83px;
-	width:83px;
-	min-width:83px;
-	height: 130px ;
-	min-height: 130px;
-	max-height: 130px;
-
-}
-#ltBook div figure figcaption,#pushBook div figure figcaption{
-
-}
-
-/** param livre **/
-#ltBook div .btParam,#pushBook div .btParam{
-	background:url("img/paramsprite.png") -35px -5px no-repeat;
-	height: 20px;
-	width: 20px;
-	text-indent: -9999px;
-	margin-bottom: 2px;
-}
-
-#ltBook div .btParam:hover,#ltBook div .btParamActive,#pushBook div .btParam:hover,#pushBook div .btParamActive{
-	background-position: -5px -5px;
-	cursor:pointer;
-}
-
-#ltBook .param,#pushBook .param{
-	position: absolute;
-	background: white;
-	width: 100%;
-	top:22px;
-}
-
-#ltBook ul,#pushBook ul{
-	list-style: none;
-	padding-left: 0;
-	text-align: center;
-}
-
-#ltBook ul li,#pushBook ul li{
-	margin-top:15px;
-}
-
-#ltBook ul li a,#pushBook ul li a{
-	color: #53a1b8;
-	display: block;
-	padding:8px 15px;
-}
-
-#ltBook ul li a:hover,#pushBook ul li a:hover{
-	color:#505050;
-}
-
-
-/**
-* Bouton add ebbok
-**/
-
-#ltBook #addEbook{
-	width: 120px;
-	border: 2px solid #53a1b8;
-	position: relative;
-}
-
-#ltBook #addEbook #iconAdd{
-	top:-20%;
-	left:15%;
-	font-weight: bold;
-	font-size: 10em;
-	padding-top: 15px;
-	line-height: 150px;
-	color:#ddd;
-}
-#ltBook #addEbook p:last-child{
-	position: absolute;
-	top:10%;
-	margin-left: 10%;
-	color: #53a1b8;
-
-}
-
-#ltBook #addEbook:hover #iconAdd,#ltBook #addEbook:hover p:last-child,#ltBook #addEbook:hover{
-	color:#53a1b8;
-	border-color: #53a1b8;
-	background: white;
-}
- 
  /**
  * 6.0 Book
  * ----------------------------------------------------------------------------
@@ -644,6 +409,9 @@ body{
 	font-weight: normal;
 }
 
+#indexCatalogue h3 a, #newCatalogue h3 a, #discoverCatalogue h3 a{
+	display: block;
+}
 
 /** design catalogue **/
 
@@ -682,15 +450,15 @@ body{
 	border-top: 1px solid #aaa;
 }
 
-#newCatalogue h3 a, #newCatalogue h3:after{
+#newCatalogue h3 a, #newCatalogue h3:after, #topDownload h3 a, #topDownload h3 a:after  {
 	color: #53a1b8;
 }
 
-#newCatalogue h3 a:hover, #newCatalogue h3 a:hover:after{
+#newCatalogue h3 a:hover, #newCatalogue h3 a:hover:after, #topDownload h3 a:hover, #topDownload h3 a:hover:after{
 	color:#555;
 }
 
-#newCatalogue h3 a:after{
+#newCatalogue h3 a:after, #topDownload h3 a:after{
 	font-size: 26px;
 	line-height: 22px;
 	color: #53a1b8;
@@ -711,7 +479,12 @@ body{
 /** catalogue random **/
 
 #discoverCatalogue{
-	background-color: #666;
+	background-color: #555;
+}
+
+#discoverCatalogue h3{
+	color:#349fff;
+	border-color: #349fff;
 }
 
 #discoverCatalogue a, #discoverCatalogue a:after{
@@ -772,6 +545,10 @@ body{
 	font-size: 1.1em;
 }
 
+#viewCatalogue #viewDescription h3{
+	border-bottom: 1px solid #505050;
+}
+
 #viewCatalogue #viewDescription p{
 	text-indent: 50px;	
 	font-size: 14px;
@@ -814,44 +591,11 @@ body{
 		display:table-cell !important ;
 
 	}
-	
-	/** Private Nav **/
-	#privateMenu{
-		background-color:white;
-		width:100%;
-		margin-top:20px;
-		margin-bottom: 10px;
-		color:#505050;
-	}
 
-	#privateMenu:before{
-		color:#505050;
-	}
-
-	#privateMenu:hover{
-		background-color:#eee;
-		cursor: pointer;
-	}
-
-	#privateNav{
-		background-color:white;
-		margin-top: 0;
-		width: 100%;
-		margin-right: 0;
-	}
-
-	#privateNav h3{
-		text-align: center;
-	}
-	#privateNav ul li a{
-		text-align: center;
+	#discoverCatalogue div.autogrid5 > *{
+	width: 30%;
 	}
 	
-	/** gestion catalogue / liste livre **/
-	#ltBook #addEbook p:last-child{
-		position: relative;
-		margin-left: 0%;
-	}
 }
 
 @media (max-width: 640px) {

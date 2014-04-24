@@ -3,6 +3,13 @@
 /* @var $model Book */
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
+$this->pageTitle=Yii::app()->name . ' - Éditeurs';
+$this->breadcrumbs=array(
+	    'Éditeurs'=>array('Catalogue/index'),
+	    'Éditions '.$model->catalogue->name =>array('catalogue/view/'.$model->catalogue->id),
+		 $model->title => array(),
+);
+
 ?>
 
 
@@ -10,6 +17,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 		<?php if(Yii::app()->user->hasFlash('success')):?>
 		    <div class="txtcenter flashsuccess pb2">
 		        <?php echo Yii::app()->user->getFlash('success'); ?>
+		    </div>		    
+		<?php elseif(Yii::app()->user->hasFlash('error')):?>
+		    <div class="txtcenter flasherror pb2">
+		        <?php echo Yii::app()->user->getFlash('error'); ?>
 		    </div>
 		<?php endif; ?>
 		<?php if($isOwner) : ?>
@@ -47,7 +58,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 			<h2 class="pl1 mb0 title "><?php echo CHtml::encode($model->title); ?></h2>
 			<h3 class="pl1 mt0 subtitle "><?php echo CHtml::encode($model->subtitle); ?></h2>
 			
-			<h4 class="pl1 mt1 mb0 author">De <?php echo CHtml::encode($model->author); ?></h4>
+			<h4 class="pl1 mt1 mb0 author"> De
+			<?php $number = 0; ?>
+			<?php foreach ($author as $value) : ?>
+					<?php if($number > 0 ) echo " & "; ?>
+					<?php echo $value["name"]; $number ++;?>
+			<?php endforeach; ?>
+			</h4>
 			<?php if(! is_null($model->catalogue)) :?>
 				<p class="pl1 mt0 editor pt1">Edité par <a href="<?php echo Yii::app()->createUrl('catalogue/view/',array( 'id'=>$model->catalogueId));  ?>"><?php echo CHtml::encode($model->catalogue->name); ?> </a>
 		 		(<?php echo Yii::app()->dateFormatter->formatDateTime($model->publication, 'medium', null) ?>)
@@ -59,7 +76,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
 			<div class="form mt2 pl1">
-				<?php echo CHtml::beginForm(array("download",'id'=>$model->id)); ?>
+				<?php echo CHtml::beginForm(array("download",'id'=>$model->id),"get"); ?>
 				 <?php echo CHtml::submitButton(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array("class"=>"inbl linkButton linkDown ")); ?> 
 				<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
 				<?php echo CHtml::endForm(); ?>
@@ -82,6 +99,20 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSe
 			<p>ISBN : <?php echo empty($model->isbn) ? "Inconnue" :  CHtml::encode($model->isbn); ?></p>
 			<p>Langue : <?php echo empty($model->language) ? "Inconnue" :  CHtml::encode(ucfirst($model->language)); ?></p>
 			<p>Format : <?php echo isset($model->epub) ? "Epub" : "" ?> <?php echo isset($model->mobi) ? "mobi" : "" ?> <?php echo isset($model->pdf) ? "PDF" : "" ?></p>
+			<?php if(count($traductor) > 0 ) :?>
+				<p>Traducteur : 
+					<?php foreach ($traductor as $value) {
+						echo $value['name'].", ";
+					} ?>
+				</p>
+			<?php endif; ?>
+			<?php if(count($illustrator) > 0 ) :?>
+				<p>Illustrateur : 
+					<?php foreach ($illustrator as $value) {
+						echo $value['name'].", " ;
+					} ?>
+				</p>
+			<?php endif; ?>
 		</section>
 		
 	</div>

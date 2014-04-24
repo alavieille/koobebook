@@ -8,9 +8,9 @@
 			
 			<?php 
 				// style
+				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/form.css');
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/knacss.css');
 				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/style.css');
-				Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/form.css');
 				
 				//js
 				Yii::app()->clientScript->registerCoreScript('jquery');
@@ -38,7 +38,7 @@
 					$this->widget('zii.widgets.CMenu',array(
 						'items'=>array(
 							array('label'=>'Connexion', 'url'=>array('/site/login'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
+							array('label'=>'Mon compte', 'url'=>array('/library/'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest,"linkOptions"=>array("class"=>"linkVisible")),
 
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'itemOptions'=>array("class"=>"small-hidden"), 'visible'=>!Yii::app()->user->isGuest),
 
@@ -67,10 +67,10 @@
 					<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 							array('label'=>'Connexion', 'url'=>array('/site/login'), 'itemOptions'=>array("class"=>"desktop-hidden"), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Mon compte', 'url'=>array('/user/view/' . yii::app()->user->id ), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
+							array('label'=>'Mon compte', 'url'=>array('/library/' . yii::app()->user->id ), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden")),
 							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
-						array('label'=>'Catalogues', 'url'=>array('/catalogue/index' )),
+						array('label'=>'Éditeurs', 'url'=>array('/catalogue/index' )),
 						array('label'=>'Aide', 'url'=>array('/site/index' )),
 						),
 					'itemCssClass' => "inbl pr2 small-w100",

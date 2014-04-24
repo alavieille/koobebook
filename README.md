@@ -1,3 +1,4 @@
 ==TODO==
-* Top Téléchargement
 
+* ajout différent contributeur
+* ajout redimension imgage
