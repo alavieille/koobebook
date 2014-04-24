@@ -156,16 +156,48 @@ var manageUpload = function(){
 		    data: formdata,  
 		    processData: false,  
 		    contentType: false, 
-		    dataType: "json", 
+		    dataType: "json",
+		    beforeSend: function() {
+		    	progressHtml = '<p id="pourcentProgress">Extraction des données : <span>0% <span></p>';
+		    	progressHtml += '<progress id="progressExtract" class="mt2 w50 .small-w100"max="100" value="0" >0%</progress>';
+		    	$("#extractInfo").hide();
+		    	if($("#progressExtract").length == 0 ) 
+		    		$("#uploadInput").append(progressHtml);
+		    	else {
+		    		$("#pourcentProgress").show();
+            		$("#progressExtract").show();
+            	}
+			
+			},
+		    xhr: function() {  // custom xhr
+                myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){ // check if upload property exists
+                    myXhr.upload.addEventListener('progress',updateProgress, false); // for handling the progress of the upload
+                }
+                return myXhr;
+            },
 		    success:  addExtractMetaInfo,
+		    complete : function() {
+		    	$("#extractInfo").show();
+		    	$('html,body').animate({scrollTop: $(".etape2").offset().top},'slow');
+		    	$("#pourcentProgress").hide();
+            	$("#progressExtract").hide();
+		    }
 		}); 
+
 		$(".etape2").show();
-		$('html,body').animate({scrollTop: $(".etape2").offset().top},'slow');
-		$(this).detach();
+		$(this).val("Extraire de nouveau les informations");
 
 
 	});
-
+var updateProgress = function(evt) {
+    if (evt.lengthComputable) {
+            var percentComplete = evt.loaded / evt.total;
+            $("#pourcentProgress span").html(Math.round(percentComplete * 100) + "%" );
+            $("#progressExtract").val(percentComplete * 100 );
+            console.log(percentComplete);
+    } 
+}
 
 	/** add information to form **/
 	var addExtractMetaInfo = function(res)

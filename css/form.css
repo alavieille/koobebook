@@ -143,12 +143,12 @@ div.form input[type="submit"],div.form input[type="button"]{
 	border: none;
 	color:white;
 	padding:8px 15px;
-	width:200px;
+	min-width:200px;
 	font-size: 1.2em;
 	font-weight: 600;
 	letter-spacing: 0.78px;
 	text-align: center;
-	height: 40px;
+	min-height: 40px;
 	background-color: #53a1b8;
 	display: block;
 	margin: 0 auto;

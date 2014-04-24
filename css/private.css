@@ -256,6 +256,37 @@
   	margin-left:30px;
   }
 
+/** progress bar */
+
+  #book-form   #progressExtract {  
+       display: block; /* default: inline-block */  
+       margin: 1em auto;  
+       padding: 4px;  
+       border: 0 none;  
+       background: #E7E7E7;  
+       border-radius: none;  
+       box-shadow: none; 
+           padding:0;
+    }  
+    /** firefox **/
+    #progressExtract::-moz-progress-bar {  
+       background: #53A1B8;  
+       border-radius: none; 
+       box-shadow: none;  
+       padding:0;
+    }  
+
+    /** chrome */ 
+     #progressExtract::-webkit-progress-bar {  
+       background: transparent;  
+    }  
+
+     #progressExtract::-webkit-progress-value {    
+        background: #53A1B8;  
+       border-radius: none; 
+       box-shadow: none;  
+       padding:0;
+    }   
 /**
  * 5.2 Manage Book
  **/
