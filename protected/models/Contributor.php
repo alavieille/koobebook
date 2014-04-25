@@ -30,14 +30,14 @@ class Contributor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array(' type, name', 'required'),
+			array('type, name', 'required'),
 			array('type', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>250),
 			array('bookId', 'safe'),
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name', 'on'=>'search'),
+			array('name,', 'safe', 'on'=>'search'),
 		);
 	}
 
