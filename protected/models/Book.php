@@ -62,7 +62,7 @@ class Book extends CActiveRecord
 			array('publication', 'date', 'format'=>'yyyy-MM-dd','message'=>"Format de date invalide (aaaa-MM-jj)"),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, catalogueId, title, price, picture, description, publication, isbn', 'safe', 'on'=>'search'),
+			array('title,', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -120,16 +120,7 @@ class Book extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('catalogueId',$this->catalogueId);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('price',$this->price,true);
-		$criteria->compare('author',$this->author,true);
-		$criteria->compare('picture',$this->picture,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('editor',$this->editor,true);
-		$criteria->compare('publication',$this->publication,true);
-		$criteria->compare('isbn',$this->isbn);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

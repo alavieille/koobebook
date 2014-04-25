@@ -48,6 +48,11 @@ class CatalogueController extends Controller
 	 */
 	public function actionView($id)
 	{
+		
+		$searchModel = new Catalogue('search');
+		$searchModel->name = 'thomas';
+		var_dump($searchModel->search()->getData());
+
 		$model= $this->loadModel($id);
 		$pushBooks = $model->books(array('condition'=>'push=1'));
 		$books = $model->books(array('condition'=>'push=0'));

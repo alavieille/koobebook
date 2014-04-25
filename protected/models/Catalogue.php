@@ -41,7 +41,7 @@ class Catalogue extends CActiveRecord
 			array('date_create', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, userId, name, description', 'safe', 'on'=>'search'),
+			array('name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -196,11 +196,9 @@ class Catalogue extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('userId',$this->userId);
+
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('firstName',$this->firstName,true);
-		$criteria->compare('description',$this->description,true);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

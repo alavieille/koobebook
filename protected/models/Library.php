@@ -32,9 +32,6 @@ class Library extends CActiveRecord
 			array('userId, bookId', 'required'),
 			array('userId, bookId', 'numerical', 'integerOnly'=>true),
 			array('date_download', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('userId, bookId', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -80,31 +77,7 @@ class Library extends CActiveRecord
 
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('userId',$this->userId);
-		$criteria->compare('bookId',$this->bookId);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
 
 	
 
