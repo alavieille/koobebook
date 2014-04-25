@@ -235,7 +235,6 @@ class BookController extends Controller
 
 		if(isset($_POST['Book']) && $_POST['contributor'])
 		{
-			var_dump($_POST["contributor"]);
 			$model->attributes=$_POST['Book'];
 
 			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');
@@ -489,7 +488,7 @@ class BookController extends Controller
 
  	public function actionTopDownload()
  	{
-		$topBookid = Library::findTopDownload(30);
+		$topBookid = Library::model()->findTopDownload(30);
 		$topBook = array();
 		foreach ($topBookid as $id) {
 			$topBook[] = Book::model()->findByPk($id);
