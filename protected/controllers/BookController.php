@@ -197,8 +197,12 @@ class BookController extends Controller
 				if(! file_exists($urlUpload."/book/".$model->id)) {
 					mkdir($urlUpload."/book/".$model->id,0777,true);
 				}
-				if(! is_null($model->pictureFile))
+				if(! is_null($model->pictureFile)) {
 					$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);			
+					$image = Yii::app()->image->load($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);
+					$image->resize(260, 392);
+					$image->save();
+				}
  				
 
 				for ($i=1; $i <=3 ; $i++) { 
@@ -307,6 +311,9 @@ class BookController extends Controller
 
 					if(! is_null($model->pictureFile)){
 						$model->pictureFile->saveAs($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);	
+						$image = Yii::app()->image->load($urlUpload."/book/".$model->id."/".$model->id."-cover.".$model->pictureFile->extensionName);
+						$image->resize(260, 392);
+						$image->save();
 						if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture
 							if(file_exists($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave))
 								unlink($urlUpload."/book/".$model->id."/".$model->id."-".$picturePrecSave);

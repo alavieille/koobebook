@@ -49,9 +49,9 @@ class CatalogueController extends Controller
 	public function actionView($id)
 	{
 		
-		$searchModel = new Catalogue('search');
+		/*$searchModel = new Catalogue('search');
 		$searchModel->name = 'thomas';
-		var_dump($searchModel->search()->getData());
+		var_dump($searchModel->search()->getData());*/
 
 		$model= $this->loadModel($id);
 		$pushBooks = $model->books(array('condition'=>'push=1'));
@@ -169,14 +169,14 @@ class CatalogueController extends Controller
 	public function actionMonitoring()
 	{
 	
-
+		$cata= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 		$this->layout = "//layouts/private";
 		$criteria = new CDbCriteria();
 		$criteria->with = array(
 			'library'=>array('joinType'=>'INNER JOIN'),
 			'libraryCount',
 			);
-		$criteria->addCondition('t.catalogueId = 20');
+		$criteria->addCondition('t.catalogueId = '.$cata->id);
 		$monitoring = Book::model()->findAll($criteria);
 
 		$totalDownload = 0;

@@ -37,7 +37,7 @@ class Contributor extends CActiveRecord
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name,', 'safe', 'on'=>'search'),
+			 array('name,', 'safe', 'on'=>'search'),
 		);
 	}
 

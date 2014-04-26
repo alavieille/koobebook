@@ -19,4 +19,5 @@ echo CHtml::link(
 );
 ?>
 </p>
+<p class="txtcenter"><a href="<?php echo Yii::app()->request->urlReferrer; ?>">Annuler</a></p>
 </section>

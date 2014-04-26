@@ -64,7 +64,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 				<td class="txtcenter" >
 					<?php foreach ($book->contributors as $contributor) : ?>
 						<?php if($contributor->type == 'author') : ?>
-						<a href="<?php  ?>" ><?php echo $contributor->name; ?></a>
+						<a href="<?php  ?>" ><?php echo $contributor->name; ?></a></br>
 						<?php endif; ?>
 					<?php endforeach ?>
 				</td>
