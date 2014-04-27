@@ -119,9 +119,7 @@ class Book extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('title',$this->title,true);
-
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

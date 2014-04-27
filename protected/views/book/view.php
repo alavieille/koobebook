@@ -4,11 +4,15 @@
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
 $this->pageTitle=Yii::app()->name . ' - Éditeurs';
-$this->breadcrumbs=array(
-	    'Éditeurs'=>array('Catalogue/index'),
-	    'Éditions '.$model->catalogue->name =>array('catalogue/view/'.$model->catalogue->id),
-		 $model->title => array(),
-);
+$editor = null;
+if(isset($model->catalogue)) {
+	$this->breadcrumbs=array(
+		    'Éditeurs'=>array('Catalogue/index'),
+		    'Éditions '.$model->catalogue->name =>array('catalogue/view/'.$model->catalogue->id),
+			 $model->title => array(),
+	);
+}
+
 
 ?>
 

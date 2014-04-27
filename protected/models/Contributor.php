@@ -103,8 +103,6 @@ class Contributor extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('bookId',$this->bookId);
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('name',$this->name,true);
 

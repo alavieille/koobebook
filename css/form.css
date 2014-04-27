@@ -59,6 +59,7 @@ input:focus{
     border:2px solid #53a1b8 !important;
 }
 div.form input[type="text"],
+div.form input[type="search"],
 div.form input[type="email"],
 div.form input[type="password"],
 div.form textarea,
@@ -371,6 +372,7 @@ div.selectPersonal ul{
   position: absolute;
   width: 100%;
   border:1px solid #ccc;
+  z-index: 1;
 }
 
 div.selectPersonal ul li{

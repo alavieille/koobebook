@@ -17,6 +17,8 @@
  * 7.0 - Catalogue
  *   7.1 - index 
  *	 7.2 - view
+ * 8.0 - Search
+ *	 8.1 - form seach
  * 8.0 - Responsive
  * ----------------------------------------------------------------------------
  */
@@ -562,6 +564,58 @@ table{
 #viewCatalogue #viewLtBook p{
 	color:white;
 }
+ /**
+ * 8.0 Search
+ * ----------------------------------------------------------------------------
+ */
+
+
+/** form seach **/
+
+#formSearch input[type='search']{
+	width: 400px;
+	width: calc(100% - 160px);
+	position: relative;
+}
+
+#formSearch input[type='image']{
+	height: 40px;
+	padding: 10px;
+	position: absolute;
+	background-color:#53A1B8;
+}
+
+#resSearch h4{
+	color: #777;
+	font-weight: normal;
+}
+
+#resSearch h5{
+	color: #53a1b8;
+	border-bottom: 1px solid #53a1b8;
+	font-size: 25px;
+	font-weight: normal;
+}
+
+#resSearch h5 .nbr{
+	font-size: 14px;
+	line-height: 25px;
+	vertical-align: 15%;
+}
+
+#resSearch h5 a, #resSearch h5:after{
+	color: #53a1b8;
+}
+
+#resSearch h5 a:hover, #resSearch h5 a:hover:after{
+	color:#555;
+}
+
+#resSearch h5 a:after{
+	font-size: 26px;
+	line-height: 22px;
+	color: #53a1b8;
+}
 
  /**
  * 8.0 Responsive
@@ -595,6 +649,16 @@ table{
 	#discoverCatalogue div.autogrid5 > *{
 	width: 30%;
 	}
+
+	#formSearch .persoDropDown{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	#formSearch input[type='search']{
+		width: 100%;
+	}
+
+
 	
 }
 
