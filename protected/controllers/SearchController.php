@@ -5,6 +5,12 @@ class SearchController extends Controller
 	
  	public $defaultAction = 'search';
 
+
+ 	/** 
+ 	* search editor , author or contributor 
+ 	* @param $query String
+ 	* @param $type String
+ 	*/
 	public function actionSearch($query=null,$type=null)
 	{
 		$catalogues = array();
@@ -52,6 +58,11 @@ class SearchController extends Controller
 	}
 
 
+	/** 
+	* Search a book
+	* @param $query String
+	* @return Array
+	*/
 	public function actionSearchBook($query=null)
 	{
 		$res = array();
@@ -59,16 +70,16 @@ class SearchController extends Controller
 			$searchModel = new Book('search');
 			$searchModel->title = $query;
 			$res = $searchModel->search()->getData();
-			foreach ($res as $key => $book) {
-				if (! isset($book->catalogue)) {
-					unset($res[$key]);
-				}
-			}
 		}
 
 		return $res;
 	}
 
+	/**
+	* Search a catalogue
+	* @param $query
+	* @return Array
+	*/
 	public function actionSearchCatalogue($query=null)
 	{
 		$res = array();
@@ -93,7 +104,12 @@ class SearchController extends Controller
 		return $res;
 	}
 
-
+	/** 
+	* Search a contributor
+	* @param $query String
+	* @param $type String type of contributor (author, illustrator, traductor)
+	* @param Array
+	*/
 	public function actionSearchContributor($query=null,$type=null)
 	{
 		$res = array();
@@ -101,12 +117,8 @@ class SearchController extends Controller
 			$searchModel = new Contributor('search');
 			$searchModel->name = $query;
 			$searchModel->type = $type;
-			$res = $searchModel->search()->getData();
-			foreach ($res as $key => $contributor) {
-				if (! isset($contributor->book->catalogue)) {
-					unset($res[$key]);
-				}
-			}
+			$res = $searchModel->search();
+
 		}
 		return $res;
 	}

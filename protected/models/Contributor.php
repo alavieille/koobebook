@@ -101,15 +101,23 @@ class Contributor extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
 
-		$criteria->compare('type',$this->type,true);
+		$criteria = new CDbCriteria();
+		$criteria->with = array('book'=>array('joinType'=>'LEFT JOIN'));
+
+ 		
+ 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('name',$this->name,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
+	
+ 		$res = $this->findAll($criteria);
+ 		foreach ($res as $key => $contributor) {
+			if (! isset($contributor->book->catalogue)) {
+					unset($res[$key]);
+				}
+		}
+		return $res;
 	}
+
 
 	/**
 	 * Returns the static model of the specified AR class.

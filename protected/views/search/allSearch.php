@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 	
 		
 		<?php $this->renderPartial('_form', array('select'=>$type,'query'=>$query)); ?>
-
+		<?php if($query != '')  :?>
 		<div class="line" id="resSearch">
 			<h4 class="pa1 mb3">Résultats pour " <?php echo $query; ?> " : </h4>
 			<?php if(count($catalogues) <= 0 && count($books) <= 0 && count($contributors) <= 0 ) : ?>
@@ -32,6 +32,7 @@ $this->breadcrumbs=array(
 				<?php $this->renderPartial('_searchContributor', array('contributors'=>$contributors,'type'=>$type,'query'=>$query)); ?>
 			<?php endif; ?>
 		</div>
+		<?php endif; ?>
 	</div>
 
 </section>

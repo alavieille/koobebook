@@ -1,4 +1,3 @@
 ==TODO==
 
-* ajout différent contributeur
-* ajout redimension imgage
+* Ajouter page d'aide

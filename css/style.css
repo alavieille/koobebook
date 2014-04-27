@@ -122,8 +122,24 @@ table{
 #siteNav a:hover{
 	color:#53a1b8;
 }
+#siteNav .linkSearch{
+	height: 60px;
 
+}
 
+#siteNav .linkSearch a{
+	text-indent: -9999px;7
+	height: 60px;
+	width : 40px;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-image: url('img/search.png');
+	background-position: -20px 50%;
+}
+
+#siteNav .linkSearch:hover a{
+	background-position: -80px 50%;
+}
 /**
  * 2.2 Compatct Navigation
  **/
@@ -150,8 +166,16 @@ table{
 }
 
 #compactNav #showSearch{
-	background-image: url("img/search.png");
 	background-position: 20%;
+	display: inline-block;
+}
+#compactNav #showSearch a{
+	display: block;
+	height: 50px;
+	width: 80px;
+	background-image: url("img/search.png");
+	background-repeat: no-repeat;
+	background-position:-0% 50%;
 }
 
 /**
@@ -434,7 +458,7 @@ table{
 	font-weight: normal;
 }
 
-.catalogue div.autogrid5 { /* list book */
+div.autogrid5 { /* list book */
 	text-align: left;
 	position: relative;
 }
