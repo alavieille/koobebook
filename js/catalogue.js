@@ -125,9 +125,9 @@ var dndHandler = {
 		        }
 		        
 	  			$.get( yii.urls.base+"/index.php/book/togglePush/"+draggedElement.attr("data-id"));
+		        
 		        draggedElement.detach().appendTo($("#pushBook .dropper"));
 		    	draggedElement.find(".param li a").eq(2).html("Supprimer de la mise en avant");
-
 
 		        if($("#pushBook .dropper .book").length > 0) {
 		       		$("#pushBook #dropInfo").hide();
