@@ -71,7 +71,7 @@
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden")),
 							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
 						array('label'=>'Éditeurs', 'url'=>array('/catalogue/index' )),
-						array('label'=>'Aide', 'url'=>array('/site/index' )),
+						array('label'=>'Aide', 'url'=>array('/site/help' )),
 						array('label'=>'Rechercher', 'url'=>array('/search/'), "itemOptions"=>array("class"=>"linkSearch")),
 						),
 					'itemCssClass' => "inbl pr2 small-w100",

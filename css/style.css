@@ -18,7 +18,8 @@
  *   7.1 - index 
  *	 7.2 - view
  * 8.0 - Search
- *	 8.1 - form seach
+ *	 8.1 - form seach 
+ * 9.0 - Help
  * 8.0 - Responsive
  * ----------------------------------------------------------------------------
  */
@@ -641,8 +642,67 @@ div.autogrid5 { /* list book */
 	color: #53a1b8;
 }
 
+
  /**
- * 8.0 Responsive
+ * 9.0 Help
+ * ----------------------------------------------------------------------------
+ */
+
+#help a, #mentions a{
+	color:#53A1B8;	
+}
+#help a:hover, #mentions a:hover{
+	color:#505050;	
+}
+
+#help h3{
+	margin-top: 15px;
+}
+
+#help h4{
+	font-weight: normal;
+}
+
+#help h5{
+	font-weight: normal;
+	font-size: 17px;
+}
+
+#help img{
+	max-width: 90%;
+}
+#help>nav{
+	position: fixed;
+	width: 250px;
+}
+
+#help>nav h4{
+	font-weight: normal;
+	color: #505050;
+	font-size: 17px;
+}
+
+#help>nav ul{
+	list-style: none;
+}
+#help>nav ul li{
+	padding: 2px;
+}
+#help>nav ul a{
+	color:#53A1B8;	
+	display: block;
+}
+
+#help>nav ul a:hover{
+	color: #505050;
+}
+
+#help #contentHelp{
+	margin-left: 250px;
+}
+
+ /**
+ * 10.0 Responsive
  * ----------------------------------------------------------------------------
  */
 
@@ -682,7 +742,22 @@ div.autogrid5 { /* list book */
 		width: 100%;
 	}
 
+	#help>nav{
+		position: relative;
+		width: 250px;
+		margin: auto;
+	}
 
+
+
+	#help #contentHelp{
+		margin-left: 0px;
+	}
+
+	#help #contentHelp img{
+		margin-left: 0;
+		margin-right: 0;
+	}
 	
 }
 
