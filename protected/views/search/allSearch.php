@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
 				<?php $this->renderPartial('_searchBook', array('books'=>$books,'type'=>'book','query'=>$query)); ?>
 			<?php endif; ?>
 			<?php if(isset($contributors) && count($contributors) > 0 ) :  ?>
-				<?php $type = ($type != 'editor' && $type != 'illustrator' && $type != 'traductor' ) ?  'Contributeurs' : $type ; ?>
+				<?php $type = ($type != 'author' && $type != 'illustrator' && $type != 'traductor' ) ?  'contributor' : $type ; ?>
 				<?php $this->renderPartial('_searchContributor', array('contributors'=>$contributors,'type'=>$type,'query'=>$query)); ?>
 			<?php endif; ?>
 		</div>

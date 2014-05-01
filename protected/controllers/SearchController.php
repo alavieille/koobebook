@@ -32,7 +32,7 @@ class SearchController extends Controller
 				$contributors = $this->actionSearchContributor($query,$type);
 			break;
 
-			case 'contributors':
+			case 'contributor':
 				$contributors = $this->actionSearchContributor($query);
 			break;
 

@@ -1,4 +1,7 @@
-<section id="mentions" class="pageCenter pa3">
+<div id="help" class="pageCenter pa1">
+<?php $this->renderPartial('_navHelp'); ?>
+<div id="contentHelp" class="mt3 pl2 mb3">
+<section id="mentions">
 	
 <h2>Informations légales</h2>
 <h3>1. Présentation du site.</h3>
@@ -57,3 +60,5 @@ Crédits : les mentions légales ont étés générées et offertes par Subdelir
 <p>Utilisateur : Internaute se connectant, utilisant le site susnommé.</p>
 <p>Informations personnelles : « les informations qui permettent, sous quelque forme que ce soit, directement ou non, l'identification des personnes physiques auxquelles elles s'appliquent » (article 4 de la loi n° 78-17 du 6 janvier 1978).</p>
 </section>
+</div>
+</div>

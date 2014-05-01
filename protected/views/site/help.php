@@ -1,30 +1,5 @@
 <div id="help" class="pageCenter pa1">
-	<nav class="mt3">
-
-	<h4 class="pl3">Aide</h4>
-		<ul>
-			<li><a href="#presHelp">Présentation</a></li>
-			<li><a href="#compte">Compte utilisateur</a></li>
-			<li><a href="#lecteur">Lecteur</a>
-				<ul>
-					<li><a href="#download">Télécharger un livre</a></li>
-					<li><a href="#library">Bibliothèque</a></li>
-				</ul>
-			</li>
-			<li><a href="#editor">Éditeur/Auteur</a>
-				<ul>
-					<li><a href="#createCata">Créer son catalogue</a></li>
-					<li><a href="#publish">Publier un livre</a></li>
-					<li><a href="#manageCata">Gérer son catalogue</a></li>
-					<li><a href="#delete">Suppréssion</a></li>
-				</ul>
-			</li>
-			<li><a href="#format">Formats</a></li>
-			<li><a href="#opds">OPDS</a></li>
-			<li><a href="#contact">Contact</a></li>
-			<li><a href="<?php echo $this->createUrl("/site/mention") ?>">Mentions légales</a></li>
-		</ul>
-	</nav>
+<?php $this->renderPartial('_navHelp'); ?>
 <div id="contentHelp" class="mt3 pl2 mb3">
 		
 	<section id="presHelp">
@@ -43,7 +18,7 @@
 	</section>
 	<section id="lecteur">
 		<h3>Lecteur</h3>
-		<h4>Télécharger un livre</h4>
+		<h4 id="download">Télécharger un livre</h4>
 		<p>Il existe deux types de livre, les livres gratuits et les livres payants.</p>
 		<h5>Livres gratuits</h5>
 		<p>Par exemple, si vous desirez acquerir <b>20000 lieues sous les mers</b> qui est un livre gratuit, il vous suffit de vous rendre sur la page du livre et du cliquer sur le bouton <b>Télécharger</b> (1).</p> 
@@ -51,7 +26,7 @@
 		<img class="ma2" src="<?php echo Yii::app()->request->baseUrl; ?>/images/help/download.png" alt="Lien de téléchargement d'un ebook">
 		<p>Nb : Vous ne devez pas être obligatoirement connecté pour télécharger un livre gratuit. Mais si vous êtes connecté, le livre sera automatiquement ajouté à votre <a href="#bibliothèque">bibliothèque</a>.</p>
 		<h5>Livres payants</h5>
-		<h4 id="bibliothèque">Bibliothèque</h4>
+		<h4 id="library">Bibliothèque</h4>
 		<p>La bibliothèque contient tous les livres pour avez téléchargés / achetés.</p>
 		<p>Pour accéder à votre bibliothèque, vous devez être connecté.</p>
 		<p>Une fois connecté, cliquez sur le lien <b>Mon compte</b> en haut à droite du site et vous serez redirigez directement sur votre bibliothèque, si ce n'est pas le cas cliquez sur le lien <b>Ma bibliothèque</b> dans le menu gauche de votre compte.</p>
@@ -93,7 +68,7 @@
 		</p>
 
 
-		<h4 id="manageCata">Suppréssion</h4>
+		<h4 id="delete">Supprimer</h4>
 		<p>Vous pouvez à tous moment decidé de supprimer votre catalogue en allant dans le menu <b>Paramètres</b> de votre compte.</p>
 		<p>Attention toutefois les livres de votre catalogue, ne seront pas supprimer de la plate-forme, ils seront juste détaché de votre compte.</p>
 		<p>Ainsi les utilisateurs qui ont téléchargé ou achété un de vos livres auront toujours accès à ces derniers, il en est de même lorsque vous supprimez un livre de votre catalogue.</p>

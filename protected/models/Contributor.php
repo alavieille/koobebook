@@ -103,9 +103,8 @@ class Contributor extends CActiveRecord
 
 
 		$criteria = new CDbCriteria();
-		$criteria->with = array('book'=>array('joinType'=>'LEFT JOIN'));
-
- 		
+		$criteria->select = 'bookId';
+ 		$criteria->distinct=true;
  		$criteria->compare('type',$this->type,true);
 		$criteria->compare('name',$this->name,true);
 	

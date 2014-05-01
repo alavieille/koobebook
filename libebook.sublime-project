@@ -3,43 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "/var/www/www-dev/libebook"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "assets"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "css"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "docs"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "images"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "js"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "lib"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "protected"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "themes"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "upload"
+			"path": "."
 		}
 	]
 }
