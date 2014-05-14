@@ -78,6 +78,23 @@ class SiteController extends Controller
 		$this->render('login',array('model'=>$model));
 	}
 
+	/** 
+	* Display help page
+	*/
+	public function actionHelp()
+	{
+		$this->render('help');
+	}
+
+	/** 
+	* Display legal notice page
+	*/
+	public function actionMention()
+	{
+		$this->render('mention');
+	}
+
+
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */

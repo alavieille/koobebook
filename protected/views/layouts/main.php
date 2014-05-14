@@ -56,7 +56,7 @@
 				<nav id="compactNav" class="grid desktop-hidden small-w100 mt2">
 					<ul class="grid2">
 						<li id="showMenu" class=" inbl small-w50 ">menu</li>
-						<li id="showSearch" class="inbl small-w50">recherche</li>
+						<li id="showSearch" class="inbl small-w50"><a class='inbl' href="<?php echo $this->createUrl('/search/') ?>">rechercher</a></li>
 					</ul>
 				</nav>
 		
@@ -71,7 +71,8 @@
 							array('label'=>'Deconnexion', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden")),
 							array('label'=>'Inscription', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest, 'itemOptions'=>array("class"=>"desktop-hidden"), "linkOptions"=>array("class"=>"linkVisible")),
 						array('label'=>'Éditeurs', 'url'=>array('/catalogue/index' )),
-						array('label'=>'Aide', 'url'=>array('/site/index' )),
+						array('label'=>'Aide', 'url'=>array('/site/help' )),
+						array('label'=>'Rechercher', 'url'=>array('/search/'), "itemOptions"=>array("class"=>"linkSearch")),
 						),
 					'itemCssClass' => "inbl pr2 small-w100",
 

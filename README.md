@@ -1,4 +1,5 @@
 ==TODO==
+* Correction orthographe page aide
 
-* ajout différent contributeur
-* ajout redimension imgage
+
+

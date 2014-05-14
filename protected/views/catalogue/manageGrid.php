@@ -45,6 +45,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 			<p class="txtcenter italic"> Ajouter un livre à la une, depuis le menu contextuel</p>
 			<p class="txtcenter">Ou faites un glissé-déposé du livre que vous souhaité mettre en avant</p>
 		</div>
+			<div class="autogrid5 dropper"></div>
 	<?php else : ?>
 		<div class="autogrid5 dropper">
 			<?php foreach ($pushBooks as $book) :?>

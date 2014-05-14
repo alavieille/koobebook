@@ -4,11 +4,15 @@
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
 $this->pageTitle=Yii::app()->name . ' - Éditeurs';
-$this->breadcrumbs=array(
-	    'Éditeurs'=>array('Catalogue/index'),
-	    'Éditions '.$model->catalogue->name =>array('catalogue/view/'.$model->catalogue->id),
-		 $model->title => array(),
-);
+$editor = null;
+if(isset($model->catalogue)) {
+	$this->breadcrumbs=array(
+		    'Éditeurs'=>array('Catalogue/index'),
+		    'Éditions '.$model->catalogue->name =>array('catalogue/view/'.$model->catalogue->id),
+			 $model->title => array(),
+	);
+}
+
 
 ?>
 
@@ -62,7 +66,7 @@ $this->breadcrumbs=array(
 			<?php $number = 0; ?>
 			<?php foreach ($author as $value) : ?>
 					<?php if($number > 0 ) echo " & "; ?>
-					<?php echo $value["name"]; $number ++;?>
+					<a href="<?php echo Yii::app()->createUrl('search/search/',array('type'=>'author','query'=>$value["name"]));  ?>"><?php echo $value["name"]; $number ++;?></a> 
 			<?php endforeach; ?>
 			</h4>
 			<?php if(! is_null($model->catalogue)) :?>
@@ -101,16 +105,18 @@ $this->breadcrumbs=array(
 			<p>Format : <?php echo isset($model->epub) ? "Epub" : "" ?> <?php echo isset($model->mobi) ? "mobi" : "" ?> <?php echo isset($model->pdf) ? "PDF" : "" ?></p>
 			<?php if(count($traductor) > 0 ) :?>
 				<p>Traducteur : 
-					<?php foreach ($traductor as $value) {
-						echo $value['name'].", ";
-					} ?>
+					<?php foreach ($traductor as $value) : ?>
+							<a href="<?php echo Yii::app()->createUrl('search/search/',array('type'=>'traductor','query'=>$value["name"]));  ?>"><?php echo $value["name"];?></a> ,  
+					
+					<?php endforeach; ?>
 				</p>
 			<?php endif; ?>
 			<?php if(count($illustrator) > 0 ) :?>
 				<p>Illustrateur : 
-					<?php foreach ($illustrator as $value) {
-						echo $value['name'].", " ;
-					} ?>
+					<?php foreach ($illustrator as $value) : ?>
+							<a href="<?php echo Yii::app()->createUrl('search/search/',array('type'=>'illustrator','query'=>$value["name"]));  ?>"><?php echo $value["name"];?></a> ,  
+					
+					<?php endforeach; ?>
 				</p>
 			<?php endif; ?>
 		</section>
