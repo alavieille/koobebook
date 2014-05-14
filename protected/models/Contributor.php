@@ -37,7 +37,7 @@ class Contributor extends CActiveRecord
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			 array('name,', 'safe', 'on'=>'search'),
+		
 		);
 	}
 
@@ -107,9 +107,9 @@ class Contributor extends CActiveRecord
  		$criteria->distinct=true;
  		$criteria->compare('type',$this->type,true);
 		$criteria->compare('name',$this->name,true);
-	
  		$res = $this->findAll($criteria);
  		foreach ($res as $key => $contributor) {
+ 			$contributor->type = $this->type;
 			if (! isset($contributor->book->catalogue)) {
 					unset($res[$key]);
 				}

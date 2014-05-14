@@ -118,7 +118,6 @@ class SearchController extends Controller
 			$searchModel->name = $query;
 			$searchModel->type = $type;
 			$res = $searchModel->search();
-
 		}
 		return $res;
 	}
