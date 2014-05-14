@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"book",
+				"bookId"
+			],
+			[
 				"mar",
 				"margin-top"
 			],
@@ -348,10 +352,6 @@
 				"click  (function)"
 			],
 			[
-				"book",
-				"bookFile1"
-			],
-			[
 				"change",
 				"changeUpload"
 			],
@@ -500,10 +500,72 @@
 	"buffers":
 	[
 		{
-			"file": "libebook.sublime-project",
+			"file": "protected/models/Catalogue.php",
 			"settings":
 			{
-				"buffer_size": 73,
+				"buffer_size": 5838,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "upload/book/92/92-mobi.mobi",
+			"settings":
+			{
+				"buffer_size": 5045047,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/extractDataFile/MobiMeta.php",
+			"settings":
+			{
+				"buffer_size": 6371,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php header(\"Content-type: text/xml\"); ?>\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<feed xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:opds=\"http://opds-spec.org/2010/catalog\" xml:lang=\"fr\"  xmlns=\"http://www.w3.org/2005/Atom\">\n  <id><?php echo $model->id; ?></id>\n  <title><?php echo $model->name; ?></title>\n  <updated><?php echo str_replace('+00:00', 'Z', gmdate('c')) ?></updated>\n  <icon><?php echo Yii::app()->getBaseUrl(true).\"/images/logo.png\"; ?></icon>\n  <author>\n    <name><?php echo $model->name; ?></name>\n    <uri><?php echo yii::app()->createAbsoluteUrl(\"catalogue/view\",array(\"id\"=>$model->id)); ?></uri>\n  </author>\n\n\n<link type=\"application/atom+xml;profile=opds-catalog;kind=navigation\" \nhref=\"<?php echo yii::app()->createAbsoluteUrl(\"catalogue/viewodps\",array(\"id\"=>$model->id)); ?>\" rel=\"start\" title=\"Accueil\"/>\n\n<link type=\"application/atom+xml; profile=opds-catalog; kind=acquisition\" href=\"<?php echo yii::app()->createAbsoluteUrl(\"catalogue/viewodps\",array(\"id\"=>$model->id)); ?>\" rel=\"self\" title=\"Tous ces ebook\"/>\n\n\n<link type=\"applicatixon/atom+xml;profile=opds-catalog;kind=acquisition\" href=\"<?php echo yii::app()->createAbsoluteUrl(\"catalogue/viewodps\",array(\"id\"=>$model->id,\"all\"=>0)); ?>\" rel=\"http://opds-spec.org/sort/popular\" title=\"A la une\"/>\n\n<?php foreach ($books as $book) : ?>\n		<?php $this->renderPartial('//book/_viewBookCatalogueOdps', array('book'=>$book)); ?>\n<?php endforeach; ?>\n\n</feed>\n",
+			"file": "protected/views/catalogue/viewOdps.php",
+			"file_size": 1441,
+			"file_write_time": 130428108376505280,
+			"settings":
+			{
+				"buffer_size": 1442,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php\n\nclass BookController extends Controller\n{\n\n\n	/**\n	 * @return array action filters\n	 */\n	public function filters()\n	{\n		return array(\n			'accessControl', // perform access control for CRUD operations\n		);\n	}\n\n	/**\n	 * Specifies the access control rules.\n	 * This method is used by the 'accessControl' filter.\n	 * @return array access control rules\n	 */\n	public function accessRules()\n	{\n		return array(\n			array('allow',  // allow all users to perform 'index' and 'view' actions\n				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo'),\n				'users'=>array('*'),\n			),\n			array('allow', // allow authenticated user \n				'actions'=>array('create'),\n				'users'=>array('@'),\n			),\n			array('allow',\n				'actions'=>array('update','delete','confirmDelete','togglePush'),\n				'users'=>array('@'),\n				'expression'=> 'Yii::app()->controller->isOwnerRules()',\n			),\n			array('deny',  // deny all users\n				'users'=>array('*'),\n			),\n		);\n	}\n\n	/**\n	 * Displays a particular model.\n	 * @param integer $id the ID of the model to be displayed\n	 */\n	public function actionView($id)\n	{\n		$model = $this->loadModel($id);\n		$contributors = $model->contributors;\n		$author = array();\n		$traductor = array();\n		$illustrator = array();\n		foreach ($contributors as $contributor) {\n			if( $contributor[\"type\"] == \"author\")\n				$author[] = $contributor;\n			elseif ($contributor[\"type\"] == \"traductor\") \n				$traductor[] = $contributor;\n			elseif ($contributor[\"type\"] == \"illustrator\")\n				$illustrator[] = $contributor;\n		}\n\n		$format = array();\n		if(isset($model->epub)) {\n			$format[\"epub\"] = \"Epub\";\n		}\n		if(isset($model->mobi)) {\n			$format[\"mobi\"] = \"Mobi\";\n		}\n		if(isset($model->pdf)) {\n			$format[\"pdf\"] = \"PDF\";\n		}\n		$this->render('view',array(\n			'model'=>$model,\n			'format'=>$format,\n			'traductor'=>$traductor,\n			'illustrator'=>$illustrator,\n			'author'=>$author,\n			'isOwner'=>$this->isOwner($id)\n		));\n	}\n	\n	/**\n	 * Displays a particular model in opds format.\n	 * @param integer $id the ID of the model to be displayed\n	 */\n	public function actionViewodps($id)\n	{\n		$model= $this->loadModel($id);\n		$contributors = $model->contributors;\n		$author = array();\n		$traductor = array();\n		$illustrator = array();\n		foreach ($contributors as $contributor) {\n			if( $contributor[\"type\"] == \"author\")\n				$author[] = $contributor;\n			elseif ($contributor[\"type\"] == \"traductor\") \n				$traductor[] = $contributor;\n			elseif ($contributor[\"type\"] == \"illustrator\")\n				$illustrator[] = $contributor;\n		}\n		$this->renderPartial('viewOdps',array(\n			'model'=>$model,\n			'traductor'=>$traductor,\n			'illustrator'=>$illustrator,\n			'author'=>$author,\n		));\n	}\n\n	/**\n	* Manage upload of all format of ebook\n	* @param Object $model \n	*/\n	private function uploadFileBook($model)\n	{\n		\n		for ($i=1; $i <=3 ; $i++) { \n			$param = 'bookFile'.$i;		\n			if(! is_null($model->$param)) {\n				$extension = $model->$param->extensionName;\n				$model->$extension=$extension.'.'.$extension;\n			}\n		}\n	}\n\n	/**\n	 * Creates a new model.\n	 * If creation is successful, the browser will be redirected to the 'view' page.\n	 */\n	public function actionCreate()\n	{\n		\n		$this->layout = \"//layouts/private\";\n		$model=new Book;\n		$hasAuthor = false;\n		$contributors = array();\n		//default value\n		$model->price = 0;\n		$model->date_create = new CDbExpression('NOW()');\n		// recherche catalogue lié\n		$catalogue = Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));\n	\n\n		if(is_null($catalogue)){\n			$this->redirect(array('catalogue/create'));\n		}\n\n\n		$model->catalogueId = $catalogue->id;\n\n		if(isset($_POST['Book']) && isset($_POST['contributor']))\n		{\n			var_dump($_POST['contributor']);\n			foreach ($_POST['contributor'] as $contributor) {\n				if( trim($contributor['name']) != \"\" && in_array($contributor['type'],array('author','illustrator','traductor')))\n			  	{\n			  		$newContributor = new Contributor;\n				  	$newContributor->name = $contributor['name'];\n				  	$newContributor->type = $contributor['type'];\n				  	if($contributor['type'] == 'author') {\n				  		$hasAuthor = true;\n				  	}\n				  	$contributors[] = $newContributor;\n				}\n			}\n\n			$model->attributes=$_POST['Book'];\n\n			//upload couverture & ebook \n			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');\n			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');\n			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');\n			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');\n\n			$this->uploadFileBook($model);\n		\n			if(! is_null($model->pictureFile )) // si couverture\n				$model->picture=\"cover.\".$model->pictureFile->extensionName;\n\n\n			if($model->save())\n			{\n				if(! $hasAuthor) {\n					$model->addError('', 'Vous devez ajouter au moins un auteur');\n					goto end;\n				}\n\n				foreach ($contributors as $contributor) {\n					$contributor->bookId = $model->id;\n\n					$contributor->save();\n				}\n\n				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR.\"..\".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;\n\n				if(! file_exists($urlUpload.\"/book/\".$model->id)) {\n					mkdir($urlUpload.\"/book/\".$model->id,0777,true);\n				}\n				if(! is_null($model->pictureFile)) {\n					$model->pictureFile->saveAs($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-cover.\".$model->pictureFile->extensionName);			\n					$image = Yii::app()->image->load($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-cover.\".$model->pictureFile->extensionName);\n					$image->resize(260, 392);\n					$image->save();\n				}\n 				\n\n				for ($i=1; $i <=3 ; $i++) { \n					$param = 'bookFile'.$i;		\n					if(! is_null($model->$param)) {\n						$extension = $model->$param->extensionName;\n						$model->$param->saveAs($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$extension.'.'.$extension);\n					}\n				}\n				$this->redirect(array(\"catalogue/manage\"));\n			}\n		}\n		end:\n		$this->render('create',array(\n			'model'=>$model,\n			'contributors'=>$contributors,\n		));\n	}\n\n\n	/**\n	 * Updates a particular model.\n	 * If update is successful, the browser will be redirected to the 'view' page.\n	 * @param integer $id the ID of the model to be updated\n	 */\n	public function actionUpdate($id)\n	{\n		$this->layout = \"//layouts/private\";\n		$model=$this->loadModel($id);\n\n		$hasAuthor = false;\n		$contributors = $model->contributors;\n		$oldContributors = $contributors;\n\n		if(isset($_POST['Book']) && $_POST['contributor'])\n		{\n			$model->attributes=$_POST['Book'];\n\n			$model->pictureFile  = CUploadedFile::getInstance($model,'pictureFile');\n\n			$model->bookFile1 = CUploadedFile::getInstance($model,'bookFile1');\n			$model->bookFile2 = CUploadedFile::getInstance($model,'bookFile2');\n			$model->bookFile3 = CUploadedFile::getInstance($model,'bookFile3');\n			\n\n			foreach ($_POST['contributor'] as $contributor) {\n				if( trim($contributor['name']) != \"\" && in_array($contributor['type'],array('author','illustrator','traductor')))\n			  	{\n			  		$newContributor = new Contributor;\n				  	$newContributor->name = $contributor['name'];\n				  	$newContributor->type = $contributor['type'];\n				  	if($contributor['type'] == 'author') {\n				  		$hasAuthor = true;\n				  	}\n				  	$contributors[] = $newContributor;\n				}\n			}\n\n			\n			if(! is_null($model->pictureFile )){\n				$picturePrecSave = $model->picture; // ancienne couverture \n				$model->picture = \"cover.\".$model->pictureFile->extensionName;\n			}\n			if($model->validate()) {\n\n				if(! $hasAuthor) {\n					$model->addError('', 'Vous devez ajouter au moins un auteur');\n					goto end;\n				}\n\n	\n				$urlUpload = Yii::app()->basePath.DIRECTORY_SEPARATOR.\"..\".DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;\n				\n				if(isset($_POST['Book']['deleteEpub']) and $_POST['Book']['deleteEpub']== 1) {\n					if(file_exists($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$model->epub))\n							unlink($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$model->epub);\n					$model->epub = null;\n				}\n\n				if(isset($_POST['Book']['deleteMobi']) and $_POST['Book']['deleteMobi']== 1) {\n					if(file_exists($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$model->mobi))\n							unlink($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$model->mobi);\n					$model->mobi = null;\n				}\n\n				if(isset($_POST['Book']['deletePdf']) and $_POST['Book']['deletePdf']== 1) {\n					if(file_exists($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$model->pdf))\n							unlink($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$model->pdf);\n					$model->pdf = null;\n				}\n\n				$this->uploadFileBook($model);\n		\n				if($model->save())\n				{\n					\n					foreach ($contributors as $contributor) {\n						$contributor->bookId = $model->id;\n\n						$contributor->save();\n					}\n\n					foreach ($oldContributors as $oldContributor) {\n						$oldContributor->delete();\n					}\n\n					if(! is_null($model->pictureFile)){\n						$model->pictureFile->saveAs($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-cover.\".$model->pictureFile->extensionName);	\n						$image = Yii::app()->image->load($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-cover.\".$model->pictureFile->extensionName);\n						$image->resize(260, 392);\n						$image->save();\n						if($picturePrecSave != $model->picture) // si changement de format suppression de l'ancience couverture\n							if(file_exists($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$picturePrecSave))\n								unlink($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$picturePrecSave);\n					}\n\n					\n					for ($i=1; $i <=3 ; $i++) { \n						$param = 'bookFile'.$i;		\n						if(! is_null($model->$param)) {\n							$extension = $model->$param->extensionName;\n							$model->$param->saveAs($urlUpload.\"/book/\".$model->id.\"/\".$model->id.\"-\".$extension.'.'.$extension);\n						}\n					}\n\n					$this->redirect(array(\"catalogue/manage\"));\n				}\n			}\n		}\n		end:\n		$this->render('update',array(\n			'model'=>$model,\n			'contributors'=>$contributors,\n		));\n	}\n\n	/**\n	 * Send file to client\n	 * @param integer $id the ID of the book\n	 */\n	public function actionDownload($id)\n	{\n		\n		if( ! isset($_GET[\"format\"])) {\n			throw new CHttpException(400,\"votre requête est invalide\");\n		}\n		$model=$this->loadModel($id);\n		$fileDir = Yii::app()->getBasePath().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.yii::app()->params->folder_upload.DIRECTORY_SEPARATOR;\n\n		$format = $_GET['format'];\n		$file = $fileDir.\"/book/\".$model->id.'/'.$model->id.\"-\".$model->$format;\n		if(file_exists($file)) {\n			if(isset(yii::app()->user->id)) {\n				$library= Library::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));\n				if(! isset($library)) {\n					$library = new Library();\n					$library->userId = yii::app()->user->id;\n					$library->bookId = $id;\n					$library->date_download =  new CDbExpression('NOW()');\n					$library->save();\n				}\n			}\n			yii::app()->request->sendFile(\n				$model->title.\"-\".$model->$format ,\n				file_get_contents($file)\n			);\n		}\n\n		else {\n			yii::app()->user->setFlash(\"error\",\"Le fichier demandé n'existe pas\");\n			Yii::app()->getController()->redirect(array('book/view/'.$model->id));\n		}\n	}\n\n	/**\n	* Toggle param push of a book\n	* @param $id the ID of the book\n	*/\n	public function actionTogglePush($id)\n	{\n\n		$model=$this->loadModel($id);\n		\n		if($model->push) {\n			$model->push = false;\n		}\n		else {\n			$nbrBookPush = count($model->catalogue->books(array('condition'=>'push=1')));\n			if($nbrBookPush >= 5) {\n				yii::app()->user->setFlash(\"error\",\"Vous pouvez mettre au maximun 5 ebooks en avant\");\n				Yii::app()->getController()->redirect(array('catalogue/manage'));\n			}\n			$model->push = true;\n		}\n		$model->save();\n\n		if(! Yii::app()->request->isAjaxRequest) {\n			Yii::app()->getController()->redirect(array('catalogue/manage'));\n		}\n\n	}\n\n\n	/**\n	* Extract information to file\n	* Is ajax request\n	*/\n	public function actionExtractInfo()\n	{\n		if(Yii::app()->request->isAjaxRequest ) {\n			try {\n				$files = array(\"application/x-mobipocket-ebook\"=>\"mobi.mobi\",\"application/epub+zip\"=>\"epub.epub\");\n				$metaFile = array();\n				foreach ($_FILES as $file) {\n					if( $file[\"error\"] == 0 )\n						$metaFile[] = FactoryMeta::initialize($file[\"tmp_name\"], $file[\"type\"]);\n				}\n				echo json_encode($this->getMetaFile($metaFile));\n			} catch (Exception $e) {\n				echo \"error\";\n			}\n		\n		}\n	}\n\n	/**\n	* Create an array who contains metadata information\n	* @param $metaFiles Array contains metadata of all file\n	* @return $meta an Array\n	**/\n	private function getMetaFile($metaFiles)\n	{\n		$meta = array(\n			\"title\" => null,\n			\"author\" => null,\n			\"language\" => null,\n			\"description\" => null,\n			\"date\" => null,\n			\"isbn\" => null,\n			);\n		foreach ($metaFiles as $metaFile) {\n			if( $meta[\"title\"] == null )\n				$meta[\"title\"] = $metaFile->getTitle();\n			if( $meta[\"author\"] == null )\n				$meta[\"author\"] = $metaFile->getAuthor();\n			if( $meta[\"language\"] == null )\n				$meta[\"language\"] = $metaFile->getLanguage();\n			if( $meta[\"description\"] == null )\n				$meta[\"description\"] = $metaFile->getDescription();\n			if( $meta[\"date\"] == null )\n				$meta[\"date\"] = date(\"Y-m-d\", strtotime($metaFile->getDate()));\n			if( $meta[\"isbn\"] == null )\n				$meta[\"isbn\"] = $metaFile->getIsbn();\n		}\n\n		return $meta;\n	}\n\n\n	/**\n	* Delete a book\n	* @param integer $id the ID of the book\n	*/\n	public function actionDelete($id)\n	{\n		$model = $this->loadModel($id);\n		$this->layout = \"//layouts/private\";\n		$this->render('delete',array('model'=>$model));\n	}	\n\n	/**\n	* Confirm delete Book\n	* @param integer $id the ID of the book\n	* @throws CHttpException\n	*/\n	public function actionConfirmDelete($id)\n	{\n		if(Yii::app()->request->getUrlReferrer() == Yii::app()->createAbsoluteUrl('book/delete', array(\n            'id'=>$id))){\n			$model = $this->loadModel($id);\n			$model->catalogueId = null;\n			$model->save();\n			Yii::app()->getController()->redirect(array('catalogue/manage'));\n		}\n		else{\n			throw new CHttpException(403,\"Vous n'êtes pas autorisé à effectuer cette action.\");\n		}\n	}\n\n\n 	public function actionTopDownload()\n 	{\n		$topBookid = Library::model()->findTopDownload(30);\n		$topBook = array();\n		foreach ($topBookid as $id) {\n			$topBook[] = Book::model()->findByPk($id);\n		}\n		$this->render('topDownload',array(\n			'topBook'=>$topBook,\n		));	\n\n 	}\n\n\n	/**\n	 * default action\n	 * Redirect user to home\n	 */\n	public function actionIndex()\n	{\n		\n		$this->redirect(Yii::app()->homeUrl);\n	}\n\n	/**\n	* Check is user is owner of book\n	* @return boolean\n	*/\n	private function isOwner($id){\n\n		 $model = $this->loadModel($id);\n		 if(isset($model->catalogue))\n		 	return yii::app()->user->id === $model->catalogue->userId;\n		 return false;\n	}\n\n\n	/**\n	* Check is user is owner of book, use in acces rules\n	* @return boolean\n	* @throws CHttpException\n	*/\n	public function isOwnerRules()\n	{\n     	if(isset($_GET[\"id\"])) {\n	        $model = $this->loadModel($_GET['id']);\n	        if(isset($model->catalogue))\n	        	return yii::app()->user->id === $model->catalogue->userId;\n	    }\n	    throw new CHttpException(400,\"votre requête est invalide\");\n	}\n\n	/**\n	 * Returns the data model based on the primary key given in the GET variable.\n	 * If the data model is not found, an HTTP exception will be raised.\n	 * @param integer $id the ID of the model to be loaded\n	 * @return Book the loaded model\n	 * @throws CHttpException\n	 */\n	public function loadModel($id)\n	{\n		$model=Book::model()->findByPk($id);\n		if($model===null)\n			throw new CHttpException(404,'The requested page does not exist.');\n		return $model;\n	}\n\n	/**\n	 * Performs the AJAX validation.\n	 * @param Book $model the model to be validated\n	 */\n	protected function performAjaxValidation($model)\n	{\n		if(isset($_POST['ajax']) && $_POST['ajax']==='book-form')\n		{\n			echo CActiveForm::validate($model);\n			Yii::app()->end();\n		}\n	}\n}\n",
+			"file": "protected/controllers/BookController.php",
+			"file_size": 15796,
+			"file_write_time": 130429777252732590,
+			"settings":
+			{
+				"buffer_size": 15789,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/amaury/Documents/cours/projet/rapport/rapport.ent",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/var/www/www-dev/test_yii/protected/controllers/SiteController.php",
+			"settings":
+			{
+				"buffer_size": 2763,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/extractDataFile/PdfMeta.php",
+			"settings":
+			{
+				"buffer_size": 1830,
 				"line_ending": "Unix"
 			}
 		}
@@ -580,10 +642,22 @@
 	},
 	"file_history":
 	[
+		"/home/amaury/Téléchargements/plan.pdf",
+		"/home/amaury/Téléchargements/Jules Verne - 20000 lieues sous les mers.pdf",
+		"/home/amaury/Téléchargements/projet.pdf",
+		"/var/www/www-dev/libebook/upload/book/92/92-pdf.pdf",
+		"/var/www/www-dev/libebook/protected/views/site/_navHelp.php",
+		"/var/www/www-dev/libebook/README.md",
+		"/var/www/www-dev/libebook/protected/views/site/help.php",
+		"/var/www/www-dev/libebook/protected/views/site/mention.php",
+		"/var/www/www-dev/libebook/protected/views/search/allSearch.php",
+		"/var/www/www-dev/libebook/protected/views/search/_searchContributor.php",
+		"/var/www/www-dev/libebook/protected/controllers/SearchController.php",
+		"/var/www/www-dev/libebook/protected/models/Contributor.php",
+		"/var/www/www-dev/libebook/libebook.sublime-project",
 		"/var/www/www-dev/libebook/js/catalogue.js",
 		"/var/www/www-dev/libebook/protected/views/catalogue/manageGrid.php",
 		"/home/amaury/Téléchargements/kit-installation-paybox/test_paiement.php",
-		"/var/www/www-dev/libebook/README.md",
 		"/etc/apache2/apache2.conf",
 		"/etc/apache2/sites-available/000-default.conf",
 		"/home/amaury/Téléchargements/kit-installation2-paybox/test_paiement.php",
@@ -597,20 +671,14 @@
 		"/var/www/www-dev/libebook/protected/views/catalogue/view.php",
 		"/var/www/www-dev/libebook/css/private.css",
 		"/var/www/www-dev/libebook/css/knacss.css",
-		"/var/www/www-dev/libebook/protected/views/site/help.php",
-		"/var/www/www-dev/libebook/protected/views/site/mention.php",
 		"/var/www/www-dev/libebook/protected/controllers/SiteController.php",
 		"/var/www/www-dev/libebook/protected/config/main.php",
 		"/var/www/www-dev/libebook/protected/views/layouts/main.php",
 		"/var/www/www-dev/libebook/css/style.css",
-		"/var/www/www-dev/libebook/protected/controllers/SearchController.php",
 		"/var/www/www-dev/libebook/protected/models/Book.php",
 		"/var/www/www-dev/libebook/protected/models/Catalogue.php",
 		"/var/www/www-dev/libebook/protected/views/book/view.php",
-		"/var/www/www-dev/libebook/protected/views/search/allSearch.php",
-		"/var/www/www-dev/libebook/protected/views/search/_searchContributor.php",
 		"/var/www/www-dev/libebook/css/form.css",
-		"/var/www/www-dev/libebook/protected/models/Contributor.php",
 		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
 		"/var/www/www-dev/libebook/protected/views/search/_form.php",
 		"/var/www/www-dev/libebook/protected/views/search/_searchBook.php",
@@ -701,13 +769,7 @@
 		"/home/amaury/21004281/www-dev/M1/Dev2/config/config.php",
 		"/var/www/www-dev/dev2/developpement/dump.sql",
 		"/var/www/www-dev/libebook/protected/views/user/forgetPass.php",
-		"/var/www/www-dev/libebook/kcfinder/config.php",
-		"/var/www/www-dev/libebook/protected/views/book/_search.php",
-		"/var/www/www-dev/libebook/protected/extensions/editMe/vendors/CKEditor/contents.css",
-		"/var/www/www-dev/libebook/css/contents.css",
-		"/var/www/www-dev/libebook/protected/views/catalogue/_view.php",
-		"/var/www/www-dev/libebook/css/knacss_save.css",
-		"/var/www/www-dev/libebook/protected/views/book/admin.php"
+		"/var/www/www-dev/libebook/kcfinder/config.php"
 	],
 	"find":
 	{
@@ -725,6 +787,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"user",
+			"find",
 			"; ",
 			"autogrid",
 			".autogrid",
@@ -791,16 +855,16 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "libebook.sublime-project",
+					"file": "protected/models/Catalogue.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 73,
+						"buffer_size": 5838,
 						"regions":
 						{
 						},
@@ -917,14 +981,735 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
+						"translation.y": 1385.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "upload/book/92/92-mobi.mobi",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5045047,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								159,
+								159
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "protected/components/extractDataFile/MobiMeta.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6371,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2637,
+								2637
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1669.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "protected/views/catalogue/viewOdps.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1069,
+								1069
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "protected/controllers/BookController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14583,
+								14583
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8648.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/amaury/Documents/cours/projet/rapport/rapport.ent",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/var/www/www-dev/test_yii/protected/controllers/SiteController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2763,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								634,
+								634
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "protected/components/extractDataFile/PdfMeta.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1830,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								88,
+								88
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -963,7 +1748,7 @@
 		"cols":
 		[
 			0.0,
-			0.578126053865,
+			0.925490196078,
 			1.0
 		],
 		"rows":
