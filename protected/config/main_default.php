@@ -17,6 +17,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.components.extractDataFile.*',
 		'application.helpers.*',
 	),
 
@@ -34,10 +35,16 @@ return array(
 
 	// application components
 	'components'=>array(
+
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		'image'=>array(
+          'class'=>'application.extensions.image.CImageComponent',
+            // GD or ImageMagick
+            'driver'=>'GD'
+         ),
 		// uncomment the following to enable URLs in path-format
 		
 		'urlManager'=>array(
