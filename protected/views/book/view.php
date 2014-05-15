@@ -26,14 +26,19 @@ if(isset($model->catalogue)) {
 
 <div id="viewBook" class="pt3 pb3">
 		<?php if(Yii::app()->user->hasFlash('success')):?>
-		    <div class="txtcenter flashsuccess pb2">
+		    <div class="txtcenter flashsuccess  pa1 mb2 small-w100 w80 center mw960p">
 		        <?php echo Yii::app()->user->getFlash('success'); ?>
 		    </div>		    
 		<?php elseif(Yii::app()->user->hasFlash('error')):?>
-		    <div class="txtcenter flasherror pb2">
+		    <div class="txtcenter flasherror  pa1 mb2 small-w100 w80 center mw960p">
 		        <?php echo Yii::app()->user->getFlash('error'); ?>
+		    </div>		
+		<?php elseif(Yii::app()->user->hasFlash('notice')):?>
+		    <div class="txtcenter flashnotice  pa1 mb2 small-w100 w80 center mw960p">
+		        <?php echo Yii::app()->user->getFlash('notice'); ?>
 		    </div>
 		<?php endif; ?>
+
 		<?php if($isOwner) : ?>
 			<nav class="center mw960p mb2">
 				<?php 
@@ -87,7 +92,7 @@ if(isset($model->catalogue)) {
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
 			<div class="form mt2 pl1">
-				<?php if((CHtml::encode($model->price) == 0)) :  ?>
+				<?php if((CHtml::encode($model->price) == 0) || $inLibraryUser != null) :  ?>
 					<?php echo CHtml::beginForm(array("download",'id'=>$model->id),"get"); ?>
 					<?php echo CHtml::submitButton("Télécharger",array("class"=>"inbl linkButton linkDown ")); ?> 
 					<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
@@ -96,10 +101,14 @@ if(isset($model->catalogue)) {
 					<?php echo CHtml::link('Acheter','#inline_content',array("class"=>"payment w150p inbl linkButton linkDown ")); ?>
 				<div style='display:none'>
 					<div id='inline_content' style='padding:10px; background:#fff;'>
+						<?php if($paymentForm != null ) : ?>
 						<h4>Achat du livre <?php echo $model->title; ?></h4>
 						<p>Prix : <?php echo $model->price ?>&euro;</p>
 						<p class="mb1">Choissisez votre mode de paiement : </p>
 						<?php echo $paymentForm; ?>
+						<?php else : ?>
+							<p>Impossible d'afficher le module de paiement, veuillez contacter l'administrateur.</p>
+						<?php endif; ?>
 					</div>
 				</div>
 				<?php endif; ?>

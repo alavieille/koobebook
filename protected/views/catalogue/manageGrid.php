@@ -10,16 +10,16 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 
 <h2 class="pt2 pb1 txtcenter">Gérer</h2>
 
-    <div class="txtcenter flasherror pb2">
+    <div class="txtcenter flasherror pa1 mt1 mb2 small-w100 w80 center mw960p">
         <?php echo Yii::app()->user->getFlash('error'); ?>
     </div>
-	<nav class="center mw960p mb2 mod">
+	<nav class="mt1 center  mb2 mod">
 		<?php 
 			$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 					array('label'=>'Voir mon catalogue', 'url'=>array('/catalogue/view/'.$catalogue->id),'linkOptions'=>array("class"=>"linkButton")),
 				),
-				'itemCssClass' => "pb1 inbl",
+				'itemCssClass' => "mt1 pb1 inbl",
 				'htmlOptions' => array("class" => 'pl0 left')
 			));
 		?>

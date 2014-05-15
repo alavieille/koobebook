@@ -19,7 +19,7 @@ DEBUG!YES!
 # indiquer:
 # ------------------------------------------------------------------------
 #
-D_LOGO!/M1/koobebook/koobebook/lib/eTransactions/logo/!
+D_LOGO!/www-dev/libebook/lib/eTransactions/logo/!
 #
 # --------------------------------------------------------------------------
 #  Fichiers parametres lies a l'api e-transactions paiement	

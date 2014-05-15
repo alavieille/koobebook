@@ -239,11 +239,18 @@ table{
 }
 
 #main .flashsuccess{
-	color:#27ae60;
+	background-color:#27ae60;
+	color:#FFFFFF
 }
 
 #main .flasherror{
-	color:#e74c3c;
+	background-color:#e74c3c;
+	color:#FFFFFF
+}
+
+#main .flashnotice{
+	background-color:#74BFDD;
+	color:#FFFFFF
 }
 
 #main h2, #main h3{

@@ -34,6 +34,14 @@
 <link type="image/jpeg" href="<?php echo $picture; ?>" rel="http://opds-spec.org/image/thumbnail"/>
 <?php endif; ?>
 
+<!-- 
+<link type="text/html" rel="http://opds-spec.org/acquisition/buy" href="http://192.168.43.137/www-dev/libebook/index.php/book/opdsPayment/79">
+  <opds:price currencycode="EUR">4.29</opds:price>
+    <opds:indirectAcquisition type="application/epub+zip" />
+
+</link> -->
+
+
 <?php if(isset($book->epub)) : ?>
 <link type="application/epub+zip" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$book->id,'format'=>'epub')); ?>" rel="http://opds-spec.org/acquisition/sample"/>
 <?php endif; ?>

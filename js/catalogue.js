@@ -6,6 +6,7 @@ $(function(){
 
 $(".btParam").click(showParam); // show parameter
 $(".param").hide();
+$(".flasherror").hide();
 
 $('html').click(function() { 
 	$(".param").hide();
@@ -97,7 +98,8 @@ var dndHandler = {
 			        	$("#pushBook #dropInfo").show();
 	        		}
 
-	        		$(".flasherror").html("");
+	        		$(".flasherror").hide();
+
 			        $("#ltBook").removeClass("onDrop");
 			    }     
 			    return false;
@@ -116,7 +118,7 @@ var dndHandler = {
 	    dropper.bind('drop', function(e) {	
 	        
 	        if( $("#pushBook .dropper .book").length < 5 ) {
-	        	$(".flasherror").html("");
+	        	$(".flasherror").hide();
 		        draggedElement = dndHandler.draggedElement; 
 		      	var target = e.target;
 		  
@@ -139,6 +141,7 @@ var dndHandler = {
 		        $(target).removeClass("onDrop");
 			}
 			else {
+				$(".flasherror").show();
 				$(".flasherror").html("Vous pouvez mettre au maximun 5 ebooks en avant");
 			}
 	        return false;

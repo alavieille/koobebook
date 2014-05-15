@@ -1,8 +1,15 @@
-
 <?php if(Yii::app()->user->hasFlash('success')):?>
-    <div class="txtcenter flashsuccess pb2">
-        <?php echo Yii::app()->user->getFlash('success'); ?>
-    </div>
+		<div class="txtcenter flashsuccess  pa1 mb2 small-w100 w80 center mw960p">
+		     <?php echo Yii::app()->user->getFlash('success'); ?>
+		</div>		    
+<?php elseif(Yii::app()->user->hasFlash('error')):?>
+		<div class="txtcenter flasherror  pa1 mb2 small-w100 w80 center mw960p">
+		    <?php echo Yii::app()->user->getFlash('error'); ?>
+		</div>		
+<?php elseif(Yii::app()->user->hasFlash('notice')):?>
+		<div class="txtcenter flashnotice  pa1 mb2 small-w100 w80 center mw960p">
+		    <?php echo Yii::app()->user->getFlash('notice'); ?>
+		 </div>
 <?php endif; ?>
 <section id="presentation" class="line pt1">
 	<div class="pageCenter pa1">

@@ -23,7 +23,7 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo'),
+				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo','responsePayment','opdsPayment'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
@@ -71,6 +71,7 @@ class BookController extends Controller
 		if(isset($model->pdf)) {
 			$format["pdf"] = "PDF";
 		}
+		$inLibraryUser = Library::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));
 		$this->render('view',array(
 			'model'=>$model,
 			'format'=>$format,
@@ -79,65 +80,67 @@ class BookController extends Controller
 			'author'=>$author,
 			'isOwner'=>$this->isOwner($id),
 			'paymentForm'=>$this->getFormPayment($model),
+			'inLibraryUser'=>$inLibraryUser,
 		));
 	}
 
-	public function getFormPayment($book)
+	private function getFormPayment($book)
 	{
-	if($book != null ) {
+		if($book != null ) {
 			$price = $book->price;
-			$centime = $price * 100;
-			$numfact = $book->id.yii::app()->user->id.date("dmy");
+			$numfact = $book->id.'-'.yii::app()->user->id.'-'.date("dmy");
+			$returnUrl =  $this->createAbsoluteUrl("book/responsePayment");
+			$payment = new Payment();
 
-		    $pathfile = Yii::app()->basePath."/../lib/eTransactions/param/pathfile";
-		    $path_bin = Yii::app()->basePath."/../lib/eTransactions/bin/request";
-
-			$paiement= array(
-				"merchant_id" => "013044876511111",
-				"merchant_country" => "fr",
-				"amount" => $centime,
-				"currency_code"=> "978",
-				"pathfile" => $pathfile,
-				"caddie" => $numfact,
-				"transaction_id"=> "",
-				"normal_return_url" => $this->createAbsoluteUrl("returnStore"),
-				"cancel_return_url" => $this->createAbsoluteUrl("payment/cancelStore"),
-				"automatic_response_url" => $this->createAbsoluteUrl("autoResponse"),
-				"language" => "fr",
-				"payment_means"=> "CB,2,VISA,2,MASTERCARD,2",
-				"header_flag" => "no",
-				"capture_day"=> "",
-				"capture_mode"=> "",
-				"bgcolor"=> "black",
-				"block_align" => "",
-				"block_order" =>"",
-				"textcolor" => "white",
-				"receipt_complement" => "",
-				"customer_id" => "",
-				"customer_email" => "",
-				"customer_ip_address" => "",
-				"data"=> "",
-				"return_context" =>"",
-				"target" => "",
-				"order_id" => "",
-			);
-		
-	     $data = "";
-	     foreach ($paiement as $key => $value) {
-	     	$data .= " ".$key."=".$value;
-	     }
-
-	  
-	     $result = exec("$path_bin$data");
-
-	     list($code,$buffer,$form)= array_slice(explode("!", $result),1);
-	
-	     if($code == 0 ) {
-	     	return $form;
-	     }
-	     return null;
+			return $payment->initPurchase($price,$returnUrl,$numfact);
 		}
+		return null;
 	}
+
+	public function actionResponsePayment()
+	{
+		if(isset($_POST["DATA"])) {
+			$data = $_POST["DATA"];
+			$payment = new Payment();
+			$responsePayment = $payment->getResponsePayment($data);
+			list($idBook,$idUser) = explode("-",$responsePayment->caddie);
+			if($responsePayment->code == "" && $responsePayment->code != 0 && $responsePayment->error == "") {
+				Yii::app()->user->setFlash('error', "Transaction annulé - Erreur du module de paiement ");
+			}
+			else {
+
+				if($responsePayment->response_code == "17") {
+					Yii::app()->user->setFlash('notice', "Transaction correctement annulé");
+				}
+				elseif($responsePayment->bank_response_code == "00"){
+					$library = new Library();
+					$library->userId = $idUser;
+					$library->bookId = $idBook;
+					$library->date_download =  new CDbExpression('NOW()');
+					$library->save();
+					Yii::app()->user->setFlash('success', "Transaction réussite");
+				
+
+				}
+				else{
+					Yii::app()->user->setFlash('error', "Transaction refusé");
+				}
+
+			}
+
+
+		   Yii::app()->getController()->redirect(array('book/view/'.$idBook));
+		}
+		Yii::app()->user->setFlash('error', "Transaction annulé - Erreur du module de paiement ");
+		 $this->redirect(array('site/index'));
+
+	}
+	public function actionOpdsPayment($id)
+	{
+		$book = Book::model()->findByPk($id);
+		echo $this->getFormPayment($book);
+	}
+
 	/**
 	 * Displays a particular model in opds format.
 	 * @param integer $id the ID of the model to be displayed

@@ -17,6 +17,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.components.Payment.*',
+		'application.components.extractDataFile.*',
 		'application.helpers.*',
 	),
 
@@ -90,5 +92,11 @@ return array(
 		'adminEmail'=>'amaury.lavieille@gmail.com',
 		// name of folder for upload ebook and cover
 		'folder_upload'=>'upload',
+		"etransactions"=> array(
+			"pathFile"=>"lib/eTransactions/param/pathfile",
+			"request"=>"lib/eTransactions/bin/request",
+			"response"=>"lib/eTransactions/bin/response",
+			"merchant_id"=>"013044876511111",
+		)
 	),
 );

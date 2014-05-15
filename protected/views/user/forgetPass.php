@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name . ' - Mot de passe oublié';
 <h2 class="txtcenter pt2 pb1 ">Mot de passe oublié</h2>
 
 <?php if(Yii::app()->user->hasFlash('error')):?>
-    <div class="txtcenter flasherror">
+    <div class="txtcenter flasherror  pa1 mb2 small-w100 w80 center mw960p">
         <?php echo Yii::app()->user->getFlash('error'); ?>
     </div>
 <?php endif; ?>

@@ -56,23 +56,30 @@
 <link type="image/jpeg" href="<?php echo $picture; ?>" rel="http://opds-spec.org/image/thumbnail"/>
 <?php endif; ?>
 
+<link type="text/html" href="<?php echo yii::app()->createAbsoluteUrl('book/opdsPayment',array('id'=>$model->id)); ?>" rel="http://opds-spec.org/acquisition/buy">
+  <opds:price currencycode="EUR">2</opds:price>
+    <opds:indirectAcquisition type="application/epub+zip"/>
+    <opds:indirectAcquisition type="application/pdf" />
+  </opds:indirectAcquisition>
+</link>
 
-<?php if(isset($model->epub)) : ?>
-<link type="application/epub+zip" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'epub')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
-<?php endif; ?>
+<!-- 
+<?php //if(isset($model->epub)) : ?>
+<link type="application/epub+zip" href="<?php //echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'epub')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
+<?php //endif; ?>
 
-<?php if(isset($model->mobi)) : ?>
-<link type="application/x-mobipocket-ebook" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'mobi')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
-<?php endif; ?>
+<?php //if(isset($model->mobi)) : ?>
+<link type="application/x-mobipocket-ebook" href="<?php// echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'mobi')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
+<?php //endif; ?>
 
-<?php if(isset($model->pdf)) : ?>
-<link type="application/pdf" href="<?php echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'pdf')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
-<?php endif; ?>
+<?php //if(isset($model->pdf)) : ?>
+<link type="application/pdf" href="<?php //echo yii::app()->createAbsoluteUrl('book/download',array('id'=>$model->id,'format'=>'pdf')); ?>" rel="http://opds-spec.org/acquisition/open-access"/>
+<?php //endif; ?>
 
-<?php if(isset($model->catalogueId)) : ?>
-<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="<?php echo yii::app()->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->catalogueId));  ?>" rel="related" title="Du m&#234;me &#233;diteur"/>
-<?php endif;?>
-
+<?php //if(isset($model->catalogueId)) : ?>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="<?php //echo yii::app()->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->catalogueId));  ?>" rel="related" title="Du m&#234;me &#233;diteur"/>
+<?php //endif;?>
+ -->
 <content type="html"><?php echo CHtml::encode($model->description); ?></content>
 
 </entry>

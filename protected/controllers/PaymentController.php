@@ -100,6 +100,52 @@ class PaymentController extends Controller
 
 	public function actionCancelStore()
 	{
+		if(isset($_POST["DATA"]))
+		{	
+			$data = $_POST["DATA"];
+			$pathfile = "pathfile=".Yii::app()->basePath."/../lib/eTransactions/param/pathfile";
+			$path_bin = Yii::app()->basePath."/../lib/eTransactions/bin/response";
+			$message = "message=". escapeshellcmd($data);
+			$result = exec("$path_bin $pathfile $message");
+			$tableau = explode ("!", $result);
 
+			$code                = $tableau[1];
+			$error               = $tableau[2];
+			$merchant_id         = $tableau[3];
+			$merchant_country    = $tableau[4];
+			$amount              = $tableau[5];
+			$transaction_id      = $tableau[6];
+			$payment_means       = $tableau[7];
+			$transmission_date   = $tableau[8];
+			$payment_time        = $tableau[9];
+			$payment_date        = $tableau[10];
+			$response_code       = $tableau[11];
+			$payment_certificate = $tableau[12];
+			$authorisation_id    = $tableau[13];
+			$currency_code       = $tableau[14];
+			$card_number         = $tableau[15];
+			$cvv_flag            = $tableau[16];
+			$cvv_response_code   = $tableau[17];
+			$bank_response_code  = $tableau[18];
+			$complementary_code  = $tableau[19];
+			$complementary_info  = $tableau[20];
+			$return_context      = $tableau[21];
+			$caddie              = $tableau[22];
+			$receipt_complement  = $tableau[23];
+			$merchant_language   = $tableau[24];
+			$language            = $tableau[25];
+			$customer_id         = $tableau[26];
+			$order_id            = $tableau[27];
+			$customer_email      = $tableau[28];
+			$customer_ip_address = $tableau[29];
+			$capture_day         = $tableau[30];
+			$capture_mode        = $tableau[31];
+			$data                = $tableau[32];
+
+			var_dump($response_code);
+			var_dump($caddie);
+			echo $result;
+		}
+		//var_dump($_POST["DATA"]);
 	}
 }
