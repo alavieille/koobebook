@@ -3,6 +3,8 @@
 /* @var $model Book */
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/personalSelect.js',CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.colorbox-min.js',CClientScript::POS_END);
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/colorbox.css');
 $this->pageTitle=Yii::app()->name . ' - Éditeurs';
 $editor = null;
 if(isset($model->catalogue)) {
@@ -15,7 +17,12 @@ if(isset($model->catalogue)) {
 
 
 ?>
+<script>
+	$(function(){
+		$(".payment").colorbox({inline:true, width:"100%",maxWidth:'500px'});
+	});
 
+</script>
 
 <div id="viewBook" class="pt3 pb3">
 		<?php if(Yii::app()->user->hasFlash('success')):?>
@@ -54,7 +61,7 @@ if(isset($model->catalogue)) {
  		}
  	?>
  	<div class="center mw960p">
-		<div class="left w200p mod tiny-w100" >
+		<div class="left w200p mod mb1 tiny-w100" >
 			<img  src="<?php echo $picture; ?>" alt="Couverture du livre">
 		</div>
 
@@ -80,13 +87,25 @@ if(isset($model->catalogue)) {
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
 			<div class="form mt2 pl1">
-				<?php echo CHtml::beginForm(array("download",'id'=>$model->id),"get"); ?>
-				 <?php echo CHtml::submitButton(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array("class"=>"inbl linkButton linkDown ")); ?> 
-				<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
-				<?php echo CHtml::endForm(); ?>
+				<?php if((CHtml::encode($model->price) == 0)) :  ?>
+					<?php echo CHtml::beginForm(array("download",'id'=>$model->id),"get"); ?>
+					<?php echo CHtml::submitButton("Télécharger",array("class"=>"inbl linkButton linkDown ")); ?> 
+					<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
+					<?php echo CHtml::endForm(); ?>
+				<?php else :  ?>
+					<?php echo CHtml::link('Acheter','#inline_content',array("class"=>"payment w150p inbl linkButton linkDown ")); ?>
+				<div style='display:none'>
+					<div id='inline_content' style='padding:10px; background:#fff;'>
+						<h4>Achat du livre <?php echo $model->title; ?></h4>
+						<p>Prix : <?php echo $model->price ?>&euro;</p>
+						<p class="mb1">Choissisez votre mode de paiement : </p>
+						<?php echo $paymentForm; ?>
+					</div>
+				</div>
+				<?php endif; ?>
+
 			</div>
-			<?php // echo CHtml::link(CHtml::encode($model->price) == 0 ? "Télécharger" : "Acheter",array('book/download',
-	                                        // 'id'=>$model->id),array("class"=>"linkButton linkDown ")); ?>
+
 		</div>
 
 	</div>

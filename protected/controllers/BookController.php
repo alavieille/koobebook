@@ -77,10 +77,67 @@ class BookController extends Controller
 			'traductor'=>$traductor,
 			'illustrator'=>$illustrator,
 			'author'=>$author,
-			'isOwner'=>$this->isOwner($id)
+			'isOwner'=>$this->isOwner($id),
+			'paymentForm'=>$this->getFormPayment($model),
 		));
 	}
+
+	public function getFormPayment($book)
+	{
+	if($book != null ) {
+			$price = $book->price;
+			$centime = $price * 100;
+			$numfact = $book->id.yii::app()->user->id.date("dmy");
+
+		    $pathfile = Yii::app()->basePath."/../lib/eTransactions/param/pathfile";
+		    $path_bin = Yii::app()->basePath."/../lib/eTransactions/bin/request";
+
+			$paiement= array(
+				"merchant_id" => "013044876511111",
+				"merchant_country" => "fr",
+				"amount" => $centime,
+				"currency_code"=> "978",
+				"pathfile" => $pathfile,
+				"caddie" => $numfact,
+				"transaction_id"=> "",
+				"normal_return_url" => $this->createAbsoluteUrl("returnStore"),
+				"cancel_return_url" => $this->createAbsoluteUrl("payment/cancelStore"),
+				"automatic_response_url" => $this->createAbsoluteUrl("autoResponse"),
+				"language" => "fr",
+				"payment_means"=> "CB,2,VISA,2,MASTERCARD,2",
+				"header_flag" => "no",
+				"capture_day"=> "",
+				"capture_mode"=> "",
+				"bgcolor"=> "black",
+				"block_align" => "",
+				"block_order" =>"",
+				"textcolor" => "white",
+				"receipt_complement" => "",
+				"customer_id" => "",
+				"customer_email" => "",
+				"customer_ip_address" => "",
+				"data"=> "",
+				"return_context" =>"",
+				"target" => "",
+				"order_id" => "",
+			);
+		
+	     $data = "";
+	     foreach ($paiement as $key => $value) {
+	     	$data .= " ".$key."=".$value;
+	     }
+
+	  
+	     $result = exec("$path_bin$data");
+
+	     list($code,$buffer,$form)= array_slice(explode("!", $result),1);
 	
+	     if($code == 0 ) {
+	     	return $form;
+	     }
+	     return null;
+		}
+	}
 	/**
 	 * Displays a particular model in opds format.
 	 * @param integer $id the ID of the model to be displayed
@@ -295,7 +352,6 @@ class BookController extends Controller
 				}
 
 				$this->uploadFileBook($model);
-		
 				if($model->save())
 				{
 					
