@@ -722,7 +722,9 @@ div.autogrid5 { /* list book */
 	#main{
 		padding-top: 0;
 	}
-
+	.linkSearch{
+		display: none !important;
+	}
 	/**
 	* presentation
 	**/

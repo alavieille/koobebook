@@ -15,10 +15,10 @@ $this->breadcrumbs=array(
 <div class="center mw960p">		
 
 		<nav class="mb2 mod ">
-		<a class="linkButton inbl w200p left mr2" href="<?php echo  str_replace("http", "opds", $this->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->id)));?>">
+		<a class="linkButton  ml1 w200p left mr2" href="<?php echo  str_replace(array("http","https"), "opds", $this->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->id)));?>">
 		Exporter au format opds
 		</a>
-		<a targer="_blank" href="<?php echo $this->createUrl("/site/help") ?>#opds" class="inbl pt1">Qu'est ce que le format opds ?</a>
+		<a targer="_blank" href="<?php echo $this->createUrl("/site/help") ?>#opds" class="inbl ml1 pt1">Qu'est ce que le format opds ?</a>
 			<?php if($isOwner) : ?>
 			<?php 
 				$this->widget('zii.widgets.CMenu',array(
@@ -28,9 +28,8 @@ $this->breadcrumbs=array(
 						
 					),
 					'itemCssClass' => "inbl",
-					'htmlOptions' => array("class" => 'inbl mt0 pr0 mr0')
+					'htmlOptions' => array("class" => 'line  mt2 pl1 pr0 mr0')
 				));
-
 			?>
 		<?php endif; ?>
 		</nav>

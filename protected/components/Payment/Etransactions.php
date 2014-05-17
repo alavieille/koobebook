@@ -1,5 +1,9 @@
 <?php 
-class Payment
+/** 
+* A class for manage payment with eTransaction an API of Crédit Agricole
+* @author Amaury Lavieille
+*/
+class Etransactions
 {
 	private $pathFile;
 	private $pathResquest;
@@ -14,7 +18,13 @@ class Payment
 		$this->merchant_id = Yii::app()->params["etransactions"]["merchant_id"];; 
 	}
 	
-
+	/**
+	* Init request for payment 
+	* @param $price price of payment
+	* @param $returnUrl url who manage response of payment
+	* @param $numFac identifiant of payment
+	*@return form or string
+	*/
 	public function initPurchase($price,$returnUrl,$numfact)
 	{
 
@@ -65,7 +75,11 @@ class Payment
 	     return null;
 	}
 
-
+	/**
+	* Return reponse sent by API
+	* @param $strin who content crypted response
+	* @return $responsePayement an Instance of ResponsePayment
+	*/
 	public function getResponsePayment($data)
 	{
 		$pathfile = "pathfile=".$this->pathFile;

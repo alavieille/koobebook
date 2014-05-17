@@ -21,8 +21,6 @@ class EpubMeta extends AbstractMeta
 		$this->zipFile->open($this->pathFile);
 		$container = simplexml_load_string($this->zipFile->getFromName('META-INF/container.xml'));	
 		return $container->rootfiles->rootfile['full-path'];
-	
-		//var_dump($this->zipFile);
 	}
 
 	private function getOpfFile($pathOpfFile)

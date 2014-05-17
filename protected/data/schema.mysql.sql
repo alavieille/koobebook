@@ -1,4 +1,4 @@
-/* Tablea user */
+
 CREATE TABLE IF NOT EXISTS user (
   id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(20) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `library` (
   `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)'
   `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
   `date_download` date NOT NULL
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
 
 
 
@@ -58,4 +58,12 @@ CREATE TABLE IF NOT EXISTS `contributor` (
   `type` varchar(50) NOT NULL,
   `name` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `payment` (
+  `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(Id)',
+  `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
+  `date` date NOT NULL,
+  `numFact` varchar(25) NOT NULL
+) ENGINE=InnoDB;

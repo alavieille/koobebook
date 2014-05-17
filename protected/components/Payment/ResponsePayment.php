@@ -1,5 +1,8 @@
 <?php 
-
+/**
+* Classs who represente a response sent by API Etransactions
+* @author Amaury Lavieille
+*/
 class ResponsePayment
 {
 

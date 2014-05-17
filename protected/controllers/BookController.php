@@ -23,11 +23,11 @@ class BookController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo','responsePayment','opdsPayment'),
+				'actions'=>array('index','view','viewodps','download','topDownload','extractInfo','responsePayment','ResponsePaymentOpds'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user 
-				'actions'=>array('create'),
+				'actions'=>array('create','opdsPayment'),
 				'users'=>array('@'),
 			),
 			array('allow',
@@ -47,6 +47,7 @@ class BookController extends Controller
 	 */
 	public function actionView($id)
 	{
+
 		$model = $this->loadModel($id);
 		$contributors = $model->contributors;
 		$author = array();
@@ -71,7 +72,8 @@ class BookController extends Controller
 		if(isset($model->pdf)) {
 			$format["pdf"] = "PDF";
 		}
-		$inLibraryUser = Library::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));
+		$isPayment = Payment::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));
+		$returnUrl =  $this->createAbsoluteUrl("book/responsePayment");
 		$this->render('view',array(
 			'model'=>$model,
 			'format'=>$format,
@@ -79,30 +81,38 @@ class BookController extends Controller
 			'illustrator'=>$illustrator,
 			'author'=>$author,
 			'isOwner'=>$this->isOwner($id),
-			'paymentForm'=>$this->getFormPayment($model),
-			'inLibraryUser'=>$inLibraryUser,
+			'paymentForm'=>$this->getFormPayment($model,$returnUrl),
+			'isPayment'=>$isPayment,
 		));
 	}
 
-	private function getFormPayment($book)
+	/** 
+	* return form of payment
+	* @param $book Instance of book
+	* @param $returnUrl string
+	* @return string who content form or null
+	*/
+	private function getFormPayment($book,$returnUrl)
 	{
-		if($book != null ) {
+		if($book != null &&  yii::app()->user->isguest == false) {
 			$price = $book->price;
 			$numfact = $book->id.'-'.yii::app()->user->id.'-'.date("dmy");
-			$returnUrl =  $this->createAbsoluteUrl("book/responsePayment");
-			$payment = new Payment();
+			$etransaction = new Etransactions();
 
-			return $payment->initPurchase($price,$returnUrl,$numfact);
+			return $etransaction->initPurchase($price,$returnUrl,$numfact);
 		}
 		return null;
 	}
 
+	/** 
+	* Check response of payment
+	**/
 	public function actionResponsePayment()
 	{
 		if(isset($_POST["DATA"])) {
 			$data = $_POST["DATA"];
-			$payment = new Payment();
-			$responsePayment = $payment->getResponsePayment($data);
+			$etransaction = new Etransactions();
+			$responsePayment = $etransaction->getResponsePayment($data);
 			list($idBook,$idUser) = explode("-",$responsePayment->caddie);
 			if($responsePayment->code == "" && $responsePayment->code != 0 && $responsePayment->error == "") {
 				Yii::app()->user->setFlash('error', "Transaction annulé - Erreur du module de paiement ");
@@ -113,11 +123,14 @@ class BookController extends Controller
 					Yii::app()->user->setFlash('notice', "Transaction correctement annulé");
 				}
 				elseif($responsePayment->bank_response_code == "00"){
-					$library = new Library();
-					$library->userId = $idUser;
-					$library->bookId = $idBook;
-					$library->date_download =  new CDbExpression('NOW()');
-					$library->save();
+
+					$payment = new Payment();
+					$payment->userId = $idUser;
+					$payment->bookId = $idBook;
+					$payment->numFact = $responsePayment->caddie;
+					$payment->date =  new CDbExpression('NOW()');
+					$payment->save();
+
 					Yii::app()->user->setFlash('success', "Transaction réussite");
 				
 
@@ -131,14 +144,67 @@ class BookController extends Controller
 
 		   Yii::app()->getController()->redirect(array('book/view/'.$idBook));
 		}
-		Yii::app()->user->setFlash('error', "Transaction annulé - Erreur du module de paiement ");
+		Yii::app()->user->setFlash('error', "Transaction annulé - Erreur");
 		 $this->redirect(array('site/index'));
-
 	}
+
+	/** 
+	* show page for payement with opds
+	* @param $id is a bookId
+	**/
 	public function actionOpdsPayment($id)
 	{
-		$book = Book::model()->findByPk($id);
-		echo $this->getFormPayment($book);
+		$model = Book::model()->findByPk($id);
+		$returnUrl =  $this->createAbsoluteUrl("book/responsePaymentOpds");
+		$paymentForm = $this->getFormPayment($model,$returnUrl);
+		$this->renderPartial('/site/paymentOpds',array(
+			'model'=>$model,
+			'paymentForm'=>$paymentForm,
+		),false,true);
+	}
+
+	/** 
+	* response of payment with opds
+	**/
+	public function actionResponsePaymentOpds()
+	{
+		if(isset($_POST["DATA"])) {
+			$data = $_POST["DATA"];
+			$etransaction = new Etransactions();
+			$responsePayment = $etransaction->getResponsePayment($data);
+			list($idBook,$idUser) = explode("-",$responsePayment->caddie);
+			if($responsePayment->code == "" && $responsePayment->code != 0 && $responsePayment->error == "") {
+				Yii::app()->user->setFlash('error', "Transaction annulé - Erreur du module de paiement ");
+			}
+			else {
+
+				if($responsePayment->response_code == "17") {
+					Yii::app()->user->setFlash('notice', "Transaction correctement annulé");
+				}
+				elseif($responsePayment->bank_response_code == "00"){
+					$payment = new Payment();
+					$payment->userId = $idUser;
+					$payment->bookId = $idBook;
+					$payment->numFact = $responsePayment->caddie;
+					$payment->date =  new CDbExpression('NOW()');
+					$payment->save();
+					Yii::app()->user->setFlash('success', "Transaction réussite");
+				
+
+				}
+				else{
+					Yii::app()->user->setFlash('error', "Transaction refusé");
+				}
+			}
+
+			$model = Book::model()->findByPk($idBook);
+			$catalogueId = $model->catalogue->id;
+			$this->renderPartial('/site/responsePaymentOpds',array(
+				'catalogueId'=>$catalogueId,
+			),false,true);
+			exit;
+		}
+		throw new CHttpException(400,"Transaction annulé - Erreur");
 	}
 
 	/**
@@ -160,11 +226,13 @@ class BookController extends Controller
 			elseif ($contributor["type"] == "illustrator")
 				$illustrator[] = $contributor;
 		}
+		$isPayment = Payment::model()->findByAttributes(array('userId'=>yii::app()->user->id,'bookId'=>$id));
 		$this->renderPartial('viewOdps',array(
 			'model'=>$model,
 			'traductor'=>$traductor,
 			'illustrator'=>$illustrator,
 			'author'=>$author,
+			'isPayment'=>$isPayment,
 		));
 	}
 
@@ -211,7 +279,6 @@ class BookController extends Controller
 
 		if(isset($_POST['Book']) && isset($_POST['contributor']))
 		{
-			var_dump($_POST['contributor']);
 			foreach ($_POST['contributor'] as $contributor) {
 				if( trim($contributor['name']) != "" && in_array($contributor['type'],array('author','illustrator','traductor')))
 			  	{

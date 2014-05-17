@@ -163,30 +163,40 @@ class CatalogueController extends Controller
 	/**
 	* Monitoring of ebook download
 	*/
-	public function actionMonitoring()
+	public function actionMonitoring($type="buy")
 	{
-	
 		$cata= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
 		$this->layout = "//layouts/private";
 		$criteria = new CDbCriteria();
-		$criteria->with = array(
-			'library'=>array('joinType'=>'INNER JOIN'),
-			'libraryCount',
+		if($type == "buy") {
+			$criteria->with = array(
+				'payment'=>array('joinType'=>'INNER JOIN'),
+				'paymentCount',
 			);
+		}
+		else {
+			$criteria->with = array(
+				'library'=>array('joinType'=>'INNER JOIN'),
+				'libraryCount',
+			);	
+		}
 		$criteria->addCondition('t.catalogueId = '.$cata->id);
 		$monitoring = Book::model()->findAll($criteria);
-
 		$totalDownload = 0;
 		$totalPrice= 0;
 
 		foreach ($monitoring as $book) {
-			$totalDownload += $book->libraryCount;
+			if( $type =="buy" ) 
+				$totalDownload += $book->paymentCount;
+			else 
+				$totalDownload += $book->libraryCount;
 			$totalPrice += $book->price;
 		}
 		$this->render('monitoring',array(
 			'monitoring' => $monitoring,
 			'totalPrice' => $totalPrice,
-			'totalDownload' => $totalDownload
+			'totalDownload' => $totalDownload,
+			'type' => $type
 			));
 
 	}

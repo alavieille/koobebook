@@ -92,7 +92,7 @@ if(isset($model->catalogue)) {
 			<p class="pl1">Prix : <?php echo (CHtml::encode($model->price) == 0) ? "gratuit" :  CHtml::encode($model->price)." €";  ?></p>
 			
 			<div class="form mt2 pl1">
-				<?php if((CHtml::encode($model->price) == 0) || $inLibraryUser != null) :  ?>
+				<?php if((CHtml::encode($model->price) == 0) || $isPayment != null) :  ?>
 					<?php echo CHtml::beginForm(array("download",'id'=>$model->id),"get"); ?>
 					<?php echo CHtml::submitButton("Télécharger",array("class"=>"inbl linkButton linkDown ")); ?> 
 					<?php echo CHtml::dropDownList('format',reset($format),$format,array("class"=>"persoDropDown w200p inbl")); ?>
@@ -106,6 +106,8 @@ if(isset($model->catalogue)) {
 						<p>Prix : <?php echo $model->price ?>&euro;</p>
 						<p class="mb1">Choissisez votre mode de paiement : </p>
 						<?php echo $paymentForm; ?>
+						<?php elseif (yii::app()->user == true) : ?>
+							<p>Vous devez être connecté pour effectuer un achat.</p>
 						<?php else : ?>
 							<p>Impossible d'afficher le module de paiement, veuillez contacter l'administrateur.</p>
 						<?php endif; ?>

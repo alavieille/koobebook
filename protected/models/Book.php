@@ -78,6 +78,8 @@ class Book extends CActiveRecord
 			'contributors' => array(self::HAS_MANY, 'Contributor', 'bookId'),
 			'library' => array(self::HAS_MANY, 'Library', 'bookId'),
 			'libraryCount' => array(self::STAT, 'Library', 'bookId'),
+			'payment' => array(self::HAS_MANY, 'Payment', 'bookId'),
+			'paymentCount' => array(self::STAT, 'Payment', 'bookId'),
 		);
 	}
 	

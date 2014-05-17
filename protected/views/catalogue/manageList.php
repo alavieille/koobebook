@@ -64,7 +64,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 				<td class="txtcenter" >
 					<?php foreach ($book->contributors as $contributor) : ?>
 						<?php if($contributor->type == 'author') : ?>
-						<a href="<?php  ?>" ><?php echo $contributor->name; ?></a></br>
+						<a href="<?php echo Yii::app()->createUrl('search/search/',array('type'=>'author','query'=>$contributor->name));  ?>" ><?php echo $contributor->name; ?></a></br>
 						<?php endif; ?>
 					<?php endforeach ?>
 				</td>
@@ -115,7 +115,7 @@ $this->pageTitle=Yii::app()->name . ' - Gérer';
 				<td class="txtcenter" >
 					<?php foreach ($book->contributors as $contributor) : ?>
 						<?php if($contributor->type == 'author') : ?>
-						<a href="<?php  ?>" ><?php echo $contributor->name; ?></a></br>
+							<a href="<?php echo Yii::app()->createUrl('search/search/',array('type'=>'author','query'=>$contributor->name));  ?>" ><?php echo $contributor->name; ?></a></br>
 						<?php endif; ?>
 					<?php endforeach ?>
 				</td>
