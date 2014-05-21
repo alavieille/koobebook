@@ -52,7 +52,7 @@ $this->breadcrumbs=array(
 
 <div id="viewDescription">
 	<?php if ($model->description != "") : ?>
-		<section class="pa2 pt1 mb1 center mw960p">
+		<section class="pa2 pt1 mb1 center line mw960p">
 			<h3  class="mb2" >Présentation</h3>
 			<p>
 				<?php echo $model->description ?>

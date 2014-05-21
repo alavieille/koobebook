@@ -38,7 +38,7 @@
 					<figcaption>
 						<h3  class="txtcenter" >Lire</h3>
 						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ante risus, pellentesque vitae vestibulum vitae, bibendum vel sem. Morbi ultricies dapibus odio at cursus.</p> -->
-						<p class="txtcenter big">Depuis votre tablette et votre smartphone consultez, téléchargez, lisez les livres de la plate-forme .</p>
+						<p class="txtcenter big">Depuis votre tablette et votre smartphone consultez, téléchargez, lisez les livres de la plate-forme.</p>
 					</figcaption>
 
 				</figure>

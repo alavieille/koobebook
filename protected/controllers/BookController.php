@@ -305,13 +305,13 @@ class BookController extends Controller
 			if(! is_null($model->pictureFile )) // si couverture
 				$model->picture="cover.".$model->pictureFile->extensionName;
 
+			if(! $hasAuthor) {
+				$model->addError('', 'Vous devez ajouter au moins un auteur');
+				goto end;
+			}
 
 			if($model->save())
 			{
-				if(! $hasAuthor) {
-					$model->addError('', 'Vous devez ajouter au moins un auteur');
-					goto end;
-				}
 
 				foreach ($contributors as $contributor) {
 					$contributor->bookId = $model->id;
