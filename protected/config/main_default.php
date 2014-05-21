@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'eLibrairie',
+	'name'=>'koobebook',
 	'language'=>'fr',
 
 	// preloading 'log' component
@@ -41,7 +41,11 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		
+		'image'=>array(
+          'class'=>'application.extensions.image.CImageComponent',
+            // GD or ImageMagick
+            'driver'=>'GD'
+         ),
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(

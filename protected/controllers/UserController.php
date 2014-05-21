@@ -101,7 +101,7 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('/library/'));
 		}
 
 		$this->render('update',array(
@@ -154,7 +154,7 @@ class UserController extends Controller
 				$user->date_tmp_password = new CDbExpression('CURRENT_TIMESTAMP()');
 				$user->update(array("temp_password","date_tmp_password"));
 				
-				$subject='=?UTF-8?B?Libebook: mot de passe oublié?=';
+				$subject='=?UTF-8?B?Koobebook: mot de passe oublié?=';
 				$headers="From: ".Yii::app()->params['adminEmail']."\r\n".
 					"Reply-To: ".Yii::app()->params['adminEmail']."\r\n".
 					"MIME-Version: 1.0\r\n".
@@ -162,7 +162,7 @@ class UserController extends Controller
 				$content = "Bonjour, \n  Votre nouveau mot de passe est : ".$user->temp_password."\n \n Attention il n'est valide que pendant 30 minutes";
 				
 				if(mail($model->email, $subject, $content)){
-					Yii::app()->user->setFlash('success','Email envoyé avec succés. Consultez vos emails, veuillez aussi vérifier les spam.');
+					Yii::app()->user->setFlash('success','Email envoyé avec succés. Consultez vos emails, veuillez aussi vérifier les spams.');
 					$this->redirect(array('site/login'));
 				}
 				else{
