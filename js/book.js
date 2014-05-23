@@ -4,6 +4,11 @@
 ****/ 
 
 $(function(){
+
+	$(".detailPrice").hide();
+	calcPrice();
+	$("#Book_price").keyup(calcPrice);
+
 	/** mange of preview */
 	previewPictureDownload();
 
@@ -18,6 +23,21 @@ $(function(){
 	manageUpload();
 
 });
+
+var calcPrice = function(){
+	var price = $("#Book_price").val();
+	if(price > 0) {
+
+		var priceHT = Math.round((price * 0.947)*100)/100;
+		var priceEditor = Math.round((priceHT * (70/100))*100)/100;
+		var priceSite = Math.round((priceHT * (30/100))*100)/100;
+		$(".priceHT").html(priceHT);
+		$(".priceEditor").html(priceEditor);
+		$(".priceSite").html(priceSite);
+		$(".detailPrice").show();
+	}
+
+}
 
 var manageUpload = function(){
 

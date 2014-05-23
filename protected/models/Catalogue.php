@@ -39,6 +39,12 @@ class Catalogue extends CActiveRecord
 			array('name', 'length', 'max'=>50),
 			array('description','length','min'=>200,'allowEmpty'=>true),
 			array('date_create', 'safe'),
+
+			array('namePayment', 'safe'),
+			array('iban', 'length','max'=>34),
+			array('bic', 'length','min'=>8, 'max'=>11),
+
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name', 'safe', 'on'=>'search'),
@@ -68,6 +74,9 @@ class Catalogue extends CActiveRecord
 			'userId' => 'User',
 			'name' => 'Nom du catalogue (Editeur)',
 			'description' => 'Description',
+			'namePayment' => 'Nom prénom (Paiement)',
+			'iban' => 'IBAN',
+			'bic' => 'BIC',
 
 		);
 	}

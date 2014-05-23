@@ -163,38 +163,58 @@ class CatalogueController extends Controller
 	/**
 	* Monitoring of ebook download
 	*/
-	public function actionMonitoring($type="buy")
+	public function actionMonitoring($type="buy",$month='')
 	{
+
+
+		$month = date('Y-m');
+		if(isset($_GET['month']))
+		{
+			$month = $_GET['month'];
+		}
 		$cata= Catalogue::model()->findByAttributes(array('userId'=>yii::app()->user->id));
+		
 		$this->layout = "//layouts/private";
 		$criteria = new CDbCriteria();
 		if($type == "buy") {
 			$criteria->with = array(
 				'payment'=>array('joinType'=>'INNER JOIN'),
-				'paymentCount',
 			);
+			$criteria->addCondition('YEAR(payment.date) >= YEAR(STR_TO_DATE("'.$month.'","%Y-%m"))');
+			$criteria->addCondition('MONTH(payment.date) = MONTH(STR_TO_DATE("'.$month.'","%Y-%m"))');
+				
 		}
 		else {
 			$criteria->with = array(
 				'library'=>array('joinType'=>'INNER JOIN'),
-				'libraryCount',
 			);	
 		}
+		
 		$criteria->addCondition('t.catalogueId = '.$cata->id);
 		$monitoring = Book::model()->findAll($criteria);
+
+
 		$totalDownload = 0;
 		$totalPrice= 0;
-
+		$totalEditor =0;
+	
 		foreach ($monitoring as $book) {
-			if( $type =="buy" ) 
-				$totalDownload += $book->paymentCount;
-			else 
-				$totalDownload += $book->libraryCount;
-			$totalPrice += $book->price;
+			if( $type =="buy" ) {
+				$totalDownload += $book->paymentCount($month);
+				$totalPrice += $book->price * $book->paymentCount($month);
+				$totalEditor = round(($totalPrice * 0.947)*(70/100),2);
+		
+			}
+			else {
+				$totalDownload += $book->libraryCount($month);
+				$totalPrice += $book->price * $book->libraryCount($month);
+			}
 		}
 		$this->render('monitoring',array(
+			'month' => $month,
 			'monitoring' => $monitoring,
 			'totalPrice' => $totalPrice,
+			'totalEditor'=>$totalEditor,
 			'totalDownload' => $totalDownload,
 			'type' => $type
 			));

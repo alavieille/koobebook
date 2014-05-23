@@ -108,16 +108,22 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/book.js',C
 				<?php echo $form->error($model,'language'); ?>
 			</div>
 
+			<div class="rowInput w200p pr1 tiny-w100">
+				<?php echo $form->labelEx($model,'isbn'); ?>
+				<?php echo $form->textField($model,'isbn'); ?>
+				<?php echo $form->error($model,'isbn'); ?>
+			</div>
+
 			<div class="rowInput w200p pr1 left tiny-w100">
 				<?php echo $form->labelEx($model,'price'); ?> 
 				<?php echo $form->textField($model,'price'); ?>
 				<?php echo $form->error($model,'price'); ?>
 			</div>
 
-			<div class="rowInput w200p left tiny-w100">
-				<?php echo $form->labelEx($model,'isbn'); ?>
-				<?php echo $form->textField($model,'isbn'); ?>
-				<?php echo $form->error($model,'isbn'); ?>
+			<div class="detailPrice rowInput w200p pr1 pt2 left tiny-w100">
+				<p class="pa0 ma0">Prix HT (-5,5%) : <span class="priceHT"></span>&euro;</p>
+				<p class="pa0 ma0">Éditeur (70% prix HT) : <span class="priceEditor"></span>&euro;</p>
+				<p class="pa0 ma0">Koobebook (30% prix HT) : <span class="priceSite"></span>&euro;</p>
 			</div>
 
 

@@ -15,6 +15,9 @@
  */
 class Payment extends CActiveRecord
 {
+	
+	public $totalPriceEditor;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -31,7 +34,7 @@ class Payment extends CActiveRecord
 		return array(
 			array('userId, bookId, date, numFact', 'required'),
 			array('userId, bookId', 'numerical', 'integerOnly'=>true),
-			array('numFact', 'length', 'max'=>25),
+			array('numFact', 'length', 'max'=>25)
 		);
 	}
 

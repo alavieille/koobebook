@@ -3,7 +3,7 @@
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/private.css');
 
 ?>
-<div id="private" class=" pt0 mod">
+<div id="private" class=" pt0 line">
 	<p id="privateMenu" class="small-visible desktop-hidden pa1 h5-like txtcenter icon-down">Menu</p>
 	<nav class=" mt0 pt1  mb1 left small-no-float small-inbl " id="privateNav">
 		<h3 class="pl2">Compte</h3>
@@ -39,7 +39,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/private.css'
 		?>
 	</nav>
 
-	<section id="content" class="pa3  pt0 mod small-w100 ">
+	<section id="content" class="pa3  pt0  small-w100 ">
 		<?php echo $content; ?>
 	</section>
 </div>

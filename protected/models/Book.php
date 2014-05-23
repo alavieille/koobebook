@@ -83,6 +83,31 @@ class Book extends CActiveRecord
 		);
 	}
 	
+	public function paymentCount($month)
+	{
+		$conditionYear = "YEAR(payment.date) >= YEAR(STR_TO_DATE('".$month."','%Y-%m'))";
+		$conditionMonth = "MONTH(payment.date) = MONTH(STR_TO_DATE('".$month."','%Y-%m'))";
+		$count = Yii::app()->db->createCommand()
+		    ->select('count(payment.bookId) as count')
+		    ->from('payment')
+		    ->where(array('AND', 'bookId=:bookid',$conditionYear,$conditionMonth), array(':bookid'=>$this->id))
+		    ->queryRow();
+		return $count['count'];
+	}	
+
+	public function libraryCount($month)
+	{
+		$conditionYear = "YEAR(library.date_download) >= YEAR(STR_TO_DATE('".$month."','%Y-%m'))";
+		$conditionMonth = "MONTH(library.date_download) = MONTH(STR_TO_DATE('".$month."','%Y-%m'))";
+		$count = Yii::app()->db->createCommand()
+		    ->select('count(library.bookId) as count')
+		    ->from('library')
+		    ->where(array('AND', 'bookId=:bookid',$conditionYear,$conditionMonth), array(':bookid'=>$this->id))
+		    ->queryRow();
+		return $count['count'];
+	}
+
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
