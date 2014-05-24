@@ -124,15 +124,16 @@ class BookController extends Controller
 				}
 				elseif($responsePayment->bank_response_code == "00"){
 
-					$payment = new Payment();
-					$payment->userId = $idUser;
-					$payment->bookId = $idBook;
-					$payment->numFact = $responsePayment->caddie;
-					$payment->date =  new CDbExpression('NOW()');
-					$payment->save();
+					if( count(Payment::model()->findByAttributes(array('userId'=>$idUser,'bookId'=>$idBook))) <= 0 ) {
+						$payment = new Payment();
+						$payment->userId = $idUser;
+						$payment->bookId = $idBook;
+						$payment->numFact = $responsePayment->caddie;
+						$payment->date =  new CDbExpression('NOW()');
+						$payment->save();
 
-					Yii::app()->user->setFlash('success', "Transaction réussite");
-				
+						Yii::app()->user->setFlash('success', "Transaction réussite");
+					}
 
 				}
 				else{
