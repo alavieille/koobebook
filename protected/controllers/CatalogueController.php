@@ -187,7 +187,8 @@ class CatalogueController extends Controller
 		else {
 			$criteria->with = array(
 				'library'=>array('joinType'=>'INNER JOIN'),
-			);	
+			);
+			$criteria->addCondition('t.price = 0');
 		}
 		
 		$criteria->addCondition('t.catalogueId = '.$cata->id);
