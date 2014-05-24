@@ -269,7 +269,7 @@ class CatalogueController extends Controller
 		$topBookid =Library::model()->findTopDownload();
 		$topBook = array();
 		foreach ($topBookid as $id) {
-			$topBook[] = Book::model()->findByPk($id);
+			$topBook[] = Book::model()->findByPk($id['bookId']);
 		}
 
 
