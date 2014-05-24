@@ -4,8 +4,28 @@
 		"selected_items":
 		[
 			[
+				"_",
+				"_GET"
+			],
+			[
+				"pay",
+				"payment"
+			],
+			[
+				"status",
+				"statusTransfer"
+			],
+			[
+				"na",
+				"namePayment"
+			],
+			[
 				"price",
-				"priceHT"
+				"priceEditor"
+			],
+			[
+				"var",
+				"var_dump"
 			],
 			[
 				"val",
@@ -186,10 +206,6 @@
 			[
 				"con",
 				"contributorText"
-			],
-			[
-				"na",
-				"name"
 			],
 			[
 				"last",
@@ -498,22 +514,6 @@
 			[
 				"remo",
 				"removeClass  (function)"
-			],
-			[
-				"paren",
-				"parentDraggedElement"
-			],
-			[
-				"dro",
-				"dropper"
-			],
-			[
-				"inde",
-				"indexOf"
-			],
-			[
-				"dra",
-				"draggedElement"
 			]
 		]
 	},
@@ -523,15 +523,15 @@
 			"file": "protected/views/book/_form.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 6547,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "protected/views/catalogue/monitoring.php",
+			"file": "protected/commands/SepaCronCommand.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 3744,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,23 +539,31 @@
 			"file": "protected/controllers/CatalogueController.php",
 			"settings":
 			{
-				"buffer_size": 8323,
+				"buffer_size": 8616,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "protected/views/book/update.php",
+			"file": "protected/models/Book.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 6384,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "js/book.js",
+			"file": "protected/models/Catalogue.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 6044,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/views/catalogue/monitoring.php",
+			"settings":
+			{
+				"buffer_size": 3062,
 				"line_ending": "Unix"
 			}
 		},
@@ -563,7 +571,39 @@
 			"file": "css/private.css",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 10141,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/views/layouts/private.php",
+			"settings":
+			{
+				"buffer_size": 1655,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/var/www/www-dev/php-sepa-xml-master/test.xml",
+			"settings":
+			{
+				"buffer_size": 1652,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/config/cron.php",
+			"settings":
+			{
+				"buffer_size": 1648,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "protected/components/Sepa/DomBuilder/BaseDomBuilder.php",
+			"settings":
+			{
+				"buffer_size": 5101,
 				"line_ending": "Unix"
 			}
 		},
@@ -571,23 +611,7 @@
 			"file": "protected/controllers/UserController.php",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/views/layouts/main.php",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "protected/config/main.php",
-			"settings":
-			{
-				"buffer_size": 2947,
+				"buffer_size": 6090,
 				"line_ending": "Unix"
 			}
 		}
@@ -664,7 +688,54 @@
 	},
 	"file_history":
 	[
+		"/var/www/www-dev/libebook/css/form.css",
+		"/var/www/www-dev/libebook/protected/views/layouts/main.php",
+		"/var/www/www-dev/libebook/protected/config/main.php",
 		"/var/www/www-dev/libebook/protected/controllers/BookController.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/monitoring.php",
+		"/var/www/www-dev/libebook/test.xml",
+		"/var/www/www-dev/libebook/protected/models/Payment.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/create.php",
+		"/var/www/www-dev/libebook/protected/config/cron_default.php",
+		"/var/www/www-dev/php-sepa-xml-master/testSepa.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/DomBuilder/DomBuilderFactory.php",
+		"/var/www/www-dev/libebook/protected/controllers/CatalogueController.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/GroupHeader.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/PaymentInformation.php",
+		"/var/www/www-dev/libebook/protected/commands/SepaCronCommand.php",
+		"/var/www/www-dev/php-sepa-xml-master/test.xml",
+		"/var/www/www-dev/libebook/protected/components/Sepa/DomBuilder/BaseDomBuilder.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/DomBuilder/CustomerCreditTransferDomBuilder.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/DomBuilder/CustomerDirectDebitTransferDomBuilder.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/DomBuilder/DomBuilderInterface.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Exception/Exception.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Exception/InvalidArgumentException.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Exception/InvalidPaymentMethodException.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Exception/InvalidTransferFileConfiguration.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Exception/InvalidTransferTypeException.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/Facade/BaseCustomerTransferFileFacade.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/Facade/CustomerDirectDebitFacade.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/Facade/CustomerTransferFileFacadeInterface.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/Factory/TransferFileFacadeFactory.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/BaseTransferFile.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/CustomerCreditTransferFile.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/CustomerDirectDebitTransferFile.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferFile/TransferFileInterface.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferInformation/BaseTransferInformation.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferInformation/CustomerCreditTransferInformation.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferInformation/CustomerDirectDebitTransferInformation.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/TransferInformation/TransferInformationInterface.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Util/StringHelper.php",
+		"/var/www/www-dev/libebook/protected/components/Sepa/Exception.php",
+		"/var/www/www-dev/libebook/css/private.css",
+		"/var/www/www-dev/libebook/protected/views/catalogue/_form.php",
+		"/var/www/www-dev/libebook/protected/views/catalogue/update.php",
+		"/var/www/www-dev/libebook/protected/models/Catalogue.php",
+		"/var/www/www-dev/libebook/cron.php",
+		"/var/www/www-dev/libebook/protected/config/cron.php",
+		"/var/www/www-dev/libebook/js/book.js",
+		"/var/www/www-dev/libebook/protected/views/book/update.php",
+		"/var/www/www-dev/libebook/protected/config/.gitignore",
 		"/var/www/www-dev/libebook/protected/views/site/index.php",
 		"/var/www/www-dev/libebook/README.md",
 		"/var/www/www-dev/libebook/protected/data/schema.mysql.sql",
@@ -679,7 +750,6 @@
 		"/home/amaury/Téléchargements/plan.pdf",
 		"/var/www/www-dev/extractDataFile/mobi.mobi",
 		"/var/www/www-dev/libebook/protected/components/Payment/Etransactions.php",
-		"/var/www/www-dev/libebook/protected/views/layouts/main.php",
 		"/var/www/www-dev/libebook/css/knacss.css",
 		"/var/www/www-dev/libebook/protected/components/Payment/ResponsePayment.php",
 		"/var/www/www-dev/libebook/protected/views/site/paymentOpds.php",
@@ -688,15 +758,11 @@
 		"/var/www/www-dev/libebook/protected/views/book/_viewBookCatalogueOdps.php",
 		"/var/www/www-dev/libebook/protected/views/book/view.php",
 		"/var/www/www-dev/libebook/protected/models/Book.php",
-		"/var/www/www-dev/libebook/protected/controllers/CatalogueController.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/monitoring.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/viewOdps.php",
 		"/var/www/www-dev/libebook/protected/controllers/SiteController.php",
-		"/var/www/www-dev/libebook/protected/models/Payment.php",
 		"/var/www/www-dev/libebook/protected/models/Library.php",
 		"/var/www/www-dev/libebook/protected/views/book/_viewBookManage.php",
 		"/var/www/www-dev/libebook/protected/views/catalogue/manageList.php",
-		"/var/www/www-dev/libebook/protected/models/Catalogue.php",
 		"/var/www/www-dev/libebook/protected/views/book/_viewBookLibrary.php",
 		"/var/www/www-dev/libebook/protected/views/book/_viewBookCatalogue.php",
 		"/var/www/www-dev/libebook/protected/controllers/PaymentController.php",
@@ -709,7 +775,6 @@
 		"/var/www/www-dev/libebook/lib/eTransactions/param/parmcom.e-transactions",
 		"/var/www/www-dev/libebook/js/catalogue.js",
 		"/var/www/www-dev/libebook/css/colorbox.css~",
-		"/var/www/www-dev/libebook/protected/config/main.php",
 		"/var/www/www-dev/libebook/lib/eTransactions/param/pathfile~",
 		"/var/www/www-dev/libebook/protected/models/Contributor.php",
 		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/config/main_default.php",
@@ -739,8 +804,6 @@
 		"/home/amaury/Téléchargements/kit-installation2-paybox/SignVer.java",
 		"/home/amaury/Téléchargements/kit-installation2-paybox/testsign.php",
 		"/var/www/www-dev/paybox.html",
-		"/var/www/www-dev/libebook/css/private.css",
-		"/var/www/www-dev/libebook/css/form.css",
 		"/var/www/www-dev/libebook/protected/views/search/_form.php",
 		"/var/www/www-dev/libebook/protected/views/search/_searchBook.php",
 		"/var/www/www-dev/libebook/protected/views/search/search.php",
@@ -752,50 +815,11 @@
 		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/controllers/BookController.php",
 		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/controllers/CatalogueController.php",
 		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/js/book.js",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/views/layouts/main.php",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/views/book/view.php",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/views/book/viewOdps.php",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/index.php",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/index-test.php",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/README.md",
-		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/views/book/_viewBookCatalogueOdps.php",
-		"/var/www/www-dev/libebook/protected/components/extractDataFile/AbstractMeta.php",
-		"/var/www/www-dev/libebook/protected/components/extractDataFile/FactoryMeta.php",
-		"/var/www/www-dev/libebook/protected/views/book/topDownload.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/_viewIndex.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/_viewDiscover.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/_viewNew.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/new.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/topDownload.php",
-		"/var/www/www-dev/extractDataFile/index.php",
-		"/var/www/www-dev/libebook/js/book.js",
-		"/var/www/www-dev/libebook/protected/views/book/_form.php",
-		"/var/www/www-dev/libebook/protected/views/book/update.php",
-		"/var/www/www-dev/libebook/protected/views/book/create.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/_form.php",
-		"/var/www/www-dev/libebook/epub.epub",
-		"/var/www/www-dev/libebook/protected/views/catalogue/index.php",
-		"/var/www/www-dev/extractDataFile/AbstractMeta.php",
-		"/home/amaury/Téléchargements/seigneur des anneaux 3/Tolkien,J.R.R.-[Seigneur des Anneaux-3]Le Retour du Roi(1955).French.ebook.AlexandriZ/Tolkien,J.R.R.-[Seigneur des Anneaux-3]Le Retour du Roi(1955).French.ebook.AlexandriZ.epub_FILES/content.opf",
-		"/home/amaury/.cache/.fr-lc87Bk/content.opf",
-		"/home/amaury/Téléchargements/seigneur des anneaux 3/Tolkien,J.R.R.-[Seigneur des Anneaux-3]Le Retour du Roi(1955).French.ebook.AlexandriZ/Tolkien,J.R.R.-[Seigneur des Anneaux-3]Le Retour du Roi(1955).French.ebook.AlexandriZ.epub_FILES/META-INF/container.xml",
-		"/var/www/www-dev/extractDataFile/EpubMeta.php",
-		"/var/www/www-dev/extractDataFile/MobiMeta.php",
-		"/var/www/www-dev/extractDataFile/PdfMeta.php",
-		"/var/www/www-dev/extractDataFile/pdf.pdf",
-		"/var/www/www-dev/extractDataFile/Imeta.php",
-		"/var/www/www-dev/libebook/protected/views/user/update.php",
-		"/var/www/www-dev/libebook/protected/controllers/UserController.php",
-		"/var/www/www-dev/libebook/protected/models/LoginForm.php",
-		"/var/www/www-dev/libebook/protected/components/UserIdentity.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/update.php",
-		"/var/www/www-dev/libebook/protected/views/layouts/private.php",
-		"/var/www/www-dev/libebook/protected/views/catalogue/manage.php",
-		"/var/www/www-dev/libebook/protected/views/library/view.php"
+		"/home/amaury/21004281/www-dev/M1/koobebook/koobebook/protected/views/layouts/main.php"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -812,6 +836,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"monitoring",
+			"test",
 			";\n",
 			"achat",
 			"visible",
@@ -891,7 +917,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -900,15 +926,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 6547,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								333,
+								333
 							]
 						],
 						"settings":
@@ -1029,19 +1055,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "protected/views/catalogue/monitoring.php",
+					"file": "protected/commands/SepaCronCommand.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 3744,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3358,
+								3358
 							]
 						],
 						"settings":
@@ -1150,14 +1176,13 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1166,15 +1191,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8323,
+						"buffer_size": 8616,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5201,
-								5201
+								5157,
+								5157
 							]
 						],
 						"settings":
@@ -1287,160 +1312,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2907.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "protected/views/book/update.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"sublime_auto_complete": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2745.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "js/book.js",
+					"buffer": 3,
+					"file": "protected/models/Book.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 6384,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2838,
+								2838
 							]
 						],
 						"settings":
@@ -1549,11 +1441,40 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "protected/models/Catalogue.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6044,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2413,
+								2413
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1275.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -1561,19 +1482,152 @@
 				},
 				{
 					"buffer": 5,
-					"file": "css/private.css",
+					"file": "protected/views/catalogue/monitoring.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 3062,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2873,
+								2873
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 128.0,
+						"translation.y": 1071.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "css/private.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8948,
+								8948
 							]
 						],
 						"settings":
@@ -1686,33 +1740,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 7268.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 6,
-					"file": "protected/controllers/UserController.php",
+					"buffer": 7,
+					"file": "protected/views/layouts/private.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1655,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								204,
+								204
 							]
 						],
 						"settings":
@@ -1828,16 +1876,186 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
 				{
-					"buffer": 7,
-					"file": "protected/views/layouts/main.php",
+					"buffer": 8,
+					"file": "/var/www/www-dev/php-sepa-xml-master/test.xml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1652,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1652,
+								1652
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1547.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "protected/config/cron.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1648,
+								1648
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "protected/components/Sepa/DomBuilder/BaseDomBuilder.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5101,
 						"regions":
 						{
 						},
@@ -1851,42 +2069,147 @@
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 144.0,
+						"translation.y": 2397.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "protected/config/main.php",
+					"buffer": 11,
+					"file": "protected/controllers/UserController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2947,
+						"buffer_size": 6090,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1156,
-								1156
+								4310,
+								4310
 							]
 						],
 						"settings":
 						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1173.0,
+						"translation.y": 2609.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -1920,7 +2243,7 @@
 		"cols":
 		[
 			0.0,
-			0.836139650772,
+			0.814955351488,
 			1.0
 		],
 		"rows":
@@ -1979,7 +2302,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 246.0,
+	"side_bar_width": 283.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

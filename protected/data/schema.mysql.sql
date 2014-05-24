@@ -12,16 +12,17 @@ CREATE TABLE IF NOT EXISTS user (
 
 
 CREATE TABLE IF NOT EXISTS `catalogue` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'CONSTRAINT FOREIGN KEY (id) REFERENCES book(id)',
   `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)',
   `name` varchar(50) NOT NULL,
-  `firstName` varchar(40) DEFAULT NULL,
   `description` text,
-  `isAuthor` tinyint(1) NOT NULL DEFAULT '0',
-  `isEditor` tinyint(1) NOT NULL DEFAULT '0',
+  `date_create` date NOT NULL,
+  `namePayment` varchar(200) DEFAULT NULL,
+  `iban` varchar(34) DEFAULT NULL,
+  `bic` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `userId` (`userId`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB ;
 
 
 CREATE TABLE IF NOT EXISTS `book` (
@@ -60,10 +61,10 @@ CREATE TABLE IF NOT EXISTS `contributor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-
 CREATE TABLE IF NOT EXISTS `payment` (
   `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(Id)',
   `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
   `date` date NOT NULL,
-  `numFact` varchar(25) NOT NULL
+  `numFact` varchar(25) NOT NULL,
+  `statusTransfer` tinyint(1) NOT NULL
 ) ENGINE=InnoDB;
