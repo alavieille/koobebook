@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 <div class="center mw960p">		
 
 		<nav class="mb2 mod ">
-		<a class="linkButton  ml1 w200p left mr2" href="<?php echo  str_replace(array("http","https"), "opds", $this->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->id)));?>">
+		<a class="linkButton  ml1 w200p left mr2" href="<?php echo  str_replace(array("https","http"), "opds", $this->createAbsoluteUrl('catalogue/viewodps',array('id'=>$model->id)));?>">
 		Exporter au format opds
 		</a>
 		<a targer="_blank" href="<?php echo $this->createUrl("/site/help") ?>#opds" class="inbl ml1 pt1">Qu'est ce que le format opds ?</a>
