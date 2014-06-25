@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `book` (
 
 
 CREATE TABLE IF NOT EXISTS `library` (
-  `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)'
+  `userId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (userId) REFERENCES user(id)',
   `bookId` int(11) NOT NULL COMMENT 'CONSTRAINT FOREIGN KEY (bookId) REFERENCES book(id)',
   `date_download` date NOT NULL
 ) ENGINE=InnoDB;
